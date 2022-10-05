@@ -1,4 +1,66 @@
 @import 'variables';
 
+.login-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 
+    .login-signup-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        height: 60vh;
+        border: 2px solid gray;
+
+        .login-signup-form-container {
+            border: 2px solid gray;
+            flex: 2;
+            height: 100%;
+            width: 100%;
+
+            .login-form-container-top {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                .login-form-container-social-buttons {
+                    display: flex;
+                }
+
+                .loginButton {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    width: 50px;
+                    height: 50px;
+                    margin: 0 10px;
+                }
+
+                .google  {
+                    background-color: #df4930;
+                    border-radius: 50%;
+                }
+                .facebook {
+                    background-color: #4267B2;
+                    border-radius: 50%;
+                }
+                .github {
+                    background-color: black;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .login-signup-toggle-container {
+            border: 2px solid gray;
+            flex: 1;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
 
