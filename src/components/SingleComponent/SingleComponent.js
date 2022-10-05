@@ -51,9 +51,6 @@ function SingleComponent() {
   }, [html, css, js]);
 
   React.useEffect(() => {
-    setHTML("<!-- HTML Goes Here -->");
-    setCSS(`/* CSS Goes Here */`);
-    setJS(`// Javascript Goes Here`);
   }, []);
 
   return (
@@ -141,7 +138,7 @@ function SingleComponent() {
             value={js}
             name="JS"
             editorProps={{ $blockScrolling: true }}
-            placeholder="//Javascript goes here"
+            placeholder="// Javascript goes here"
             width="100%"
             fontSize="1.5rem"
           />
@@ -159,6 +156,7 @@ function SingleComponent() {
             editorProps={{ $blockScrolling: true }}
             width="100%"
             fontSize="1.5rem"
+            placeholder="/* Less Goes Here */"
           />
         </div>
       </div>
