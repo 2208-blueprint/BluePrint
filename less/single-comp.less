@@ -3,6 +3,40 @@
     justify-content: space-between;
 }
 
-#singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor {
+#singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor, #singlecomp-less-editor {
     width: 100%
+}
+
+.singlecomp-hidden {
+    display: none;
+}
+
+a.singlecomp-back {
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 2.5vh;
+    margin-top: 1vh;
+}
+
+#singlecomp-iframe{
+    height: 40vh;
+}
+
+#singlecomp-buttons-box {
+    display:flex;
+    gap:0;
+    width:300px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
+    button {
+        width: 100%;
+        height: 50px;
+    }
+
+    .singlecomp-pressed {
+        background-color: blue;
+        color: white
+    }
 }
