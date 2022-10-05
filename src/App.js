@@ -1,16 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { SingleComponent } from "./components";
 import { LoginPage } from "./components";
-import ButtonLibrary from "./components/ButtonLibrary";
-
 
 function App() {
 
-
-
   return (
     <>
-      <ButtonLibrary/>
+    <Routes>
+      <Route path='/singlecomponent' element={<SingleComponent/>}></Route>
+    </Routes>
     </>
   );
 }
