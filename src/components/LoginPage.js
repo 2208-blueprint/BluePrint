@@ -23,8 +23,12 @@ function LoginPage() {
                     <div className='loginButton github'>
                         <img src={Github} alt='' className='icon' />
                     </div>
-                    </div>
+                  </div>
               </div>
+              <div className='login-form-center'>
+                    <div className='login-line'></div>
+                    <div className='login-or'>OR</div>
+                </div>
             </div>
             <div className='login-signup-toggle-container'>
               test2
