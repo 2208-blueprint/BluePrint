@@ -35,6 +35,7 @@ a.singlecomp-back {
 #singlecomp-buttons-box .singlecomp-pressed {
   background-color: blue;
   color: white;
+}
 html,
 body {
   margin: 0;
