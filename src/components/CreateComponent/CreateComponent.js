@@ -19,6 +19,8 @@ function CreateComponent() {
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
   const [color, setColor] = useState('')
+
+  // form section
   const [form, setForm] = useState(['html', 'css'])
 
   function onChangeHTML(newValue) {

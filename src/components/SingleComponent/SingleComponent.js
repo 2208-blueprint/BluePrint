@@ -215,6 +215,11 @@ function SingleComponent() {
             wrapEnabled={true}
           />
         </div>
+        <div id ="singlecomp-userinfo">
+            <h1>Title of Component</h1>
+            <h1>By User</h1>
+            <a href='/users/1'>See more from user</a>
+        </div>
         <div id="singlecomp-color-picker">
           <h1>Color Selector Tool</h1>
           <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
