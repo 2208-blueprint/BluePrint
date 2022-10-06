@@ -37,6 +37,25 @@ function SingleComponent() {
     })
   }
 
+  function copyClipboard() {
+    switch (view) {
+      case 'html':
+        navigator.clipboard.writeText(html).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'css':
+        navigator.clipboard.writeText(css).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'js':
+        navigator.clipboard.writeText(js).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'less':
+        navigator.clipboard.writeText(less).then(()=>alert('Copied to clipboard!'))
+        break;
+      default:
+        break;
+    }
+  }
+
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -55,9 +74,8 @@ function SingleComponent() {
 
   return (
     <div id="singlecomp-root">
-      <a href="/" className="singlecomp-back fa fa-chevron-left">
-        {" "}
-        Back
+      <a href="/" className="singlecomp-back">
+        <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
       <div id="singlecomp-iframe">
         <iframe
@@ -68,6 +86,7 @@ function SingleComponent() {
           height="100%"
         />
       </div>
+      <div id="singlecomp-buttons">
       <div id="singlecomp-buttons-box">
         <button
           onClick={() => setView("html")}
@@ -94,6 +113,10 @@ function SingleComponent() {
           Less
         </button>
       </div>
+        <div class="singlecomp-clipboard" onClick={copyClipboard}>
+            <img src="/copy.png"></img>
+        </div>
+      </div>
       <div id="singlecomp-editors">
         <div
           id="singlecomp-html-editor"
@@ -109,6 +132,7 @@ function SingleComponent() {
             placeholder="<!-- HTML goes here -->"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled="true"
           />
         </div>
         <div
@@ -125,6 +149,7 @@ function SingleComponent() {
             placeholder="/* CSS Goes Here */"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled="true"
           />
         </div>
         <div
@@ -141,6 +166,7 @@ function SingleComponent() {
             placeholder="// Javascript goes here"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled="true"
           />
         </div>
         <div
@@ -157,6 +183,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
+            wrapEnabled="true"
           />
         </div>
       </div>

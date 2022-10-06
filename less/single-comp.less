@@ -1,12 +1,27 @@
 @import 'variables';
 
+#singlecomp-root {
+    background-color: @background-color;
+    height: auto;
+}
+
 #singlecomp-editors {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    font-family: monospace;
+    max-width: 1000px;
+    margin: 20px 20px 0 20px;
 }
 
 #singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor, #singlecomp-less-editor {
-    width: 100%
+    width: 100%;
+    font-family: monospace;
+    border: 1px solid @tertiary-color;
+}
+
+#HTML, #CSS, #JS, #Less {
+    font-family: monospace;
 }
 
 .singlecomp-hidden {
@@ -16,29 +31,88 @@
 a.singlecomp-back {
     font-size: 2rem;
     text-decoration: none;
-    color: black;
-    margin-bottom: 2.5vh;
-    margin-top: 1vh;
+    color: @tertiary-color;
+    font-family: 'Inter', 'sans-serif';
+
+    div {
+        margin: 20px;
+        span {
+            font-family: 'Inter', 'sans-serif'
+        }
+    }
 }
 
 #singlecomp-iframe{
     height: 40vh;
+    margin: 20px;
+    background-color: white;
+
+    iframe {
+        border: solid @tertiary-color 2px;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+#singlecomp-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+
+    .singlecomp-clipboard {
+        display: flex;
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        margin-right: 20px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10%;
+        transition: 0.25s ease;
+        img {
+            height: 80%;
+            width: 80%;
+        }
+    }
+
+    .singlecomp-clipboard:hover {
+        background-color: rgb(209, 209, 209);
+        cursor: pointer;
+    }
 }
 
 #singlecomp-buttons-box {
     display:flex;
     gap:0;
-    width:300px;
+    max-width:1000px;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    margin-left: 20px;
+    position: static;
 
     button {
-        width: 100%;
+        width: 100px;
         height: 50px;
+        font-family: 'Inter', 'sans-serif';
+        background-color: @secondary-color;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    button:hover {
+        background-color:#1a6da4 ;
     }
 
     .singlecomp-pressed {
-        background-color: blue;
+        background-color: @tertiary-color;
         color: white
+    }
+
+    .singlecomp-pressed:active {
+        background-color: @tertiary-color;
     }
 }
