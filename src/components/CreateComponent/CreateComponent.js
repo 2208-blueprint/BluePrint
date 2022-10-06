@@ -10,9 +10,8 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
-import {useParams} from 'react-router-dom'
 
-function SingleComponent() {
+function CreateComponent() {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
@@ -21,9 +20,13 @@ function SingleComponent() {
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
   const [color, setColor] = useState('')
-  const [title, setTitle] = useState('title of component')
 
-  const params = useParams()
+  // form section
+  const [form, setForm] = useState(['html', 'css'])
+  const [name, setName] = useState('')
+  const [type, setType] = useState('')
+  const [desc, setDesc] = useState('')
+  const [img, setImg] = useState('')
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -67,6 +70,31 @@ function SingleComponent() {
     }
   }
 
+  async function submitComponent() {
+    let markup
+    let stylesheet
+    if (form[0] === 'html') {
+        markup = html
+    } else {
+        markup = js
+    }
+    if (form[1] === 'css') {
+        stylesheet = css
+    } else {
+        stylesheet = less
+    }
+    await axios.post('/api/components/test-create', {
+        name: name,
+        description: desc,
+        type: type,
+        framework: form[0],
+        stylingFramework: form[1],
+        img: img,
+        markup: markup,
+        stylesheet: stylesheet
+    })
+  }
+
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -80,31 +108,13 @@ function SingleComponent() {
       `);
   }, [html, css, js]);
 
-  React.useEffect(() => {
-    async function getComp() {
-      const {data} = await axios.get(`/api/components/${params.id}`)
-      console.log(data)
-      if (data.framework === 'html') {
-        setHTML(data.markup)
-      } else {
-        setJS(data.markup)
-      }
-      if (data.stylingFramework === 'css') {
-        setCSS(data.stylesheet)
-      } else {
-        setLess(data.stylesheet)
-      }
-      setTitle(data.name)
-    }
-    getComp()
-  }, []);
 
   return (
-    <div id="singlecomp-root">
-      <a href="/" className="singlecomp-back">
+    <div id="createcomp-root">
+      <a href="/" className="createcomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
-      <div id="singlecomp-iframe">
+      <div id="createcomp-iframe">
         <iframe
           srcDoc={srcDoc}
           title="output"
@@ -113,47 +123,47 @@ function SingleComponent() {
           height="100%"
         />
       </div>
-      <div id="singlecomp-buttons">
-      <div id="singlecomp-buttons-box">
+      <div id="createcomp-buttons">
+      <div id="createcomp-buttons-box">
         <button
           onClick={() => setView("html")}
-          className={view === "html" ? " singlecomp-pressed" : ""}
+          className={view === "html" ? " createcomp-pressed" : ""}
         >
           HTML
         </button>
         <button
           onClick={() => setView("css")}
-          className={view === "css" ? " singlecomp-pressed" : ""}
+          className={view === "css" ? " createcomp-pressed" : ""}
         >
           CSS
         </button>
         <button
           onClick={() => setView("js")}
-          className={view === "js" ? " singlecomp-pressed" : ""}
+          className={view === "js" ? " createcomp-pressed" : ""}
         >
           JS
         </button>
         <button
           onClick={() => setView("less")}
-          className={view === "less" ? " singlecomp-pressed" : ""}
+          className={view === "less" ? " createcomp-pressed" : ""}
         >
           Less
         </button>
         <button
           onClick={() => setView("sass")}
-          className={view === "sass" ? " singlecomp-pressed" : ""}
+          className={view === "sass" ? " createcomp-pressed" : ""}
         >
           Sass
         </button>
       </div>
-        <div className="singlecomp-clipboard" onClick={copyClipboard}>
+        <div className="createcomp-clipboard" onClick={copyClipboard}>
             <img src="/copy.png"></img>
         </div>
       </div>
-      <div id="singlecomp-editors">
+      <div id="createcomp-editors">
         <div
-          id="singlecomp-html-editor"
-          className={view === "html" ? "" : "singlecomp-hidden"}
+          id="createcomp-html-editor"
+          className={view === "html" ? "" : "createcomp-hidden"}
         >
           <AceEditor
             mode="xml"
@@ -166,11 +176,12 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
-          id="singlecomp-css-editor"
-          className={view === "css" ? "" : "singlecomp-hidden"}
+          id="createcomp-css-editor"
+          className={view === "css" ? "" : "createcomp-hidden"}
         >
           <AceEditor
             mode="css"
@@ -183,11 +194,12 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
-          id="singlecomp-javascript-editor"
-          className={view === "js" ? "" : "singlecomp-hidden"}
+          id="createcomp-javascript-editor"
+          className={view === "js" ? "" : "createcomp-hidden"}
         >
           <AceEditor
             mode="javascript"
@@ -200,11 +212,12 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
-          id="singlecomp-less-editor"
-          className={view === "less" ? "" : "singlecomp-hidden"}
+          id="createcomp-less-editor"
+          className={view === "less" ? "" : "createcomp-hidden"}
         >
           <AceEditor
             mode="less"
@@ -217,11 +230,12 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
-          id="singlecomp-sass-editor"
-          className={view === "sass" ? "" : "singlecomp-hidden"}
+          id="createcomp-sass-editor"
+          className={view === "sass" ? "" : "createcomp-hidden"}
         >
           <AceEditor
             mode="less"
@@ -234,14 +248,39 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
-        <div id ="singlecomp-userinfo">
-            <h1>{title}</h1>
-            <h1>By User</h1>
-            <a href='/users/1'>See more from user</a>
+        <div id ="createcomp-submission">
+            <h1>Submit Your Creation!</h1>
+            <div>Markup:&nbsp;&nbsp;
+            <select onChange={(event)=>setForm([event.target.value, form[1]])}>
+                <option value="html">HTML</option>
+                <option value="react">React</option>
+            </select>
+            </div>
+            <div>Stylesheet:&nbsp;&nbsp;
+            <select onChange={(event)=>setForm([form[0],event.target.value])}>
+                <option value="css">CSS</option>
+                <option value="less">Less</option>
+            </select>
+            </div>
+            <div>Name:&nbsp;&nbsp;
+                <input onChange={(event)=>setName(event.target.value)}></input>
+            </div>
+            <div>Type:&nbsp;&nbsp;
+                <input onChange={(event)=>setType(event.target.value)}></input>
+            </div>
+            <h2>Description:</h2>
+            <div>
+                <textarea onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
+            </div>
+            <div>Image Url:&nbsp;&nbsp;
+                <input onChange={(event)=>setImg(event.target.value)}></input>
+            </div>
+            <button onClick={submitComponent}>Submit</button>
         </div>
-        <div id="singlecomp-color-picker">
+        <div id="createcomp-color-picker">
           <h1>Color Selector Tool</h1>
           <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
           <h2>Selected: {color}</h2>
@@ -251,7 +290,4 @@ function SingleComponent() {
   );
 }
 
-export default SingleComponent;
-
-
-
+export default CreateComponent;
