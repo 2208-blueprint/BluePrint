@@ -7,13 +7,13 @@ const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
-    req.user = user;
+    res.user = user;
     next();
   } catch (error) {
     next(error);
   }
 };
-
+//get a list of all owned components
 router.get("/components", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -21,23 +21,23 @@ router.get("/components", requireToken, async (req, res, next) => {
     const owned = components.filter(
       (item) => item.user_component.dataValues.isAuthor
     );
-    req.send(owned);
+    res.send(owned);
   } catch (error) {
     next(error);
   }
 });
-
+//create a component and assign to the user
 router.post("/create", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
     const component = await Component.create(req.body);
     await user.addComponent(component, { through: { isAuthor: true } });
-    req.status(201).send(component);
+    res.status(201).send(component);
   } catch (error) {
     next(error);
   }
 });
-
+//update a component owned by user
 router.put("/update/:componentId", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -51,12 +51,12 @@ router.put("/update/:componentId", requireToken, async (req, res, next) => {
     });
     const component = await Component.findByPk(record.componentId);
     await component.update(req.body);
-    req.status(204).send(component);
+    res.status(204).send(component);
   } catch (error) {
     next(error);
   }
 });
-
+//delete a component owned by user
 router.delete("/delete/:componentId", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -70,7 +70,7 @@ router.delete("/delete/:componentId", requireToken, async (req, res, next) => {
     });
     const component = await Component.findByPk(record.componentId);
     await component.destroy();
-    req.sendStatus(204);
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

@@ -6,7 +6,7 @@ const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
-    req.user = user;
+    res.user = user;
     next();
   } catch (error) {
     next(error);
@@ -16,7 +16,7 @@ const requireToken = async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const components = await Component.findAll();
-    req.send(components);
+    res.send(components);
   } catch (error) {
     next(error);
   }
@@ -25,7 +25,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const component = await Component.findByPk(id);
-    req.send(component);
+    res.send(component);
   } catch (error) {
     next(error);
   }
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/test-create", async (req, res, next) => {
   try {
     const component = await Component.create(req.body);
-    req.status(201).send(component);
+    res.status(201).send(component);
   } catch (error) {
     next(error);
   }
