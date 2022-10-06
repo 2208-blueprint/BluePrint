@@ -9,6 +9,8 @@ import "ace-builds/src-noconflict/mode-scss";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
+import axios from "axios";
+import {useParams} from 'react-router-dom'
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -19,6 +21,9 @@ function SingleComponent() {
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
   const [color, setColor] = useState('')
+  const [title, setTitle] = useState('title of component')
+
+  const params = useParams()
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -76,6 +81,22 @@ function SingleComponent() {
   }, [html, css, js]);
 
   React.useEffect(() => {
+    async function getComp() {
+      const {data} = await axios.get(`/api/components/${params.id}`)
+      console.log(data)
+      if (data.framework === 'html') {
+        setHTML(data.markup)
+      } else {
+        setJS(data.markup)
+      }
+      if (data.stylingFramework === 'css') {
+        setCSS(data.stylesheet)
+      } else {
+        setLess(data.stylesheet)
+      }
+      setTitle(data.name)
+    }
+    getComp()
   }, []);
 
   return (
@@ -216,7 +237,7 @@ function SingleComponent() {
           />
         </div>
         <div id ="singlecomp-userinfo">
-            <h1>Title of Component</h1>
+            <h1>{title}</h1>
             <h1>By User</h1>
             <a href='/users/1'>See more from user</a>
         </div>

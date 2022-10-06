@@ -9,6 +9,7 @@ import "ace-builds/src-noconflict/mode-scss";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
+import axios from "axios";
 
 function CreateComponent() {
   const [html, setHTML] = useState("");
@@ -22,6 +23,10 @@ function CreateComponent() {
 
   // form section
   const [form, setForm] = useState(['html', 'css'])
+  const [name, setName] = useState('')
+  const [type, setType] = useState('')
+  const [desc, setDesc] = useState('')
+  const [img, setImg] = useState('')
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -65,7 +70,7 @@ function CreateComponent() {
     }
   }
 
-  function submitComponent() {
+  async function submitComponent() {
     let markup
     let stylesheet
     if (form[0] === 'html') {
@@ -78,7 +83,16 @@ function CreateComponent() {
     } else {
         stylesheet = less
     }
-    console.log(markup, stylesheet)
+    await axios.post('/api/components/test-create', {
+        name: name,
+        description: desc,
+        type: type,
+        framework: form[0],
+        stylingFramework: form[1],
+        img: img,
+        markup: markup,
+        stylesheet: stylesheet
+    })
   }
 
   React.useEffect(() => {
@@ -162,6 +176,7 @@ function CreateComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -179,6 +194,7 @@ function CreateComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -196,6 +212,7 @@ function CreateComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -213,6 +230,7 @@ function CreateComponent() {
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -230,21 +248,35 @@ function CreateComponent() {
             fontSize="1.5rem"
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div id ="createcomp-submission">
             <h1>Submit Your Creation!</h1>
-            <div>Markup:
+            <div>Markup:&nbsp;&nbsp;
             <select onChange={(event)=>setForm([event.target.value, form[1]])}>
                 <option value="html">HTML</option>
                 <option value="react">React</option>
             </select>
             </div>
-            <div>Stylesheet:
+            <div>Stylesheet:&nbsp;&nbsp;
             <select onChange={(event)=>setForm([form[0],event.target.value])}>
                 <option value="css">CSS</option>
                 <option value="less">Less</option>
             </select>
+            </div>
+            <div>Name:&nbsp;&nbsp;
+                <input onChange={(event)=>setName(event.target.value)}></input>
+            </div>
+            <div>Type:&nbsp;&nbsp;
+                <input onChange={(event)=>setType(event.target.value)}></input>
+            </div>
+            <h2>Description:</h2>
+            <div>
+                <textarea onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
+            </div>
+            <div>Image Url:&nbsp;&nbsp;
+                <input onChange={(event)=>setImg(event.target.value)}></input>
             </div>
             <button onClick={submitComponent}>Submit</button>
         </div>

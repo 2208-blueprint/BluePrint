@@ -145,7 +145,7 @@ a.createcomp-back {
     font-family: 'Inter', 'sans-serif';
     background-color: @secondary-color;
     width: 300px;
-    height: 300px;
+    height: 600px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -154,18 +154,32 @@ a.createcomp-back {
     margin: 25px;
     border-radius: 0.25rem;
     color: @tertiary-color;
+    h2 {
+        margin: 10px;
+    }
     h1 {
         text-align: center;
     }
     div {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 700;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        margin: 10px;
+        input {
+            font-size: 1.25rem;
+            width: 90%;
+        }
+
+        .createcomp-desc {
+            height: 100px;
+            width: 250px;
+            word-wrap: break-word;
+            font-family: 'Inter', 'sans-serif';
+        }
     }
     select {
-        margin: 20px;
         font-size: 1.25rem;
     }
 
