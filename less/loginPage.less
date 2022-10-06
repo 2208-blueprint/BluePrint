@@ -1,4 +1,369 @@
 @import 'variables';
 
+.login-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: @background-gradient;
 
+    .login-signup-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        height: 60vh;
+        border-radius: 5px;
+        background: #142c43;
+        box-shadow:  -20px -20px 34px #112539,
+                     20px 20px 34px #17334d;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+            width: 90vw;
+            height: 90vh;
+        }
+
+        .login-signup-form-container {
+            border-radius: 5px 0 0 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 2;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+
+            .login-form-container-top {
+                display: flex;
+                flex: 0.7;
+                align-items: center;
+                flex-direction: column;
+
+                .login-form-container-social-buttons {
+                    display: flex;
+                    margin: 10px 0 0 0;
+                }
+
+                .loginButton {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    width: 50px;
+                    height: 50px;
+                    margin: 0 10px;
+                    cursor: pointer;
+                }
+
+                .google  {
+                    background-color: #df4930;
+                    border-radius: 50%;
+                }
+                .facebook {
+                    background-color: #4267B2;
+                    border-radius: 50%;
+                }
+                .github {
+                    background-color: black;
+                    border-radius: 50%;
+                }
+
+                h1 {
+                    margin: 40px 0 5px 0;
+                    color: @secondary-color;
+                    text-align: center;
+                }
+
+                small {
+                    margin: 30px 0 15px 0;
+                    font-weight: bold;
+                }
+
+                @media only screen and (max-width: 755px) {
+                    h1 {
+                        font-size: 23px;
+                    }
+                }
+            }
+
+            .login-form-center {
+                width: 100%;
+                flex: 0.4;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+
+                .login-or {
+                    border: 2px solid lightgray;
+                    border-radius: 50%;
+                    padding: 10px;
+                    color: gray;
+                    background-color: white;
+                    font-weight: bold;
+                    z-index: 1;
+                }
+
+                .login-line {
+                    height: 0.5px;
+                    width: 50%;
+                    background-color: lightgray;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    z-index: 0;
+                }
+            }
+
+            .login-form-bottom {
+                display: flex;
+                width: 50%;
+                flex: 1;
+                flex-direction: column;
+                align-items: center;
+
+
+                .login-form {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px 0 0 0;
+
+                    input {
+                        width: 90%;
+                        height: 30px;
+                        border-radius: 5px;
+                        margin: 10px 0;
+                    }
+
+                    button {
+                        margin: 10px 0;
+                        width: 50%;
+                        height: 40px;
+                        border-radius: 10px;
+                        background-color: @tertiary-color;
+                        cursor: pointer;
+                        font-size: 20px;
+                    }
+
+                    @media only screen and (max-width: 1000px) {
+                        input {
+                            min-width: 175px;
+                        }
+                    }
+                    @media only screen and (max-width: 800px) {
+                        button {
+                            font-size: 15px;
+                        }
+                    }
+
+                }
+            }
+            @media only screen and (max-width: 600px) {
+                border-radius: 0;
+            }
+        }
+
+        .login-signup-toggle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            // background: linear-gradient(330deg, rgba(3,20,31,1) 0%, rgba(13,43,62,1) 22%, rgba(71,181,255,1) 100%);
+            background-image: url("/trianglify-lowres.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+            h1 {
+                font-size: 30px;
+                color: white;
+                text-align: center;
+            }
+            small {
+                margin: 20px;
+                text-align: center;
+            }
+            button {
+                color: black;
+                margin: 10px 0;
+                width: 50%;
+                height: 40px;
+                border-radius: 10px;
+                background-color: white;
+                cursor: pointer;
+                font-size: 20px;
+            }
+
+            @media only screen and (max-width: 900px) {
+                button {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+.signup-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: @background-gradient;
+
+    .signup-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        height: 60vh;
+        border-radius: 5px;
+        background: #142c43;
+        box-shadow:  -20px -20px 34px #112539,
+                     20px 20px 34px #17334d;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+            width: 90vw;
+            height: 90vh;
+        }
+
+        .signup-form-container {
+            border-radius: 5px 0 0 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 2;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+
+            @media only screen and (max-width: 600px) {
+                border-radius: 0;
+            }
+
+            .signup-form-container-top {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                h1 {
+                    margin: 0;
+                    text-align: center;
+                    color: @secondary-color;
+                }
+
+
+                @media only screen and (max-width: 755px) {
+                    font-size: 12px;
+                }
+            }
+
+            .signup-form-bottom {
+                display: flex;
+                width: 50%;
+                flex-direction: column;
+                align-items: center;
+
+                .signup-form {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px 0 0 0;
+
+                    input {
+                        width: 80%;
+                        height: 25px;
+                        border-radius: 5px;
+                        margin: 10px 0;
+                    }
+
+                    button {
+                        margin: 10px 0 0 0;
+                        width: 50%;
+                        min-width: 75px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background-color: @tertiary-color;
+                        cursor: pointer;
+                        font-size: 20px;
+                    }
+
+                    @media only screen and (max-width: 1000px) {
+                        input {
+                            min-width: 175px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 901px) {
+                        button {
+                            font-size: 15px;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .signup-toggle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            background-image: url("/trianglify-lowres.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+            @media only screen and (max-width: 600px) {
+                border-radius: 0;
+            }
+
+            h1 {
+                font-size: 30px;
+                text-align: center;
+                text-shadow: 3px 3px black;
+            }
+
+            button {
+                color: black;
+                margin: 10px 0 0 0;
+                width: 50%;
+                min-width: 75px;
+                height: 40px;
+                border-radius: 10px;
+                background-color: white;
+                cursor: pointer;
+                font-size: 20px;
+            }
+
+            @media only screen and (max-width: 900px) {
+                button {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
 
