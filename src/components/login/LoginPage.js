@@ -3,11 +3,16 @@ import { LoginForm, SignUpForm } from '../../components'
 
 function LoginPage() {
 
-  const test = false;
+  const [toggle, setToggle] = React.useState(false)
 
   return (
     <>
-      {test ? <SignUpForm /> : <LoginForm />}
+      {
+      toggle ?
+        <SignUpForm toggle={toggle} setToggle={setToggle}/>
+        :
+        <LoginForm toggle={toggle} setToggle={setToggle}/>
+        }
     </>
   )
 }

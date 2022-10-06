@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SignUpForm() {
+function SignUpForm({ toggle, setToggle }) {
 
     const [username, setUserName] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
@@ -30,7 +30,7 @@ function SignUpForm() {
                 </div>
             <div className='signup-toggle-container'>
                 <h1>Already have an account?</h1>
-                <button>Log In</button>
+                <button onClick={() => setToggle(!toggle)}>Log In</button>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@ import Google from '../images/google.png'
 import Facebook from '../images/facebook.png'
 import Github from '../images/github.png'
 
-function LoginForm() {
+function LoginForm({ toggle, setToggle }) {
 
     const [username, setUserName] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -42,7 +42,7 @@ function LoginForm() {
             <div className='login-signup-toggle-container'>
               <h1>New to BluePrint?</h1>
               <small>Sign up and start building!</small>
-              <button>Sign Up</button>
+              <button onClick={() => setToggle(!toggle)}>Sign Up</button>
             </div>
         </div>
     </div>
