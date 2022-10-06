@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-less";
-import "ace-builds/src-noconflict/mode-sass";
+import "ace-builds/src-noconflict/mode-scss";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
@@ -15,8 +15,10 @@ function SingleComponent() {
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
   const [less, setLess] = useState("");
+  const [sass, setSass] = useState("");
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
+  const [color, setColor] = useState('')
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -37,6 +39,29 @@ function SingleComponent() {
     })
   }
 
+  function onChangeSass(newValue) {
+    setSass(newValue);
+  }
+
+  function copyClipboard() {
+    switch (view) {
+      case 'html':
+        navigator.clipboard.writeText(html).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'css':
+        navigator.clipboard.writeText(css).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'js':
+        navigator.clipboard.writeText(js).then(()=>alert('Copied to clipboard!'))
+        break;
+      case 'less':
+        navigator.clipboard.writeText(less).then(()=>alert('Copied to clipboard!'))
+        break;
+      default:
+        break;
+    }
+  }
+
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -51,16 +76,12 @@ function SingleComponent() {
   }, [html, css, js]);
 
   React.useEffect(() => {
-    setHTML("<!-- HTML Goes Here -->");
-    setCSS(`/* CSS Goes Here */`);
-    setJS(`// Javascript Goes Here`);
   }, []);
 
   return (
     <div id="singlecomp-root">
-      <a href="/" className="singlecomp-back fa fa-chevron-left">
-        {" "}
-        Back
+      <a href="/" className="singlecomp-back">
+        <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
       <div id="singlecomp-iframe">
         <iframe
@@ -71,6 +92,7 @@ function SingleComponent() {
           height="100%"
         />
       </div>
+      <div id="singlecomp-buttons">
       <div id="singlecomp-buttons-box">
         <button
           onClick={() => setView("html")}
@@ -96,6 +118,16 @@ function SingleComponent() {
         >
           Less
         </button>
+        <button
+          onClick={() => setView("sass")}
+          className={view === "sass" ? " singlecomp-pressed" : ""}
+        >
+          Sass
+        </button>
+      </div>
+        <div className="singlecomp-clipboard" onClick={copyClipboard}>
+            <img src="/copy.png"></img>
+        </div>
       </div>
       <div id="singlecomp-editors">
         <div
@@ -112,6 +144,7 @@ function SingleComponent() {
             placeholder="<!-- HTML goes here -->"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -128,6 +161,7 @@ function SingleComponent() {
             placeholder="/* CSS Goes Here */"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -141,9 +175,10 @@ function SingleComponent() {
             value={js}
             name="JS"
             editorProps={{ $blockScrolling: true }}
-            placeholder="//Javascript goes here"
+            placeholder="// Javascript goes here"
             width="100%"
             fontSize="1.5rem"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -159,7 +194,31 @@ function SingleComponent() {
             editorProps={{ $blockScrolling: true }}
             width="100%"
             fontSize="1.5rem"
+            placeholder="/* Less Goes Here */"
+            wrapEnabled={true}
           />
+        </div>
+        <div
+          id="singlecomp-sass-editor"
+          className={view === "sass" ? "" : "singlecomp-hidden"}
+        >
+          <AceEditor
+            mode="less"
+            theme="monokai"
+            onChange={onChangeSass}
+            value={sass}
+            name="Sass"
+            editorProps={{ $blockScrolling: true }}
+            width="100%"
+            fontSize="1.5rem"
+            placeholder="/* Sass Goes Here */"
+            wrapEnabled={true}
+          />
+        </div>
+        <div id="singlecomp-color-picker">
+          <h1>Color Selector Tool</h1>
+          <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
+          <h2>Selected: {color}</h2>
         </div>
       </div>
     </div>
