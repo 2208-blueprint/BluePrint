@@ -17,7 +17,10 @@ router.get("/:id/components", requireToken, async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findByPk(id, { include: Component });
-    req.send(user.components);
+    const owned = user.components.filter(
+      (item) => item.user_component.dataValues.isAuthor
+    );
+    req.send(owned);
   } catch (error) {
     next(error);
   }

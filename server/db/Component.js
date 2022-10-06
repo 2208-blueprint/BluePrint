@@ -32,18 +32,19 @@ const Component = db.define("component", {
   markup: {
     type: Sequelize.TEXT,
   },
-  css: {
+  stylesheet: {
     type: Sequelize.TEXT,
   },
   js: {
     type: Sequelize.TEXT,
   },
-  less: {
-    type: Sequelize.TEXT,
-  },
-  sass: {
-    type: Sequelize.TEXT,
-  },
+  // less: {
+  //   type: Sequelize.TEXT,
+  // },
+  // sass: {
+  //   type: Sequelize.TEXT,
+  // },
 });
+//depending on enum value, we conditionally render code editor with correct tabs and buttons. we could include file to
 
 module.exports = Component;
