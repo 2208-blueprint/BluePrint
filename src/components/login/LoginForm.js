@@ -34,7 +34,7 @@ function LoginForm() {
               <div className='login-form-bottom'>
                 <form className='login-form'>
                     <input type='text' placeholder='Username' onChange={(e) => setUserName(e.target.value)} value={username}/>
-                    <input type='text' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
+                    <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
                     <button className='login-submit-button'>Login</button>
                 </form>
                   </div>

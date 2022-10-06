@@ -14,14 +14,17 @@
         align-items: center;
         width: 60vw;
         height: 60vh;
-        border-radius: 20px;
-        background: #062437;
-        box-shadow:  6px 6px 12px #020e16,
-        -6px -6px 12px #0a3a58;
-        padding: 10px;
+        border-radius: 5px;
+        background: #142c43;
+        box-shadow:  -20px -20px 34px #112539,
+                     20px 20px 34px #17334d;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+        }
 
         .login-signup-form-container {
-            border-radius: 20px 0 0 20px;
+            border-radius: 5px 0 0 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -67,10 +70,13 @@
 
                 h1 {
                     margin: 40px 0 5px 0;
+                    color: @secondary-color;
+                    text-align: center;
                 }
 
                 small {
                     margin: 30px 0 15px 0;
+                    font-weight: bold;
                 }
             }
 
@@ -113,6 +119,7 @@
                 flex-direction: column;
                 align-items: center;
 
+
                 .login-form {
                     display: flex;
                     width: 100%;
@@ -138,6 +145,17 @@
                         font-size: 20px;
                     }
 
+                    @media only screen and (max-width: 1000px) {
+                        input {
+                            min-width: 175px;
+                        }
+                    }
+                    @media only screen and (max-width: 800px) {
+                        button {
+                            font-size: 15px;
+                        }
+                    }
+
                 }
             }
         }
@@ -148,17 +166,24 @@
             align-items: center;
             justify-content: center;
             color: white;
-            border-radius: 0 20px 20px 0;
+            border-radius: 0 5px 5px 0;
             flex: 1;
             height: 100%;
             width: 100%;
-            background: linear-gradient(330deg, rgba(3,20,31,1) 0%, rgba(13,43,62,1) 22%, rgba(71,181,255,1) 100%);
+            // background: linear-gradient(330deg, rgba(3,20,31,1) 0%, rgba(13,43,62,1) 22%, rgba(71,181,255,1) 100%);
+            background-image: url("/trianglify-lowres.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
 
             h1 {
                 font-size: 30px;
+                color: white;
+                text-align: center;
             }
             small {
                 margin: 20px;
+                text-align: center;
             }
             button {
                 color: black;
@@ -169,6 +194,12 @@
                 background-color: white;
                 cursor: pointer;
                 font-size: 20px;
+            }
+
+            @media only screen and (max-width: 900px) {
+                button {
+                    font-size: 15px;
+                }
             }
         }
     }
@@ -188,14 +219,19 @@
         align-items: center;
         width: 60vw;
         height: 60vh;
-        border-radius: 20px;
-        background: #062437;
-        box-shadow:  6px 6px 12px #020e16,
-        -6px -6px 12px #0a3a58;
-        padding: 10px;
+        border-radius: 5px;
+        background: #142c43;
+        box-shadow:  -20px -20px 34px #112539,
+                     20px 20px 34px #17334d;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+            width: 90vw;
+            height: 90vh;
+        }
 
         .signup-form-container {
-            border-radius: 20px 0 0 20px;
+            border-radius: 5px 0 0 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -205,6 +241,10 @@
             width: 100%;
             background-color: white;
 
+            @media only screen and (max-width: 600px) {
+                border-radius: 0;
+            }
+
             .signup-form-container-top {
                 display: flex;
                 align-items: center;
@@ -212,6 +252,11 @@
 
                 h1 {
                     margin: 20px 0 15px 0;
+                    text-align: center;
+                }
+
+                @media only screen and (max-width: 600px) {
+                    font-size: 12px;
                 }
             }
 
@@ -239,11 +284,24 @@
                     button {
                         margin: 30px 0 0 0;
                         width: 50%;
+                        min-width: 75px;
                         height: 40px;
                         border-radius: 10px;
                         background-color: @tertiary-color;
                         cursor: pointer;
                         font-size: 20px;
+                    }
+
+                    @media only screen and (max-width: 1000px) {
+                        input {
+                            min-width: 175px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 901px) {
+                        button {
+                            font-size: 15px;
+                        }
                     }
 
                 }
@@ -256,11 +314,15 @@
             align-items: center;
             justify-content: center;
             color: white;
-            border-radius: 0 20px 20px 0;
+            border-radius: 0 5px 5px 0;
             flex: 1;
             height: 100%;
             width: 100%;
             background: linear-gradient(330deg, rgba(3,20,31,1) 0%, rgba(13,43,62,1) 22%, rgba(71,181,255,1) 100%);
+
+            @media only screen and (max-width: 600px) {
+                border-radius: 0;
+            }
 
             h1 {
                 font-size: 30px;
@@ -272,11 +334,18 @@
                 color: black;
                 margin: 10px 0;
                 width: 50%;
+                min-width: 75px;
                 height: 40px;
                 border-radius: 10px;
                 background-color: white;
                 cursor: pointer;
                 font-size: 20px;
+            }
+
+            @media only screen and (max-width: 900px) {
+                button {
+                    font-size: 15px;
+                }
             }
         }
     }
