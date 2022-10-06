@@ -27717,9 +27717,9 @@ exports.Mode = Mode;
 
 /***/ }),
 
-/***/ "./node_modules/ace-builds/src-noconflict/mode-sass.js":
+/***/ "./node_modules/ace-builds/src-noconflict/mode-scss.js":
 /*!*************************************************************!*\
-  !*** ./node_modules/ace-builds/src-noconflict/mode-sass.js ***!
+  !*** ./node_modules/ace-builds/src-noconflict/mode-scss.js ***!
   \*************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -28053,143 +28053,436 @@ exports.ScssHighlightRules = ScssHighlightRules;
 
 });
 
-ace.define("ace/mode/sass_highlight_rules",["require","exports","module","ace/lib/oop","ace/lib/lang","ace/mode/scss_highlight_rules"], function(require, exports, module){"use strict";
-var oop = require("../lib/oop");
-var lang = require("../lib/lang");
-var ScssHighlightRules = require("./scss_highlight_rules").ScssHighlightRules;
-var SassHighlightRules = function () {
-    ScssHighlightRules.call(this);
-    var start = this.$rules.start;
-    if (start[1].token == "comment") {
-        start.splice(1, 1, {
-            onMatch: function (value, currentState, stack) {
-                stack.unshift(this.next, -1, value.length - 2, currentState);
-                return "comment";
-            },
-            regex: /^\s*\/\*/,
-            next: "comment"
-        }, {
-            token: "error.invalid",
-            regex: "/\\*|[{;}]"
-        }, {
-            token: "support.type",
-            regex: /^\s*:[\w\-]+\s/
-        });
-        this.$rules.comment = [
-            { regex: /^\s*/, onMatch: function (value, currentState, stack) {
-                    if (stack[1] === -1)
-                        stack[1] = Math.max(stack[2], value.length - 1);
-                    if (value.length <= stack[1]) { stack.shift();
-                        stack.shift();
-                        stack.shift();
-                        this.next = stack.shift();
-                        return "text";
-                    }
-                    else {
-                        this.next = "";
-                        return "comment";
-                    }
-                }, next: "start" },
-            { defaultToken: "comment" }
-        ];
-    }
-};
-oop.inherits(SassHighlightRules, ScssHighlightRules);
-exports.SassHighlightRules = SassHighlightRules;
+ace.define("ace/mode/matching_brace_outdent",["require","exports","module","ace/range"], function(require, exports, module){"use strict";
+var Range = require("../range").Range;
+var MatchingBraceOutdent = function () { };
+(function () {
+    this.checkOutdent = function (line, input) {
+        if (!/^\s+$/.test(line))
+            return false;
+        return /^\s*\}/.test(input);
+    };
+    this.autoOutdent = function (doc, row) {
+        var line = doc.getLine(row);
+        var match = line.match(/^(\s*\})/);
+        if (!match)
+            return 0;
+        var column = match[1].length;
+        var openBracePos = doc.findMatchingBracket({ row: row, column: column });
+        if (!openBracePos || openBracePos.row == row)
+            return 0;
+        var indent = this.$getIndent(doc.getLine(openBracePos.row));
+        doc.replace(new Range(row, 0, row, column - 1), indent);
+    };
+    this.$getIndent = function (line) {
+        return line.match(/^\s*/)[0];
+    };
+}).call(MatchingBraceOutdent.prototype);
+exports.MatchingBraceOutdent = MatchingBraceOutdent;
 
 });
 
-ace.define("ace/mode/folding/coffee",["require","exports","module","ace/lib/oop","ace/mode/folding/fold_mode","ace/range"], function(require, exports, module){"use strict";
+ace.define("ace/mode/behaviour/css",["require","exports","module","ace/lib/oop","ace/mode/behaviour","ace/mode/behaviour/cstyle","ace/token_iterator"], function(require, exports, module){"use strict";
 var oop = require("../../lib/oop");
-var BaseFoldMode = require("./fold_mode").FoldMode;
+var Behaviour = require("../behaviour").Behaviour;
+var CstyleBehaviour = require("./cstyle").CstyleBehaviour;
+var TokenIterator = require("../../token_iterator").TokenIterator;
+var CssBehaviour = function () {
+    this.inherit(CstyleBehaviour);
+    this.add("colon", "insertion", function (state, action, editor, session, text) {
+        if (text === ':' && editor.selection.isEmpty()) {
+            var cursor = editor.getCursorPosition();
+            var iterator = new TokenIterator(session, cursor.row, cursor.column);
+            var token = iterator.getCurrentToken();
+            if (token && token.value.match(/\s+/)) {
+                token = iterator.stepBackward();
+            }
+            if (token && token.type === 'support.type') {
+                var line = session.doc.getLine(cursor.row);
+                var rightChar = line.substring(cursor.column, cursor.column + 1);
+                if (rightChar === ':') {
+                    return {
+                        text: '',
+                        selection: [1, 1]
+                    };
+                }
+                if (/^(\s+[^;]|\s*$)/.test(line.substring(cursor.column))) {
+                    return {
+                        text: ':;',
+                        selection: [1, 1]
+                    };
+                }
+            }
+        }
+    });
+    this.add("colon", "deletion", function (state, action, editor, session, range) {
+        var selected = session.doc.getTextRange(range);
+        if (!range.isMultiLine() && selected === ':') {
+            var cursor = editor.getCursorPosition();
+            var iterator = new TokenIterator(session, cursor.row, cursor.column);
+            var token = iterator.getCurrentToken();
+            if (token && token.value.match(/\s+/)) {
+                token = iterator.stepBackward();
+            }
+            if (token && token.type === 'support.type') {
+                var line = session.doc.getLine(range.start.row);
+                var rightChar = line.substring(range.end.column, range.end.column + 1);
+                if (rightChar === ';') {
+                    range.end.column++;
+                    return range;
+                }
+            }
+        }
+    });
+    this.add("semicolon", "insertion", function (state, action, editor, session, text) {
+        if (text === ';' && editor.selection.isEmpty()) {
+            var cursor = editor.getCursorPosition();
+            var line = session.doc.getLine(cursor.row);
+            var rightChar = line.substring(cursor.column, cursor.column + 1);
+            if (rightChar === ';') {
+                return {
+                    text: '',
+                    selection: [1, 1]
+                };
+            }
+        }
+    });
+    this.add("!important", "insertion", function (state, action, editor, session, text) {
+        if (text === '!' && editor.selection.isEmpty()) {
+            var cursor = editor.getCursorPosition();
+            var line = session.doc.getLine(cursor.row);
+            if (/^\s*(;|}|$)/.test(line.substring(cursor.column))) {
+                return {
+                    text: '!important',
+                    selection: [10, 10]
+                };
+            }
+        }
+    });
+};
+oop.inherits(CssBehaviour, CstyleBehaviour);
+exports.CssBehaviour = CssBehaviour;
+
+});
+
+ace.define("ace/mode/folding/cstyle",["require","exports","module","ace/lib/oop","ace/range","ace/mode/folding/fold_mode"], function(require, exports, module){"use strict";
+var oop = require("../../lib/oop");
 var Range = require("../../range").Range;
-var FoldMode = exports.FoldMode = function () { };
+var BaseFoldMode = require("./fold_mode").FoldMode;
+var FoldMode = exports.FoldMode = function (commentRegex) {
+    if (commentRegex) {
+        this.foldingStartMarker = new RegExp(this.foldingStartMarker.source.replace(/\|[^|]*?$/, "|" + commentRegex.start));
+        this.foldingStopMarker = new RegExp(this.foldingStopMarker.source.replace(/\|[^|]*?$/, "|" + commentRegex.end));
+    }
+};
 oop.inherits(FoldMode, BaseFoldMode);
 (function () {
-    this.getFoldWidgetRange = function (session, foldStyle, row) {
-        var range = this.indentationBlock(session, row);
-        if (range)
-            return range;
-        var re = /\S/;
-        var line = session.getLine(row);
-        var startLevel = line.search(re);
-        if (startLevel == -1 || line[startLevel] != "#")
-            return;
-        var startColumn = line.length;
-        var maxRow = session.getLength();
-        var startRow = row;
-        var endRow = row;
-        while (++row < maxRow) {
-            line = session.getLine(row);
-            var level = line.search(re);
-            if (level == -1)
-                continue;
-            if (line[level] != "#")
-                break;
-            endRow = row;
-        }
-        if (endRow > startRow) {
-            var endColumn = session.getLine(endRow).length;
-            return new Range(startRow, startColumn, endRow, endColumn);
-        }
-    };
+    this.foldingStartMarker = /([\{\[\(])[^\}\]\)]*$|^\s*(\/\*)/;
+    this.foldingStopMarker = /^[^\[\{\(]*([\}\]\)])|^[\s\*]*(\*\/)/;
+    this.singleLineBlockCommentRe = /^\s*(\/\*).*\*\/\s*$/;
+    this.tripleStarBlockCommentRe = /^\s*(\/\*\*\*).*\*\/\s*$/;
+    this.startRegionRe = /^\s*(\/\*|\/\/)#?region\b/;
+    this._getFoldWidgetBase = this.getFoldWidget;
     this.getFoldWidget = function (session, foldStyle, row) {
         var line = session.getLine(row);
-        var indent = line.search(/\S/);
-        var next = session.getLine(row + 1);
-        var prev = session.getLine(row - 1);
-        var prevIndent = prev.search(/\S/);
-        var nextIndent = next.search(/\S/);
-        if (indent == -1) {
-            session.foldWidgets[row - 1] = prevIndent != -1 && prevIndent < nextIndent ? "start" : "";
-            return "";
-        }
-        if (prevIndent == -1) {
-            if (indent == nextIndent && line[indent] == "#" && next[indent] == "#") {
-                session.foldWidgets[row - 1] = "";
-                session.foldWidgets[row + 1] = "";
-                return "start";
-            }
-        }
-        else if (prevIndent == indent && line[indent] == "#" && prev[indent] == "#") {
-            if (session.getLine(row - 2).search(/\S/) == -1) {
-                session.foldWidgets[row - 1] = "start";
-                session.foldWidgets[row + 1] = "";
+        if (this.singleLineBlockCommentRe.test(line)) {
+            if (!this.startRegionRe.test(line) && !this.tripleStarBlockCommentRe.test(line))
                 return "";
-            }
         }
-        if (prevIndent != -1 && prevIndent < indent)
-            session.foldWidgets[row - 1] = "start";
-        else
-            session.foldWidgets[row - 1] = "";
-        if (indent < nextIndent)
-            return "start";
-        else
-            return "";
+        var fw = this._getFoldWidgetBase(session, foldStyle, row);
+        if (!fw && this.startRegionRe.test(line))
+            return "start"; // lineCommentRegionStart
+        return fw;
+    };
+    this.getFoldWidgetRange = function (session, foldStyle, row, forceMultiline) {
+        var line = session.getLine(row);
+        if (this.startRegionRe.test(line))
+            return this.getCommentRegionBlock(session, line, row);
+        var match = line.match(this.foldingStartMarker);
+        if (match) {
+            var i = match.index;
+            if (match[1])
+                return this.openingBracketBlock(session, match[1], row, i);
+            var range = session.getCommentFoldRange(row, i + match[0].length, 1);
+            if (range && !range.isMultiLine()) {
+                if (forceMultiline) {
+                    range = this.getSectionRange(session, row);
+                }
+                else if (foldStyle != "all")
+                    range = null;
+            }
+            return range;
+        }
+        if (foldStyle === "markbegin")
+            return;
+        var match = line.match(this.foldingStopMarker);
+        if (match) {
+            var i = match.index + match[0].length;
+            if (match[1])
+                return this.closingBracketBlock(session, match[1], row, i);
+            return session.getCommentFoldRange(row, i, -1);
+        }
+    };
+    this.getSectionRange = function (session, row) {
+        var line = session.getLine(row);
+        var startIndent = line.search(/\S/);
+        var startRow = row;
+        var startColumn = line.length;
+        row = row + 1;
+        var endRow = row;
+        var maxRow = session.getLength();
+        while (++row < maxRow) {
+            line = session.getLine(row);
+            var indent = line.search(/\S/);
+            if (indent === -1)
+                continue;
+            if (startIndent > indent)
+                break;
+            var subRange = this.getFoldWidgetRange(session, "all", row);
+            if (subRange) {
+                if (subRange.start.row <= startRow) {
+                    break;
+                }
+                else if (subRange.isMultiLine()) {
+                    row = subRange.end.row;
+                }
+                else if (startIndent == indent) {
+                    break;
+                }
+            }
+            endRow = row;
+        }
+        return new Range(startRow, startColumn, endRow, session.getLine(endRow).length);
+    };
+    this.getCommentRegionBlock = function (session, line, row) {
+        var startColumn = line.search(/\s*$/);
+        var maxRow = session.getLength();
+        var startRow = row;
+        var re = /^\s*(?:\/\*|\/\/|--)#?(end)?region\b/;
+        var depth = 1;
+        while (++row < maxRow) {
+            line = session.getLine(row);
+            var m = re.exec(line);
+            if (!m)
+                continue;
+            if (m[1])
+                depth--;
+            else
+                depth++;
+            if (!depth)
+                break;
+        }
+        var endRow = row;
+        if (endRow > startRow) {
+            return new Range(startRow, startColumn, endRow, line.length);
+        }
     };
 }).call(FoldMode.prototype);
 
 });
 
-ace.define("ace/mode/sass",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/sass_highlight_rules","ace/mode/folding/coffee"], function(require, exports, module){"use strict";
+ace.define("ace/mode/css_completions",["require","exports","module"], function(require, exports, module){"use strict";
+var propertyMap = {
+    "background": { "#$0": 1 },
+    "background-color": { "#$0": 1, "transparent": 1, "fixed": 1 },
+    "background-image": { "url('/$0')": 1 },
+    "background-repeat": { "repeat": 1, "repeat-x": 1, "repeat-y": 1, "no-repeat": 1, "inherit": 1 },
+    "background-position": { "bottom": 2, "center": 2, "left": 2, "right": 2, "top": 2, "inherit": 2 },
+    "background-attachment": { "scroll": 1, "fixed": 1 },
+    "background-size": { "cover": 1, "contain": 1 },
+    "background-clip": { "border-box": 1, "padding-box": 1, "content-box": 1 },
+    "background-origin": { "border-box": 1, "padding-box": 1, "content-box": 1 },
+    "border": { "solid $0": 1, "dashed $0": 1, "dotted $0": 1, "#$0": 1 },
+    "border-color": { "#$0": 1 },
+    "border-style": { "solid": 2, "dashed": 2, "dotted": 2, "double": 2, "groove": 2, "hidden": 2, "inherit": 2, "inset": 2, "none": 2, "outset": 2, "ridged": 2 },
+    "border-collapse": { "collapse": 1, "separate": 1 },
+    "bottom": { "px": 1, "em": 1, "%": 1 },
+    "clear": { "left": 1, "right": 1, "both": 1, "none": 1 },
+    "color": { "#$0": 1, "rgb(#$00,0,0)": 1 },
+    "cursor": { "default": 1, "pointer": 1, "move": 1, "text": 1, "wait": 1, "help": 1, "progress": 1, "n-resize": 1, "ne-resize": 1, "e-resize": 1, "se-resize": 1, "s-resize": 1, "sw-resize": 1, "w-resize": 1, "nw-resize": 1 },
+    "display": { "none": 1, "block": 1, "inline": 1, "inline-block": 1, "table-cell": 1 },
+    "empty-cells": { "show": 1, "hide": 1 },
+    "float": { "left": 1, "right": 1, "none": 1 },
+    "font-family": { "Arial": 2, "Comic Sans MS": 2, "Consolas": 2, "Courier New": 2, "Courier": 2, "Georgia": 2, "Monospace": 2, "Sans-Serif": 2, "Segoe UI": 2, "Tahoma": 2, "Times New Roman": 2, "Trebuchet MS": 2, "Verdana": 1 },
+    "font-size": { "px": 1, "em": 1, "%": 1 },
+    "font-weight": { "bold": 1, "normal": 1 },
+    "font-style": { "italic": 1, "normal": 1 },
+    "font-variant": { "normal": 1, "small-caps": 1 },
+    "height": { "px": 1, "em": 1, "%": 1 },
+    "left": { "px": 1, "em": 1, "%": 1 },
+    "letter-spacing": { "normal": 1 },
+    "line-height": { "normal": 1 },
+    "list-style-type": { "none": 1, "disc": 1, "circle": 1, "square": 1, "decimal": 1, "decimal-leading-zero": 1, "lower-roman": 1, "upper-roman": 1, "lower-greek": 1, "lower-latin": 1, "upper-latin": 1, "georgian": 1, "lower-alpha": 1, "upper-alpha": 1 },
+    "margin": { "px": 1, "em": 1, "%": 1 },
+    "margin-right": { "px": 1, "em": 1, "%": 1 },
+    "margin-left": { "px": 1, "em": 1, "%": 1 },
+    "margin-top": { "px": 1, "em": 1, "%": 1 },
+    "margin-bottom": { "px": 1, "em": 1, "%": 1 },
+    "max-height": { "px": 1, "em": 1, "%": 1 },
+    "max-width": { "px": 1, "em": 1, "%": 1 },
+    "min-height": { "px": 1, "em": 1, "%": 1 },
+    "min-width": { "px": 1, "em": 1, "%": 1 },
+    "overflow": { "hidden": 1, "visible": 1, "auto": 1, "scroll": 1 },
+    "overflow-x": { "hidden": 1, "visible": 1, "auto": 1, "scroll": 1 },
+    "overflow-y": { "hidden": 1, "visible": 1, "auto": 1, "scroll": 1 },
+    "padding": { "px": 1, "em": 1, "%": 1 },
+    "padding-top": { "px": 1, "em": 1, "%": 1 },
+    "padding-right": { "px": 1, "em": 1, "%": 1 },
+    "padding-bottom": { "px": 1, "em": 1, "%": 1 },
+    "padding-left": { "px": 1, "em": 1, "%": 1 },
+    "page-break-after": { "auto": 1, "always": 1, "avoid": 1, "left": 1, "right": 1 },
+    "page-break-before": { "auto": 1, "always": 1, "avoid": 1, "left": 1, "right": 1 },
+    "position": { "absolute": 1, "relative": 1, "fixed": 1, "static": 1 },
+    "right": { "px": 1, "em": 1, "%": 1 },
+    "table-layout": { "fixed": 1, "auto": 1 },
+    "text-decoration": { "none": 1, "underline": 1, "line-through": 1, "blink": 1 },
+    "text-align": { "left": 1, "right": 1, "center": 1, "justify": 1 },
+    "text-transform": { "capitalize": 1, "uppercase": 1, "lowercase": 1, "none": 1 },
+    "top": { "px": 1, "em": 1, "%": 1 },
+    "vertical-align": { "top": 1, "bottom": 1 },
+    "visibility": { "hidden": 1, "visible": 1 },
+    "white-space": { "nowrap": 1, "normal": 1, "pre": 1, "pre-line": 1, "pre-wrap": 1 },
+    "width": { "px": 1, "em": 1, "%": 1 },
+    "word-spacing": { "normal": 1 },
+    "filter": { "alpha(opacity=$0100)": 1 },
+    "text-shadow": { "$02px 2px 2px #777": 1 },
+    "text-overflow": { "ellipsis-word": 1, "clip": 1, "ellipsis": 1 },
+    "-moz-border-radius": 1,
+    "-moz-border-radius-topright": 1,
+    "-moz-border-radius-bottomright": 1,
+    "-moz-border-radius-topleft": 1,
+    "-moz-border-radius-bottomleft": 1,
+    "-webkit-border-radius": 1,
+    "-webkit-border-top-right-radius": 1,
+    "-webkit-border-top-left-radius": 1,
+    "-webkit-border-bottom-right-radius": 1,
+    "-webkit-border-bottom-left-radius": 1,
+    "-moz-box-shadow": 1,
+    "-webkit-box-shadow": 1,
+    "transform": { "rotate($00deg)": 1, "skew($00deg)": 1 },
+    "-moz-transform": { "rotate($00deg)": 1, "skew($00deg)": 1 },
+    "-webkit-transform": { "rotate($00deg)": 1, "skew($00deg)": 1 }
+};
+var CssCompletions = function () {
+};
+(function () {
+    this.completionsDefined = false;
+    this.defineCompletions = function () {
+        if (document) {
+            var style = document.createElement('c').style;
+            for (var i in style) {
+                if (typeof style[i] !== 'string')
+                    continue;
+                var name = i.replace(/[A-Z]/g, function (x) {
+                    return '-' + x.toLowerCase();
+                });
+                if (!propertyMap.hasOwnProperty(name))
+                    propertyMap[name] = 1;
+            }
+        }
+        this.completionsDefined = true;
+    };
+    this.getCompletions = function (state, session, pos, prefix) {
+        if (!this.completionsDefined) {
+            this.defineCompletions();
+        }
+        if (state === 'ruleset' || session.$mode.$id == "ace/mode/scss") {
+            var line = session.getLine(pos.row).substr(0, pos.column);
+            var inParens = /\([^)]*$/.test(line);
+            if (inParens) {
+                line = line.substr(line.lastIndexOf('(') + 1);
+            }
+            if (/:[^;]+$/.test(line)) {
+                /([\w\-]+):[^:]*$/.test(line);
+                return this.getPropertyValueCompletions(state, session, pos, prefix);
+            }
+            else {
+                return this.getPropertyCompletions(state, session, pos, prefix, inParens);
+            }
+        }
+        return [];
+    };
+    this.getPropertyCompletions = function (state, session, pos, prefix, skipSemicolon) {
+        skipSemicolon = skipSemicolon || false;
+        var properties = Object.keys(propertyMap);
+        return properties.map(function (property) {
+            return {
+                caption: property,
+                snippet: property + ': $0' + (skipSemicolon ? '' : ';'),
+                meta: "property",
+                score: 1000000
+            };
+        });
+    };
+    this.getPropertyValueCompletions = function (state, session, pos, prefix) {
+        var line = session.getLine(pos.row).substr(0, pos.column);
+        var property = (/([\w\-]+):[^:]*$/.exec(line) || {})[1];
+        if (!property)
+            return [];
+        var values = [];
+        if (property in propertyMap && typeof propertyMap[property] === "object") {
+            values = Object.keys(propertyMap[property]);
+        }
+        return values.map(function (value) {
+            return {
+                caption: value,
+                snippet: value,
+                meta: "property value",
+                score: 1000000
+            };
+        });
+    };
+}).call(CssCompletions.prototype);
+exports.CssCompletions = CssCompletions;
+
+});
+
+ace.define("ace/mode/scss",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/scss_highlight_rules","ace/mode/matching_brace_outdent","ace/mode/behaviour/css","ace/mode/folding/cstyle","ace/mode/css_completions"], function(require, exports, module){"use strict";
 var oop = require("../lib/oop");
 var TextMode = require("./text").Mode;
-var SassHighlightRules = require("./sass_highlight_rules").SassHighlightRules;
-var FoldMode = require("./folding/coffee").FoldMode;
+var ScssHighlightRules = require("./scss_highlight_rules").ScssHighlightRules;
+var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
+var CssBehaviour = require("./behaviour/css").CssBehaviour;
+var CStyleFoldMode = require("./folding/cstyle").FoldMode;
+var CssCompletions = require("./css_completions").CssCompletions;
 var Mode = function () {
-    this.HighlightRules = SassHighlightRules;
-    this.foldingRules = new FoldMode();
-    this.$behaviour = this.$defaultBehaviour;
+    this.HighlightRules = ScssHighlightRules;
+    this.$outdent = new MatchingBraceOutdent();
+    this.$behaviour = new CssBehaviour();
+    this.$completer = new CssCompletions();
+    this.foldingRules = new CStyleFoldMode();
 };
 oop.inherits(Mode, TextMode);
 (function () {
     this.lineCommentStart = "//";
-    this.$id = "ace/mode/sass";
+    this.blockComment = { start: "/*", end: "*/" };
+    this.getNextLineIndent = function (state, line, tab) {
+        var indent = this.$getIndent(line);
+        var tokens = this.getTokenizer().getLineTokens(line, state).tokens;
+        if (tokens.length && tokens[tokens.length - 1].type == "comment") {
+            return indent;
+        }
+        var match = line.match(/^.*\{\s*$/);
+        if (match) {
+            indent += tab;
+        }
+        return indent;
+    };
+    this.checkOutdent = function (state, line, input) {
+        return this.$outdent.checkOutdent(line, input);
+    };
+    this.autoOutdent = function (state, doc, row) {
+        this.$outdent.autoOutdent(doc, row);
+    };
+    this.getCompletions = function (state, session, pos, prefix) {
+        return this.$completer.getCompletions(state, session, pos, prefix);
+    };
+    this.$id = "ace/mode/scss";
 }).call(Mode.prototype);
 exports.Mode = Mode;
 
 });                (function() {
-                    ace.require(["ace/mode/sass"], function(m) {
+                    ace.require(["ace/mode/scss"], function(m) {
                         if ( true && module) {
                             module.exports = m;
                         }
@@ -31404,8 +31697,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ace_builds_src_noconflict_mode_javascript__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ace_builds_src_noconflict_mode_javascript__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var ace_builds_src_noconflict_mode_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ace-builds/src-noconflict/mode-less */ "./node_modules/ace-builds/src-noconflict/mode-less.js");
 /* harmony import */ var ace_builds_src_noconflict_mode_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ace_builds_src_noconflict_mode_less__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var ace_builds_src_noconflict_mode_sass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ace-builds/src-noconflict/mode-sass */ "./node_modules/ace-builds/src-noconflict/mode-sass.js");
-/* harmony import */ var ace_builds_src_noconflict_mode_sass__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(ace_builds_src_noconflict_mode_sass__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var ace_builds_src_noconflict_mode_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ace-builds/src-noconflict/mode-scss */ "./node_modules/ace-builds/src-noconflict/mode-scss.js");
+/* harmony import */ var ace_builds_src_noconflict_mode_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(ace_builds_src_noconflict_mode_scss__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var ace_builds_src_noconflict_theme_github__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ace-builds/src-noconflict/theme-github */ "./node_modules/ace-builds/src-noconflict/theme-github.js");
 /* harmony import */ var ace_builds_src_noconflict_theme_github__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(ace_builds_src_noconflict_theme_github__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var ace_builds_src_noconflict_theme_monokai__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ace-builds/src-noconflict/theme-monokai */ "./node_modules/ace-builds/src-noconflict/theme-monokai.js");
@@ -31459,13 +31752,23 @@ function SingleComponent() {
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      srcDoc = _useState10[0],
-      setSrcDoc = _useState10[1];
+      sass = _useState10[0],
+      setSass = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("html"),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState12 = _slicedToArray(_useState11, 2),
-      view = _useState12[0],
-      setView = _useState12[1];
+      srcDoc = _useState12[0],
+      setSrcDoc = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("html"),
+      _useState14 = _slicedToArray(_useState13, 2),
+      view = _useState14[0],
+      setView = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      color = _useState16[0],
+      setColor = _useState16[1];
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -31486,20 +31789,53 @@ function SingleComponent() {
     });
   }
 
+  function onChangeSass(newValue) {
+    setSass(newValue);
+  }
+
+  function copyClipboard() {
+    switch (view) {
+      case 'html':
+        navigator.clipboard.writeText(html).then(function () {
+          return alert('Copied to clipboard!');
+        });
+        break;
+
+      case 'css':
+        navigator.clipboard.writeText(css).then(function () {
+          return alert('Copied to clipboard!');
+        });
+        break;
+
+      case 'js':
+        navigator.clipboard.writeText(js).then(function () {
+          return alert('Copied to clipboard!');
+        });
+        break;
+
+      case 'less':
+        navigator.clipboard.writeText(less).then(function () {
+          return alert('Copied to clipboard!');
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
+
   react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {
     setSrcDoc("\n        <html>\n          <body><div id=\"root\"></div>".concat(html, "</body>\n          <style>").concat(css, "</style>\n          <script type=\"text/babel\">").concat(js, "</script>\n          <script src=\"https://unpkg.com/react@17/umd/react.development.js\"></script>\n          <script src=\"https://unpkg.com/react-dom@17/umd/react-dom.development.js\"></script>\n          <script src=\"https://unpkg.com/@babel/standalone/babel.min.js\"></script>\n        </html>\n      "));
   }, [html, css, js]);
-  react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {
-    setHTML("<!-- HTML Goes Here -->");
-    setCSS("/* CSS Goes Here */");
-    setJS("// Javascript Goes Here");
-  }, []);
+  react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {}, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-root"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "/",
-    className: "singlecomp-back fa fa-chevron-left"
-  }, " ", "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "singlecomp-back"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fa fa-chevron-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "\xA0Back"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-iframe"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("iframe", {
     srcDoc: srcDoc,
@@ -31508,6 +31844,8 @@ function SingleComponent() {
     width: "100%",
     height: "100%"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "singlecomp-buttons"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-buttons-box"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: function onClick() {
@@ -31529,7 +31867,17 @@ function SingleComponent() {
       return setView("less");
     },
     className: view === "less" ? " singlecomp-pressed" : ""
-  }, "Less")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "Less"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: function onClick() {
+      return setView("sass");
+    },
+    className: view === "sass" ? " singlecomp-pressed" : ""
+  }, "Sass")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "singlecomp-clipboard",
+    onClick: copyClipboard
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: "/copy.png"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-editors"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-html-editor",
@@ -31545,7 +31893,8 @@ function SingleComponent() {
     },
     placeholder: "<!-- HTML goes here -->",
     width: "100%",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    wrapEnabled: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-css-editor",
     className: view === "css" ? "" : "singlecomp-hidden"
@@ -31560,7 +31909,8 @@ function SingleComponent() {
     },
     placeholder: "/* CSS Goes Here */",
     width: "100%",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    wrapEnabled: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-javascript-editor",
     className: view === "js" ? "" : "singlecomp-hidden"
@@ -31573,9 +31923,10 @@ function SingleComponent() {
     editorProps: {
       $blockScrolling: true
     },
-    placeholder: "//Javascript goes here",
+    placeholder: "// Javascript goes here",
     width: "100%",
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    wrapEnabled: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "singlecomp-less-editor",
     className: view === "less" ? "" : "singlecomp-hidden"
@@ -31589,8 +31940,33 @@ function SingleComponent() {
       $blockScrolling: true
     },
     width: "100%",
-    fontSize: "1.5rem"
-  }))));
+    fontSize: "1.5rem",
+    placeholder: "/* Less Goes Here */",
+    wrapEnabled: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "singlecomp-sass-editor",
+    className: view === "sass" ? "" : "singlecomp-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_ace__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    mode: "less",
+    theme: "monokai",
+    onChange: onChangeSass,
+    value: sass,
+    name: "Sass",
+    editorProps: {
+      $blockScrolling: true
+    },
+    width: "100%",
+    fontSize: "1.5rem",
+    placeholder: "/* Sass Goes Here */",
+    wrapEnabled: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "singlecomp-color-picker"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Color Selector Tool"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    onChange: function onChange(event) {
+      return setColor(event.target.value);
+    },
+    type: "color"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Selected: ", color))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SingleComponent);
