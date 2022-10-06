@@ -12,6 +12,13 @@ module.exports = {
       directory: __dirname + "/public",
     },
   },
+  resolve: {
+    fallback: {
+      "fs": false,
+      "assert": false,
+      "os": false
+    }
+  },
   module: {
     rules: [
       {

@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-less";
-import "ace-builds/src-noconflict/mode-sass";
+import "ace-builds/src-noconflict/mode-scss";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
@@ -15,8 +15,10 @@ function SingleComponent() {
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
   const [less, setLess] = useState("");
+  const [sass, setSass] = useState("");
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
+  const [color, setColor] = useState('')
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -35,6 +37,10 @@ function SingleComponent() {
     Less.render(newValue).then(function(output) {
       setCSS(output.css)
     })
+  }
+
+  function onChangeSass(newValue) {
+    setSass(newValue);
   }
 
   function copyClipboard() {
@@ -112,8 +118,14 @@ function SingleComponent() {
         >
           Less
         </button>
+        <button
+          onClick={() => setView("sass")}
+          className={view === "sass" ? " singlecomp-pressed" : ""}
+        >
+          Sass
+        </button>
       </div>
-        <div class="singlecomp-clipboard" onClick={copyClipboard}>
+        <div className="singlecomp-clipboard" onClick={copyClipboard}>
             <img src="/copy.png"></img>
         </div>
       </div>
@@ -132,7 +144,7 @@ function SingleComponent() {
             placeholder="<!-- HTML goes here -->"
             width="100%"
             fontSize="1.5rem"
-            wrapEnabled="true"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -149,7 +161,7 @@ function SingleComponent() {
             placeholder="/* CSS Goes Here */"
             width="100%"
             fontSize="1.5rem"
-            wrapEnabled="true"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -166,7 +178,7 @@ function SingleComponent() {
             placeholder="// Javascript goes here"
             width="100%"
             fontSize="1.5rem"
-            wrapEnabled="true"
+            wrapEnabled={true}
           />
         </div>
         <div
@@ -183,8 +195,30 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
-            wrapEnabled="true"
+            wrapEnabled={true}
           />
+        </div>
+        <div
+          id="singlecomp-sass-editor"
+          className={view === "sass" ? "" : "singlecomp-hidden"}
+        >
+          <AceEditor
+            mode="less"
+            theme="monokai"
+            onChange={onChangeSass}
+            value={sass}
+            name="Sass"
+            editorProps={{ $blockScrolling: true }}
+            width="100%"
+            fontSize="1.5rem"
+            placeholder="/* Sass Goes Here */"
+            wrapEnabled={true}
+          />
+        </div>
+        <div id="singlecomp-color-picker">
+          <h1>Color Selector Tool</h1>
+          <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
+          <h2>Selected: {color}</h2>
         </div>
       </div>
     </div>

@@ -10,17 +10,23 @@
     justify-content: space-between;
     flex-wrap: wrap;
     font-family: monospace;
-    max-width: 1000px;
-    margin: 20px 20px 0 20px;
+    width: 93%;
+    padding: 20px 20px 0 20px;
+    margin-right: 20px;
+
+    @media only screen and (max-width:480px) {
+        width: 90%;
+    }
 }
 
-#singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor, #singlecomp-less-editor {
+#singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor, #singlecomp-less-editor, #singlecomp-sass-editor {
+    max-width: 1000px;
     width: 100%;
     font-family: monospace;
     border: 1px solid @tertiary-color;
 }
 
-#HTML, #CSS, #JS, #Less {
+#HTML, #CSS, #JS, #Less, #Sass {
     font-family: monospace;
 }
 
@@ -93,7 +99,7 @@ a.singlecomp-back {
     position: static;
 
     button {
-        width: 100px;
+        min-width: 100px;
         height: 50px;
         font-family: 'Inter', 'sans-serif';
         background-color: @secondary-color;
@@ -101,6 +107,10 @@ a.singlecomp-back {
         border: none;
         cursor: pointer;
         transition: 0.25s ease;
+
+        @media only screen and (max-width: 480px) {
+            min-width: 50px;
+        }
     }
 
     button:hover {
@@ -114,5 +124,24 @@ a.singlecomp-back {
 
     .singlecomp-pressed:active {
         background-color: @tertiary-color;
+    }
+}
+
+#singlecomp-color-picker {
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', 'sans-serif';
+    color: @tertiary-color;
+    justify-content: center;
+    align-items: center;
+    background-color: @secondary-color;
+    border-radius: 1rem;
+    margin: 50px;
+
+    input {
+        height: 100px;
+        width: 200px;
     }
 }
