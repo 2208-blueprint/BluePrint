@@ -64,7 +64,7 @@ router.put("/unfollow/:userId", requireToken, async (req, res, next) => {
     const id = req.params.userId;
     const user = req.user;
     const creator = await User.findByPk(id);
-    await user.removeFollowing(creator);
+    await creator.removeFollowers(user);
     res.send(user);
   } catch (error) {
     next(error);

@@ -62,6 +62,7 @@ const syncAndSeed = async () => {
       framework: "react",
       stylingFramework: "less",
     });
+
     // await ben.addComponent(item, { through: { isAuthor: true } });
     // await ben.addComponent(item2, { through: { isAuthor: false } });
     // console.log("added item");
