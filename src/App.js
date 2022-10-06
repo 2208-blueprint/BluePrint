@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { SingleComponent, CreateComponent } from "./components";
-import { LoginPage } from "./components";
+import { CreateComponent } from "./components";
+import { SingleComponent, LoginPage } from "./components";
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
     <Routes>
       <Route path='/components/:id' element={<SingleComponent/>}></Route>
       <Route path='/profile/create' element={<CreateComponent/>}></Route>
+      <Route path='/login' element={<LoginPage />}></Route>
     </Routes>
     </>
   );

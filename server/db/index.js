@@ -73,14 +73,10 @@ const syncAndSeed = async () => {
     const subscriberKing = await User.findByPk(1, {
       include: [{ model: User, as: "followers", attributes: ["username"] }],
     });
-    console.log("should have three followers", subscriberKing.followers);
     await ben.removeFollowing(thomas);
     const afterRemoving = await User.findByPk(1, {
       include: [{ model: User, as: "followers", attributes: ["username"] }],
     });
-    console.log("should have two followers", afterRemoving.followers);
-    console.log(await cathal.getFollowers());
-    console.log(await cathal.getFollowing());
     // const subscribedTo = await User.findByPk(2, {
     //   include: [{ model: User, as: "following" }],
     // });
