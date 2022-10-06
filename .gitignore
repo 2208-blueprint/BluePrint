@@ -1,5 +1,10 @@
 secrets.js
 node_modules
 public/index.css
+<<<<<<< HEAD
+bundle.js
+bundle.js.map
+=======
 public/bundle.js
 public/bundle.js.map
+>>>>>>> b3189aa380c80847a991e0daa055768cfaa59f9c
