@@ -1,36 +1,35 @@
 @import 'variables';
 
-#singlecomp-root {
+#createcomp-root {
     background-color: @background-color;
     height: auto;
 }
 
-#singlecomp-editors {
+#createcomp-editors {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     font-family: monospace;
-    width: 93%;
+    width: 94%;
     padding: 20px 20px 0 20px;
-    margin-right: 20px;
 
     @media only screen and (max-width:480px) {
         width: 90%;
     }
 }
 
-#singlecomp-html-editor, #singlecomp-css-editor, #singlecomp-javascript-editor, #singlecomp-less-editor, #singlecomp-sass-editor {
+#createcomp-html-editor, #createcomp-css-editor, #createcomp-javascript-editor, #createcomp-less-editor, #createcomp-sass-editor {
     max-width: 1000px;
     width: 100%;
     font-family: monospace;
     border: 1px solid @tertiary-color;
 }
 
-.singlecomp-hidden {
+.createcomp-hidden {
     display: none;
 }
 
-a.singlecomp-back {
+a.createcomp-back {
     font-size: 2rem;
     text-decoration: none;
     color: @tertiary-color;
@@ -44,7 +43,7 @@ a.singlecomp-back {
     }
 }
 
-#singlecomp-iframe{
+#createcomp-iframe{
     height: 40vh;
     margin: 20px;
     background-color: white;
@@ -57,13 +56,13 @@ a.singlecomp-back {
     }
 }
 
-#singlecomp-buttons {
+#createcomp-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1000px;
 
-    .singlecomp-clipboard {
+    .createcomp-clipboard {
         display: flex;
         width: 50px;
         height: 50px;
@@ -79,13 +78,13 @@ a.singlecomp-back {
         }
     }
 
-    .singlecomp-clipboard:hover {
+    .createcomp-clipboard:hover {
         background-color: rgb(209, 209, 209);
         cursor: pointer;
     }
 }
 
-#singlecomp-buttons-box {
+#createcomp-buttons-box {
     display:flex;
     gap:0;
     max-width:1000px;
@@ -113,17 +112,17 @@ a.singlecomp-back {
         background-color:#1a6da4 ;
     }
 
-    .singlecomp-pressed {
+    .createcomp-pressed {
         background-color: @tertiary-color;
         color: white
     }
 
-    .singlecomp-pressed:active {
+    .createcomp-pressed:active {
         background-color: @tertiary-color;
     }
 }
 
-#singlecomp-color-picker {
+#createcomp-color-picker {
     height: 300px;
     padding: 20px;
     display: flex;
@@ -134,10 +133,54 @@ a.singlecomp-back {
     align-items: center;
     background-color: @secondary-color;
     border-radius: 0.25rem;
-    margin: 50px;
+    margin: 20px;
 
     input {
         height: 100px;
         width: 200px;
+    }
+}
+
+#createcomp-submission {
+    font-family: 'Inter', 'sans-serif';
+    background-color: @secondary-color;
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px;
+    border-radius: 0.25rem;
+    color: @tertiary-color;
+    h1 {
+        text-align: center;
+    }
+    div {
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    select {
+        margin: 20px;
+        font-size: 1.25rem;
+    }
+
+    button {
+        min-width: 100px;
+        height: 50px;
+        font-family: 'Inter', 'sans-serif';
+        background-color: @tertiary-color;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    button:hover {
+        background-color:#1a6da4 ;
     }
 }

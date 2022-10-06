@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { SingleComponent } from "./components";
+import { SingleComponent, CreateComponent } from "./components";
 import { LoginPage } from "./components";
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path='/singlecomponent' element={<SingleComponent/>}></Route>
+      <Route path='/components/:id' element={<SingleComponent/>}></Route>
+      <Route path='/profile/create' element={<CreateComponent/>}></Route>
     </Routes>
     </>
   );
