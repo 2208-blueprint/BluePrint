@@ -1,14 +1,12 @@
 import React from 'react'
-import Google from './images/google.png'
-import Facebook from './images/facebook.png'
-import Github from './images/github.png'
-import triangleBG from './images/trianglify-lowres.png'
+import Google from '../images/google.png'
+import Facebook from '../images/facebook.png'
+import Github from '../images/github.png'
 
-function LoginPage() {
+function LoginForm() {
 
-  const [username, setUserName] = React.useState('')
-  const [password, setPassword] = React.useState('')
-
+    const [username, setUserName] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
   return (
     <div className='login-main-container'>
@@ -51,4 +49,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
+export default LoginForm
