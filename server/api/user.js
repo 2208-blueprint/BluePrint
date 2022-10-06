@@ -1,4 +1,5 @@
 const User = require("../db/User.js");
+const Component = require("../db/Component.js");
 const router = require("express").Router();
 
 const requireToken = async (req, res, next) => {
@@ -12,13 +13,11 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-// router.get("/", requireToken, async (req, res, next) => {
-//   try {
-
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
+router.get("/:id/components", requireToken, async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
