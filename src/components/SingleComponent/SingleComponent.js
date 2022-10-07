@@ -166,6 +166,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -183,6 +184,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -200,6 +202,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -217,6 +220,7 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -234,6 +238,7 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div id ="singlecomp-userinfo">
