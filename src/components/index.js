@@ -10,3 +10,4 @@ export { default as MainPage } from "./MainPage/MainPage";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as DropDownItems } from "./navbar/DropDownItems";
 export { default as Footer } from "./footer/Footer";
+export { default as Redirect } from "./Redirect";

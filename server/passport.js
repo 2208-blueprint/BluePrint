@@ -15,7 +15,7 @@ opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = 'secret';
 
 passport.use(new JWTStrategy(opts, function(jwt_payload, done) {
-    // console.log(jwt_payload)
+    console.log(jwt_payload)
     User.findOne({id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);
@@ -43,6 +43,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GithubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    scope: ['user:email'],
     callbackURL: "/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -61,7 +62,7 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id)
+    done(null, user)
 })
 
 passport.deserializeUser(function(user, done) {
