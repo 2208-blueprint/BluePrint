@@ -4,12 +4,13 @@ function MainPage () {
 
     return (
         <div className="main-page-main-container">
-            <div className="main-page-categories-container"> Categories
-                    Main Page Single Featured Component
+            <div className="main-page-categories-container"> 
+                Main Page Categories Container
             </div>
             <div className="main-page-outer-component-container">
+                Main Page Outer Component Container
                 <div className="main-page-single-featured-component">
-                    Main Page Featured Components
+                    Main Page Featured Component
                 </div>
                 <div className="main-page-listed-component-container">
                     <div className="main-page-single-component-container">

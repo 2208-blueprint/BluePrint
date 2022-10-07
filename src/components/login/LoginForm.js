@@ -1,7 +1,7 @@
 import React from 'react'
-import Google from '../images/google.png'
-import Facebook from '../images/facebook.png'
-import Github from '../images/github.png'
+// import Google from '../images/google.png'
+// import Facebook from '../images/facebook.png'
+// import Github from '../images/github.png'
 
 function LoginForm({ toggle, setToggle }) {
 
