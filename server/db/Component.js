@@ -45,6 +45,6 @@ const Component = db.define("component", {
   //   type: Sequelize.TEXT,
   // },
 });
-//depending on enum value, we conditionally render code editor with correct tabs and buttons. we could include file to
+//depending on enum value, we conditionally render code editor with correct tabs and buttons
 
 module.exports = Component;
