@@ -3,19 +3,27 @@ import Google from '../images/google.png'
 import Facebook from '../images/facebook.png'
 import Github from '../images/github.png'
 import Axios from 'axios'
+import { getUsers } from '../../store/users/userSlice'
 
 function LoginForm({ toggle, setToggle }) {
 
   const [username, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  const google = () => {
+  let myPromise = () =>
+      new Promise((resolve, reject) => {
+        setTimeout(function () {
+          resolve("Count");
+        }, 500);
+      });
+
+  const google = async() => {
     window.open('http://localhost:3000/auth/google', '_self')
   }
-  const facebook = () => {
+  const facebook = async() => {
     window.open('http://localhost:3000/auth/facebook', '_self')
   }
-  const github = () => {
+  const github = async() => {
     window.open('http://localhost:3000/auth/github', '_self')
   }
 
@@ -38,6 +46,21 @@ function LoginForm({ toggle, setToggle }) {
       console.log(error);
     }
   }
+
+  // React.useEffect(() => {
+  //   async function getUser() {
+
+  //     const user = await Axios.get('/api/auth/login/success', {
+  //       credentials: "include",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Credentials": true,
+  //       }})
+  //       console.log(user);
+  //   }
+  //   getUser()
+  // }, [])
 
   return (
     <div className='login-main-container'>

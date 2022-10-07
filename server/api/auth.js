@@ -1,8 +1,9 @@
 const User = require('../db/User.js')
 const router = require('express').Router()
 const passport = require('passport');
-const CLIENT_URL = 'http://localhost:3000/';
+const CLIENT_URL = 'http://localhost:3000/api/auth/login/success';
 const jwt = require('jsonwebtoken')
+
 
 const requireToken = async (req, res, next) => {
   try {
@@ -30,7 +31,44 @@ router.get('/login/failed', (req, res) => {
   })
 })
 
-router.get('/login/success', async(req, res) => {
+router.get('/test', requireToken, (req, res, next) => {
+  try {
+    console.log('success');
+    res.sendStatus(200)
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+})
+
+
+router.get('/login/success', async(req, res, next) => {
+  const userName = require('crypto').randomBytes(64).toString('hex')
+  const password = require('crypto').randomBytes(64).toString('hex')
+
+  let email = '';
+
+  if (req.user.provider === 'google') { email = req.user['_json'].email }
+  if (req.user.provider === 'github') { email = req.user.emails[0].value }
+
+  let userCheck = await User.findOne({
+    where: {
+      email,
+    }
+  })
+
+  if (!userCheck) {
+    const newUser = await User.create({
+      username: userName,
+      password: password,
+      email,
+    })
+
+    userCheck = newUser
+  }
+
+  const token = userCheck.generateToken();
 
   if (req.user) {
       res.status(200).json({
@@ -38,26 +76,27 @@ router.get('/login/success', async(req, res) => {
           message: 'Login successful',
           user: req.user,
           // jwt token here or cookies
-          // token:
+          token: token,
       })
   }
 })
 
 router.get('/google', passport.authenticate('google', {
-  scope: ['profile']
+  scope: ['https://www.googleapis.com/auth/userinfo.profile',
+          'https://www.googleapis.com/auth/userinfo.email']
 }))
 
 router.get('/google/callback', passport.authenticate('google', {
-  successRedirect: CLIENT_URL,
+  successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
 
 router.get('/github', passport.authenticate('github', {
-  scope: ['profile']
+  scope: ['user:email']
 }))
 
 router.get('/github/callback', passport.authenticate('github', {
-  successRedirect: CLIENT_URL,
+  successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
 
@@ -66,7 +105,7 @@ router.get('/facebook', passport.authenticate('facebook', {
 }))
 
 router.get('/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: CLIENT_URL,
+  successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
 
