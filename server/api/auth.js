@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 const User = require('../db/User.js')
 const router = require('express').Router()
 const passport = require('passport');
 const CLIENT_URL = 'http://localhost:3000/';
 const jwt = require('jsonwebtoken')
-=======
-const User = require("../db/User.js");
-const router = require("express").Router();
->>>>>>> 682227933fe070c0f27a5cecb98fd157968cf497
 
 const requireToken = async (req, res, next) => {
   try {
@@ -84,20 +79,10 @@ router.post("/signup", async (req, res, next) => {
       },
     });
     if (!newUser) {
-<<<<<<< HEAD
-      newUser = await User.create(req.body)
-      console.log(req.body)
-      res.status(200).send({ token: await User.authenticate(req.body)})
-    }
-    else {
-      console.log('hit')
-      res.sendStatus(403)
-=======
       newUser = await User.create(req.body);
       res.status(200).send({ token: await User.authenticate(req.body) });
     } else {
       res.sendStatus(403);
->>>>>>> 682227933fe070c0f27a5cecb98fd157968cf497
     }
   } catch (ex) {
     next(ex);
