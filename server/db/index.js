@@ -2,6 +2,9 @@ const db = require("./database");
 const User = require("./User");
 const Component = require("./Component");
 const UserComponent = require("./UserComponent");
+const Comment = require("./Comment");
+const Favorite = require("./Favorite");
+const Like = require("./Like");
 const axios = require("axios");
 
 User.belongsToMany(Component, { through: UserComponent });
@@ -22,6 +25,24 @@ User.belongsToMany(User, {
   otherKey: "creator_id",
   as: "following",
 });
+
+Comment.belongsTo(Component);
+Component.hasMany(Comment);
+
+Comment.belongsTo(User);
+User.hasMany(Comment);
+
+Like.belongsTo(User);
+User.hasMany(Like);
+
+Like.belongsTo(Comment);
+Comment.hasMany(Like);
+
+Favorite.belongsTo(User);
+User.hasMany(Favorite);
+
+Favorite.belongsTo(Component);
+Component.hasMany(Favorite);
 
 const syncAndSeed = async () => {
   try {
