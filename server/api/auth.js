@@ -39,7 +39,6 @@ router.get('/test', requireToken, (req, res, next) => {
   catch (err) {
     console.log(err);
   }
-
 })
 
 
@@ -63,6 +62,7 @@ router.get('/login/success', async(req, res, next) => {
       username: userName,
       password: password,
       email,
+
     })
 
     userCheck = newUser
