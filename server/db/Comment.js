@@ -8,6 +8,12 @@ const Comment = db.define("comment", {
     unique: true,
   },
 });
+// Comment.prototype.getReplyingTo = async function () {
+//   return await this.Sequelize.model.findByPk(this.replyId);
+// };
+// Comment.prototype.setReplyingTo = async function (comment) {
+//   return await this.update({ replyId: comment.id });
+// };
 
 module.exports = Comment;
 

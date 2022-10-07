@@ -29,6 +29,8 @@ User.belongsToMany(User, {
 Comment.belongsTo(Component);
 Component.hasMany(Comment);
 
+// Comment.hasMany(Comment, { as: "Replies", foreignKey: "replyId" });
+
 Comment.belongsTo(User);
 User.hasMany(Comment);
 
