@@ -6,4 +6,5 @@ export { default as CreateComponent } from './CreateComponent/CreateComponent'
 export { default as LoginPage } from "./login/LoginPage";
 export { default as LoginForm } from "./login/LoginForm";
 export { default as SignUpForm } from "./login/SignUpForm";
+export { default as MainPage } from "./MainPage/MainPage";
 
