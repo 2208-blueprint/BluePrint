@@ -1,6 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GithubStrategy = require('passport-github2').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const passport = require('passport')
@@ -51,21 +51,20 @@ passport.use(new GithubStrategy({
   }
 ));
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    done(null, profile)
-  }
-));
+// passport.use(new TwitterStrategy({
+//     consumerKey: process.env.TWITTER_CONSUMER_KEY,
+//     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+//     callbackURL: "/auth/twitter/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     done(null, profile)
+//   }
+// ));
 
 passport.serializeUser((user, done) => {
     done(null, user)
 })
 
 passport.deserializeUser(function(user, done) {
-    // const userCheck = User.findByPk(user)
     done(null, user);
   });

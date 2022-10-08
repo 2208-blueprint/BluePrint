@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 
@@ -9,10 +9,6 @@ function Redirect() {
         async function test() {
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
-            await Axios.get('/api/auth/test', {
-              headers: {
-                authorization: data.token
-            }})
             navigate('/login')
         }
         test()

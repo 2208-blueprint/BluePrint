@@ -31,16 +31,6 @@ router.get('/login/failed', (req, res) => {
   })
 })
 
-router.get('/test', requireToken, (req, res, next) => {
-  try {
-    console.log('success');
-    res.sendStatus(200)
-  }
-  catch (err) {
-    console.log(err);
-  }
-})
-
 
 router.get('/login/success', async(req, res, next) => {
   const userName = require('crypto').randomBytes(64).toString('hex')
@@ -50,6 +40,9 @@ router.get('/login/success', async(req, res, next) => {
 
   if (req.user.provider === 'google') { email = req.user['_json'].email }
   if (req.user.provider === 'github') { email = req.user.emails[0].value }
+
+  //*** TODO ***
+  // if (req.user.provider === 'facebook') { email = req.user.emails[0].value }
 
   let userCheck = await User.findOne({
     where: {
@@ -100,14 +93,15 @@ router.get('/github/callback', passport.authenticate('github', {
   failureRedirect: '/login/failed'
 }))
 
-router.get('/facebook', passport.authenticate('facebook', {
+router.get('/twitter', passport.authenticate('twitter', {
   scope: ['profile']
 }))
 
-router.get('/facebook/callback', passport.authenticate('facebook', {
+router.get('/twitter/callback', passport.authenticate('twitter', {
   successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
+
 
 // sign up on website, (takes whatever is in req.body)
 router.post("/signup", async (req, res, next) => {

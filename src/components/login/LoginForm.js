@@ -1,6 +1,7 @@
 import React from 'react'
 import Google from '../images/google.png'
-import Facebook from '../images/facebook.png'
+import Twitter from '../images/twitter.png'
+import Instagram from '../images/instagram_32x32.png'
 import Github from '../images/github.png'
 import Axios from 'axios'
 import { getUsers } from '../../store/users/userSlice'
@@ -10,18 +11,11 @@ function LoginForm({ toggle, setToggle }) {
   const [username, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  let myPromise = () =>
-      new Promise((resolve, reject) => {
-        setTimeout(function () {
-          resolve("Count");
-        }, 500);
-      });
-
   const google = async() => {
     window.open('http://localhost:3000/auth/google', '_self')
   }
-  const facebook = async() => {
-    window.open('http://localhost:3000/auth/facebook', '_self')
+  const twitter = async() => {
+    window.open('http://localhost:3000/auth/twitter', '_self')
   }
   const github = async() => {
     window.open('http://localhost:3000/auth/github', '_self')
@@ -73,8 +67,8 @@ function LoginForm({ toggle, setToggle }) {
                     <div className='loginButton google' onClick={google}>
                         <img src={Google} alt='' className='icon' />
                     </div>
-                    <div className='loginButton facebook' onClick={facebook}>
-                        <img src={Facebook} alt='' className='icon' />
+                    <div className='loginButton twitter' onClick={twitter}>
+                        <img src={Twitter} alt='' className='icon' />
                     </div>
                     <div className='loginButton github' onClick={github}>
                         <img src={Github} alt='' className='icon' />
