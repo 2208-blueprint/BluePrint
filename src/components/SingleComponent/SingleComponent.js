@@ -12,6 +12,7 @@ import Less from "less";
 import axios from "axios";
 import {useParams} from 'react-router-dom'
 import anime from "animejs/lib/anime.es.js"
+import CommentsSection from "./CommentsSection";
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -283,6 +284,7 @@ function SingleComponent() {
           <h2>Selected: {color}</h2>
         </div>
       </div>
+      <CommentsSection/>
     </div>
   );
 }
