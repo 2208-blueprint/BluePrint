@@ -11,6 +11,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
 import {useParams} from 'react-router-dom'
+import anime from "animejs/lib/anime.es.js"
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -26,6 +27,7 @@ function SingleComponent() {
     framework: null,
     stylingFramework: null
   })
+  const [liked, setLiked] = useState(false)
 
   const params = useParams()
 
@@ -68,6 +70,18 @@ function SingleComponent() {
         break;
       default:
         break;
+    }
+  }
+
+  function likeHandler() {
+    setLiked(!liked)
+    if (!liked) {
+    anime({
+      targets: '#singlecomp-heart',
+      scale: [4,1],
+      duration: 200,
+      easing: 'easeOutCubic'
+    })
     }
   }
 
@@ -115,9 +129,12 @@ function SingleComponent() {
 
   return (
     <div id="singlecomp-root">
+      <div id="singlecomp-top">
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
+      <div id="singlecomp-heart" onClick={likeHandler}>{liked ? <span className="singlecomp-grow">&#9829;</span>:<span>&#9825;</span>}</div>
+      </div>
       <div id="singlecomp-iframe">
         <iframe
           srcDoc={srcDoc}

@@ -1,17 +1,47 @@
 @import 'variables';
 
+@keyframes grow {
+    from {scale: 0.1}
+    to {scale: 1}
+}
+
 #singlecomp-root {
     background-color: @background-color;
     height: auto;
 }
 
+#singlecomp-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    div {
+        color: @tertiary-color;
+        margin-right: 20px;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    #singlecomp-heart {
+        font-family: 'Inter', 'sans-serif';
+        font-size: 3rem;
+    }
+}
+
+.singlecomp-grow {
+    animation-name: grow;
+    animation-duration: 1s;
+}
+
 #singlecomp-editors {
+    background-color: @background-color;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     font-family: monospace;
     width: 94%;
-    padding: 20px 20px 0 20px;
+    padding: 20px 20px 30px 20px;
 
     @media only screen and (max-width:480px) {
         width: 90%;
