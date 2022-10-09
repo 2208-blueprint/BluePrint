@@ -99,6 +99,8 @@ console.log(req.user);
   if (!userCheck) {
     const newUser = await User.create({
       username: userName,
+      firstName: 'Not Provided',
+      lastName: 'Not Provided',
       password: password,
       email,
       img: profilePicUrl,

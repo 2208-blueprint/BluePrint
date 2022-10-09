@@ -3,6 +3,8 @@ import Google from '../images/google.png'
 import Github from '../images/github.png'
 import Twitch from '../images/twitch.png'
 import Axios from 'axios'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function LoginForm({ toggle, setToggle }) {
 
@@ -69,7 +71,7 @@ function LoginForm({ toggle, setToggle }) {
                         <img src={Twitch} alt='' className='icon' />
                     </div>
                     <div className='loginButton github' onClick={github}>
-                        <img src={Github} alt='' className='icon' />
+                        {<img src={Github} alt='' className='icon' /> || <Skeleton />}
                     </div>
                   </div>
               </div>
