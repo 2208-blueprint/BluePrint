@@ -31,17 +31,63 @@ router.get('/login/failed', (req, res) => {
   })
 })
 
+router.get('/redirect', async(req, res, next) => {
+  const userName = require('crypto').randomBytes(64).toString('hex')
+  const password = require('crypto').randomBytes(64).toString('hex')
+
+  let userCheck = await User.findOne({
+    where: {
+      email: req.user['_json'].email,
+    }
+  })
+
+  if (!userCheck) {
+    const newUser = await User.create({
+      username: userName,
+      password: password,
+      email: req.user['_json'].email,
+
+    })
+
+    userCheck = newUser
+  }
+
+  const token = userCheck.generateToken();
+
+  if (req.user) {
+      res.status(200).json({
+          success: true,
+          message: 'Login successful',
+          user: req.user,
+          // jwt token here or cookies
+          token: token,
+      })
+  }
+
+})
 
 router.get('/login/success', async(req, res, next) => {
   const userName = require('crypto').randomBytes(64).toString('hex')
   const password = require('crypto').randomBytes(64).toString('hex')
+console.log(req.user);
 
   let email = '';
+  let profilePicUrl = '';
 
-  if (req.user.provider === 'google') { email = req.user['_json'].email }
-  if (req.user.provider === 'github') { email = req.user.emails[0].value }
+  if (req.user.provider === 'google') {
+    email = req.user['_json'].email;
+    profilePicUrl = req.user.photos[0].value;
+  }
+  if (req.user.provider === 'github') {
+    email = req.user.emails[0].value;
+    profilePicUrl = req.user.profileUrl;
+  }
+  if (req.user.provider === 'twitch') {
+    email = req.user.email;
+    profilePicUrl = req.user.profile_image_url;
+  }
 
-  //*** TODO ***
+  //** TODO ***
   // if (req.user.provider === 'facebook') { email = req.user.emails[0].value }
 
   let userCheck = await User.findOne({
@@ -55,7 +101,7 @@ router.get('/login/success', async(req, res, next) => {
       username: userName,
       password: password,
       email,
-
+      img: profilePicUrl,
     })
 
     userCheck = newUser
@@ -93,14 +139,22 @@ router.get('/github/callback', passport.authenticate('github', {
   failureRedirect: '/login/failed'
 }))
 
-router.get('/twitter', passport.authenticate('twitter', {
-  scope: ['profile']
-}))
+router.get('/twitch', passport.authenticate('twitch'))
 
-router.get('/twitter/callback', passport.authenticate('twitter', {
+router.get('/twitch/callback', passport.authenticate('twitch', {
   successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
+
+router.get('/twitter', passport.authenticate('twitter'))
+
+router.get('/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login/failed' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+
+    res.redirect('/login/success');
+  });
 
 
 // sign up on website, (takes whatever is in req.body)

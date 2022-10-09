@@ -6,6 +6,7 @@ function Redirect() {
     const navigate = useNavigate()
 
     React.useEffect(() => {
+
         async function test() {
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
@@ -15,8 +16,7 @@ function Redirect() {
     }, [])
 
   return (
-    <div>
-    </div>
+    <></>
   )
 }
 

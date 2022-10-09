@@ -1,10 +1,8 @@
 import React from 'react'
 import Google from '../images/google.png'
-import Twitter from '../images/twitter.png'
-import Instagram from '../images/instagram_32x32.png'
 import Github from '../images/github.png'
+import Twitch from '../images/twitch.png'
 import Axios from 'axios'
-import { getUsers } from '../../store/users/userSlice'
 
 function LoginForm({ toggle, setToggle }) {
 
@@ -14,11 +12,11 @@ function LoginForm({ toggle, setToggle }) {
   const google = async() => {
     window.open('http://localhost:3000/auth/google', '_self')
   }
-  const twitter = async() => {
-    window.open('http://localhost:3000/auth/twitter', '_self')
-  }
   const github = async() => {
     window.open('http://localhost:3000/auth/github', '_self')
+  }
+  const twitchtv = async() => {
+    window.open('http://localhost:3000/auth/twitch', '_self')
   }
 
   const handleSubmit = async(e) => {
@@ -67,8 +65,8 @@ function LoginForm({ toggle, setToggle }) {
                     <div className='loginButton google' onClick={google}>
                         <img src={Google} alt='' className='icon' />
                     </div>
-                    <div className='loginButton twitter' onClick={twitter}>
-                        <img src={Twitter} alt='' className='icon' />
+                    <div className='loginButton twitch' onClick={twitchtv}>
+                        <img src={Twitch} alt='' className='icon' />
                     </div>
                     <div className='loginButton github' onClick={github}>
                         <img src={Github} alt='' className='icon' />
