@@ -1,23 +1,37 @@
 import React from "react";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import ContentSkeleton from './ContentSkeleton'
 
 function MainPage () {
 
-    const nums = ['1','2','3','4','5','6','7','8','9', '10', '11', '12']
+    const [users, setUsers] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/users")
+          .then((res) => res.json())
+          .then((users) => {
+            setUsers(users);
+            setIsLoading(false);
+          });
+      }, []);
 
     return (
         <div className="main-page-main-container">
             <div className="main-page-wrapper">
                 <div className="main-page-category-container">
-                Categories
+                    {isLoading && <Skeleton containerClassName="skeleton-container"/>}
                 </div>
                 <div className="main-page-content-container">
                     <div className="main-page-featured-container">
-                        Featured component
+                        {isLoading && <Skeleton containerClassName="skeleton-container"/>}
                     </div>
                     <div className="main-page-list-content-container">
-                        {nums.map((num, i) => {
+                        {isLoading && <ContentSkeleton cards={9}/>}
+                        {users.map((user, i) => {
                             return <div key={i} className="main-page-content-list-element">
-                                {num}
+                                {user.name}
                             </div>
                         })}
                     </div>
