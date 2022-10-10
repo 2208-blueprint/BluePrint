@@ -29,6 +29,7 @@ function SingleComponent() {
     stylingFramework: null
   })
   const [liked, setLiked] = useState(false)
+  const [author, setAuthor] = useState({username: '', id:0})
 
   const params = useParams()
 
@@ -117,6 +118,11 @@ function SingleComponent() {
       setTitle(data.name)
       setTemp(data)
       setView(data.framework === 'html' ? 'html' : 'js')
+      for (let i = 0; i < data.users.length; i++) {
+        if (data.users[i].user_component.isAuthor) {
+          setAuthor(data.users[i])
+        }
+      }
     }
     getComp()
   }, []);
@@ -275,8 +281,8 @@ function SingleComponent() {
         </div>
         <div id ="singlecomp-userinfo">
             <h1>{title}</h1>
-            <h1>By User</h1>
-            <a href='/users/1'>See more from user</a>
+            <h1>By {author.username}</h1>
+            <a href={`/users/${author.id}`}>See more from {author.username}</a>
         </div>
         <div id="singlecomp-color-picker">
           <h1>Color Selector Tool</h1>
