@@ -1,67 +1,54 @@
 @import 'variables';
 
-.main-page-main-container {
-    display:flex;
-    width: 90vw;
-    height: 100vh;
-    background: @background-gradient;
+.main-page-wrapper {
+    display: flex;
 
-    .main-page-categories-container {
-        background-color: @tertiary-color;
-        min-width: 250px;
-        margin: 15px;
-        border-radius:5px;
-        box-shadow:  -10px -10px 20px #112539
+    .main-page-category-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        height: calc(100vh - 80px);
+        border: 1px solid gray;
+        margin: 20px 0 0 20px;
+        background-color: lightgray;
+        line-height: 1;
     }
 
-    .main-page-outer-component-container {
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height: 100vh;
-        width: 100%;
-        flex-wrap:wrap;
-        background-color: @background-color;
+    .main-page-content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 4;
 
-        .main-page-single-featured-component {
-            display:inline-flex;
-            flex-direction:column;
-            margin: 5px;
-            width: 300px;
+        .main-page-featured-container {
+            border: 1px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
             height: 200px;
-            border-radius:5px;
-            background-color: @tertiary-color;
+            margin: 20px 0 0 0;
+            background-color: lightgray;
         }
 
-        .main-page-listed-component-container {
-            width: 90vw;
-            min-height:70vh;
-            max-height:70vh;
-            position:relative;
+        .main-page-list-content-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            width: 100%;
+            height: 100%;
 
-            .main-page-single-component-container {
-                display:inline-flex;
-                flex-direction:column;
-                margin: 5px;
-                width: 300px;
-                height: 200px;
-                border-radius:5px;
-                box-shadow:  -10px -10px 20px #112539,
-                     20px 20px 34px #17334d;
-                background-color: @tertiary-color;
-                
-                .main-page-single-component-img {
-                    display:flex;
-                }
-
-                .main-page-single-component-title {
-                    display:flex;
-                }
-
-                .main-page-single-component-description {
-                    display:flex;
-                }
+            .main-page-content-list-element {
+                border: 1px solid gray;
+                border-radius: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 350px;
+                height: 375px;
+                margin: 30px 10px 10px 10px;
+                background-color: lightgray;
             }
         }
     }

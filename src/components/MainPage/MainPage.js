@@ -1,117 +1,39 @@
 import React from "react";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import ContentSkeleton from './ContentSkeleton'
 
 function MainPage () {
 
+    const [users, setUsers] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/users")
+          .then((res) => res.json())
+          .then((users) => {
+            setUsers(users);
+            setIsLoading(false);
+          });
+      }, []);
+
     return (
         <div className="main-page-main-container">
-            <div className="main-page-categories-container"> 
-                Main Page Categories Container
-            </div>
-            <div className="main-page-outer-component-container">
-                Main Page Outer Component Container
-                <div className="main-page-single-featured-component">
-                    Main Page Featured Component
+            <div className="main-page-wrapper">
+                <div className="main-page-category-container">
+                    {isLoading && <Skeleton containerClassName="skeleton-container"/>}
                 </div>
-                <div className="main-page-listed-component-container">
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
+                <div className="main-page-content-container">
+                    <div className="main-page-featured-container">
+                        {isLoading && <Skeleton containerClassName="skeleton-container"/>}
                     </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
-                    </div>
-                    <div className="main-page-single-component-container">
-                        Main Page Single Component Container
-                        <img className="main-page-single-component-img"/>
-                        <div className="main-page-single-component-title">
-                            Main Page Single Component Title
-                        </div>
-                        <div className="main-page-single-component-description">
-                            Main Page Single Component Description
-                        </div>
+                    <div className="main-page-list-content-container">
+                        {isLoading && <ContentSkeleton cards={9}/>}
+                        {users.map((user, i) => {
+                            return <div key={i} className="main-page-content-list-element">
+                                {user.name}
+                            </div>
+                        })}
                     </div>
                 </div>
             </div>
