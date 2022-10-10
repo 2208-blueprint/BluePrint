@@ -1,6 +1,5 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GithubStrategy = require('passport-github2').Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
 const TwitchStrategy = require('passport-twitch-new').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
@@ -58,18 +57,6 @@ passport.use(new TwitchStrategy({
     callbackURL: "/auth/twitch/callback",
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null, profile)
-  }
-));
-
-passport.use(new TwitterStrategy({
-    consumerKey: process.env.TWITTER_CLIENT_ID,
-    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-    callbackURL: "/auth/twitter/callback",
-    includeEmail: true
-  },
-  function(token, tokenSecret, profile, done) {
-
     done(null, profile)
   }
 ));
