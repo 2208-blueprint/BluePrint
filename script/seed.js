@@ -60,6 +60,7 @@ async function seed() {
   });
   thomas.addComponent(item, { through: { isAuthor: true } })
   await Comment.create({message: 'hello'})
+
   console.log("🌱🌱  Seeding Successful  🌱🌱");
 }
 
