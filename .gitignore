@@ -1,5 +1,5 @@
 secrets.js
 node_modules
 # public/index.css
-# public/bundle.js
-# public/bundle.js.map
+public/bundle.js
+public/bundle.js.map
