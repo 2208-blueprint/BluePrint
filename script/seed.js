@@ -1,11 +1,25 @@
-"use strict";
+// "use strict";
 
-const { db, User, Component } = require("../server/db");
+// const { db, models: {
+//   User,
+//   Component,
+//   Comment, 
+//   UserComments, 
+//   UserComponent 
+// }} = require("../server/db");
+
+const db = require('../server/db/database')
+const User = require('../server/db/User')
+const Component = require('../server/db/Component')
+const Comment = require('../server/db/Comment')
+const UserComments = require('../server/db/UserComments')
+const UserComponent = require('../server/db/UserComponent')
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
+
 async function seed() {
   await db.sync({ force: true });
 
@@ -44,6 +58,8 @@ async function seed() {
     framework: "react",
     stylingFramework: "less",
   });
+  thomas.addComponent(item, { through: { isAuthor: true } })
+  await Comment.create({message: 'hello'})
   console.log("🌱🌱  Seeding Successful  🌱🌱");
 }
 
