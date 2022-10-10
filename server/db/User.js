@@ -8,7 +8,6 @@ const axios = require("axios");
 if (process.env.NODE_ENV !== "production") {
   require("../../secrets.js");
 }
-
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
