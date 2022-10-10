@@ -11,6 +11,8 @@ import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
 import {useParams} from 'react-router-dom'
+import anime from "animejs/lib/anime.es.js"
+import CommentsSection from "./CommentsSection";
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -22,6 +24,11 @@ function SingleComponent() {
   const [view, setView] = useState("html");
   const [color, setColor] = useState('')
   const [title, setTitle] = useState('title of component')
+  const [temp, setTemp] = useState({
+    framework: null,
+    stylingFramework: null
+  })
+  const [liked, setLiked] = useState(false)
 
   const params = useParams()
 
@@ -39,9 +46,9 @@ function SingleComponent() {
 
   function onChangeLess(newValue) {
     setLess(newValue)
-    Less.render(newValue).then(function(output) {
-      setCSS(output.css)
-    })
+    // Less.render(newValue).then(function(output) {
+    //   setCSS(output.css)
+    // })
   }
 
   function onChangeSass(newValue) {
@@ -67,6 +74,19 @@ function SingleComponent() {
     }
   }
 
+  function likeHandler() {
+    setLiked(!liked)
+    if (!liked) {
+    anime({
+      targets: '#singlecomp-heart',
+      scale: [4,1],
+      duration: 200,
+      easing: 'easeOutCubic'
+    })
+    }
+  }
+
+  // if any of those changes, then re define the source for the iframe
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -80,10 +100,10 @@ function SingleComponent() {
       `);
   }, [html, css, js]);
 
+  // load in the apropriate component
   React.useEffect(() => {
     async function getComp() {
       const {data} = await axios.get(`/api/components/${params.id}`)
-      console.log(data)
       if (data.framework === 'html') {
         setHTML(data.markup)
       } else {
@@ -95,15 +115,27 @@ function SingleComponent() {
         setLess(data.stylesheet)
       }
       setTitle(data.name)
+      setTemp(data)
+      setView(data.framework === 'html' ? 'html' : 'js')
     }
     getComp()
   }, []);
 
+  // compile the less into css if less changes
+  React.useEffect(()=> {
+    Less.render(less).then(function(output) {
+      setCSS(output.css)
+    })
+  }, [less])
+
   return (
     <div id="singlecomp-root">
+      <div id="singlecomp-top">
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
+      <div id="singlecomp-heart" onClick={likeHandler}>{liked ? <span className="singlecomp-grow">&#9829;</span>:<span>&#9825;</span>}</div>
+      </div>
       <div id="singlecomp-iframe">
         <iframe
           srcDoc={srcDoc}
@@ -117,31 +149,31 @@ function SingleComponent() {
       <div id="singlecomp-buttons-box">
         <button
           onClick={() => setView("html")}
-          className={view === "html" ? " singlecomp-pressed" : ""}
+          className={(view === "html" ? "singlecomp-pressed" : "") + (temp.framework === 'html' ? '' : ' singlecomp-hidden')}
         >
           HTML
         </button>
         <button
           onClick={() => setView("css")}
-          className={view === "css" ? " singlecomp-pressed" : ""}
+          className={(view === "css" ? "singlecomp-pressed" : "") + (temp.stylingFramework === 'css' ? '' : ' singlecomp-hidden')}
         >
           CSS
         </button>
         <button
           onClick={() => setView("js")}
-          className={view === "js" ? " singlecomp-pressed" : ""}
+          className={(view === "js" ? "singlecomp-pressed" : "")}
         >
           JS
         </button>
         <button
           onClick={() => setView("less")}
-          className={view === "less" ? " singlecomp-pressed" : ""}
+          className={(view === "less" ? "singlecomp-pressed" : "") + (temp.stylingFramework === 'less' ? '' : ' singlecomp-hidden') }
         >
           Less
         </button>
         <button
           onClick={() => setView("sass")}
-          className={view === "sass" ? " singlecomp-pressed" : ""}
+          className={(view === "sass" ? "singlecomp-pressed" : "") + (temp.stylingFramework === 'sass' ? '' : ' singlecomp-hidden')}
         >
           Sass
         </button>
@@ -166,6 +198,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -183,6 +216,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -200,6 +234,7 @@ function SingleComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -217,6 +252,7 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div
@@ -234,6 +270,7 @@ function SingleComponent() {
             fontSize="1.5rem"
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
+            height="700px"
           />
         </div>
         <div id ="singlecomp-userinfo">
@@ -247,6 +284,7 @@ function SingleComponent() {
           <h2>Selected: {color}</h2>
         </div>
       </div>
+      <CommentsSection/>
     </div>
   );
 }

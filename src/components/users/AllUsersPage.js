@@ -10,7 +10,8 @@ function AllUsersPage() {
 
     function handleSelectSingleUser(evt) {
         evt.preventDefault()
-        navigate(`/users/${evt.key}`)
+        console.log('Going to: ', evt.target.getAttribute('value'))
+        navigate(`/users/${evt.target.getAttribute('value')}`)
     }
     return(
         <>
@@ -19,9 +20,9 @@ function AllUsersPage() {
         </div>
             <div className="all-users-container">
                 {users.map((user, i) => 
-                    <div key={i} onClick={handleSelectSingleUser} className="single-user-container">
-                        User #{user}
-                    </div>
+                <div className="user-single-user-main-container" key={i} value={i + 1}onClick={handleSelectSingleUser}>
+                <SingleUser user={user} />
+                </div>
                 )}
             </div>
         </>

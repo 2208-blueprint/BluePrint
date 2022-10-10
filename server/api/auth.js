@@ -31,25 +31,26 @@ router.get('/login/failed', (req, res) => {
   })
 })
 
-router.get('/test', requireToken, (req, res, next) => {
-  try {
-    console.log('success');
-    res.sendStatus(200)
-  }
-  catch (err) {
-    console.log(err);
-  }
-})
-
-
 router.get('/login/success', async(req, res, next) => {
   const userName = require('crypto').randomBytes(64).toString('hex')
   const password = require('crypto').randomBytes(64).toString('hex')
+console.log(req.user);
 
   let email = '';
+  let profilePicUrl = '';
 
-  if (req.user.provider === 'google') { email = req.user['_json'].email }
-  if (req.user.provider === 'github') { email = req.user.emails[0].value }
+  if (req.user.provider === 'google') {
+    email = req.user['_json'].email;
+    profilePicUrl = req.user.photos[0].value;
+  }
+  if (req.user.provider === 'github') {
+    email = req.user.emails[0].value;
+    profilePicUrl = req.user.profileUrl;
+  }
+  if (req.user.provider === 'twitch') {
+    email = req.user.email;
+    profilePicUrl = req.user.profile_image_url;
+  }
 
   let userCheck = await User.findOne({
     where: {
@@ -60,9 +61,11 @@ router.get('/login/success', async(req, res, next) => {
   if (!userCheck) {
     const newUser = await User.create({
       username: userName,
+      firstName: 'Not Provided',
+      lastName: 'Not Provided',
       password: password,
       email,
-
+      img: profilePicUrl,
     })
 
     userCheck = newUser
@@ -100,14 +103,13 @@ router.get('/github/callback', passport.authenticate('github', {
   failureRedirect: '/login/failed'
 }))
 
-router.get('/facebook', passport.authenticate('facebook', {
-  scope: ['profile']
-}))
+router.get('/twitch', passport.authenticate('twitch'))
 
-router.get('/facebook/callback', passport.authenticate('facebook', {
+router.get('/twitch/callback', passport.authenticate('twitch', {
   successRedirect: '/redirect',
   failureRedirect: '/login/failed'
 }))
+
 
 // sign up on website, (takes whatever is in req.body)
 router.post("/signup", async (req, res, next) => {
@@ -121,7 +123,7 @@ router.post("/signup", async (req, res, next) => {
       newUser = await User.create(req.body);
       res.status(200).send({ token: await User.authenticate(req.body) });
     } else {
-      res.sendStatus(403);
+      res.status(403).send('User already exists');
     }
   } catch (ex) {
     next(ex);

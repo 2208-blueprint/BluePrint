@@ -1,9 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-function SingleUser() {
+//This is to be used when mapping an array of Users to populate the AllUsersPage. It should be
+//shorthand info about users to display on smaller card.
+
+function SingleUser(props) {
+
+    let value = props.user
+
     return(
-        <div className="single-user-main-container">
-
+        <div>
+          SingleUser #{value}
         </div>
     )
 }

@@ -54,10 +54,10 @@ function Navbar({ loggedIn, setLoggedIn }) {
             Leaderboard
           </Link>
           <Link
-            to="/"
+            to="/users"
             onClick={() => setDropDown(false)}
           >
-            Popular Users
+            All Users
           </Link>
           <Link to="/" onClick={() => setDropDown(false)}>
             (Your profile name here)

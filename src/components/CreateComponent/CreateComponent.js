@@ -10,6 +10,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 function CreateComponent() {
   const [html, setHTML] = useState("");
@@ -20,6 +21,8 @@ function CreateComponent() {
   const [srcDoc, setSrcDoc] = useState("");
   const [view, setView] = useState("html");
   const [color, setColor] = useState('')
+
+  const navigate = useNavigate()
 
   // form section
   const [form, setForm] = useState(['html', 'css'])
@@ -83,7 +86,7 @@ function CreateComponent() {
     } else {
         stylesheet = less
     }
-    await axios.post('/api/components/test-create', {
+    const {data} = await axios.post('/api/components/test-create', {
         name: name,
         description: desc,
         type: type,
@@ -93,6 +96,7 @@ function CreateComponent() {
         markup: markup,
         stylesheet: stylesheet
     })
+    navigate(`/components/${data.id}`)
   }
 
   React.useEffect(() => {
@@ -127,31 +131,31 @@ function CreateComponent() {
       <div id="createcomp-buttons-box">
         <button
           onClick={() => setView("html")}
-          className={view === "html" ? " createcomp-pressed" : ""}
+          className={(view === "html" ? " createcomp-pressed" : "") + (form[0] === 'html' ? '': ' createcomp-hidden')}
         >
           HTML
         </button>
         <button
-          onClick={() => setView("css")}
-          className={view === "css" ? " createcomp-pressed" : ""}
-        >
-          CSS
-        </button>
-        <button
           onClick={() => setView("js")}
-          className={view === "js" ? " createcomp-pressed" : ""}
+          className={(view === "js" ? " createcomp-pressed" : "")}
         >
           JS
         </button>
         <button
+          onClick={() => setView("css")}
+          className={(view === "css" ? " createcomp-pressed" : "") + (form[1] === 'css' ? '':' createcomp-hidden')}
+        >
+          CSS
+        </button>
+        <button
           onClick={() => setView("less")}
-          className={view === "less" ? " createcomp-pressed" : ""}
+          className={(view === "less" ? " createcomp-pressed" : "") + (form[1] === 'less' ? '':' createcomp-hidden')}
         >
           Less
         </button>
         <button
           onClick={() => setView("sass")}
-          className={view === "sass" ? " createcomp-pressed" : ""}
+          className={(view === "sass" ? " createcomp-pressed" : "") + (form[1] === 'sass' ? '':' createcomp-hidden')}
         >
           Sass
         </button>
@@ -254,13 +258,19 @@ function CreateComponent() {
         <div id ="createcomp-submission">
             <h1>Submit Your Creation!</h1>
             <div>Markup:&nbsp;&nbsp;
-            <select onChange={(event)=>setForm([event.target.value, form[1]])}>
+            <select onChange={(event)=>{
+              setForm([event.target.value, form[1]])
+              setView(event.target.value === 'html' ? 'html' : 'js')
+              }}>
                 <option value="html">HTML</option>
                 <option value="react">React</option>
             </select>
             </div>
             <div>Stylesheet:&nbsp;&nbsp;
-            <select onChange={(event)=>setForm([form[0],event.target.value])}>
+            <select onChange={(event)=>{
+              setForm([form[0],event.target.value])
+              setView(form[0] === 'html' ? 'html' : 'js')
+              }}>
                 <option value="css">CSS</option>
                 <option value="less">Less</option>
             </select>
