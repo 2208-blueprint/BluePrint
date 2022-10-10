@@ -6,6 +6,8 @@
   "scripts": {
     "start:dev": "npm run build-watch & npm run start-server ",
     "build-watch": "webpack -w",
+    "build": "webpack",
+    "less": "lessc less/index.less public/index.css",
     "start-server": "nodemon --watch server -e js,html server/index.js",
     "start": "node ./server/index.js"
   },
@@ -15,6 +17,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "ace-builds": "^1.11.2",
+    "animejs": "^3.2.1",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "chalk": "^5.0.1",

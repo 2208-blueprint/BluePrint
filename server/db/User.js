@@ -8,7 +8,6 @@ const axios = require("axios");
 if (process.env.NODE_ENV !== "production") {
   require("../../secrets.js");
 }
-
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
@@ -29,6 +28,7 @@ const User = db.define("user", {
   },
   email: {
     type: Sequelize.STRING,
+    // allowNull: false,
     isEmail: true,
     unique: true,
   },

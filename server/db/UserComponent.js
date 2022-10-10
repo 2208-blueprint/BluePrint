@@ -6,6 +6,10 @@ const UserComponent = db.define("user_component", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  isFavorite: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = UserComponent;

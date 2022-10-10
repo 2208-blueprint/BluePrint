@@ -4,17 +4,47 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+@keyframes grow {
+  from {
+    scale: 0.1;
+  }
+  to {
+    scale: 1;
+  }
+}
 #singlecomp-root {
   background-color: #062437;
   height: auto;
+  padding-bottom: 40px;
+}
+#singlecomp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+#singlecomp-top div {
+  color: #47B5FF;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+#singlecomp-top #singlecomp-heart {
+  font-family: 'Inter', 'sans-serif';
+  font-size: 3rem;
+}
+.singlecomp-grow {
+  animation-name: grow;
+  animation-duration: 1s;
 }
 #singlecomp-editors {
+  background-color: #062437;
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   flex-wrap: wrap;
   font-family: monospace;
   width: 94%;
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 30px 20px;
 }
 @media only screen and (max-width: 480px) {
   #singlecomp-editors {
@@ -518,11 +548,11 @@ a.singlecomp-back div span {
 }
 #createcomp-editors {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   flex-wrap: wrap;
   font-family: monospace;
   width: 94%;
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 30px 20px;
 }
 @media only screen and (max-width: 480px) {
   #createcomp-editors {
@@ -546,13 +576,13 @@ a.createcomp-back {
   font-size: 2rem;
   text-decoration: none;
   color: #47B5FF;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 a.createcomp-back div {
   margin: 20px;
 }
 a.createcomp-back div span {
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 #createcomp-iframe {
   height: 40vh;
@@ -602,7 +632,7 @@ a.createcomp-back div span {
 #createcomp-buttons-box button {
   min-width: 100px;
   height: 50px;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #0F4C75;
   color: white;
   border: none;
@@ -629,7 +659,7 @@ a.createcomp-back div span {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   color: #47B5FF;
   justify-content: center;
   align-items: center;
@@ -642,7 +672,7 @@ a.createcomp-back div span {
   width: 200px;
 }
 #createcomp-submission {
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #0F4C75;
   width: 300px;
   height: 600px;
@@ -677,7 +707,7 @@ a.createcomp-back div span {
   height: 100px;
   width: 250px;
   word-wrap: break-word;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 #createcomp-submission select {
   font-size: 1.25rem;
@@ -685,7 +715,7 @@ a.createcomp-back div span {
 #createcomp-submission button {
   min-width: 100px;
   height: 50px;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #47B5FF;
   color: white;
   border: none;
@@ -947,6 +977,70 @@ a.createcomp-back div span {
 }
 .footer-group-2 .footer-copy {
   width: 10%;
+}
+#comments-root {
+  font-family: 'Inter', 'sans-serif';
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  max-width: 1000px;
+  background-color: #0F4C75;
+  padding: 8px;
+  color: #47B5FF;
+  height: 550px;
+}
+#comments-root h1 {
+  color: #47B5FF;
+  margin-left: 20px;
+}
+#comments-root #comments-list {
+  overflow-y: auto;
+  height: 450px;
+}
+#comments-root #comments-list #comments-form p {
+  font-size: 1.5rem;
+}
+#comments-root #comments-list #comments-form input {
+  font-size: 1.25rem;
+  width: 80%;
+}
+#comments-root #comments-list #comments-form button {
+  min-width: 100px;
+  height: 40px;
+  font-family: 'Inter', 'sans-serif';
+  background-color: #47B5FF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin: 10px;
+}
+@media only screen and (max-width: 480px) {
+  #comments-root #comments-list #comments-form button {
+    min-width: 50px;
+  }
+}
+#comments-root #comments-list #comments-form button:hover {
+  background-color: #1a6da4;
+}
+#comments-root #comments-list .comment-box {
+  background-color: #062437;
+  padding: 20px;
+  margin: 20px;
+}
+#comments-root #comments-list .comment-box .comment-name {
+  color: #47B5FF;
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  align-items: center;
+}
+#comments-root #comments-list .comment-box .comment-name .comment-heart {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+#comments-root #comments-list .comment-box .comment-content {
+  color: white;
 }
 .card-skeleton {
   width: 350px;

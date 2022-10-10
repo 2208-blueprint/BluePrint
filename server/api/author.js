@@ -51,7 +51,7 @@ router.put("/update/:componentId", requireToken, async (req, res, next) => {
     });
     const component = await Component.findByPk(record.componentId);
     await component.update(req.body);
-    res.status(204).send(component);
+    res.send(component);
   } catch (error) {
     next(error);
   }
