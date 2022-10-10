@@ -55,7 +55,15 @@ function SignUpForm({ toggle, setToggle }) {
             toastCreate('Account created & logged in!')
         }
         catch(error) {
-            toastError(error.response.data)
+            if (error.response.data === 'Validation error: Validation isEmail on email failed'){
+                toastError('Invalid email')
+            }
+            if (error.response.data === 'Validation error'){
+                toastError('Username already in use')
+            }
+            if (error.response.data === 'Validation error: Validation isUrl on img failed'){
+                toastError('Invalid profile picture URL')
+            }
             console.log(error)
         }
       }
