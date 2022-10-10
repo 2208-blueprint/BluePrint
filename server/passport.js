@@ -1,6 +1,7 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GithubStrategy = require('passport-github2').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
+const TwitchStrategy = require('passport-twitch-new').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const passport = require('passport')
@@ -15,7 +16,6 @@ opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = 'secret';
 
 passport.use(new JWTStrategy(opts, function(jwt_payload, done) {
-    // console.log(jwt_payload)
     User.findOne({id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);
@@ -43,28 +43,41 @@ passport.use(new GoogleStrategy({
 passport.use(new GithubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "/auth/github/callback"
+    scope: ['user:email'],
+    callbackURL: "/auth/github/callback",
+  },
+  function(accessToken, refreshToken, profile, done) {
+    done(null, profile)
+  }
+  ));
+
+passport.use(new TwitchStrategy({
+    clientID: process.env.TWITCH_CLIENT_ID,
+    clientSecret: process.env.TWITCH_CLIENT_SECRET,
+    scope: ['user_read'],
+    callbackURL: "/auth/twitch/callback",
   },
   function(accessToken, refreshToken, profile, done) {
     done(null, profile)
   }
 ));
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "/auth/facebook/callback"
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWITTER_CLIENT_ID,
+    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    callbackURL: "/auth/twitter/callback",
+    includeEmail: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(token, tokenSecret, profile, done) {
+
     done(null, profile)
   }
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id)
+    done(null, user)
 })
 
 passport.deserializeUser(function(user, done) {
-    // const userCheck = User.findByPk(user)
     done(null, user);
   });
