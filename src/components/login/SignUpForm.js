@@ -15,9 +15,11 @@ function SignUpForm({ toggle, setToggle }) {
     const [password, setPassword] = React.useState('')
 
     const toastError = (err) => toast.error(err);
+    const toastCreate = (msg) => toast.success(msg);
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+
         let newUserObj = {
             username: username,
             password: password,
@@ -26,6 +28,7 @@ function SignUpForm({ toggle, setToggle }) {
             email: email,
             img: profilePicture,
         };
+
         if (!profilePicture.length) {
         newUserObj = {
             username: username,
@@ -48,7 +51,8 @@ function SignUpForm({ toggle, setToggle }) {
             setEmail('')
             setProfilePicture('')
 
-            navigate('/login')
+            navigate('/')
+            toastCreate('Account created & logged in!')
         }
         catch(error) {
             toastError(error.response.data)
