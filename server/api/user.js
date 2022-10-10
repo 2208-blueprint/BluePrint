@@ -1,5 +1,9 @@
 const User = require("../db/User.js");
 const Component = require("../db/Component.js");
+const Like = require("../db/Like.js");
+const Comment = require("../db/Comment.js");
+const Favorite = require("../db/Favorite.js");
+
 const router = require("express").Router();
 
 const requireToken = async (req, res, next) => {
@@ -66,6 +70,33 @@ router.put("/unfollow/:userId", requireToken, async (req, res, next) => {
     const creator = await User.findByPk(id);
     await user.removeFollowing(creator);
     res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//get all likes with associated comments from user
+router.get("/likes", requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const likes = await Like.find({
+      where: { userId: user.id },
+      include: Comment,
+    });
+    res.send(likes);
+  } catch (error) {
+    next(error);
+  }
+});
+//get all favorites with associated components from user
+router.get("/favorites", requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const favorites = await Favorite.find({
+      where: { userId: user.id },
+      include: Component,
+    });
+    res.send(favorites);
   } catch (error) {
     next(error);
   }

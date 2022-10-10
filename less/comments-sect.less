@@ -1,0 +1,76 @@
+@import 'variables';
+
+#comments-root {
+    font-family: 'Inter', 'sans-serif';
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    max-width: 1000px;
+    background-color: @secondary-color;
+    padding: 8px;
+    color: @tertiary-color;
+    height: 550px;
+    h1 {
+        color: @tertiary-color;
+        margin-left: 20px;
+    }
+
+    #comments-list {
+        overflow-y: auto;
+        height: 450px;
+
+        #comments-form {
+            p {
+                font-size: 1.5rem;
+            }
+
+            input {
+                font-size: 1.25rem;
+                width: 80%;
+            }
+
+            button {
+                min-width: 100px;
+                height: 40px;
+                font-family: 'Inter', 'sans-serif';
+                background-color: @tertiary-color;
+                color: white;
+                border: none;
+                cursor: pointer;
+                transition: 0.25s ease;
+                margin: 10px;
+        
+                @media only screen and (max-width: 480px) {
+                    min-width: 50px;
+                }
+            }
+
+            button:hover {
+                background-color:#1a6da4 ;
+            }
+        }
+
+        .comment-box {
+            background-color: @background-color;
+            padding: 20px;
+            margin: 20px;
+
+            .comment-name {
+                color: @tertiary-color;
+                display: flex;
+                width: 100%;
+                gap: 30px;
+                align-items: center;
+
+                .comment-heart {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+
+            .comment-content {
+                color: white
+            }
+        }
+    }
+}
