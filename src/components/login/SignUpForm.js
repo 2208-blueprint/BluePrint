@@ -1,6 +1,8 @@
 import React from 'react'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpForm({ toggle, setToggle }) {
     const navigate = useNavigate();
@@ -11,6 +13,8 @@ function SignUpForm({ toggle, setToggle }) {
     const [email, setEmail] = React.useState('')
     const [profilePicture, setProfilePicture] = React.useState('')
     const [password, setPassword] = React.useState('')
+
+    const toastError = (err) => toast.error(err);
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -33,25 +37,28 @@ function SignUpForm({ toggle, setToggle }) {
         }
 
         try {
-          const auth = await Axios.post('/api/auth/signup', newUserObj)
-          const { token } = auth.data
-          window.localStorage.setItem('token', token);
-          setUserName('');
-          setPassword('');
-          setFirstName('')
-          setLastName('')
-          setEmail('')
-          setProfilePicture('')
+            const auth = await Axios.post('/api/auth/signup', newUserObj)
+            const { token } = auth.data
+            window.localStorage.setItem('token', token);
 
-          navigate('/login')
+            setUserName('');
+            setPassword('');
+            setFirstName('')
+            setLastName('')
+            setEmail('')
+            setProfilePicture('')
+
+            navigate('/login')
         }
         catch(error) {
-          console.log(error)
+            toastError(error.response.data)
+            console.log(error)
         }
       }
 
     return (
     <div className='signup-main-container'>
+        <ToastContainer />
         <div className='signup-wrapper'>
             <div className='signup-form-container'>
                 <div className='signup-form-container-top'>
@@ -59,11 +66,11 @@ function SignUpForm({ toggle, setToggle }) {
                 </div>
                 <div className='signup-form-bottom'>
                     <form className='signup-form' onSubmit={handleSubmit}>
-                        <input type='text' placeholder='Username' onChange={(e) => setUserName(e.target.value)} value={username}/>
-                        <input type='text' placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
-                        <input type='text' placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} value={lastName}/>
-                        <input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email}/>
-                        <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        <input type='text' placeholder='Username' onChange={(e) => setUserName(e.target.value)} value={username} required/>
+                        <input type='text' placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} value={firstName} required/>
+                        <input type='text' placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} value={lastName} required/>
+                        <input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} required/>
+                        <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} required/>
                         <input type='text' placeholder='Profile picture URL (optional)' onChange={(e) => setProfilePicture(e.target.value)} value={profilePicture}/>
                         <button className='signup-submit-button'>Sign Up</button>
                     </form>
