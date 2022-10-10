@@ -2,6 +2,8 @@ import React from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import ContentSkeleton from './ContentSkeleton'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MainPage () {
 
@@ -19,6 +21,7 @@ function MainPage () {
 
     return (
         <div className="main-page-main-container">
+            <ToastContainer />
             <div className="main-page-wrapper">
                 <div className="main-page-category-container">
                     {isLoading && <Skeleton containerClassName="skeleton-container"/>}
