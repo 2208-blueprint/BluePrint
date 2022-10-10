@@ -521,13 +521,13 @@ a.createcomp-back {
   font-size: 2rem;
   text-decoration: none;
   color: #47B5FF;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 a.createcomp-back div {
   margin: 20px;
 }
 a.createcomp-back div span {
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 #createcomp-iframe {
   height: 40vh;
@@ -577,7 +577,7 @@ a.createcomp-back div span {
 #createcomp-buttons-box button {
   min-width: 100px;
   height: 50px;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #0F4C75;
   color: white;
   border: none;
@@ -604,7 +604,7 @@ a.createcomp-back div span {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   color: #47B5FF;
   justify-content: center;
   align-items: center;
@@ -617,7 +617,7 @@ a.createcomp-back div span {
   width: 200px;
 }
 #createcomp-submission {
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #0F4C75;
   width: 300px;
   height: 600px;
@@ -652,7 +652,7 @@ a.createcomp-back div span {
   height: 100px;
   width: 250px;
   word-wrap: break-word;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 #createcomp-submission select {
   font-size: 1.25rem;
@@ -660,7 +660,7 @@ a.createcomp-back div span {
 #createcomp-submission button {
   min-width: 100px;
   height: 50px;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   background-color: #47B5FF;
   color: white;
   border: none;
@@ -669,4 +669,60 @@ a.createcomp-back div span {
 }
 #createcomp-submission button:hover {
   background-color: #1a6da4;
+}
+.main-page-main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(150deg, #062437 0%, #011018 100%);
+}
+.main-page-main-container .main-page-categories-container {
+  background-color: #47B5FF;
+  min-width: 250px;
+  margin: 15px;
+  border-radius: 5px;
+  box-shadow: -10px -10px 20px #112539;
+}
+.main-page-main-container .main-page-outer-component-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-wrap: wrap;
+  background-color: #062437;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-single-featured-component {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
+  background-color: #47B5FF;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-listed-component-container {
+  width: 90vw;
+  min-height: 70vh;
+  max-height: 70vh;
+  position: relative;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-listed-component-container .main-page-single-component-container {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: -10px -10px 20px #112539, 20px 20px 34px #17334d;
+  background-color: #47B5FF;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-listed-component-container .main-page-single-component-container .main-page-single-component-img {
+  display: flex;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-listed-component-container .main-page-single-component-container .main-page-single-component-title {
+  display: flex;
+}
+.main-page-main-container .main-page-outer-component-container .main-page-listed-component-container .main-page-single-component-container .main-page-single-component-description {
+  display: flex;
 }

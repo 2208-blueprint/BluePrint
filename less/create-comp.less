@@ -1,200 +1,204 @@
-@import 'variables';
+@import "variables";
 
 #createcomp-root {
-    background-color: @background-color;
-    height: auto;
+  background-color: @background-color;
+  height: auto;
 }
 
 #createcomp-editors {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-family: monospace;
-    width: 94%;
-    padding: 20px 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-family: monospace;
+  width: 94%;
+  padding: 20px 20px 0 20px;
 
-    @media only screen and (max-width:480px) {
-        width: 90%;
-    }
+  @media only screen and (max-width: 480px) {
+    width: 90%;
+  }
 }
 
-#createcomp-html-editor, #createcomp-css-editor, #createcomp-javascript-editor, #createcomp-less-editor, #createcomp-sass-editor {
-    max-width: 1000px;
-    width: 100%;
-    font-family: monospace;
-    border: 1px solid @tertiary-color;
+#createcomp-html-editor,
+#createcomp-css-editor,
+#createcomp-javascript-editor,
+#createcomp-less-editor,
+#createcomp-sass-editor {
+  max-width: 1000px;
+  width: 100%;
+  font-family: monospace;
+  border: 1px solid @tertiary-color;
 }
 
 .createcomp-hidden {
-    display: none;
+  display: none;
 }
 
 a.createcomp-back {
-    font-size: 2rem;
-    text-decoration: none;
-    color: @tertiary-color;
-    font-family: 'Inter', 'sans-serif';
+  font-size: 2rem;
+  text-decoration: none;
+  color: @tertiary-color;
+  font-family: "Inter", "sans-serif";
 
-    div {
-        margin: 20px;
-        span {
-            font-family: 'Inter', 'sans-serif'
-        }
+  div {
+    margin: 20px;
+    span {
+      font-family: "Inter", "sans-serif";
     }
+  }
 }
 
-#createcomp-iframe{
-    height: 40vh;
-    margin: 20px;
-    background-color: white;
+#createcomp-iframe {
+  height: 40vh;
+  margin: 20px;
+  background-color: white;
 
-    iframe {
-        border: solid @tertiary-color 2px;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-    }
+  iframe {
+    border: solid @tertiary-color 2px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 #createcomp-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+
+  .createcomp-clipboard {
     display: flex;
-    justify-content: space-between;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    margin-right: 20px;
     align-items: center;
-    max-width: 1000px;
-
-    .createcomp-clipboard {
-        display: flex;
-        width: 50px;
-        height: 50px;
-        background-color: white;
-        margin-right: 20px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10%;
-        transition: 0.25s ease;
-        img {
-            height: 80%;
-            width: 80%;
-        }
+    justify-content: center;
+    border-radius: 10%;
+    transition: 0.25s ease;
+    img {
+      height: 80%;
+      width: 80%;
     }
+  }
 
-    .createcomp-clipboard:hover {
-        background-color: rgb(209, 209, 209);
-        cursor: pointer;
-    }
+  .createcomp-clipboard:hover {
+    background-color: rgb(209, 209, 209);
+    cursor: pointer;
+  }
 }
 
 #createcomp-buttons-box {
-    display:flex;
-    gap:0;
-    max-width:1000px;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    margin-left: 20px;
-    position: static;
+  display: flex;
+  gap: 0;
+  max-width: 1000px;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  margin-left: 20px;
+  position: static;
 
-    button {
-        min-width: 100px;
-        height: 50px;
-        font-family: 'Inter', 'sans-serif';
-        background-color: @secondary-color;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: 0.25s ease;
+  button {
+    min-width: 100px;
+    height: 50px;
+    font-family: "Inter", "sans-serif";
+    background-color: @secondary-color;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s ease;
 
-        @media only screen and (max-width: 480px) {
-            min-width: 50px;
-        }
+    @media only screen and (max-width: 480px) {
+      min-width: 50px;
     }
+  }
 
-    button:hover {
-        background-color:#1a6da4 ;
-    }
+  button:hover {
+    background-color: #1a6da4;
+  }
 
-    .createcomp-pressed {
-        background-color: @tertiary-color;
-        color: white
-    }
+  .createcomp-pressed {
+    background-color: @tertiary-color;
+    color: white;
+  }
 
-    .createcomp-pressed:active {
-        background-color: @tertiary-color;
-    }
+  .createcomp-pressed:active {
+    background-color: @tertiary-color;
+  }
 }
 
 #createcomp-color-picker {
-    height: 300px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Inter', 'sans-serif';
-    color: @tertiary-color;
-    justify-content: center;
-    align-items: center;
-    background-color: @secondary-color;
-    border-radius: 0.25rem;
-    margin: 20px;
+  height: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", "sans-serif";
+  color: @tertiary-color;
+  justify-content: center;
+  align-items: center;
+  background-color: @secondary-color;
+  border-radius: 0.25rem;
+  margin: 20px;
 
-    input {
-        height: 100px;
-        width: 200px;
-    }
+  input {
+    height: 100px;
+    width: 200px;
+  }
 }
 
 #createcomp-submission {
-    font-family: 'Inter', 'sans-serif';
-    background-color: @secondary-color;
-    width: 300px;
-    height: 600px;
-    padding: 20px;
+  font-family: "Inter", "sans-serif";
+  background-color: @secondary-color;
+  width: 300px;
+  height: 600px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 25px;
+  border-radius: 0.25rem;
+  color: @tertiary-color;
+  h2 {
+    margin: 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+  div {
+    font-size: 1.25rem;
+    font-weight: 700;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 25px;
-    border-radius: 0.25rem;
-    color: @tertiary-color;
-    h2 {
-        margin: 10px;
-    }
-    h1 {
-        text-align: center;
-    }
-    div {
-        font-size: 1.25rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin: 10px;
-        input {
-            font-size: 1.25rem;
-            width: 90%;
-        }
-
-        .createcomp-desc {
-            height: 100px;
-            width: 250px;
-            word-wrap: break-word;
-            font-family: 'Inter', 'sans-serif';
-        }
-    }
-    select {
-        font-size: 1.25rem;
+    justify-content: space-around;
+    margin: 10px;
+    input {
+      font-size: 1.25rem;
+      width: 90%;
     }
 
-    button {
-        min-width: 100px;
-        height: 50px;
-        font-family: 'Inter', 'sans-serif';
-        background-color: @tertiary-color;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: 0.25s ease;
+    .createcomp-desc {
+      height: 100px;
+      width: 250px;
+      word-wrap: break-word;
+      font-family: "Inter", "sans-serif";
     }
+  }
+  select {
+    font-size: 1.25rem;
+  }
 
-    button:hover {
-        background-color:#1a6da4 ;
-    }
+  button {
+    min-width: 100px;
+    height: 50px;
+    font-family: "Inter", "sans-serif";
+    background-color: @tertiary-color;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+  }
+
+  button:hover {
+    background-color: #1a6da4;
+  }
 }
