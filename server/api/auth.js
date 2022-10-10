@@ -31,41 +31,6 @@ router.get('/login/failed', (req, res) => {
   })
 })
 
-router.get('/redirect', async(req, res, next) => {
-  const userName = require('crypto').randomBytes(64).toString('hex')
-  const password = require('crypto').randomBytes(64).toString('hex')
-
-  let userCheck = await User.findOne({
-    where: {
-      email: req.user['_json'].email,
-    }
-  })
-
-  if (!userCheck) {
-    const newUser = await User.create({
-      username: userName,
-      password: password,
-      email: req.user['_json'].email,
-
-    })
-
-    userCheck = newUser
-  }
-
-  const token = userCheck.generateToken();
-
-  if (req.user) {
-      res.status(200).json({
-          success: true,
-          message: 'Login successful',
-          user: req.user,
-          // jwt token here or cookies
-          token: token,
-      })
-  }
-
-})
-
 router.get('/login/success', async(req, res, next) => {
   const userName = require('crypto').randomBytes(64).toString('hex')
   const password = require('crypto').randomBytes(64).toString('hex')
@@ -86,9 +51,6 @@ console.log(req.user);
     email = req.user.email;
     profilePicUrl = req.user.profile_image_url;
   }
-
-  //** TODO ***
-  // if (req.user.provider === 'facebook') { email = req.user.emails[0].value }
 
   let userCheck = await User.findOne({
     where: {
@@ -148,16 +110,6 @@ router.get('/twitch/callback', passport.authenticate('twitch', {
   failureRedirect: '/login/failed'
 }))
 
-router.get('/twitter', passport.authenticate('twitter'))
-
-router.get('/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login/failed' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-
-    res.redirect('/login/success');
-  });
-
 
 // sign up on website, (takes whatever is in req.body)
 router.post("/signup", async (req, res, next) => {
@@ -171,7 +123,7 @@ router.post("/signup", async (req, res, next) => {
       newUser = await User.create(req.body);
       res.status(200).send({ token: await User.authenticate(req.body) });
     } else {
-      res.sendStatus(403);
+      res.status(403).send('User already exists');
     }
   } catch (ex) {
     next(ex);

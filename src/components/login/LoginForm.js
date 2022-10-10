@@ -5,11 +5,15 @@ import Twitch from '../images/twitch.png'
 import Axios from 'axios'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginForm({ toggle, setToggle }) {
 
   const [username, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
+
+  const toastError = (err) => toast.error(err);
 
   const google = async() => {
     window.open('http://localhost:3000/auth/google', '_self')
@@ -30,6 +34,7 @@ function LoginForm({ toggle, setToggle }) {
 
     try {
       const auth = await Axios.post("/api/auth/login", loginObj);
+
       const { token } = auth.data;
       window.localStorage.setItem("token", token);
 
@@ -37,6 +42,7 @@ function LoginForm({ toggle, setToggle }) {
       setPassword("");
 
     } catch (error) {
+      toastError('Incorrect email/password');
       console.log(error);
     }
   }
@@ -58,6 +64,7 @@ function LoginForm({ toggle, setToggle }) {
 
   return (
     <div className='login-main-container'>
+        <ToastContainer />
         <div className='login-signup-wrapper'>
             <div className='login-signup-form-container'>
               <div className='login-form-container-top'>
