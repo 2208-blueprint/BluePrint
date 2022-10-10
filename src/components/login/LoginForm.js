@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Google from '../images/google.png'
 import Github from '../images/github.png'
 import Twitch from '../images/twitch.png'
@@ -13,7 +14,10 @@ function LoginForm({ toggle, setToggle }) {
   const [username, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
 
+  const navigate = useNavigate();
+
   const toastError = (err) => toast.error(err);
+  const toastLogin = (msg) => toast.success(msg);
 
   const google = async() => {
     window.open('http://localhost:3000/auth/google', '_self')
@@ -40,6 +44,8 @@ function LoginForm({ toggle, setToggle }) {
 
       setUserName("");
       setPassword("");
+      navigate('/')
+      toastLogin('You are logged in!')
 
     } catch (error) {
       toastError('Incorrect email/password');
