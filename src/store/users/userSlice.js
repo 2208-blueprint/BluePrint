@@ -8,7 +8,7 @@ axios.defaults.headers.common["authorization"] =
 
 export const getUsers = createAsyncThunk("/allUsers", async () => {
   try {
-    const { data } = await axios.get("/api/users");
+    const { data } = await axios.get("/api/allUsers");
     return data;
   } catch (err) {
     console.log(err);
