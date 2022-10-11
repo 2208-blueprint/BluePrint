@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { CreateComponent, Footer, Redirect } from "./components";
+import { CreateComponent, Footer, Redirect, ProfilePage } from "./components";
 import { SingleComponent } from "./components";
 import { LoginPage } from "./components";
 import { MainPage } from "./components";
@@ -24,6 +24,7 @@ function App() {
           <Route path="/components/:id" element={<SingleComponent />}></Route>
           <Route path="/profile/create" element={<CreateComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/redirect" element={<Redirect />}></Route>
         </Routes>
         <Footer />

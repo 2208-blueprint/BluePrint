@@ -119,6 +119,7 @@ function SingleComponent() {
       setView(data.framework === 'html' ? 'html' : 'js')
     }
     getComp()
+    // setIsLoading(false)
   }, []);
 
   // compile the less into css if less changes
@@ -284,7 +285,7 @@ function SingleComponent() {
           <h2>Selected: {color}</h2>
         </div>
       </div>
-      <CommentsSection/>
+       <CommentsSection/>
     </div>
   );
 }

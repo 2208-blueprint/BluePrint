@@ -4,10 +4,8 @@ import Google from '../images/google.png'
 import Github from '../images/github.png'
 import Twitch from '../images/twitch.png'
 import Axios from 'axios'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function LoginForm({ toggle, setToggle }) {
 
@@ -53,23 +51,8 @@ function LoginForm({ toggle, setToggle }) {
     }
   }
 
-  // React.useEffect(() => {
-  //   async function getUser() {
-
-  //     const user = await Axios.get('/api/auth/login/success', {
-  //       credentials: "include",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Credentials": true,
-  //       }})
-  //       console.log(user);
-  //   }
-  //   getUser()
-  // }, [])
-
   return (
-    <div className='login-main-container'>
+      <div className='login-main-container'>
         <ToastContainer />
         <div className='login-signup-wrapper'>
             <div className='login-signup-form-container'>
@@ -84,7 +67,7 @@ function LoginForm({ toggle, setToggle }) {
                         <img src={Twitch} alt='' className='icon' />
                     </div>
                     <div className='loginButton github' onClick={github}>
-                        {<img src={Github} alt='' className='icon' /> || <Skeleton />}
+                        <img src={Github} alt='' className='icon' />
                     </div>
                   </div>
               </div>
@@ -106,7 +89,7 @@ function LoginForm({ toggle, setToggle }) {
               <button onClick={() => setToggle(!toggle)}>Sign Up</button>
             </div>
         </div>
-    </div>
+      </div>
   )
 }
 

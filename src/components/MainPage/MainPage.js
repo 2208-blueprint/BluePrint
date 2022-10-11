@@ -1,7 +1,4 @@
 import React from "react";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
-import ContentSkeleton from './ContentSkeleton'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,15 +20,13 @@ function MainPage () {
         <div className="main-page-main-container">
             <ToastContainer />
             <div className="main-page-wrapper">
-                <div className="main-page-category-container">
-                    {isLoading && <Skeleton containerClassName="skeleton-container"/>}
+                <div className={isLoading ? "main-page-category-container skeleton" : 'main-page-category-container'}>
                 </div>
                 <div className="main-page-content-container">
-                    <div className="main-page-featured-container">
-                        {isLoading && <Skeleton containerClassName="skeleton-container"/>}
+                    <div className={isLoading ? "main-page-featured-container skeleton" : "main-page-featured-container"}>
                     </div>
                     <div className="main-page-list-content-container">
-                        {isLoading && <ContentSkeleton cards={9}/>}
+                        {isLoading && Array(9).fill(0).map((_) => <div className="main-page-content-list-element skeleton"></div>)}
                         {users.map((user, i) => {
                             return <div key={i} className="main-page-content-list-element">
                                 {user.name}
