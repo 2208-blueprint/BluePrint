@@ -1,0 +1,162 @@
+@import "variables";
+.component-card-main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.component-card-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(5, 3, 10);
+  opacity: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  .component-card-info {
+    opacity: 1;
+  }
+}
+.component-card-cover:hover {
+  opacity: 0.9;
+}
+.component-card-thumbnail {
+  -ms-zoom: 0.65;
+  -moz-transform: scale(0.65);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.65);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.65);
+  display: flex;
+}
+
+iframe {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
+}
+.component-card-info {
+  font-weight: 600;
+  font-size: 34px;
+  padding: 5px;
+  color: @tertiary-color;
+  max-width: 340px;
+  opacity: 1;
+}
+.component-card-icons {
+  position: absolute;
+  z-index: 100;
+  align-self: flex-end;
+  display: flex;
+  width: 380px;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+.component-card-icons:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+.component-card-heart {
+  color: @tertiary-color;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.component-card-heart-container {
+  min-width: 90px;
+  background-color: rgb(5, 4, 11);
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.component-card-heart-container:hover {
+  background-color: rgb(25, 24, 37);
+  opacity: 1;
+  .component-card-heart {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+.component-card-comment-container {
+  min-width: 90px;
+  background-color: rgb(5, 4, 11);
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.component-card-comment {
+  color: @tertiary-color;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-comment-container:hover {
+  background-color: rgb(25, 24, 37);
+  opacity: 1;
+  .component-card-comment {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+.component-card-save-container {
+  min-width: 90px;
+  background-color: rgb(5, 4, 11);
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-save {
+  color: @tertiary-color;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-save-container:hover {
+  background-color: rgb(25, 24, 37);
+  opacity: 1;
+  .component-card-save {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+.component-card-like-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-comment-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-save-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.component-card-cover:hover + .component-card-icons {
+  opacity: 1;
+  transform: scale(1);
+}
