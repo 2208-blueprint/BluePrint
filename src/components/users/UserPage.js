@@ -8,6 +8,7 @@ function UserPage(props) {
 
     let componentsMade = ['1','2','3','4','5','6','7','8','9', '10', '11', '12']
     let userList = useSelector((state) => state.users)
+    console.log(userList)
 
     function handleSelectComponent(evt){
         evt.preventDefault()
@@ -16,6 +17,7 @@ function UserPage(props) {
     function handleMessageMeButton(evt){
         evt.preventDefault()
         console.log('Messaging the user now!')
+        console.log(userList)
     }
     return(
         <>

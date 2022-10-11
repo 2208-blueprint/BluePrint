@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getUsers } from "../../store/users/userSlice";
 import SingleUser from "./SingleUser";
 
 function AllUsersPage() {
-    let allUsers = useSelector((state) => state.users)
+    const allUsers = useSelector((state) => state.users)
     let users = ['1','2','3','4','5','6','7','8','9', '10', '11', '12']
-    let navigate = useNavigate()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getUsers())
+    },[])
 
     function handleSelectSingleUser(evt) {
         evt.preventDefault()
+        console.log(allUsers)
         console.log('Going to: ', evt.target.getAttribute('value'))
         navigate(`/users/${evt.target.getAttribute('value')}`)
     }
