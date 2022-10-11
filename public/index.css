@@ -1152,6 +1152,7 @@ a.createcomp-back div span {
   opacity: 0;
   font-family: "Inter", sans-serif;
   text-align: center;
+  transition: all 0.2s ease-in-out;
 }
 .component-card-cover .component-card-info {
   opacity: 1;
@@ -1191,4 +1192,105 @@ iframe {
   position: absolute;
   z-index: 100;
   align-self: flex-end;
+  display: flex;
+  width: 380px;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+.component-card-icons:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+.component-card-heart {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.component-card-heart-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-heart-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-heart-container:hover .component-card-heart {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-comment-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-comment {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-comment-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-comment-container:hover .component-card-comment {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-save-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-save {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-save-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-save-container:hover .component-card-save {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-like-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-comment-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-save-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-cover:hover + .component-card-icons {
+  opacity: 1;
+  transform: scale(1);
 }

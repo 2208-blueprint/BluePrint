@@ -3,6 +3,9 @@ import axios from "axios";
 import Less from "less";
 import { Link } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
+import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
+import { IconContext } from "react-icons";
+
 function ComponentCard({ componentId }) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
@@ -16,15 +19,12 @@ function ComponentCard({ componentId }) {
 
   function likeHandler(e) {
     e.preventDefault();
-    setLiked(!liked);
     if (!liked) {
-      anime({
-        targets: "#singlecomp-heart",
-        scale: [4, 1],
-        duration: 200,
-        easing: "easeOutCubic",
-      });
+      setLikes(likes + 1);
+    } else {
+      setLikes(likes - 1);
     }
+    setLiked(!liked);
   }
 
   React.useEffect(() => {
@@ -90,12 +90,46 @@ function ComponentCard({ componentId }) {
             </div>
           </div>
           <div className="component-card-icons">
-            <div id="singlecomp-heart" onClick={likeHandler}>
+            <div
+              className="component-card-heart-container"
+              onClick={likeHandler}
+            >
               {liked ? (
-                <span className="singlecomp-grow">&#9829;</span>
+                <IconContext.Provider
+                  value={{ size: "40px", className: "component-card-heart" }}
+                >
+                  <FaHeart />
+                </IconContext.Provider>
               ) : (
-                <span>&#9825;</span>
+                <IconContext.Provider
+                  value={{ size: "40px", className: "component-card-heart" }}
+                >
+                  <FaRegHeart />
+                </IconContext.Provider>
               )}
+              <div className="component-card-like-count">{likes}</div>
+            </div>
+            <div
+              className="component-card-comment-container"
+              onClick={likeHandler}
+            >
+              <IconContext.Provider
+                value={{ size: "38px", className: "component-card-comment" }}
+              >
+                <FaCommentAlt />
+              </IconContext.Provider>
+              <div className="component-card-comment-count">{likes}</div>
+            </div>
+            <div
+              className="component-card-save-container"
+              onClick={likeHandler}
+            >
+              <IconContext.Provider
+                value={{ size: "40px", className: "component-card-save" }}
+              >
+                <FaSave />
+              </IconContext.Provider>
+              <div className="component-card-save-count">{likes}</div>
             </div>
           </div>
           <iframe
