@@ -30,6 +30,7 @@ function App() {
           <Route path="/profile/create" element={<CreateComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/redirect" element={<Redirect />}></Route>
+          <Route path='/:badpath' element={<LoginPage/>}></Route>
         </Routes>
         <Footer />
       </SkeletonTheme>

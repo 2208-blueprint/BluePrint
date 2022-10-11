@@ -46,19 +46,6 @@ async function seed() {
   alec.addFollowing(thomas);
   //source model cathal has the foreign key of creator_id, thomas has the key of following_id. cathal is adding thomas as a follower (following)
   cathal.addFollower(thomas);
-  const item = await Component.create({
-    name: "Test Button2",
-    type: "button",
-    framework: "html",
-    stylingFramework: "css",
-  });
-  const item2 = await Component.create({
-    name: "Test Slider",
-    type: "slider",
-    framework: "react",
-    stylingFramework: "less",
-  });
-  thomas.addComponent(item, { through: { isAuthor: true } });
   await Comment.create({ message: "hello" });
 
   const arr = [];
@@ -72,7 +59,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-3" role="button">Button 3</button>`,
       stylesheet: `/* CSS */
-    .button-3 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-3 {
       appearance: none;
       background-color: #2ea44f;
       border: 1px solid rgba(27, 31, 35, .15);
@@ -134,6 +128,13 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-19" role="button">Button 19</button>`,
       stylesheet: `/* CSS */
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .button-19 {
       appearance: button;
       background-color: #1899D6;
@@ -162,7 +163,7 @@ async function seed() {
       -webkit-user-select: none;
       vertical-align: middle;
       white-space: nowrap;
-      width: 10%;
+      width: 150px;
     }
     
     .button-19:after {
@@ -205,7 +206,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-56" role="button">Button 56</button>`,
       stylesheet: `/* CSS */
-    .button-56 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-56 {
       align-items: center;
       background-color: #fee6e3;
       border: 2px solid #111;
@@ -274,7 +282,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-53" role="button">Button 53</button>`,
       stylesheet: `/* CSS */
-    .button-53 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-53 {
       background-color: #3DD1E7;
       border: 0 solid #E5E7EB;
       box-sizing: border-box;
