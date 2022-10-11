@@ -5,6 +5,7 @@ import ContentSkeleton from "./ContentSkeleton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ComponentCard from "./ComponentCard";
+import axios from "axios";
 
 function MainPage() {
   //   const [users, setUsers] = React.useState([]);
@@ -20,12 +21,12 @@ function MainPage() {
   //       });
   //   }, []);
   React.useEffect(() => {
-    fetch("http://localhost:3000/api/components")
-      .then((res) => res.json())
-      .then((data) => {
-        setComponents(data);
-        setIsLoading(false);
-      });
+    async function getComponents() {
+      const {data} = await axios.get('/api/components');
+      setComponents(data)
+      setIsLoading(false)
+    }
+    getComponents()
   }, []);
 
   return (
