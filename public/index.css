@@ -735,14 +735,15 @@ a.createcomp-back div span {
   flex: 1;
   height: calc(100vh - 80px);
   border: 1px solid gray;
-  margin: 20px 0 0 20px;
-  background-color: lightgray;
   line-height: 1;
+  background-color: aquamarine;
+  box-sizing: content-box;
 }
 .main-page-wrapper .main-page-content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #09141a;
   flex: 4;
 }
 .main-page-wrapper .main-page-content-container .main-page-featured-container {
@@ -752,7 +753,7 @@ a.createcomp-back div span {
   align-items: center;
   width: 80%;
   height: 200px;
-  margin: 20px 0 0 0;
+  margin: 20px 0 10px 0;
   background-color: lightgray;
 }
 .main-page-wrapper .main-page-content-container .main-page-list-content-container {
@@ -1129,6 +1130,163 @@ a.createcomp-back div span {
   height: 100%;
   width: 100%;
   line-height: 1;
+}
+.component-card-main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.component-card-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #05030a;
+  opacity: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+.component-card-cover .component-card-info {
+  opacity: 1;
+}
+.component-card-cover:hover {
+  opacity: 0.9;
+}
+.component-card-thumbnail {
+  -ms-zoom: 0.65;
+  -moz-transform: scale(0.65);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.65);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.65);
+  display: flex;
+}
+iframe {
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
+}
+.component-card-info {
+  font-weight: 600;
+  font-size: 34px;
+  padding: 5px;
+  color: #47B5FF;
+  max-width: 340px;
+  opacity: 1;
+}
+.component-card-icons {
+  position: absolute;
+  z-index: 100;
+  align-self: flex-end;
+  display: flex;
+  width: 380px;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+.component-card-icons:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+.component-card-heart {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.component-card-heart-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-heart-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-heart-container:hover .component-card-heart {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-comment-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-comment {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-comment-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-comment-container:hover .component-card-comment {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-save-container {
+  min-width: 90px;
+  background-color: #05040b;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.component-card-save {
+  color: #47B5FF;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  opacity: 0.6;
+}
+.component-card-save-container:hover {
+  background-color: #191825;
+  opacity: 1;
+}
+.component-card-save-container:hover .component-card-save {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.component-card-like-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-comment-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-save-count {
+  margin-left: 10px;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.component-card-cover:hover + .component-card-icons {
+  opacity: 1;
+  transform: scale(1);
 }
 .skeleton {
   opacity: 0.7;
