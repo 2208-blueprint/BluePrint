@@ -1,5 +1,6 @@
 const User = require("../db/User.js");
 const Component = require("../db/Component.js");
+const Comment = require("../db/Comment.js");
 const router = require("express").Router();
 
 const requireToken = async (req, res, next) => {
@@ -16,7 +17,18 @@ const requireToken = async (req, res, next) => {
 // WORKS
 router.get("/", async (req, res, next) => {
   try {
-    const components = await Component.findAll();
+    const components = await Component.findAll({
+      include: [
+        {
+          model: User,
+          // through: { where: { isAuthor: true } },
+          // attributes: ["username"],
+        },
+        {
+          model: Comment,
+        },
+      ],
+    });
     res.send(components);
   } catch (error) {
     next(error);
@@ -37,9 +49,9 @@ router.post("/test-create", async (req, res, next) => {
 router.post("/create", requireToken, async (req, res, next) => {
   try {
     const component = await Component.create(req.body);
-    const user = req.user
-    user.addComponent(component, { through: { isAuthor: true } })
-    res.sendStatus(201)
+    const user = req.user;
+    user.addComponent(component, { through: { isAuthor: true } });
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
@@ -51,7 +63,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const component = await Component.findByPk(id, {
-      include: User
+      include: User,
     });
     res.send(component);
   } catch (error) {
@@ -59,22 +71,22 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put('/:id', requireToken, async (req, res, next) => {
+router.put("/:id", requireToken, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const component = await Component.findByPk(id)
-    await component.update(req.body)
+    const component = await Component.findByPk(id);
+    await component.update(req.body);
     res.send(component);
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:id', requireToken, async (req, res, next) => {
+router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const component = await Component.findByPk(id)
-    await component.destroy()
+    const component = await Component.findByPk(id);
+    await component.destroy();
     res.sendStatus(204);
   } catch (error) {
     next(error);
@@ -100,20 +112,23 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
     const id = req.params.componentId;
     const user = req.user;
     const component = await Component.findByPk(id);
-    await component.addUser(user, {through: {isFavorite:true}});
-    res.sendStatus(201)
+    await component.addUser(user, { through: { isFavorite: true } });
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
 });
 //remove favorite from component
 // WORKS
-router.delete("/:componentId/remove-favorite", requireToken, async (req, res, next) => {
+router.delete(
+  "/:componentId/remove-favorite",
+  requireToken,
+  async (req, res, next) => {
     try {
       const id = req.params.componentId;
       const user = req.user;
       const component = await Component.findByPk(id);
-      await component.addUser(user, {through: {isFavorite:false}});
+      await component.addUser(user, { through: { isFavorite: false } });
       res.sendStatus(204);
     } catch (error) {
       next(error);
@@ -128,8 +143,8 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
     const id = req.params.componentId;
     const user = req.user;
     const component = await Component.findByPk(id);
-    await component.addUser(user, {through: {isSaved:true}});
-    res.sendStatus(201)
+    await component.addUser(user, { through: { isSaved: true } });
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
@@ -137,17 +152,20 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
 
 //remove save from component
 // WORKS
-router.delete("/:componentId/remove-save", requireToken, async (req, res, next) => {
-  try {
-    const id = req.params.componentId;
-    const user = req.user;
-    const component = await Component.findByPk(id);
-    await component.addUser(user, {through: {isSaved:false}});
-    res.sendStatus(204);
-  } catch (error) {
-    next(error);
+router.delete(
+  "/:componentId/remove-save",
+  requireToken,
+  async (req, res, next) => {
+    try {
+      const id = req.params.componentId;
+      const user = req.user;
+      const component = await Component.findByPk(id);
+      await component.addUser(user, { through: { isSaved: false } });
+      res.sendStatus(204);
+    } catch (error) {
+      next(error);
+    }
   }
-}
 );
 
 module.exports = router;

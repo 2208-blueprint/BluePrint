@@ -736,13 +736,13 @@ a.createcomp-back div span {
   height: calc(100vh - 80px);
   border: 1px solid gray;
   margin: 20px 0 0 20px;
-  background-color: lightgray;
   line-height: 1;
 }
 .main-page-wrapper .main-page-content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #062437;
   flex: 4;
 }
 .main-page-wrapper .main-page-content-container .main-page-featured-container {
@@ -1129,4 +1129,66 @@ a.createcomp-back div span {
   height: 100%;
   width: 100%;
   line-height: 1;
+}
+.component-card-main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.component-card-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #05030a;
+  opacity: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+.component-card-cover .component-card-info {
+  opacity: 1;
+}
+.component-card-cover:hover {
+  opacity: 0.9;
+}
+.component-card-thumbnail {
+  -ms-zoom: 0.65;
+  -moz-transform: scale(0.65);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.65);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.65);
+  display: flex;
+}
+.component-card-background {
+  position: absolute;
+  width: 100%;
+  height: 99.25%;
+  background-color: #ffffff;
+  opacity: 0.8;
+  z-index: -99;
+}
+iframe {
+  background-color: white;
+}
+.component-card-info {
+  font-weight: 600;
+  font-size: 34px;
+  padding: 5px;
+  color: #47B5FF;
+  max-width: 340px;
+  opacity: 1;
+}
+.component-card-icons {
+  position: absolute;
+  z-index: 100;
+  align-self: flex-end;
 }

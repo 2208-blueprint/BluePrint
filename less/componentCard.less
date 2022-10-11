@@ -1,0 +1,63 @@
+@import "variables";
+.component-card-main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.component-card-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(5, 3, 10);
+  opacity: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  .component-card-info {
+    opacity: 1;
+  }
+}
+.component-card-cover:hover {
+  opacity: 0.9;
+}
+.component-card-thumbnail {
+  -ms-zoom: 0.65;
+  -moz-transform: scale(0.65);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.65);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.65);
+  display: flex;
+}
+.component-card-background {
+  position: absolute;
+  width: 100%;
+  height: 99.25%;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.8;
+  z-index: -99;
+}
+iframe {
+  background-color: white;
+}
+.component-card-info {
+  font-weight: 600;
+  font-size: 34px;
+  padding: 5px;
+  color: @tertiary-color;
+  max-width: 340px;
+  opacity: 1;
+}
+.component-card-icons {
+  position: absolute;
+  z-index: 100;
+  align-self: flex-end;
+}
