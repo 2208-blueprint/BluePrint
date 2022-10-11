@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Google from '../images/google.png'
 import Github from '../images/github.png'
@@ -6,6 +7,7 @@ import Twitch from '../images/twitch.png'
 import Axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-loading-skeleton/dist/skeleton.css'
+import { getSingleUser } from '../../store/users/singleUserSlice'
 
 function LoginForm({ toggle, setToggle }) {
 
@@ -13,6 +15,7 @@ function LoginForm({ toggle, setToggle }) {
   const [password, setPassword] = React.useState('')
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toastError = (err) => toast.error(err);
   const toastLogin = (msg) => toast.success(msg);
@@ -38,10 +41,13 @@ function LoginForm({ toggle, setToggle }) {
       const auth = await Axios.post("/api/auth/login", loginObj);
 
       const { token } = auth.data;
+      console.log(auth);
+
       window.localStorage.setItem("token", token);
 
       setUserName("");
       setPassword("");
+      dispatch(getSingleUser(token))
       navigate('/')
       toastLogin('You are logged in!')
 
