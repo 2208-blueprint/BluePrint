@@ -15,9 +15,32 @@ function ComponentCard({ componentId }) {
   const [title, setTitle] = useState("title of component");
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState(0);
+  const [saved, setSaved] = useState(false);
+  const [saves, setSaves] = useState(0);
   const [author, setAuthor] = useState("");
 
-  function likeHandler(e) {
+  async function likeHandler(e) {
+    e.preventDefault();
+    if (!liked) {
+      setLikes(likes + 1);
+      await axios.post("/:componentId/favorite", {});
+    } else {
+      setLikes(likes - 1);
+      await axios.delete("/:componentId/remove-favorite");
+    }
+    setLiked(!liked);
+  }
+  async function likeHandler(e) {
+    e.preventDefault();
+    if (!liked) {
+      setLikes(likes + 1);
+    } else {
+      setLikes(likes - 1);
+    }
+    setLiked(!liked);
+  }
+  async function likeHandler(e) {
     e.preventDefault();
     if (!liked) {
       setLikes(likes + 1);
@@ -55,20 +78,26 @@ function ComponentCard({ componentId }) {
         setLess(data?.stylesheet);
       }
       setTitle(data.name);
+      const numberOfComments = data.comments;
+      setComments(numberOfComments.length);
       const componentAuthor = data.users.find(
         (user) => user["user_component"].isAuthor
       );
       const componentLikes = data.users.filter(
         (user) => !user["user_component"].isAuthor
       );
-      setLikes(componentLikes.length);
-      console.log(author);
+      const componentSaves = data.users.filter(
+        (user) => user["user_component"].isSaved
+      );
+      setSaves(componentSaves?.length);
+      setLikes(componentLikes?.length);
+      console.log("author", data.users);
       if (componentAuthor?.username) {
         setAuthor(componentAuthor?.username);
       } else {
         setAuthor(`BluePrint Community`);
       }
-      console.log(author);
+      console.log("comments", data.comments);
     }
     getComp();
   }, []);
@@ -118,7 +147,7 @@ function ComponentCard({ componentId }) {
               >
                 <FaCommentAlt />
               </IconContext.Provider>
-              <div className="component-card-comment-count">{likes}</div>
+              <div className="component-card-comment-count">{comments}</div>
             </div>
             <div
               className="component-card-save-container"
@@ -129,7 +158,7 @@ function ComponentCard({ componentId }) {
               >
                 <FaSave />
               </IconContext.Provider>
-              <div className="component-card-save-count">{likes}</div>
+              <div className="component-card-save-count">{saves}</div>
             </div>
           </div>
           <iframe

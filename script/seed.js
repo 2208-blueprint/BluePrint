@@ -1437,7 +1437,6 @@ async function seed() {
       }
       `,
   });
-
   await Component.create({
     name: `Cyberpunk 2077 Glitch Button`,
     type: `Button`,

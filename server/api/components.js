@@ -17,18 +17,21 @@ const requireToken = async (req, res, next) => {
 // WORKS
 router.get("/", async (req, res, next) => {
   try {
-    const components = await Component.findAll({
-      include: [
-        {
-          model: User,
-          // through: { where: { isAuthor: true } },
-          // attributes: ["username"],
-        },
-        {
-          model: Comment,
-        },
-      ],
-    });
+    const components = await Component
+      .findAll
+      //   {
+      //   include: [
+      //     {
+      //       model: User,
+      //       // through: { where: { isAuthor: true } },
+      //       // attributes: ["username"],
+      //     },
+      //     {
+      //       model: Comment,
+      //     },
+      //   ],
+      // }
+      ();
     res.send(components);
   } catch (error) {
     next(error);
@@ -63,7 +66,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const component = await Component.findByPk(id, {
-      include: User,
+      include: [User, Comment],
     });
     res.send(component);
   } catch (error) {
