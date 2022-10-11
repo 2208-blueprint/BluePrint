@@ -978,6 +978,75 @@ a.createcomp-back div span {
 .footer-group-2 .footer-copy {
   width: 10%;
 }
+.all-users-title {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+}
+.all-users-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+}
+.all-users-container .single-user-container {
+  border: 1px solid gray;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 250px;
+  margin: 30px 10px 10px 10px;
+  background-color: lightgray;
+}
+.user-page-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+.user-page-header-container .user-page-image {
+  display: flex;
+}
+.user-page-header-container .user-page-title {
+  display: flex;
+}
+.user-page-components {
+  display: flex;
+}
+.user-single-user-main-container {
+  border: 1px solid gray;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  margin: 30px 10px 10px 10px;
+  background-color: lightgray;
+}
+.single-user-main-container .user-page-header-container .user-page-info-container {
+  display: flex;
+  flex-direction: column;
+}
+.single-user-main-container .user-page-components-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+}
+.single-user-main-container .user-page-components-container .user-page-single-component-container {
+  border: 1px solid gray;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  margin: 30px 10px 10px 10px;
+  background-color: lightgray;
+}
 #comments-root {
   font-family: 'Inter', 'sans-serif';
   margin-left: 20px;

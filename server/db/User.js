@@ -3,6 +3,8 @@ const db = require("./database.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
+const Comment = require('./Comment')
+const Component = require('./Component')
 
 // if not in production environment, I want access to the JWT key
 if (process.env.NODE_ENV !== "production") {
@@ -77,10 +79,9 @@ User.authenticate = async function ({ username, password }) {
 User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-
-    const user = await User.findByPk(id);
-console.log(id, user);
-
+    const user = User.findByPk(id, {
+      include: [Comment, Component]
+    });
     if (!user) {
       throw "No user with that token found";
     }

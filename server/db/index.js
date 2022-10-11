@@ -103,8 +103,13 @@ User.belongsToMany(Comment, { through: UserComments });
 module.exports = {
   // Include your models in this exports object as well!
   db,
-  User,
-  Component,
+  models: {
+    User,
+    Component,
+    Comment, 
+    UserComments, 
+    UserComponent 
+  }
 };
 
 //Delay function

@@ -1,8 +1,6 @@
 const User = require("../db/User.js");
 const Component = require("../db/Component.js");
-const Like = require("../db/Like.js");
 const Comment = require("../db/Comment.js");
-const Favorite = require("../db/Favorite.js");
 
 const router = require("express").Router();
 
@@ -10,13 +8,40 @@ const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
-    res.user = user;
+    req.user = user;
     next();
   } catch (error) {
     next(error);
   }
 };
+
+// get user profile
+// WORKS
+router.get('/profile', requireToken, async(req,res,next) => {
+  try {
+    const user = req.user
+    res.send(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// get all users who have created
+// Works
+router.get('/allUsers', async(req,res,next) => {
+  try {
+    const users = await User.findAll({
+      attributes: ['username', 'firstName', 'lastName', 'img'],
+      include: Component
+    })
+    res.send(users)
+  } catch(err) {
+    next(err)
+  }
+})
+
 //sends components user has saved but is not author of
+// WORKS
 router.get("/components", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -30,6 +55,7 @@ router.get("/components", requireToken, async (req, res, next) => {
   }
 });
 //sends list of creators user is following
+//WORKS
 router.get("/creators", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -40,6 +66,7 @@ router.get("/creators", requireToken, async (req, res, next) => {
   }
 });
 //sends list of followers following user
+//WORKS
 router.get("/followers", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -51,44 +78,49 @@ router.get("/followers", requireToken, async (req, res, next) => {
 });
 
 //follow a user
+//WORKS
 router.put("/follow/:userId", requireToken, async (req, res, next) => {
   try {
     const id = req.params.userId;
     const user = req.user;
     const creator = await User.findByPk(id);
     await user.addFollowing(creator);
-    res.send(user);
+    res.send(creator);
   } catch (error) {
     next(error);
   }
 });
 //unfollow a user
+//WORKS
 router.put("/unfollow/:userId", requireToken, async (req, res, next) => {
   try {
     const id = req.params.userId;
     const user = req.user;
     const creator = await User.findByPk(id);
     await user.removeFollowing(creator);
-    res.send(user);
+    res.send(creator);
   } catch (error) {
     next(error);
   }
 });
 
-//get all likes with associated comments from user
+// get all likes with associated comments from user
+// Dont need?????
 router.get("/likes", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const likes = await Like.find({
-      where: { userId: user.id },
-      include: Comment,
-    });
+    const comments = await user.getComments()
+    const likes = comments.filter((comment) => {
+      return comment.user_comments.dataValues.isAuthor === false
+    })
     res.send(likes);
   } catch (error) {
     next(error);
   }
 });
+
 //get all favorites with associated components from user
+// Dont need???
 router.get("/favorites", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -99,6 +131,42 @@ router.get("/favorites", requireToken, async (req, res, next) => {
     res.send(favorites);
   } catch (error) {
     next(error);
+  }
+});
+
+// get user by Id
+// WORKS
+router.get("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findByPk(id, {
+      include: [Component, {
+        model: User,
+        as: 'following',
+        attributes: ['id', 'username', 'img']
+      }, {
+        model: User,
+        as: 'followers',
+        attributes: ['id', 'username', 'img']
+      }],
+      attributes: ['username', 'firstName', 'lastName', 'img']
+    });
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// update user's information (takes new details in req.body)
+// WORKS
+router.put("/:id", requireToken, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    user.set(req.body);
+    await user.save();
+    res.send(user);
+  } catch (ex) {
+    next(ex);
   }
 });
 
