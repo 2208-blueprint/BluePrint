@@ -15,7 +15,6 @@ const requireToken = async (req, res, next) => {
 
   router.get("/", requireToken, async (req, res, next) => {
     try {
-
         const user = req.user;
         res.send(user)
 
