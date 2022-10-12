@@ -36,6 +36,10 @@ const User = db.define("user", {
     },
     unique: true,
   },
+  country: {
+    type: Sequelize.STRING,
+    defaultValue: 'Not specified',
+  },
   img: {
     type: Sequelize.STRING,
     validate: {

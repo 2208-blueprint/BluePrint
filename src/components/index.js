@@ -14,4 +14,6 @@ export { default as ProfilePage } from "./profilePage/ProfilePage";
 export { default as Redirect } from "./Redirect";
 export { default as AllUsersPage } from "./users/AllUsersPage";
 export { default as UserPage } from "./users/UserPage";
+export { default as CountryList } from "./login/CountryList";
+export { default as NotFoundPage } from "./404Page/NotFoundPage";
 export { getSingleUser } from "../store/users/singleUserSlice";

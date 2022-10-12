@@ -121,6 +121,9 @@ router.post("/signup", async (req, res, next) => {
     });
     if (!newUser) {
       newUser = await User.create(req.body);
+      console.log(newUser);
+      console.log(req.body);
+
       res.status(200).send({ token: await User.authenticate(req.body) });
     } else {
       res.status(403).send('User already exists');
