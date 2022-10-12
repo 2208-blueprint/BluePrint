@@ -47,11 +47,11 @@ function AllUsersPage() {
         </div>
         <button onClick={handleButtonClick}>Click me!</button>
             <div className="all-users-container">
-                {/* { allUsers && allUsers.map((user, i) => 
+                { allUsers && allUsers.map((user, i) => 
                 <div className="user-single-user-main-container" key={i} value={i + 1}onClick={handleSelectSingleUser}>
                 <SingleUser user={user} />
                 </div>
-                )} */}
+                )}
             </div>
         </>
     )

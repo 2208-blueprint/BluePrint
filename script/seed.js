@@ -23,26 +23,26 @@ const UserComponent = require("../server/db/UserComponent");
 async function seed() {
   await db.sync({ force: true });
 
-  const thomas = await User.create({
-    username: "Thomas",
-    password: "test",
-  });
+  // const thomas = await User.create({
+  //   username: "Thomas",
+  //   password: "test",
+  // });
 
-  const ben = await User.create({
-    username: "Ben",
-    password: "test",
-  });
-  const cathal = await User.create({
-    username: "Cathal",
-    password: "test",
-    firstName: 'Cathal',
-    lastName: 'O Cuinneagain',
-    img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
-  });
-  const alec = await User.create({
-    username: "Alec",
-    password: "test",
-  });
+  // const ben = await User.create({
+  //   username: "Ben",
+  //   password: "test",
+  // });
+  // const cathal = await User.create({
+  //   username: "Cathal",
+  //   password: "test",
+  //   firstName: 'Cathal',
+  //   lastName: 'O Cuinneagain',
+  //   img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
+  // });
+  // const alec = await User.create({
+  //   username: "Alec",
+  //   password: "test",
+  // });
   //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
   ben.addFollowing(thomas);
   cathal.addFollowing(thomas);
