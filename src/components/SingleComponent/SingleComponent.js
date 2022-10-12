@@ -15,6 +15,8 @@ import anime from "animejs/lib/anime.es.js"
 import CommentsSection from "./CommentsSection";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -31,6 +33,7 @@ function SingleComponent() {
     stylingFramework: null
   })
   const [liked, setLiked] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [author, setAuthor] = useState({username: '', id:0})
   const [loggin, setLoggin] = useState(false)
 
@@ -79,15 +82,63 @@ function SingleComponent() {
     }
   }
 
-  function likeHandler() {
-    setLiked(!liked)
-    if (!liked) {
-    anime({
-      targets: '#singlecomp-heart',
-      scale: [4,1],
-      duration: 200,
-      easing: 'easeOutCubic'
-    })
+  async function likeHandler(e) {
+    try {
+      e.preventDefault();
+      if (window.localStorage.token) {
+        if (!liked) {
+          await axios.post(`/api/components/${params.id}/favorite`, {}, {
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+          anime({
+            targets: '#singlecomp-heart',
+            scale: [4,1],
+            duration: 200,
+            easing: 'easeOutCubic'
+          })
+        } else {
+          await axios.delete(`/api/components/${params.id}/remove-favorite`, {
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+        }
+        setLiked(!liked);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function saveHandler(e) {
+    try {
+      e.preventDefault();
+      if (window.localStorage.token) {
+        if (!saved) {
+          await axios.post(`/api/components/${params.id}/save`, {}, {
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+          anime({
+            targets: '#singlecomp-save',
+            scale: [4,1],
+            duration: 200,
+            easing: 'easeOutCubic'
+          })
+        } else {
+          await axios.delete(`/api/components/${params.id}/remove-save`, {
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+        }
+        setSaved(!saved);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -111,6 +162,12 @@ function SingleComponent() {
     async function getComp() {
       // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
+      const profile = await axios.get(`/api/users/profile`, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+      const currentUser = profile.data
       if (data.framework === 'html') {
         setHTML(data.markup)
       } else {
@@ -128,6 +185,18 @@ function SingleComponent() {
         if (data.users[i].user_component.isAuthor) {
           setAuthor(data.users[i])
         }
+      }
+      const componentLikes = data.users.filter(
+        (user) => user["user_component"].isFavorite
+      );
+      const componentSaves = data.users.filter(
+        (user) => user["user_component"].isSaved
+      );
+      if (componentSaves.find((user) => user.id === currentUser.id)) {
+        setSaved(true);
+      }
+      if (componentLikes.find((user) => user.id === currentUser.id)) {
+        setLiked(true);
       }
     }
     getComp()
@@ -149,7 +218,31 @@ function SingleComponent() {
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
-      {loggin ? <div id="singlecomp-heart" onClick={likeHandler}>{liked ? <span className="singlecomp-grow">&#9829;</span>:<span>&#9825;</span>}</div>
+      {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
+        {liked ? <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
+                    value={{ size: "40px"}} 
+                  >
+                    <FaHeart/>
+                  </IconContext.Provider></span>
+                  :<span value={params.id}><IconContext.Provider
+                  value={{ size: "40px"}} 
+                >
+                  <FaRegHeart/>
+                </IconContext.Provider></span>}
+        </div>
+      : <div></div>}
+      {loggin ? <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
+        {saved ? <span className='singlecomp-saved' value={params.id}><IconContext.Provider
+                    value={{ size: "40px"}} 
+                  >
+                    <FaSave/>
+                  </IconContext.Provider></span>
+                  :<span value={params.id}><IconContext.Provider
+                  value={{ size: "40px"}} 
+                >
+                  <FaSave/>
+                </IconContext.Provider></span>}
+        </div>
       : <div></div>}
       </div>
       <div id="singlecomp-iframe">
