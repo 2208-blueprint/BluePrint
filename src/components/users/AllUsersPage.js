@@ -38,7 +38,7 @@ function AllUsersPage() {
         </div>
             <div className="all-users-container">
                 { allUsers && allUsers.map((user, i) => 
-                <div className="user-single-user-main-container" key={i} value={i + 1}onClick={handleSelectSingleUser}>
+                <div className="user-single-user-main-container" key={i} value={i + 1} onClick={handleSelectSingleUser}>
                 <SingleUser user={user} />
                 </div>
                 )}
