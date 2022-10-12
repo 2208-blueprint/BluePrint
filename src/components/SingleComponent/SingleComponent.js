@@ -13,6 +13,8 @@ import axios from "axios";
 import {useParams} from 'react-router-dom'
 import anime from "animejs/lib/anime.es.js"
 import CommentsSection from "./CommentsSection";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SingleComponent() {
   const [html, setHTML] = useState("");
@@ -30,8 +32,10 @@ function SingleComponent() {
   })
   const [liked, setLiked] = useState(false)
   const [author, setAuthor] = useState({username: '', id:0})
+  const [loggin, setLoggin] = useState(false)
 
   const params = useParams()
+  const toastSuccess = (msg) => toast.success(msg);
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -59,16 +63,16 @@ function SingleComponent() {
   function copyClipboard() {
     switch (view) {
       case 'html':
-        navigator.clipboard.writeText(html).then(()=>alert('Copied to clipboard!'))
+        navigator.clipboard.writeText(html).then(()=>toastSuccess('Copied to clipboard!'))
         break;
       case 'css':
-        navigator.clipboard.writeText(css).then(()=>alert('Copied to clipboard!'))
+        navigator.clipboard.writeText(css).then(()=>toastSuccess('Copied to clipboard!'))
         break;
       case 'js':
-        navigator.clipboard.writeText(js).then(()=>alert('Copied to clipboard!'))
+        navigator.clipboard.writeText(js).then(()=>toastSuccess('Copied to clipboard!'))
         break;
       case 'less':
-        navigator.clipboard.writeText(less).then(()=>alert('Copied to clipboard!'))
+        navigator.clipboard.writeText(less).then(()=>toastSuccess('Copied to clipboard!'))
         break;
       default:
         break;
@@ -103,7 +107,9 @@ function SingleComponent() {
 
   // load in the apropriate component
   React.useEffect(() => {
+    window.scrollTo(0,0)
     async function getComp() {
+      // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
       if (data.framework === 'html') {
         setHTML(data.markup)
@@ -125,7 +131,9 @@ function SingleComponent() {
       }
     }
     getComp()
-    // setIsLoading(false)
+    if (window.localStorage.getItem('token')) {
+      setLoggin(true)
+    }
   }, []);
 
   // compile the less into css if less changes
@@ -141,7 +149,8 @@ function SingleComponent() {
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
-      <div id="singlecomp-heart" onClick={likeHandler}>{liked ? <span className="singlecomp-grow">&#9829;</span>:<span>&#9825;</span>}</div>
+      {loggin ? <div id="singlecomp-heart" onClick={likeHandler}>{liked ? <span className="singlecomp-grow">&#9829;</span>:<span>&#9825;</span>}</div>
+      : <div></div>}
       </div>
       <div id="singlecomp-iframe">
         <iframe
@@ -291,7 +300,7 @@ function SingleComponent() {
           <h2>Selected: {color}</h2>
         </div>
       </div>
-       <CommentsSection/>
+      <CommentsSection loggin={loggin}/>
     </div>
   );
 }

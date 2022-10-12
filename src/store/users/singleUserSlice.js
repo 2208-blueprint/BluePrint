@@ -3,8 +3,8 @@ import axios from "axios";
 
 const initialState = {};
 
-axios.defaults.headers.common["authorization"] =
-  window.localStorage.getItem("token");
+// axios.defaults.headers.common["authorization"] =
+//   window.localStorage.getItem("token");
 
 export const getSingleUser = createAsyncThunk("/singleUser", async (token) => {
   try {

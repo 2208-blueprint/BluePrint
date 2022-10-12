@@ -92,7 +92,7 @@ router.delete("/:commentId/unlike", requireToken, async (req, res, next) => {
     const id = req.params.commentId;
     const user = req.user;
     const comment = await Comment.findByPk(id);
-    await comment.removeUser(user);
+    await user.removeComment(comment);
     res.sendStatus(204);
   } catch (error) {
     next(error);

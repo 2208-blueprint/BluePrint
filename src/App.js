@@ -28,6 +28,7 @@ function App() {
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/redirect" element={<Redirect />}></Route>
+          <Route path='/:badpath' element={<LoginPage/>}></Route>
         </Routes>
         <Footer />
     </>
