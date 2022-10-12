@@ -477,11 +477,6 @@ a.singlecomp-back div span {
   justify-content: center;
   padding: 10px 0 0 0;
 }
-.signup-main-container .signup-wrapper .signup-form-container .signup-form-bottom .signup-form .login-select-wrapper {
-  display: flex;
-  justify-content: center;
-  overflow-y: visible;
-}
 .signup-main-container .signup-wrapper .signup-form-container .signup-form-bottom .signup-form .form-control {
   display: inline;
   float: none;
@@ -1362,6 +1357,22 @@ iframe {
 .profile-wrapper .profile-sidebar .profile-category-link-container .profile-category-link {
   display: flex;
   align-items: center;
+  margin: 2px 0;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .username {
+  margin: 0 0 10px 0;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .followers svg {
+  color: #29e7e4;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .following svg {
+  color: greenyellow;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .favorited svg {
+  color: gold;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .likes svg {
+  color: red;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container p {
   margin: 0;
@@ -1384,7 +1395,7 @@ iframe {
   justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  flex: 0.8;
+  flex: 0.5;
   width: 90%;
   height: 100%;
   margin: 30px 30px 5px 30px;
@@ -1394,6 +1405,17 @@ iframe {
   box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
   -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
   -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+}
+.profile-wrapper .profile-main-content-container .profile-user-info-container .profile-user-name .profile-country-span {
+  margin: 0 0 0 20px;
+}
+.profile-wrapper .profile-main-content-container .profile-user-info-container .profile-user-name .profile-country-span svg {
+  margin: 0 3px 0 0;
+}
+.profile-wrapper .profile-main-content-container .profile-user-info-container .profile-new-component-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 .profile-wrapper .profile-main-content-container .profile-user-extras-container {
   display: flex;
@@ -1430,6 +1452,67 @@ iframe {
   box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
   -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
   -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+}
+.not-found-bg-image {
+  position: absolute;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  background: url('blueprint.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: blur(8px);
+  -webkit-filter: blur(4px);
+}
+.not-found-main-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  position: absolute;
+  color: white;
+  font-weight: 600;
+  font-size: 100px;
+  opacity: 100%;
+  z-index: 2;
+}
+.not-found-main-text .not-found-text-extra {
+  font-size: 15px;
+  text-align: center;
+}
+.not-found-main-text .oops {
+  margin: 100px 0 20px 0;
+}
+.not-found-main-text .not-found-text {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+}
+.not-found-main-text button {
+  background-color: #47B5FF;
+  border-radius: 6px;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  margin: 20px 0 0 0;
+}
+.not-found-page-container {
+  width: 100vw;
+  height: calc(100vh - 80px);
+}
+.not-found-page-container .not-found-img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  opacity: 80%;
+}
+.not-found-page-container .not-found-img img {
+  height: 100px;
+  width: 100px;
 }
 * {
   font-family: 'Inter', sans-serif;

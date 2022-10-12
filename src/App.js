@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { CreateComponent, Footer, Redirect, ProfilePage } from "./components";
+import { CreateComponent, Footer, Redirect, ProfilePage, NotFoundPage } from "./components";
 import { SingleComponent } from "./components";
 import { LoginPage } from "./components";
 import { MainPage } from "./components";
@@ -28,7 +28,7 @@ function App() {
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/redirect" element={<Redirect />}></Route>
-          <Route path='/:badpath' element={<LoginPage/>}></Route>
+          <Route path='/:badpath' element={<NotFoundPage />}></Route>
         </Routes>
         {/* <Footer /> */}
     </>

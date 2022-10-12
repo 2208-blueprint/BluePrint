@@ -43,6 +43,31 @@
             .profile-category-link {
                 display: flex;
                 align-items: center;
+                margin: 2px 0;
+            }
+
+            .username {
+                margin: 0 0 10px 0;
+            }
+            .followers {
+                svg {
+                    color: rgb(41, 231, 228);
+                }
+            }
+            .following {
+                svg {
+                    color: greenyellow;
+                }
+            }
+            .favorited {
+                svg {
+                    color: gold;
+                }
+            }
+            .likes {
+                svg {
+                    color: red;
+                }
             }
 
             p {
@@ -70,7 +95,7 @@
             justify-content: flex-start;
             display: flex;
             flex-direction: column;
-            flex: 0.8;
+            flex: 0.5;
             width: 90%;
             height: 100%;
             border-radius: 5px;
@@ -81,6 +106,22 @@
             box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
             -webkit-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
             -moz-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+
+            .profile-user-name {
+                .profile-country-span {
+                    margin: 0 0 0 20px;
+
+                    svg {
+                        margin: 0 3px 0 0;
+                    }
+                }
+            }
+
+            .profile-new-component-button-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
         }
 
         .profile-user-extras-container {
