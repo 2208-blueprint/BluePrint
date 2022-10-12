@@ -13,7 +13,7 @@ body {
   }
 }
 #singlecomp-root {
-  background-color: #062437;
+  background-color: #1e2d38;
   height: auto;
   padding-bottom: 40px;
 }
@@ -38,7 +38,7 @@ body {
   animation-duration: 1s;
 }
 #singlecomp-editors {
-  background-color: #062437;
+  background-color: #1e2d38;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -192,7 +192,7 @@ a.singlecomp-back div span {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(150deg, #062437 0%, #011018 100%);
+  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
 }
 .login-main-container .login-signup-wrapper {
   display: flex;
@@ -411,7 +411,7 @@ a.singlecomp-back div span {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(150deg, #062437 0%, #011018 100%);
+  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
 }
 .signup-main-container .signup-wrapper {
   display: flex;
@@ -543,7 +543,7 @@ a.singlecomp-back div span {
   }
 }
 #createcomp-root {
-  background-color: #062437;
+  background-color: #1e2d38;
   height: auto;
 }
 #createcomp-editors {
@@ -778,8 +778,7 @@ a.createcomp-back div span {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 100%;
-  min-width: 100%;
+  width: 100vw;
   background-color: #0F4C75;
   height: 80px;
 }
@@ -899,7 +898,7 @@ a.createcomp-back div span {
   z-index: 99;
 }
 .navbar-dropdown-container li button {
-  background-color: #062437;
+  background-color: #1e2d38;
   color: #0F4C75;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -1094,7 +1093,7 @@ a.createcomp-back div span {
   background-color: #1a6da4;
 }
 #comments-root #comments-list .comment-box {
-  background-color: #062437;
+  background-color: #1e2d38;
   padding: 20px;
   margin: 20px;
 }
@@ -1287,4 +1286,80 @@ iframe {
 .component-card-cover:hover + .component-card-icons {
   opacity: 1;
   transform: scale(1);
+}
+.skeleton {
+  opacity: 0.7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton-login-img {
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+.profile-wrapper {
+  display: flex;
+  height: calc(100vh - 80px);
+  width: 100vw;
+  background-color: #1e2d38;
+}
+.profile-wrapper .profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 100%;
+  margin-left: 50px;
+  color: white;
+}
+.profile-wrapper .profile-sidebar .profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  background-color: gray;
+  height: 220px;
+  width: 220px;
+  margin: 30px 0 30px 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+.profile-wrapper .profile-sidebar .profile-picture img {
+  height: 100%;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.profile-wrapper .profile-sidebar .profile-category-link-container .profile-category-link {
+  display: flex;
+  align-items: center;
+}
+.profile-wrapper .profile-main-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+}
+.profile-wrapper .profile-main-content-container .profile-user-info-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 30px 30px 15px 30px;
 }

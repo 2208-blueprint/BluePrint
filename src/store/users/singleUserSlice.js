@@ -6,7 +6,7 @@ const initialState = {};
 // axios.defaults.headers.common["authorization"] =
 //   window.localStorage.getItem("token");
 
-export const getSingleUser = createAsyncThunk("/singleUser", async (id) => {
+export const getSingleUser = createAsyncThunk("/singleUser", async (token) => {
   try {
     const token = window.localStorage.getItem("token");
     const { data } = await axios.get(`/api/users/profile`, {
