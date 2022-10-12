@@ -3,16 +3,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../../store/users/userSlice";
 import SingleUser from "./SingleUser";
+import Axios from 'axios';
 
 function AllUsersPage() {
-    const allUsers = useSelector((state) => state.users)
-    let users = ['1','2','3','4','5','6','7','8','9', '10', '11', '12']
+    let users = []
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getUsers())
-    },[])
+    React.useEffect(() => {
+
+        async function getAllUsers() {
+            try{
+                console.log("Trying getAllUsers")
+                const allUsers = await Axios.get('/api/user/allUsers')
+                .then(users.push(allUsers))
+                .then(console.log(users))
+                
+            }
+            catch(e) {
+            console.error(e)
+            }
+        }
+
+        getAllUsers()
+
+    },[users])
+
+    console.log('Users: ', users)
 
     function handleSelectSingleUser(evt) {
         evt.preventDefault()
