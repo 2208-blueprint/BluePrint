@@ -1,31 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 //This is the full "profile page" of a user. The logged-in user can visit this page to see components made by this
 //user, as well as follow the user to see more content from them.
 
-function UserPage(props) {
+function UserPage() {
 
-    let componentsMade = ['1','2','3','4','5','6','7','8','9', '10', '11', '12']
-    let userList = useSelector((state) => state.users)
-  
+    const componentsMade = []
+    let navigate = useNavigate()
+    const [curUser, setCurUser] = useState('')
+    
+    let curUserNum = window.location.pathname
+    curUserNum = curUserNum.slice(7, curUserNum.length)
+
+    console.log('Window search: ', curUserNum)
+    React.useEffect(() => {
+
+        async function getAllUsers() {
+            try{
+                let curUser = await Axios.get(`/api/users/${curUserNum}`);
+                setCurUser(curUser.data) 
+            }
+            catch(e) {
+            console.error(e)
+            }
+        }
+        getAllUsers()
+
+    },[])
+
+    console.log('Cur User: ', curUser)
 
     function handleSelectComponent(evt){
         evt.preventDefault()
-        console.log('Gonna search for that component now: #', evt.target.getAttribute('value'))
+        navigate(`/components/${evt.target.id}`)
     }
     function handleMessageMeButton(evt){
         evt.preventDefault()
-        console.log('Messaging the user now!')
     }
     return(
         <>
         <div className="single-user-main-container">
             <div className="user-page-header-container">
-                <img className="user-page-image" alt='user-image'/>
-                <div className="user-page-title">User Title/Name</div>
+                <img alt='user-image'/>
+                <div className="user-page-title"></div>
                 <div className="user-page-info-container">
-                    <div className="user-number-components-made">10 components made</div>
+                    <div className="user-number-components-made"></div>
                     <div className="user-number-followers">15 followers</div>
                     <button onClick={handleMessageMeButton} className="user-message-me-button">Message me!</button>
                 </div>

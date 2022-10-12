@@ -6,24 +6,19 @@ import { useNavigate } from "react-router-dom";
 //shorthand info about users to display on smaller card.
 
 function SingleUser(props) {
-    let userComponents = props.user.components
-    let value = props.user
+    let id = props.user.id
+    let numComponentsMade = props.user.components.length
+    let userName = props.user.username
+    console.log("props: ", props)
 
-    const navigate = useNavigate()
-
-    function handleComponentClick(evt) {
-        evt.preventDefault()
-        navigate(`/components/${id}`)
-    }
+ 
 
     return(
         
         <div>
-            {userComponents && userComponents.map((component, i) =>
-            <div key={i} value ={i + 1} id = {component.id} onClick = {handleComponentClick}>
-            Component
-            </div>
-            )}
+            Username: {userName} <br/>
+            ID: {id} <br/>
+            Components made: {numComponentsMade}
         </div>
     )
 }

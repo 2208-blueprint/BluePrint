@@ -33,27 +33,27 @@ Component.hasMany(Comment);
 Comment.belongsToMany(User, { through: UserComments });
 User.belongsToMany(Comment, { through: UserComments });
 
-const syncAndSeed = async () => {
-  try {
-    await db.sync({ force: true });
+// const syncAndSeed = async () => {
+//   try {
+//     await db.sync({ force: true });
 
-    const thomas = await User.create({
-      username: "Thomas",
-      password: "test",
-    });
+//     const thomas = await User.create({
+//       username: "Thomas",
+//       password: "test",
+//     });
 
-    const ben = await User.create({
-      username: "Ben",
-      password: "test",
-    });
-    const cathal = await User.create({
-      username: "Cathal",
-      password: "test",
-    });
-    const alec = await User.create({
-      username: "Alec",
-      password: "test",
-    });
+//     const ben = await User.create({
+//       username: "Ben",
+//       password: "test",
+//     });
+//     const cathal = await User.create({
+//       username: "Cathal",
+//       password: "test",
+//     });
+//     const alec = await User.create({
+//       username: "Alec",
+//       password: "test",
+//     });
 //     //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
 //     ben.addFollowing(thomas);
 //     cathal.addFollowing(thomas);
@@ -91,12 +91,12 @@ const syncAndSeed = async () => {
 //     //   include: [{ model: User, as: "following" }],
 //     // });
 //     // console.log("should be thomas", subscribedTo.following[0]);
-  } catch (err) {
-    console.log(err);
-  }
-};
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
-syncAndSeed();
+// syncAndSeed();
 
 //Model relationships go here
 
