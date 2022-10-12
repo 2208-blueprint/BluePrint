@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Less from "less";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -23,18 +23,26 @@ function ComponentCard({ componentId }) {
   const [markup, setMarkup] = useState("");
   const [styling, setStyling] = useState("");
   const [component, setComponent] = useState("");
-  const navigate = useNavigate();
   async function likeHandler(e) {
+    const token = window.localStorage.getItem("token");
     try {
       e.preventDefault();
-      if (window.localStorage.token) {
+      if (window.localStorage.getItem("token")) {
         if (!liked) {
           setLikes(likes + 1);
-          await axios.post(`/api/components/${componentId}/favorite`, {});
+          await axios.post(
+            `/api/components/${componentId}/favorite`,
+            {},
+            {
+              headers: { authorization: token },
+            }
+          );
           console.log("after axios");
         } else {
           setLikes(likes - 1);
-          await axios.delete(`/api/components/${componentId}/remove-favorite`);
+          await axios.delete(`/api/components/${componentId}/remove-favorite`, {
+            headers: { authorization: token },
+          });
           console.log("after axios");
         }
         setLiked(!liked);
@@ -44,15 +52,24 @@ function ComponentCard({ componentId }) {
     }
   }
   async function saveHandler(e) {
+    const token = window.localStorage.getItem("token");
     e.preventDefault();
-    if (window.localStorage.token) {
+    if (window.localStorage.getItem("token")) {
       if (!saved) {
         setSaves(saves + 1);
-        await axios.post(`/api/components/${componentId}/save`, {});
+        await axios.post(
+          `/api/components/${componentId}/save`,
+          {},
+          {
+            headers: { authorization: token },
+          }
+        );
         console.log("after axios");
       } else {
         setSaves(saves - 1);
-        await axios.delete(`/api/components/${componentId}/remove-save`, {});
+        await axios.delete(`/api/components/${componentId}/remove-save`, {
+          headers: { authorization: token },
+        });
         console.log("after axios");
       }
       setSaved(!saved);
@@ -76,8 +93,26 @@ function ComponentCard({ componentId }) {
   React.useEffect(() => {
     async function getComp() {
       const { data } = await axios.get(`/api/components/${componentId}`);
-      const profile = await axios.get(`/api/users/profile`);
-      const currentUser = profile.data;
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const componentLikes = data.users.filter(
+          (user) => user["user_component"].isFavorite
+        );
+        const componentSaves = data.users.filter(
+          (user) => user["user_component"].isSaved
+        );
+        const profile = await axios.get(`/api/users/profile`, {
+          headers: { authorization: token },
+        });
+        const currentUser = profile.data;
+        if (componentSaves.find((user) => user.id === currentUser.id)) {
+          setSaved(true);
+        }
+        if (componentLikes.find((user) => user.id === currentUser.id)) {
+          setLiked(true);
+        }
+      }
+
       setComponent(data);
       if (data?.framework === "html") {
         setHTML(data?.markup);
@@ -105,12 +140,7 @@ function ComponentCard({ componentId }) {
       const componentSaves = data.users.filter(
         (user) => user["user_component"].isSaved
       );
-      if (componentSaves.find((user) => user.id === currentUser.id)) {
-        setSaved(true);
-      }
-      if (componentLikes.find((user) => user.id === currentUser.id)) {
-        setLiked(true);
-      }
+
       setSaves(componentSaves?.length);
       setLikes(componentLikes?.length);
       if (componentAuthor?.username) {
