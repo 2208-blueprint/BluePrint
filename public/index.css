@@ -1206,6 +1206,12 @@ iframe {
   text-decoration: none;
 }
 .component-card-heart {
+  color: #ca6072;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1px;
+  cursor: pointer;
+}
+.component-card-heart-outline {
   color: #47B5FF;
   transition: all 0.1s ease-in-out;
   margin-top: 1px;
