@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import Less from "less";
 import { Link } from "react-router-dom";
-import anime from "animejs/lib/anime.es.js";
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
@@ -195,7 +194,10 @@ function ComponentCard({ componentId }) {
             </IconContext.Provider>
           ) : (
             <IconContext.Provider
-              value={{ size: "25px", className: "component-card-heart" }}
+              value={{
+                size: "25px",
+                className: "component-card-heart-outline",
+              }}
             >
               <FaRegHeart />
             </IconContext.Provider>
