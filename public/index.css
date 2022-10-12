@@ -32,6 +32,17 @@ body {
 #singlecomp-top #singlecomp-heart {
   font-family: 'Inter', 'sans-serif';
   font-size: 3rem;
+  margin-left: auto;
+}
+#singlecomp-top #singlecomp-heart .singlecomp-hearted {
+  color: #ca6072;
+}
+#singlecomp-top #singlecomp-save {
+  font-family: 'Inter', 'sans-serif';
+  font-size: 3rem;
+}
+#singlecomp-top #singlecomp-save .singlecomp-saved {
+  color: #ca6072;
 }
 .singlecomp-grow {
   animation-name: grow;
@@ -1107,6 +1118,12 @@ a.createcomp-back div span {
 #comments-root #comments-list .comment-box .comment-name .comment-heart {
   font-size: 1.5rem;
   cursor: pointer;
+}
+#comments-root #comments-list .comment-box .comment-name .comment-hearted {
+  color: #ca6072;
+}
+#comments-root #comments-list .comment-box .comment-name .comment-date {
+  margin-left: auto;
 }
 #comments-root #comments-list .comment-box .comment-content {
   color: white;

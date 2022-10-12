@@ -26,11 +26,15 @@ async function seed() {
   const thomas = await User.create({
     username: "Thomas",
     password: "test",
+    firstName: 'Thomas',
+    lastName: 'Bak',
   });
 
   const ben = await User.create({
     username: "Ben",
     password: "test",
+    firstName: 'Benjamin',
+    lastName: 'Lee'
   });
   const cathal = await User.create({
     username: "Cathal",
@@ -42,6 +46,8 @@ async function seed() {
   const alec = await User.create({
     username: "Alec",
     password: "test",
+    firstName: 'Alec',
+    lastName: 'Butterfield'
   });
   //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
   ben.addFollowing(thomas);
