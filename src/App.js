@@ -8,8 +8,6 @@ import { Navbar } from "./components";
 import { DropDownItems } from "./components";
 import { AllUsersPage } from "./components";
 import UserPage from "./components/users/UserPage";
-
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +18,6 @@ function App() {
   return (
     <>
     <ToastContainer />
-      <SkeletonTheme baseColor="#bcbcbc" highlightColor="#ebebeb">
         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
@@ -33,7 +30,6 @@ function App() {
           <Route path="/redirect" element={<Redirect />}></Route>
         </Routes>
         <Footer />
-      </SkeletonTheme>
     </>
   );
 }
