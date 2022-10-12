@@ -76,6 +76,8 @@ function ComponentCard({ componentId }) {
   React.useEffect(() => {
     async function getComp() {
       const { data } = await axios.get(`/api/components/${componentId}`);
+      const profile = await axios.get(`/api/users/profile`);
+      const currentUser = profile.data;
       setComponent(data);
       if (data?.framework === "html") {
         setHTML(data?.markup);
@@ -98,11 +100,17 @@ function ComponentCard({ componentId }) {
         (user) => user["user_component"].isAuthor
       );
       const componentLikes = data.users.filter(
-        (user) => !user["user_component"].isAuthor
+        (user) => user["user_component"].isFavorite
       );
       const componentSaves = data.users.filter(
         (user) => user["user_component"].isSaved
       );
+      if (componentSaves.find((user) => user.id === currentUser.id)) {
+        setSaved(true);
+      }
+      if (componentLikes.find((user) => user.id === currentUser.id)) {
+        setLiked(true);
+      }
       setSaves(componentSaves?.length);
       setLikes(componentLikes?.length);
       if (componentAuthor?.username) {
