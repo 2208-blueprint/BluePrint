@@ -96,7 +96,7 @@ const syncAndSeed = async () => {
   }
 };
 
-// syncAndSeed();
+syncAndSeed();
 
 //Model relationships go here
 
