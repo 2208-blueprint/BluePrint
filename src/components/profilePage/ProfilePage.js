@@ -37,14 +37,25 @@ function ProfilePage() {
                 <div className="profile-category-link"><b>{user?.firstName}</b></div>
                 <div className="profile-category-link"><small>{user?.username}</small></div>
                 <div className="profile-category-link"><small><BsPeople /> 0 Followers</small></div>
-                <div className="profile-category-link"><small><BsBookmarkStar /> 0 Favorited</small></div>
+                <div className="profile-category-link favorited"><small><BsBookmarkStar /> 0 Favorited</small></div>
+                <hr></hr>
                 <div className="profile-category-link"><p>Placeholder</p></div>
+                <hr></hr>
                 <div className="profile-category-link"><p>Placeholder</p></div>
             </div>
         </div>
         <div className="profile-main-content-container">
             <div className="profile-user-info-container">
-
+                <h1>My info</h1>
+                <div className="profile-user-name">{`${user?.firstName} ${user?.lastName}`}</div>
+            </div>
+            <div className="profile-user-extras-container">
+                <div className="profile-user-extras-left">
+                    <h1>My uploads</h1>
+                </div>
+                <div className="profile-user-extras-right">
+                    <h1>My favorites</h1>
+                </div>
             </div>
         </div>
     </div>

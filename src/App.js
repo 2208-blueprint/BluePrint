@@ -30,7 +30,7 @@ function App() {
           <Route path="/redirect" element={<Redirect />}></Route>
           <Route path='/:badpath' element={<LoginPage/>}></Route>
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
     </>
   );
 }
