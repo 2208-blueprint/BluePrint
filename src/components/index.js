@@ -10,6 +10,8 @@ export { default as MainPage } from "./MainPage/MainPage";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as DropDownItems } from "./navbar/DropDownItems";
 export { default as Footer } from "./footer/Footer";
+export { default as ProfilePage } from "./profilePage/ProfilePage";
 export { default as Redirect } from "./Redirect";
 export { default as AllUsersPage } from "./users/AllUsersPage";
 export { default as UserPage } from "./users/UserPage";
+export { getSingleUser } from "../store/users/singleUserSlice";

@@ -35,6 +35,9 @@ async function seed() {
   const cathal = await User.create({
     username: "Cathal",
     password: "test",
+    firstName: 'Cathal',
+    lastName: 'O Cuinneagain',
+    img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
   });
   const alec = await User.create({
     username: "Alec",
@@ -46,19 +49,6 @@ async function seed() {
   alec.addFollowing(thomas);
   //source model cathal has the foreign key of creator_id, thomas has the key of following_id. cathal is adding thomas as a follower (following)
   cathal.addFollower(thomas);
-  const item = await Component.create({
-    name: "Test Button2",
-    type: "button",
-    framework: "html",
-    stylingFramework: "css",
-  });
-  const item2 = await Component.create({
-    name: "Test Slider",
-    type: "slider",
-    framework: "react",
-    stylingFramework: "less",
-  });
-  thomas.addComponent(item, { through: { isAuthor: true } });
   await Comment.create({ message: "hello" });
 
   const arr = [];
@@ -72,7 +62,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-3" role="button">Button 3</button>`,
       stylesheet: `/* CSS */
-    .button-3 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-3 {
       appearance: none;
       background-color: #2ea44f;
       border: 1px solid rgba(27, 31, 35, .15);
@@ -96,28 +93,28 @@ async function seed() {
       vertical-align: middle;
       white-space: nowrap;
     }
-    
+
     .button-3:focus:not(:focus-visible):not(.focus-visible) {
       box-shadow: none;
       outline: none;
     }
-    
+
     .button-3:hover {
       background-color: #2c974b;
     }
-    
+
     .button-3:focus {
       box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
       outline: none;
     }
-    
+
     .button-3:disabled {
       background-color: #94d3a2;
       border-color: rgba(27, 31, 35, .1);
       color: rgba(255, 255, 255, .8);
       cursor: default;
     }
-    
+
     .button-3:active {
       background-color: #298e46;
       box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
@@ -134,6 +131,13 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-19" role="button">Button 19</button>`,
       stylesheet: `/* CSS */
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .button-19 {
       appearance: button;
       background-color: #1899D6;
@@ -162,9 +166,9 @@ async function seed() {
       -webkit-user-select: none;
       vertical-align: middle;
       white-space: nowrap;
-      width: 10%;
+      width: 150px;
     }
-    
+
     .button-19:after {
       background-clip: padding-box;
       background-color: #1CB0F6;
@@ -179,17 +183,17 @@ async function seed() {
       top: 0;
       z-index: -1;
     }
-    
+
     .button-19:main,
     .button-19:focus {
       user-select: auto;
     }
-    
+
     .button-19:hover:not(:disabled) {
       filter: brightness(1.1);
       -webkit-filter: brightness(1.1);
     }
-    
+
     .button-19:disabled {
       cursor: auto;
     }`,
@@ -205,7 +209,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-56" role="button">Button 56</button>`,
       stylesheet: `/* CSS */
-    .button-56 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-56 {
       align-items: center;
       background-color: #fee6e3;
       border: 2px solid #111;
@@ -228,7 +239,7 @@ async function seed() {
       -webkit-user-select: none;
       touch-action: manipulation;
     }
-    
+
     .button-56:after {
       background-color: #111;
       border-radius: 8px;
@@ -243,20 +254,20 @@ async function seed() {
       transition: transform .2s ease-out;
       z-index: -1;
     }
-    
+
     .button-56:hover:after {
       transform: translate(0, 0);
     }
-    
+
     .button-56:active {
       background-color: #ffdeda;
       outline: 0;
     }
-    
+
     .button-56:hover {
       outline: 0;
     }
-    
+
     @media (min-width: 768px) {
       .button-56 {
         padding: 0 40px;
@@ -274,7 +285,14 @@ async function seed() {
       markup: `<!-- HTML !-->
     <button class="button-53" role="button">Button 53</button>`,
       stylesheet: `/* CSS */
-    .button-53 {
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .button-53 {
       background-color: #3DD1E7;
       border: 0 solid #E5E7EB;
       box-sizing: border-box;
@@ -299,11 +317,11 @@ async function seed() {
       -webkit-user-select: none;
       touch-action: manipulation;
     }
-    
+
     .button-53:focus {
       outline: 0;
     }
-    
+
     .button-53:after {
       content: '';
       position: absolute;
@@ -313,12 +331,12 @@ async function seed() {
       width: calc(100% - 1px);
       height: calc(100% - 1px);
     }
-    
+
     .button-53:hover:after {
       bottom: 2px;
       left: 2px;
     }
-    
+
     @media (min-width: 768px) {
       .button-53 {
         padding: .75rem 3rem;
@@ -350,12 +368,12 @@ async function seed() {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
-    
+
     body {
       background: #272727;
       font-family: "Montserrat", sans-serif;
     }
-    
+
     .navMenu {
       position: absolute;
       top: 50%;
@@ -363,7 +381,7 @@ async function seed() {
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
-    
+
     .navMenu a {
       color: #f6f4e6;
       text-decoration: none;
@@ -375,11 +393,11 @@ async function seed() {
       -webkit-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    
+
     .navMenu a:hover {
       color: #fddb3a;
     }
-    
+
     .navMenu .dot {
       width: 6px;
       height: 6px;
@@ -391,7 +409,7 @@ async function seed() {
       -webkit-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    
+
     .navMenu a:nth-child(1):hover ~ .dot {
       -webkit-transform: translateX(30px);
       transform: translateX(30px);
@@ -399,7 +417,7 @@ async function seed() {
       transition: all 0.2s ease-in-out;
       opacity: 1;
     }
-    
+
     .navMenu a:nth-child(2):hover ~ .dot {
       -webkit-transform: translateX(110px);
       transform: translateX(110px);
@@ -407,7 +425,7 @@ async function seed() {
       transition: all 0.2s ease-in-out;
       opacity: 1;
     }
-    
+
     .navMenu a:nth-child(3):hover ~ .dot {
       -webkit-transform: translateX(200px);
       transform: translateX(200px);
@@ -415,7 +433,7 @@ async function seed() {
       transition: all 0.2s ease-in-out;
       opacity: 1;
     }
-    
+
     .navMenu a:nth-child(4):hover ~ .dot {
       -webkit-transform: translateX(285px);
       transform: translateX(285px);
@@ -435,7 +453,7 @@ async function seed() {
       markup: `
   	<input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
   	<label for="menu-icon"></label>
-  	<nav class="nav"> 		
+  	<nav class="nav">
   		<ul class="pt-5">
   			<li><a href="#">Work</a></li>
   			<li><a href="#">Studio</a></li>
@@ -485,7 +503,7 @@ async function seed() {
       text-fill-color: transparent;
       color: transparent;
     }
-    
+
     [type="checkbox"]:checked,
     [type="checkbox"]:not(:checked){
       position: absolute;
@@ -516,9 +534,9 @@ async function seed() {
       left: 0;
       border-top: 2px solid #ececee;
       border-bottom: 2px solid #ececee;
-      transition: border-width 100ms 1500ms ease, 
+      transition: border-width 100ms 1500ms ease,
                   top 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
-                  height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1), 
+                  height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
                   background-color 200ms ease,
                   transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -534,9 +552,9 @@ async function seed() {
       right: 4px;
       background-color: #ececee;
       margin-top: -1px;
-      transition: width 100ms 1750ms ease, 
+      transition: width 100ms 1750ms ease,
                   right 100ms 1750ms ease,
-                  margin-top 100ms ease, 
+                  margin-top 100ms ease,
                   transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     .menu-icon:checked + label:before{
@@ -545,9 +563,9 @@ async function seed() {
       height: 2px;
       background-color: #ececee;
       border-width: 0;
-      transition: border-width 100ms 340ms ease, 
+      transition: border-width 100ms 340ms ease,
                   top 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
-                  height 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1), 
+                  height 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
                   background-color 200ms 500ms ease,
                   transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -557,11 +575,11 @@ async function seed() {
       right: 0;
       transform: rotate(-45deg);
       transition: width 100ms ease,
-                  right 100ms ease,  
-                  margin-top 100ms 500ms ease, 
+                  right 100ms ease,
+                  margin-top 100ms 500ms ease,
                   transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    
+
     .nav{
       position: fixed;
       top: 33px;
@@ -576,22 +594,22 @@ async function seed() {
       box-shadow: 0 8px 30px 0 rgba(0,0,0,0.3);
       background-color: #353746;
       animation: border-transform 7s linear infinite;
-      transition: top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),  
+      transition: top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
                   right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
                   transform 250ms 1100ms ease,
                   width 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1),
                   height 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     @keyframes border-transform{
-        0%,100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; } 
-      14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; } 
-      28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; } 
-      42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; } 
-      56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; } 
-      70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; } 
-      84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; } 
+        0%,100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
+      14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
+      28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
+      42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
+      56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
+      70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
+      84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
     }
-    
+
     .menu-icon:checked ~ .nav {
       animation-play-state: paused;
       top: 50%;
@@ -599,13 +617,13 @@ async function seed() {
       transform: translate(50%, -50%);
       width: 200%;
       height: 200%;
-      transition: top 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),  
+      transition: top 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
                   right 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
                   transform 250ms 700ms ease,
                   width 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1),
                   height 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    
+
     .nav ul{
       position: absolute;
       top: 50%;
@@ -676,8 +694,8 @@ async function seed() {
     .nav ul li a:hover:after{
       width: 100%;
     }
-    
-    
+
+
     .menu-icon:checked ~ .nav  ul li {
       pointer-events: auto;
       visibility: visible;
@@ -698,9 +716,9 @@ async function seed() {
     .menu-icon:checked ~ .nav ul li:nth-child(4){
       transition-delay: 1640ms;
     }
-    
-    
-    
+
+
+
     .logo {
       position: absolute;
       top: 60px;
@@ -714,9 +732,9 @@ async function seed() {
       width: auto;
       display: block;
     }
-    
-    
-    
+
+
+
     @media screen and (max-width: 991px) {
       .menu-icon:checked + label,
       .menu-icon:not(:checked) + label{
@@ -823,11 +841,11 @@ async function seed() {
     @amber: #fdbc40;
     @green: #34c748;
     @offWhite: #e9eaea;
-    
+
     html {
       background: @rhinoMid;
     }
-    
+
     div.browser {
       background: #fff url(http://www.s4c.cymru/temp/unsplash-kitsune-4.jpg) no-repeat;
       background-size: cover;
@@ -897,7 +915,7 @@ async function seed() {
         padding: 0 40px;
       }
     }
-    
+
     footer {
       bottom: 0;
       left: 0;
@@ -998,7 +1016,7 @@ async function seed() {
       justify-content: center;
       height: 100vh;
     }
-    
+
     .form {
       background-color: #15172b;
       border-radius: 20px;
@@ -1007,7 +1025,7 @@ async function seed() {
       padding: 20px;
       width: 320px;
     }
-    
+
     .title {
       color: #eee;
       font-family: sans-serif;
@@ -1015,7 +1033,7 @@ async function seed() {
       font-weight: 600;
       margin-top: 30px;
     }
-    
+
     .subtitle {
       color: #eee;
       font-family: sans-serif;
@@ -1023,21 +1041,21 @@ async function seed() {
       font-weight: 600;
       margin-top: 10px;
     }
-    
+
     .input-container {
       height: 50px;
       position: relative;
       width: 100%;
     }
-    
+
     .ic1 {
       margin-top: 40px;
     }
-    
+
     .ic2 {
       margin-top: 30px;
     }
-    
+
     .input {
       background-color: #303245;
       border-radius: 12px;
@@ -1050,7 +1068,7 @@ async function seed() {
       padding: 4px 20px 0;
       width: 100%;
     }
-    
+
     .cut {
       background-color: #15172b;
       border-radius: 10px;
@@ -1062,16 +1080,16 @@ async function seed() {
       transition: transform 200ms;
       width: 76px;
     }
-    
+
     .cut-short {
       width: 50px;
     }
-    
+
     .input:focus ~ .cut,
     .input:not(:placeholder-shown) ~ .cut {
       transform: translateY(8px);
     }
-    
+
     .placeholder {
       color: #65657b;
       font-family: sans-serif;
@@ -1083,20 +1101,20 @@ async function seed() {
       transition: transform 200ms, color 200ms;
       top: 20px;
     }
-    
+
     .input:focus ~ .placeholder,
     .input:not(:placeholder-shown) ~ .placeholder {
       transform: translateY(-30px) translateX(10px) scale(0.75);
     }
-    
+
     .input:not(:placeholder-shown) ~ .placeholder {
       color: #808097;
     }
-    
+
     .input:focus ~ .placeholder {
       color: #dc2f55;
     }
-    
+
     .submit {
       background-color: #08d;
       border-radius: 12px;
@@ -1111,7 +1129,7 @@ async function seed() {
       text-align: center;
       width: 100%;
     }
-    
+
     .submit:active {
       background-color: #06b;
     }`,
@@ -1153,7 +1171,7 @@ async function seed() {
       font-family: sans-serif;
       background: linear-gradient(#141e30, #243b55);
     }
-    
+
     .login-box {
       position: absolute;
       top: 50%;
@@ -1166,18 +1184,18 @@ async function seed() {
       box-shadow: 0 15px 25px rgba(0,0,0,.6);
       border-radius: 10px;
     }
-    
+
     .login-box h2 {
       margin: 0 0 30px;
       padding: 0;
       color: #fff;
       text-align: center;
     }
-    
+
     .login-box .user-box {
       position: relative;
     }
-    
+
     .login-box .user-box input {
       width: 100%;
       padding: 10px 0;
@@ -1199,7 +1217,7 @@ async function seed() {
       pointer-events: none;
       transition: .5s;
     }
-    
+
     .login-box .user-box input:focus ~ label,
     .login-box .user-box input:valid ~ label {
       top: -20px;
@@ -1207,7 +1225,7 @@ async function seed() {
       color: #03e9f4;
       font-size: 12px;
     }
-    
+
     .login-box form a {
       position: relative;
       display: inline-block;
@@ -1221,7 +1239,7 @@ async function seed() {
       margin-top: 40px;
       letter-spacing: 4px
     }
-    
+
     .login-box a:hover {
       background: #03e9f4;
       color: #fff;
@@ -1231,12 +1249,12 @@ async function seed() {
                   0 0 50px #03e9f4,
                   0 0 100px #03e9f4;
     }
-    
+
     .login-box a span {
       position: absolute;
       display: block;
     }
-    
+
     .login-box a span:nth-child(1) {
       top: 0;
       left: -100%;
@@ -1245,7 +1263,7 @@ async function seed() {
       background: linear-gradient(90deg, transparent, #03e9f4);
       animation: btn-anim1 1s linear infinite;
     }
-    
+
     @keyframes btn-anim1 {
       0% {
         left: -100%;
@@ -1254,7 +1272,7 @@ async function seed() {
         left: 100%;
       }
     }
-    
+
     .login-box a span:nth-child(2) {
       top: -100%;
       right: 0;
@@ -1264,7 +1282,7 @@ async function seed() {
       animation: btn-anim2 1s linear infinite;
       animation-delay: .25s
     }
-    
+
     @keyframes btn-anim2 {
       0% {
         top: -100%;
@@ -1273,7 +1291,7 @@ async function seed() {
         top: 100%;
       }
     }
-    
+
     .login-box a span:nth-child(3) {
       bottom: 0;
       right: -100%;
@@ -1283,7 +1301,7 @@ async function seed() {
       animation: btn-anim3 1s linear infinite;
       animation-delay: .5s
     }
-    
+
     @keyframes btn-anim3 {
       0% {
         right: -100%;
@@ -1292,7 +1310,7 @@ async function seed() {
         right: 100%;
       }
     }
-    
+
     .login-box a span:nth-child(4) {
       bottom: -100%;
       left: 0;
@@ -1302,7 +1320,7 @@ async function seed() {
       animation: btn-anim4 1s linear infinite;
       animation-delay: .75s
     }
-    
+
     @keyframes btn-anim4 {
       0% {
         bottom: -100%;
@@ -1349,7 +1367,7 @@ async function seed() {
         <path d="M147.87,541.93V320.84c-.05-13.2,8.25-21.51,21.62-24.27a42.71,42.71,0,0,1,7.14-1.32l-29.36-.63a67.77,67.77,0,0,0-9.13.45c-13.37,2.75-20.32,12.57-20.27,25.77l.38,221.24c-1.57,15.44,8.15,27.08,25.34,26.1l33-.19c-15.9,0-28.78-10.58-28.76-25.93Z" fill="#7b8f91" />
         <path d="M148.16,343.22a6,6,0,0,0-6,6v92a6,6,0,0,0,12,0v-92A6,6,0,0,0,148.16,343.22Z" fill="#323c44" />
       </g>
-  
+
     </svg>
   </button>`,
     stylesheet: `@media (hover: hover) {
@@ -1359,27 +1377,27 @@ async function seed() {
           transition: transform 0.1s ease-in-out;
           /*  set transition for mouse enter & exit */
         }
-      
+
         #money {
           /*  set start position */
           transform: translateY(180px);
           transition: transform 0.1s ease-in-out;
           /*  set transition for mouse enter & exit */
         }
-      
+
         button:hover #creditcard {
           transform: translateY(0px);
           transition: transform 0.2s ease-in-out;
           /*  overide transition for mouse enter */
         }
-      
+
         button:hover #money {
           transform: translateY(0px);
           transition: transform 0.3s ease-in-out;
           /*  overide transition for mouse enter */
         }
       }
-      
+
       @keyframes bounce {
         0% {
           transform: translateY(0);
@@ -1391,23 +1409,23 @@ async function seed() {
           transform: translateY(0);
         }
       }
-      
+
       .button:hover .button__text span {
         transform: translateY(-0.25rem);
         transition: transform .2s ease-in-out;
       }
-      
+
       /* styling */
-      
+
       @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
-      
+
       body {
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      
+
       .button {
         border: none;
         outline: none;
@@ -1423,11 +1441,11 @@ async function seed() {
         cursor: pointer;
         box-shadow: rgba(0, 9, 61, 0.2) 0px 4px 8px 0px;
       }
-      
+
       .button:active {
         transform: translateY(1px);
       }
-      
+
       .button__svg {
         position: absolute;
         overflow: visible;
@@ -1443,9 +1461,9 @@ async function seed() {
     framework: `html`,
     stylingFramework: `css`,
     src: `https://codepen.io/stevenlei/pen/ZEpyBod`,
-    markup: `<link rel="preconnect" href="https://fonts.gstatic.com"> 
+    markup: `<link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    
+
     <button>AVAILABLE NOW</button>`,
     stylesheet: `body {
         display: flex;
@@ -1454,7 +1472,7 @@ async function seed() {
         min-height: 100vh;
         background-color: #F8F005;
       }
-      
+
       button, button::after {
         width: 380px;
         height: 86px;
@@ -1469,7 +1487,7 @@ async function seed() {
         outline: transparent;
         position: relative;
       }
-      
+
       button::after {
         --slice-0: inset(50% 50% 50% 50%);
         --slice-1: inset(80% -6px 0 0);
@@ -1477,7 +1495,7 @@ async function seed() {
         --slice-3: inset(10% -6px 85% 0);
         --slice-4: inset(40% -6px 43% 0);
         --slice-5: inset(80% -6px 5% 0);
-        
+
         content: 'AVAILABLE NOW';
         display: block;
         position: absolute;
@@ -1489,12 +1507,12 @@ async function seed() {
         text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
         clip-path: var(--slice-0);
       }
-      
+
       button:hover::after {
         animation: 1s glitch;
         animation-timing-function: steps(2, end);
       }
-      
+
       @keyframes glitch {
         0% {
           clip-path: var(--slice-1);
@@ -1563,11 +1581,11 @@ async function seed() {
         src: url("https://assets.codepen.io/605876/Blender-Pro-Bold.otf");
         font-display: swap;
       }
-      
+
       * {
         box-sizing: border-box;
       }
-      
+
       body {
         display: flex;
         align-items: center;
@@ -1577,11 +1595,11 @@ async function seed() {
         font-family: 'Cyber', sans-serif;
         background: linear-gradient(90deg, #f5ed00 70%, #e6de00 70%), #fff700;
       }
-      
+
       body .cybr-btn + .cybr-btn {
         margin-top: 2rem;
       }
-      
+
       .cybr-btn {
         --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 1%));
         --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
@@ -1619,14 +1637,14 @@ async function seed() {
         line-height: 75px;
         transition: background 0.2s;
       }
-      
+
       .cybr-btn:hover {
         --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 0.8%));
       }
       .cybr-btn:active {
         --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 0.6%));
       }
-      
+
       .cybr-btn:after,
       .cybr-btn:before {
         content: '';
@@ -1638,16 +1656,16 @@ async function seed() {
         clip-path: var(--clip);
         z-index: -1;
       }
-      
+
       .cybr-btn:before {
         background: var(--shadow-primary);
         transform: translate(var(--border), 0);
       }
-      
+
       .cybr-btn:after {
         background: var(--primary);
       }
-      
+
       .cybr-btn__tag {
         position: absolute;
         padding: 1px 4px;
@@ -1659,7 +1677,7 @@ async function seed() {
         color: hsl(0, 0%, 0%);
         font-size: var(--label-size);
       }
-      
+
       .cybr-btn__glitch {
         position: absolute;
         top: calc(var(--border) * -1);
@@ -1672,11 +1690,11 @@ async function seed() {
         animation: glitch 2s infinite;
         display: none;
       }
-      
+
       .cybr-btn:hover .cybr-btn__glitch {
         display: block;
       }
-      
+
       .cybr-btn__glitch:before {
         content: '';
         position: absolute;
@@ -1688,7 +1706,7 @@ async function seed() {
         background: var(--primary);
         z-index: -1;
       }
-      
+
       @keyframes glitch {
         0% {
           clip-path: var(--clip-one);
@@ -1749,7 +1767,7 @@ async function seed() {
           clip-path: var(--clip-four);
         }
       }
-      
+
       .cybr-btn:nth-of-type(2) {
         --primary-hue: 260;
       }`,
@@ -1789,13 +1807,13 @@ async function seed() {
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     *:focus,
     *:active {
       outline: none !important;
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     html,
     body {
       display: grid;
@@ -1805,12 +1823,12 @@ async function seed() {
       place-items: center;
       background: linear-gradient(315deg, #ffffff, #d7e1ec);
     }
-    
+
     .wrapper {
       display: inline-flex;
       list-style: none;
     }
-    
+
     .wrapper .icon {
       position: relative;
       background: #ffffff;
@@ -1828,7 +1846,7 @@ async function seed() {
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    
+
     .wrapper .tooltip {
       position: absolute;
       top: 0;
@@ -1842,7 +1860,7 @@ async function seed() {
       pointer-events: none;
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    
+
     .wrapper .tooltip::before {
       position: absolute;
       content: "";
@@ -1854,47 +1872,47 @@ async function seed() {
       transform: translate(-50%) rotate(45deg);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    
+
     .wrapper .icon:hover .tooltip {
       top: -45px;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
     }
-    
+
     .wrapper .icon:hover span,
     .wrapper .icon:hover .tooltip {
       text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
     }
-    
+
     .wrapper .facebook:hover,
     .wrapper .facebook:hover .tooltip,
     .wrapper .facebook:hover .tooltip::before {
       background: #1877F2;
       color: #ffffff;
     }
-    
+
     .wrapper .twitter:hover,
     .wrapper .twitter:hover .tooltip,
     .wrapper .twitter:hover .tooltip::before {
       background: #1DA1F2;
       color: #ffffff;
     }
-    
+
     .wrapper .instagram:hover,
     .wrapper .instagram:hover .tooltip,
     .wrapper .instagram:hover .tooltip::before {
       background: #E4405F;
       color: #ffffff;
     }
-    
+
     .wrapper .github:hover,
     .wrapper .github:hover .tooltip,
     .wrapper .github:hover .tooltip::before {
       background: #333333;
       color: #ffffff;
     }
-    
+
     .wrapper .youtube:hover,
     .wrapper .youtube:hover .tooltip,
     .wrapper .youtube:hover .tooltip::before {
@@ -1920,7 +1938,7 @@ async function seed() {
           viewBox='0 0 310 350'
         >
           <path d='M156.4,339.5c31.8-2.5,59.4-26.8,80.2-48.5c28.3-29.5,40.5-47,56.1-85.1c14-34.3,20.7-75.6,2.3-111  c-18.1-34.8-55.7-58-90.4-72.3c-11.7-4.8-24.1-8.8-36.8-11.5l-0.9-0.9l-0.6,0.6c-27.7-5.8-56.6-6-82.4,3c-38.8,13.6-64,48.8-66.8,90.3c-3,43.9,17.8,88.3,33.7,128.8c5.3,13.5,10.4,27.1,14.9,40.9C77.5,309.9,111,343,156.4,339.5z' />
-    
+
           </svg>
         </div>
         <div class='line'></div>
@@ -1934,11 +1952,11 @@ async function seed() {
           <p>!</p>
         </div>
       </button>
-      
-     
-      
+
+
+
   </div>
-    
+
      Created by Balazs Danyadi
        <a href='https://www.linkedin.com/in/balazs-danyadi/'><i class="fab fa-linkedin fa-2x"></i></>
          </div>`,
@@ -1947,10 +1965,10 @@ async function seed() {
     * {
       box-sizing: border-box;
       margin: 0;
-       
-    
+
+
     }
-    
+
     .bg {
       width: 100vw;
       height: 100vh;
@@ -1960,10 +1978,10 @@ async function seed() {
       align-items: center;
       justify-content: center;
       font-family: 'Montserrat', sans-serif;
-    
-     
+
+
     }
-    
+
     .cont {
       position: relative;
       width: 16vw;
@@ -1972,7 +1990,7 @@ async function seed() {
       border-radius: 10px;
       box-shadow: 0px 0px 15px black;
       margin: 3vw 0;
-    
+
     }
     .button {
       width: 100%;
@@ -1987,16 +2005,16 @@ async function seed() {
       outline: none;
       transition: box-shadow 0.3s linear;
       box-shadow: inset 0px 0px 5px black, inset 0px 0px 0px #F7EA25;
-    
+
     }
-    
+
     .button:active {
         box-shadow: inset 0px 0px 0px black, inset 0px 0px 105px #F7EA25;
     }
     .button:active .blob {
       animation: none;
     }
-    
+
     .blob {
       position: relative;
       top: 10%;
@@ -2007,11 +2025,11 @@ async function seed() {
       transform-origin: 50% 50%;
       filter: drop-shadow(4px 4px 0 black);
       animation: bump 5.5s ease infinite;
-    
-      
-      
+
+
+
     }
-    
+
     @keyframes bump {
         0% {
           transform: scale(1, 1) translateX(0px);
@@ -2041,7 +2059,7 @@ async function seed() {
           transform: scale(1, 1) translateX(0px);
         }
       }
-    
+
     .line {
       position: absolute;
       bottom: 20%;
@@ -2052,7 +2070,7 @@ async function seed() {
       box-shadow: 2px 2px 0px black;
       animation: line 4s ease infinite reverse;
     }
-    
+
     @keyframes line {
         0% {
           transform: rotate(-8deg);
@@ -2075,16 +2093,16 @@ async function seed() {
         80% {
           transform: rotate(-12deg);
         }
-    
+
         88% {
           transform: rotate(-18deg);
         }
-    
+
         100% {
           transform: rotate(-8deg);
         }
       }
-    
+
     .text {
       display: flex;
       position: absolute;
@@ -2092,36 +2110,36 @@ async function seed() {
       font-size: 4vw;
       text-shadow: 2px 2px black;
       font-family: 'Anton', sans-serif;
-    
-    
-      
-      
+
+
+
+
     }
-    
+
     p:nth-child(1n) {
       transform: rotate(8deg);
       animation: shake 0.5s ease infinite;
       color: #F7EA25
-    
+
       }
       p:nth-child(2n) {
       transform: rotate(5deg);
       animation: shake 0.5s ease-out infinite reverse;
       color: white
-    
+
       }
      p:nth-child(3n) {
       transform: rotate(-2deg);
       animation: shake 0.5s 0.1s ease infinite;
-     
-    
+
+
       }
-    
+
      p:nth-child(4n) {
         transform: rotate(-5deg);
         animation: shake 0.5s ease-in infinite reverse;
       }
-    
+
     @keyframes shake {
         0% {
           transform: translateX(0) rotate(8deg);
@@ -2129,12 +2147,12 @@ async function seed() {
         50% {
           transform: translateX(4px) rotate(-3deg);
         }
-    
+
         100% {
           transform: translateX(0) rotate(6deg);
         }
       }
-    
+
     i {
       color: #2867B2;
       margin-top: 1vw
@@ -2235,7 +2253,7 @@ async function seed() {
       background: -webkit-linear-gradient(top, #222838 0%, #131621 100%);
       height: 100vh;
     }
-    
+
     .container {
       width: 334px;
       margin: 0 auto;
@@ -2247,7 +2265,7 @@ async function seed() {
       -webkit-transform: translateY(-50%);
               transform: translateY(-50%);
     }
-    
+
     body
     {
       background:#333;
@@ -2256,19 +2274,19 @@ async function seed() {
       color: white;
       text-decoration: none;
     }
-    
+
     h1, h2 {
       color: white;
       font-family: 'Oswald', sans-serif;
       font-weight: normal;
     }
-    
+
     h2 {
       font-size: 14px;
       margin-bottom: 30px;
       color: #24E2B8;
     }
-    
+
     .one, .two, .three, .four, .five {
       border: none;
       border-radius: 4px;
@@ -2319,7 +2337,7 @@ async function seed() {
       right: -120px;
       top: -17px;
     }
-    
+
     .one {
       box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #782CDA;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#782CDA), to(rgba(126, 94, 162, 0.51))), url("http://gearnuke.com/wp-content/uploads/2015/11/1280x720-cuU.jpg");
@@ -2343,7 +2361,7 @@ async function seed() {
       color: #DDA6FF;
       font-weight: 700;
     }
-    
+
     .two {
       box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #E48A3C;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#E48A3C), to(rgba(222, 135, 61, 0.24))), url("http://www.eatweartravel.com/wp-content/uploads/2015/04/i-love-shopping_1920x1200_83206.jpg");
@@ -2367,7 +2385,7 @@ async function seed() {
       color: #FFD9B4;
       font-weight: 700;
     }
-    
+
     .three {
       box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #36C176;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#36C176), to(rgba(86, 202, 139, 0.18))), url("http://blog.teamthinklabs.com/wp-content/uploads/2012/09/codepen-460x253.png");
@@ -2391,7 +2409,7 @@ async function seed() {
       color: #63FFAC;
       font-weight: 700;
     }
-    
+
     .four {
       box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #33E7EA;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#33E7EA), to(rgba(161, 245, 245, 0.24))), url("https://cdn2.itpro.co.uk/sites/itpro/files/server_room.jpg");
@@ -2415,7 +2433,7 @@ async function seed() {
       color: #1CF4FF;
       font-weight: 700;
     }
-    
+
     .five {
       box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #DE3964;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#DE3964), to(rgba(154, 40, 87, 0.24))), url("http://nightlifeassociates.com/wp-content/uploads/2014/03/hakkasan-nightclub_tiesto-smalls.jpg");
@@ -2449,11 +2467,11 @@ async function seed() {
     src: `https://codepen.io/joebocock/pen/ZEWoMPb`,
     markup: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />
-    
+
     <button type="button" class="simple">Simple</button>
-    
+
     <button type="button" class="fill">Fill</button>
-    
+
     <button type="button" class="slide">
       <div>Slide</div>
       <i class="icon-arrow-right"></i>
@@ -2468,13 +2486,13 @@ async function seed() {
       min-height: 100vh;
       font-family: "Roboto Mono", monospace;
     }
-    
+
     button {
       margin: 50px;
       font-family: inherit;
     }
     /* End of Page styling */
-    
+
     /* Simple button styling -- No animation */
     .simple {
       font-size: 20px;
@@ -2487,7 +2505,7 @@ async function seed() {
       position: relative;
       background-color: rgba(0, 0, 0, 0);
     }
-    
+
     .simple::after {
       content: "";
       background-color: #dcbaff;
@@ -2499,7 +2517,7 @@ async function seed() {
       left: 7px;
     }
     /* End of Simple Button */
-    
+
     /* Fill button styling */
     .fill {
       font-size: 20px;
@@ -2512,7 +2530,7 @@ async function seed() {
       position: relative;
       background-color: rgba(0, 0, 0, 0);
     }
-    
+
     .fill::after {
       content: "";
       background-color: #ffe54c;
@@ -2524,13 +2542,13 @@ async function seed() {
       left: 7px;
       transition: 0.2s;
     }
-    
+
     .fill:hover::after {
       top: 0px;
       left: 0px;
     }
     /* End of Fill Button  */
-    
+
     /* Slide button styling */
     .slide {
       font-size: 20px;
@@ -2543,7 +2561,7 @@ async function seed() {
       position: relative;
       background-color: rgba(0, 0, 0, 0);
     }
-    
+
     .slide i {
       opacity: 0;
       font-size: 13px;
@@ -2553,15 +2571,15 @@ async function seed() {
       top: 21px;
       transition: transform 1;
     }
-    
+
     .slide div {
       transition: transform 0.8s;
     }
-    
+
     .slide:hover div {
       transform: translateX(-6px);
     }
-    
+
     .slide::after {
       content: "";
       background-color: #66f2d5;
@@ -2572,7 +2590,7 @@ async function seed() {
       top: 7px;
       left: 7px;
     }
-    
+
     .slide:hover i {
       opacity: 1;
       transform: translateX(-6px);
