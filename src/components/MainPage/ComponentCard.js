@@ -57,7 +57,9 @@ function ComponentCard({ componentId }) {
         }
         setLiked(!liked);
       }
-      toastPopup('🖥️ Only logged in users can give likes!')
+      else {
+        toastPopup('🖥️ Only logged in users can give likes!')
+      }
     } catch (err) {
       console.log(err);
     }
@@ -87,7 +89,9 @@ function ComponentCard({ componentId }) {
       }
       setSaved(!saved);
     }
-    toastPopup('🖥️ Only logged in users can save to profile!')
+    else {
+      toastPopup('🖥️ Only logged in users can save to profile!')
+    }
   }
 
   React.useEffect(() => {
