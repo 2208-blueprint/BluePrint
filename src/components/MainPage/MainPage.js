@@ -45,7 +45,11 @@ function MainPage() {
           <div className="main-page-list-content-container">
             {isLoading && <ContentSkeleton cards={9} />}
             {components.map((component, i) => {
-              return <ComponentCard componentId={component.id} key={i} />;
+              return (
+                <div>
+                  <ComponentCard componentId={component.id} key={i} />
+                </div>
+              );
             })}
             {/* {users.map((user, i) => {
               return (

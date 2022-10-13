@@ -755,11 +755,11 @@ body {
 .main-page-wrapper .main-page-category-container {
   display: flex;
   flex-direction: column;
-  flex: 1;
   height: calc(100vh - 80px);
   line-height: 1;
   background-color: #09141a;
   box-sizing: content-box;
+  width: 400px;
   z-index: 0;
 }
 .main-page-wrapper .main-page-content-container {
@@ -1333,6 +1333,7 @@ iframe {
   margin: 10px;
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
+  flex-shrink: 1;
 }
 .component-card-outer:hover {
   background-color: #31323e;
@@ -1771,7 +1772,6 @@ iframe {
   font-family: "Inter", sans-serif;
   position: fixed;
   height: calc(100vh - 60px);
-  width: 300px;
   top: 70px;
   margin-left: 70px;
   font-family: "Inter", "sans-serif";
@@ -1826,6 +1826,7 @@ iframe {
   margin: 20px;
   opacity: 0.7;
   cursor: pointer;
+  max-width: 150px;
 }
 .side-bar-container-category:hover {
   color: #47B5FF;
