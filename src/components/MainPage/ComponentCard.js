@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 import Less from "less";
 import { Link } from "react-router-dom";
-import { FaHeart, FaCommentAlt, FaSave, FaRegHeart, FaHeartBroken } from "react-icons/fa";
+import {
+  FaHeart,
+  FaCommentAlt,
+  FaSave,
+  FaRegHeart,
+  FaHeartBroken,
+} from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BsHeartFill } from 'react-icons/bs'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BsHeartFill } from "react-icons/bs";
 
 function ComponentCard({ componentId }) {
   const [html, setHTML] = useState("");
@@ -44,20 +50,19 @@ function ComponentCard({ componentId }) {
               headers: { authorization: token },
             }
           );
-          toastPopup('❤️ Liked!')
+          toastPopup("❤️ Liked!");
           console.log("after axios");
         } else {
           setLikes(likes - 1);
           await axios.delete(`/api/components/${componentId}/remove-favorite`, {
             headers: { authorization: token },
           });
-          toastPopup('💔 Unliked!')
+          toastPopup("💔 Unliked!");
           console.log("after axios");
         }
         setLiked(!liked);
-      }
-      else {
-        toastPopup('🖥️ Only logged in users can give likes!')
+      } else {
+        toastPopup("🖥️ Only logged in users can give likes!");
       }
     } catch (err) {
       console.log(err);
@@ -76,20 +81,19 @@ function ComponentCard({ componentId }) {
             headers: { authorization: token },
           }
         );
-        toastPopup('💾 Saved to your profile!')
+        toastPopup("💾 Saved to your profile!");
         console.log("after axios");
       } else {
         setSaves(saves - 1);
         await axios.delete(`/api/components/${componentId}/remove-save`, {
           headers: { authorization: token },
         });
-        toastPopup('💾 Removed from your profile!')
+        toastPopup("💾 Removed from your profile!");
         console.log("after axios");
       }
       setSaved(!saved);
-    }
-    else {
-      toastPopup('🖥️ Only logged in users can save to profile!')
+    } else {
+      toastPopup("🖥️ Only logged in users can save to profile!");
     }
   }
 
@@ -191,6 +195,7 @@ function ComponentCard({ componentId }) {
             </div>
 
             <iframe
+              key={componentId}
               srcDoc={srcDoc}
               title="output"
               sandbox="allow-scripts"

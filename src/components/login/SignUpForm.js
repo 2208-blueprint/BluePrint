@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CountryList } from '../../components'
+import { getSingleUser } from '../../store/users/singleUserSlice'
+import { useDispatch } from 'react-redux'
 
-function SignUpForm({ toggle, setToggle }) {
+function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [username, setUserName] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
@@ -54,7 +57,9 @@ function SignUpForm({ toggle, setToggle }) {
             setLastName('')
             setEmail('')
             setProfilePicture('')
+            setLoggedIn(true)
             setCountry('')
+            dispatch(getSingleUser())
 
             navigate('/')
             toastCreate('Account created & logged in!')
