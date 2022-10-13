@@ -1,14 +1,21 @@
 @import 'variables';
 
+#navigation-root-container {
+  width: 100%;
+  position: static;
+  height: 94px;
+}
+
 .navigation {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 20px 20px 20px 0px;
     background-color: @background-color;
     align-items: center;
-    // position: fixed;
+    position: fixed;
     z-index: 999;
     font-family: "Inter", 'sans-serif';
+    width: 100%;
   }
   
   .navigation-link-wrapper {
@@ -16,6 +23,7 @@
     width: auto;
     gap: 30px;
     font-size: 1rem;
+    margin-right: 20px;
 
     a {
         background-color: #1a83c8;
@@ -75,12 +83,14 @@
   .navigation-logo img {
     height: 50px;
     width: 50px;
+    margin-left: 20px;
   }
   
   .navigation-drop-down {
     display: none;
     height: 100%;
     cursor: pointer;
+    margin-right: 20px;
   }
   
   .navigation-side-bar{
