@@ -3,9 +3,17 @@ import Axios from 'axios'
 import { BsPeople, BsBookmarkStar, BsHeartFill } from 'react-icons/bs'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { MdPeopleOutline, MdOutlineMail } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProfilePage() {
     const [user, setUser] = React.useState()
+
+    const navigate = useNavigate();
+    const toastPopup = (msg) => {
+        toast.dark(msg, { autoClose: 2000 })
+    }
 
     React.useEffect(() => {
         async function getUser() {
@@ -21,6 +29,8 @@ function ProfilePage() {
 
                     setUser(data)
                 }
+                navigate('/login')
+                toastPopup('🖥️ Login to view your profile')
             }
             catch(err) {
                 console.log(err);
