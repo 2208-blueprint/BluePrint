@@ -1700,6 +1700,10 @@ iframe {
   height: 50px;
   border-radius: 50%;
 }
+.navigation-side-bar .side-bar-container-main {
+  position: static;
+  margin-left: 20px;
+}
 @media screen and (max-width: 600px) {
   .navigation-link-wrapper {
     display: none;
@@ -1878,4 +1882,95 @@ iframe {
   font-size: 16px;
   opacity: 0.6;
   margin-top: 5px;
+}
+#search-user-root {
+  font-family: 'Inter', 'sans-serif';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#search-user-root .search-user-bar-container {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+#search-user-root .search-user-bar-container .search-user-icon {
+  background-color: #47B5FF;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+#search-user-root .search-user-bar-container input {
+  border-radius: 0.5rem 0rem 0rem 0.5rem;
+  height: 40px;
+  border-width: 2px;
+  border-color: #47B5FF;
+  width: 300px;
+  font-size: 1.5rem;
+}
+#search-user-root .search-user-results {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 200px;
+  max-width: 1000px;
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 50px;
+  background-color: #20212d;
+}
+#search-user-root .search-user-results .search-user-none {
+  width: 100%;
+  color: white;
+  margin: 20px;
+  text-align: center;
+}
+#search-user-root .search-user-results .search-user-card {
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  width: 100%;
+  height: 125px;
+  background-color: #0F4C75;
+  margin: 2.5%;
+}
+#search-user-root .search-user-results .search-user-card img {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 50%;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text {
+  color: white;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  cursor: pointer;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text h1:hover {
+  text-decoration: underline;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text p {
+  margin: 0;
+  font-weight: 200;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text .search-user-follow {
+  color: #47B5FF;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+#search-user-root .search-user-results .search-user-card .search-user-text .search-user-follow:hover {
+  text-decoration: underline;
+}
+@media only screen and (max-width: 1000px) {
+  #search-user-root .search-user-results .search-user-card {
+    max-width: 100%;
+  }
 }
