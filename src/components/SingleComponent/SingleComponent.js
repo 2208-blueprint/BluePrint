@@ -162,12 +162,16 @@ function SingleComponent() {
     async function getComp() {
       // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
-      const profile = await axios.get(`/api/users/profile`, {
-        headers: {
-          authorization: window.localStorage.getItem('token')
-        }
-      });
-      const currentUser = profile.data
+
+      if (window.localStorage.getItem('token')) {
+        const profile = await axios.get(`/api/users/profile`, {
+          headers: {
+            authorization: window.localStorage.getItem('token')
+          }
+        });
+        const currentUser = profile.data
+      }
+
       if (data.framework === 'html') {
         setHTML(data.markup)
       } else {
@@ -186,17 +190,19 @@ function SingleComponent() {
           setAuthor(data.users[i])
         }
       }
-      const componentLikes = data.users.filter(
-        (user) => user["user_component"].isFavorite
-      );
-      const componentSaves = data.users.filter(
-        (user) => user["user_component"].isSaved
-      );
-      if (componentSaves.find((user) => user.id === currentUser.id)) {
-        setSaved(true);
-      }
-      if (componentLikes.find((user) => user.id === currentUser.id)) {
-        setLiked(true);
+      if (window.localStorage.getItem('token')) {
+        const componentLikes = data.users.filter(
+          (user) => user["user_component"].isFavorite
+        );
+        const componentSaves = data.users.filter(
+          (user) => user["user_component"].isSaved
+        );
+        if (componentSaves.find((user) => user.id === currentUser.id)) {
+          setSaved(true);
+        }
+        if (componentLikes.find((user) => user.id === currentUser.id)) {
+          setLiked(true);
+        }
       }
     }
     getComp()
