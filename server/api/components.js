@@ -17,21 +17,18 @@ const requireToken = async (req, res, next) => {
 // WORKS
 router.get("/", async (req, res, next) => {
   try {
-    const components = await Component
-      .findAll
-      //   {
-      //   include: [
-      //     {
-      //       model: User,
-      //       // through: { where: { isAuthor: true } },
-      //       // attributes: ["username"],
-      //     },
-      //     {
-      //       model: Comment,
-      //     },
-      //   ],
-      // }
-      ();
+    const components = await Component.findAll({
+      include: [
+        {
+          model: User,
+          through: { where: { isAuthor: true } },
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+        },
+      ],
+    });
     res.send(components);
   } catch (error) {
     next(error);

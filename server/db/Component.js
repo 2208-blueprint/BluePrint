@@ -38,6 +38,12 @@ const Component = db.define("component", {
   js: {
     type: Sequelize.TEXT,
   },
+  tags: {
+    type: Sequelize.STRING,
+    set(val) {
+      this.setDataValue("tags", val?.join(";"));
+    },
+  },
   // less: {
   //   type: Sequelize.TEXT,
   // },
