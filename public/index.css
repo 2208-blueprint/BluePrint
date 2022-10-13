@@ -1599,22 +1599,13 @@ iframe {
 .navigation {
   display: flex;
   justify-content: space-between;
-<<<<<<< HEAD
-  padding: 20px;
-  background-color: #09141a;
-=======
   padding: 20px 20px 20px 0px;
   background-color: #1e2d38;
->>>>>>> 604422619878c31a647ca3f64bb9843d92f29f5a
   align-items: center;
   position: fixed;
   z-index: 999;
-<<<<<<< HEAD
   font-family: "Inter", "sans-serif";
-=======
-  font-family: "Inter", 'sans-serif';
   width: 100%;
->>>>>>> 604422619878c31a647ca3f64bb9843d92f29f5a
 }
 .navigation-link-wrapper {
   display: flex;
@@ -1789,6 +1780,7 @@ iframe {
 .side-bar-container-main {
   background-color: #09141a;
   font-family: "Inter", sans-serif;
+  margin-top: 20px;
   position: fixed;
   height: calc(100vh - 60px);
   top: 70px;
@@ -1807,7 +1799,7 @@ iframe {
   font-family: "Inter", "sans-serif";
   background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
   color: rgba(255, 255, 255, 0.912);
-  width: 150px;
+  width: 180px;
   height: 30px;
   border: 1px solid #0F4C75;
   border-right: none;
