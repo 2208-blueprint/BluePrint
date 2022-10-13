@@ -33,9 +33,8 @@ function ComponentCard({ componentId }) {
   const [component, setComponent] = useState("");
 
   const toastPopup = (msg) => {
-    toast.dark(msg, { autoClose: 2000 });
-  };
-  const icon1 = <FaHeartBroken />;
+    toast.dark(msg, { autoClose: 2000 })
+  }
 
   async function likeHandler(e) {
     const token = window.localStorage.getItem("token");
