@@ -30,6 +30,7 @@ function Navigation({loggedIn, setLoggedIn}){
         setLoggedIn(false)
         toastSuccess('Successfully logged out!')
         navigate('/')
+        window.location.reload(false)
     }
 
     const profileHandler = () => {

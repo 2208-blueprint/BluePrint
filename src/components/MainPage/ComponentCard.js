@@ -6,7 +6,7 @@ import { FaHeart, FaCommentAlt, FaSave, FaRegHeart, FaHeartBroken } from "react-
 import { IconContext } from "react-icons";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BsHeartFill } from 'react-icons/bs'
+import { BsHeartFill } from 'react-icons/bs';
 
 function ComponentCard({ componentId }) {
   const [html, setHTML] = useState("");
