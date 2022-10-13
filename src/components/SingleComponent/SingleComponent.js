@@ -162,6 +162,7 @@ function SingleComponent() {
     async function getComp() {
       // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
+      let currentUser
 
       if (window.localStorage.getItem('token')) {
         const profile = await axios.get(`/api/users/profile`, {
@@ -169,7 +170,7 @@ function SingleComponent() {
             authorization: window.localStorage.getItem('token')
           }
         });
-        const currentUser = profile.data
+        currentUser = profile.data
       }
 
       if (data.framework === 'html') {
