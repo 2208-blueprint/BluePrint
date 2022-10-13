@@ -202,7 +202,7 @@ a.singlecomp-back div span {
   align-items: flex-start;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  background: linear-gradient(150deg, #09141a 0%, #011018 100%);
 }
 .login-main-container .login-signup-wrapper {
   display: flex;
@@ -422,7 +422,7 @@ a.singlecomp-back div span {
   align-items: flex-start;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  background: linear-gradient(150deg, #09141a 0%, #011018 100%);
 }
 .signup-main-container .signup-wrapper {
   display: flex;
@@ -563,7 +563,7 @@ a.singlecomp-back div span {
   }
 }
 #createcomp-root {
-  background-color: #1e2d38;
+  background-color: #09141a;
   height: auto;
 }
 #createcomp-editors {
@@ -921,7 +921,7 @@ body {
   z-index: 99;
 }
 .navbar-dropdown-container li button {
-  background-color: #1e2d38;
+  background-color: #09141a;
   color: #0F4C75;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -1116,7 +1116,7 @@ body {
   background-color: #1a6da4;
 }
 #comments-root #comments-list .comment-box {
-  background-color: #1e2d38;
+  background-color: #09141a;
   padding: 20px;
   margin: 20px;
 }
@@ -1378,7 +1378,7 @@ iframe {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: #1e2d38;
+  background-color: #09141a;
 }
 .profile-wrapper .profile-sidebar {
   display: flex;
@@ -1521,12 +1521,25 @@ iframe {
 }
 .profile-wrapper .profile-main-content-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 30px;
+}
+.profile-wrapper .profile-main-content-container .profile-user-extras-right {
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 95%;
+  flex: 1;
+  border-radius: 5px;
+  margin: 30px 30px 30px 15px;
+  background: #bfd5dd;
+  background: radial-gradient(circle, #bfd5dd 0%, #6b8d9d 100%);
+  box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+  -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+  -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
 }
 .profile-wrapper .profile-main-content-container .profile-user-info-container {
   color: white;
@@ -1534,9 +1547,8 @@ iframe {
   display: flex;
   flex-direction: column;
   flex: 0.5;
-  width: 90%;
+  width: 100%;
   height: 100%;
-  margin: 30px 30px 5px 30px;
   background: #bfd5dd;
   background: radial-gradient(circle, #bfd5dd 0%, #6b8d9d 100%);
   border-radius: 5px;
@@ -1557,34 +1569,23 @@ iframe {
 }
 .profile-wrapper .profile-main-content-container .profile-user-extras-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 100%;
-  width: 90%;
+  height: 95%;
+  width: 100%;
+  margin: 30px 15px 30px 30px;
 }
 .profile-wrapper .profile-main-content-container .profile-user-extras-container .profile-user-extras-left {
   color: white;
   display: flex;
   justify-content: center;
-  height: 90%;
+  height: 100%;
+  width: 100%;
   flex: 1;
   border-radius: 5px;
-  margin: 5px 15px 0 0;
-  background: #bfd5dd;
-  background: radial-gradient(circle, #bfd5dd 0%, #6b8d9d 100%);
-  box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
-  -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
-  -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
-}
-.profile-wrapper .profile-main-content-container .profile-user-extras-container .profile-user-extras-right {
-  color: white;
-  display: flex;
-  justify-content: center;
-  height: 90%;
-  flex: 1;
-  border-radius: 5px;
-  margin: 5px 0 0 15px;
+  margin: 20px 0 0 0;
   background: #bfd5dd;
   background: radial-gradient(circle, #bfd5dd 0%, #6b8d9d 100%);
   box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
@@ -1599,22 +1600,13 @@ iframe {
 .navigation {
   display: flex;
   justify-content: space-between;
-<<<<<<< HEAD
-  padding: 20px;
-  background-color: #09141a;
-=======
   padding: 20px 20px 20px 0px;
   background-color: #1e2d38;
->>>>>>> 604422619878c31a647ca3f64bb9843d92f29f5a
   align-items: center;
   position: fixed;
   z-index: 999;
-<<<<<<< HEAD
-  font-family: "Inter", "sans-serif";
-=======
   font-family: "Inter", 'sans-serif';
   width: 100%;
->>>>>>> 604422619878c31a647ca3f64bb9843d92f29f5a
 }
 .navigation-link-wrapper {
   display: flex;
@@ -1779,7 +1771,7 @@ iframe {
   align-items: flex-end;
   height: 100%;
   width: 100%;
-  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  background: linear-gradient(150deg, #09141a 0%, #011018 100%);
   opacity: 80%;
 }
 .not-found-page-container .not-found-img img {
