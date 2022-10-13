@@ -7,11 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import ComponentCard from "./ComponentCard";
 import Sidebar from "./Sidebar";
 import axios from "axios";
+import { getSingleUser } from "../../store/users/singleUserSlice";
+import { useDispatch } from "react-redux";
 
 function MainPage() {
   //   const [users, setUsers] = React.useState([]);
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const dispatch = useDispatch();
 
   //   React.useEffect(() => {
   //     fetch("https://jsonplaceholder.typicode.com/users")
@@ -28,11 +31,11 @@ function MainPage() {
       setIsLoading(false);
     }
     getComponents();
+    dispatch(getSingleUser());
   }, []);
 
   return (
     <div className="main-page-main-container">
-      <ToastContainer />
       <div className="main-page-wrapper">
         <div className="main-page-category-container">
           {isLoading && <Skeleton containerClassName="skeleton-container" />}

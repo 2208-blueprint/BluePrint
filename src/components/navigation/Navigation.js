@@ -30,6 +30,7 @@ function Navigation({loggedIn, setLoggedIn}){
         setLoggedIn(false)
         toastSuccess('Successfully logged out!')
         navigate('/')
+        window.location.reload(false)
     }
 
     const profileHandler = () => {
@@ -41,6 +42,7 @@ function Navigation({loggedIn, setLoggedIn}){
     }
 
     return(
+        <div id="navigation-root-container">
         <nav className="navigation">
             <a className="navigation-logo" href="/"><img src={'/trianglify-lowres.png'} alt="Logo Here"/></a>
 
@@ -87,6 +89,7 @@ function Navigation({loggedIn, setLoggedIn}){
                 }
             </div>
         </nav>
+        </div>
     )
 }
 

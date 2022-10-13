@@ -1,35 +1,41 @@
 @import "variables";
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: rgb(9, 20, 26);
-  align-items: center;
-  // position: fixed;
-  // width: 100vw;
-  // height: 60px;
-  z-index: 999;
-  font-family: "Inter", "sans-serif";
+#navigation-root-container {
+  width: 100%;
+  position: static;
+  height: 94px;
 }
 
-.navigation-link-wrapper {
-  display: flex;
-  width: auto;
-  gap: 30px;
-  font-size: 1rem;
-
-  a {
-    background-color: #1a83c8;
-    color: white;
-    width: auto;
-    height: auto;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    padding: 15px;
-    // box-shadow: 3px 3px 0px 0px rgb(130, 149, 176);
-    transition: 0.25s ease;
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 20px 0px;
+    background-color: @background-color;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+    font-family: "Inter", 'sans-serif';
+    width: 100%;
   }
+  
+  .navigation-link-wrapper {
+    display: flex;
+    width: auto;
+    gap: 30px;
+    font-size: 1rem;
+    margin-right: 20px;
+
+    a {
+        background-color: #1a83c8;
+        color: white;
+        width: auto;
+        height: auto;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        padding: 15px;
+        // box-shadow: 3px 3px 0px 0px rgb(130, 149, 176);
+        transition: 0.25s ease;
+    }
 
   a:hover {
     // box-shadow: none;
@@ -73,38 +79,11 @@
 //     background-color: aquamarine;
 //     border-radius: 5px;
 //   }
-
-.navigation-logo img {
-  height: 50px;
-  width: 50px;
-}
-
-.navigation-drop-down {
-  display: none;
-  height: 100%;
-  cursor: pointer;
-}
-
-.navigation-side-bar {
-  position: fixed;
-  top: 70px;
-  height: 100vh;
-  transition: 0.425s;
-  background-color: @background-color;
-  width: 100%;
-  display: none;
-  z-index: 999;
-
-  a {
-    background-color: #1a83c8;
-    color: white;
-    width: auto;
-    height: auto;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    padding: 15px;
-    // box-shadow: 3px 3px 0px 0px rgb(130, 149, 176);
-    transition: 0.25s ease;
+  
+  .navigation-logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 20px;
   }
 
   a:hover {
@@ -115,6 +94,7 @@
   .navigation-logout {
     background-color: #0f507b;
     cursor: pointer;
+    margin-right: 20px;
   }
 
   .navigation-logout:hover {
