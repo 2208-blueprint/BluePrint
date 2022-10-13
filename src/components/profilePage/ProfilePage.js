@@ -29,8 +29,10 @@ function ProfilePage() {
 
                     setUser(data)
                 }
-                navigate('/login')
-                toastPopup('🖥️ Login to view your profile')
+                else {
+                    navigate('/login')
+                    toastPopup('🖥️ Login to view your profile')
+                }
             }
             catch(err) {
                 console.log(err);
@@ -62,19 +64,19 @@ function ProfilePage() {
             </div>
         </div>
         <div className="profile-main-content-container">
-            <div className="profile-user-info-container">
-                <h1>My info</h1>
-                <div className="profile-user-name">{`${user?.firstName} ${user?.lastName}`} <span className='profile-country-span'><FaMapMarkerAlt /><small>{user?.country}</small></span></div>
-                <div className="profile-user-email"><MdOutlineMail />{user?.email}</div>
-            </div>
             <div className="profile-user-extras-container">
+                <div className="profile-user-info-container">
+                    <h1>My info</h1>
+                    <div className="profile-user-name">{`${user?.firstName} ${user?.lastName}`} <span className='profile-country-span'><FaMapMarkerAlt /><small>{user?.country}</small></span></div>
+                    <div className="profile-user-email"><MdOutlineMail />{user?.email}</div>
+                </div>
                 <div className="profile-user-extras-left">
                     <h1>My uploads</h1>
                 </div>
+            </div>
                 <div className="profile-user-extras-right">
                     <h1>My favorites</h1>
                 </div>
-            </div>
         </div>
     </div>
   )
