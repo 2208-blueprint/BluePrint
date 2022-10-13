@@ -1605,7 +1605,7 @@ iframe {
   align-items: center;
   position: fixed;
   z-index: 999;
-  font-family: "Inter", 'sans-serif';
+  font-family: "Inter", "sans-serif";
   width: 100%;
 }
 .navigation-link-wrapper {
@@ -1652,25 +1652,50 @@ iframe {
   width: 50px;
   margin-left: 20px;
 }
-a:hover {
-  background-color: #14669d;
-}
-.navigation-logout {
-  background-color: #0f507b;
+.navigation-drop-down {
+  display: none;
+  height: 100%;
   cursor: pointer;
   margin-right: 20px;
 }
-.navigation-logout:hover {
+.navigation-side-bar {
+  position: fixed;
+  top: 70px;
+  height: 100vh;
+  transition: 0.425s;
+  background-color: #09141a;
+  width: 100%;
+  display: none;
+  z-index: 999;
+}
+.navigation-side-bar a {
+  background-color: #1a83c8;
+  color: white;
+  width: auto;
+  height: auto;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  padding: 15px;
+  transition: 0.25s ease;
+}
+.navigation-side-bar a:hover {
+  background-color: #14669d;
+}
+.navigation-side-bar .navigation-logout {
+  background-color: #0f507b;
+  cursor: pointer;
+}
+.navigation-side-bar .navigation-logout:hover {
   background-color: #0f4467;
 }
-.navigation-profile {
+.navigation-side-bar .navigation-profile {
   display: flex;
   gap: 10px;
   align-items: center;
   color: white;
   cursor: pointer;
 }
-.navigation-profile img {
+.navigation-side-bar .navigation-profile img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -1756,6 +1781,7 @@ a:hover {
 .side-bar-container-main {
   background-color: #09141a;
   font-family: "Inter", sans-serif;
+  margin-top: 20px;
   position: fixed;
   height: calc(100vh - 60px);
   top: 70px;
@@ -1774,7 +1800,7 @@ a:hover {
   font-family: "Inter", "sans-serif";
   background: linear-gradient(150deg, #09141a 0%, #011018 100%);
   color: rgba(255, 255, 255, 0.912);
-  width: 150px;
+  width: 180px;
   height: 30px;
   border: 1px solid #0F4C75;
   border-right: none;

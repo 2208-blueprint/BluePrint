@@ -21,7 +21,7 @@ function Sidebar() {
         <input
           type="text"
           className="side-bar-container-searchbar"
-          placeholder="SEARCH..."
+          placeholder="SEARCH COMPONENTS"
           onChange={(e) => {
             setSearchBarInput(e.target.value);
           }}
