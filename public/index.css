@@ -13,7 +13,7 @@ body {
   }
 }
 #singlecomp-root {
-  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  background: linear-gradient(150deg, #09141a 0%, #011018 100%);
   height: auto;
   padding-bottom: 40px;
 }
@@ -1601,7 +1601,7 @@ iframe {
   display: flex;
   justify-content: space-between;
   padding: 20px 20px 20px 0px;
-  background-color: #1e2d38;
+  background-color: #09141a;
   align-items: center;
   position: fixed;
   z-index: 999;
@@ -1652,50 +1652,25 @@ iframe {
   width: 50px;
   margin-left: 20px;
 }
-.navigation-drop-down {
-  display: none;
-  height: 100%;
+a:hover {
+  background-color: #14669d;
+}
+.navigation-logout {
+  background-color: #0f507b;
   cursor: pointer;
   margin-right: 20px;
 }
-.navigation-side-bar {
-  position: fixed;
-  top: 70px;
-  height: 100vh;
-  transition: 0.425s;
-  background-color: #1e2d38;
-  width: 100%;
-  display: none;
-  z-index: 999;
-}
-.navigation-side-bar a {
-  background-color: #1a83c8;
-  color: white;
-  width: auto;
-  height: auto;
-  border-radius: 0.25rem;
-  text-decoration: none;
-  padding: 15px;
-  transition: 0.25s ease;
-}
-.navigation-side-bar a:hover {
-  background-color: #14669d;
-}
-.navigation-side-bar .navigation-logout {
-  background-color: #0f507b;
-  cursor: pointer;
-}
-.navigation-side-bar .navigation-logout:hover {
+.navigation-logout:hover {
   background-color: #0f4467;
 }
-.navigation-side-bar .navigation-profile {
+.navigation-profile {
   display: flex;
   gap: 10px;
   align-items: center;
   color: white;
   cursor: pointer;
 }
-.navigation-side-bar .navigation-profile img {
+.navigation-profile img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -1797,7 +1772,7 @@ iframe {
 }
 .side-bar-container-searchbar {
   font-family: "Inter", "sans-serif";
-  background: linear-gradient(150deg, #1e2d38 0%, #011018 100%);
+  background: linear-gradient(150deg, #09141a 0%, #011018 100%);
   color: rgba(255, 255, 255, 0.912);
   width: 150px;
   height: 30px;
