@@ -15,3 +15,4 @@ export { default as Redirect } from "./Redirect";
 export { default as AllUsersPage } from "./users/AllUsersPage";
 export { default as UserPage } from "./users/UserPage";
 export { getSingleUser } from "../store/users/singleUserSlice";
+export { default as Navigation} from './navigation/Navigation'

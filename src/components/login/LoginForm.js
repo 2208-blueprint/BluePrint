@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-loading-skeleton/dist/skeleton.css'
 import { getSingleUser } from '../../store/users/singleUserSlice'
 
-function LoginForm({ toggle, setToggle }) {
+function LoginForm({ toggle, setToggle, setLoggedIn }) {
 
   const [username, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -47,6 +47,7 @@ function LoginForm({ toggle, setToggle }) {
 
       setUserName("");
       setPassword("");
+      setLoggedIn(true)
       dispatch(getSingleUser(token))
       navigate('/')
       toastLogin('You are logged in!')
