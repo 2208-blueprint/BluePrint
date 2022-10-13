@@ -748,17 +748,22 @@ a.createcomp-back div span {
 }
 .main-page-wrapper {
   display: flex;
+  background-color: #09141a;
 }
 .main-page-wrapper .main-page-category-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 1;
   height: calc(100vh - 80px);
-  border: 1px solid gray;
   line-height: 1;
-  background-color: aquamarine;
+  background-color: #09141a;
   box-sizing: content-box;
+}
+.main-page-wrapper .side-bar-container-main {
+  background-color: red;
+  position: fixed;
+  height: calc(100vh - 80px);
+  width: 300px;
 }
 .main-page-wrapper .main-page-content-container {
   display: flex;

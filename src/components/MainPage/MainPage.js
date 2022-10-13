@@ -5,6 +5,7 @@ import ContentSkeleton from "./ContentSkeleton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ComponentCard from "./ComponentCard";
+import Sidebar from "./Sidebar";
 import axios from "axios";
 
 function MainPage() {
@@ -22,11 +23,11 @@ function MainPage() {
   //   }, []);
   React.useEffect(() => {
     async function getComponents() {
-      const {data} = await axios.get('/api/components');
-      setComponents(data)
-      setIsLoading(false)
+      const { data } = await axios.get("/api/components");
+      setComponents(data);
+      setIsLoading(false);
     }
-    getComponents()
+    getComponents();
   }, []);
 
   return (
@@ -35,6 +36,7 @@ function MainPage() {
       <div className="main-page-wrapper">
         <div className="main-page-category-container">
           {isLoading && <Skeleton containerClassName="skeleton-container" />}
+          <Sidebar />
         </div>
         <div className="main-page-content-container">
           <div className="main-page-featured-container">

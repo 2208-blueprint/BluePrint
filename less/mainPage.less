@@ -2,18 +2,24 @@
 
 .main-page-wrapper {
   display: flex;
+  background-color: rgb(9, 20, 26);
 
   .main-page-category-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex: 1;
     height: calc(100vh - 80px);
-    border: 1px solid gray;
     // margin: 20px 0 0 20px;
     line-height: 1;
-    background-color: aquamarine;
+    background-color: rgb(9, 20, 26);
     box-sizing: content-box;
+    // position: fixed;
+  }
+  .side-bar-container-main {
+    background-color: red;
+    position: fixed;
+    height: calc(100vh - 80px);
+    width: 300px;
   }
 
   .main-page-content-container {
