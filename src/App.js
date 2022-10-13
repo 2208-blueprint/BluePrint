@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-    <ToastContainer />
+    <ToastContainer theme="dark"/>
         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>

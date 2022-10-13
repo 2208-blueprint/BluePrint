@@ -38,16 +38,17 @@ function ProfilePage() {
             <div className="profile-category-link-container">
                 <div className="profile-category-link"><b>{user?.firstName}</b></div>
                 <div className="profile-category-link username"><small>{user?.username}</small></div>
+                <div className="profile-category-link location"><FaMapMarkerAlt /><small>{user?.country}</small></div>
                 <div className="profile-category-link followers"><small><BsPeople /> 0 Followers</small></div>
                 <div className="profile-category-link following"><small><MdPeopleOutline /> 0 Following</small></div>
                 <div className="profile-category-link favorited"><small><BsBookmarkStar /> 0 Favorited</small></div>
                 <div className="profile-category-link likes"><small><BsHeartFill /> 0 Likes</small></div>
                 <hr></hr>
-                <div className="profile-category-link"><p>Placeholder</p></div>
+                <div className="profile-category-link inbox"><p className='my-inbox'><MdOutlineMail />My Inbox</p></div>
                 <hr></hr>
                 <div className="profile-category-link"><p>Placeholder</p></div>
                 <hr></hr>
-                <button className="profile-new-component-button">Create new component</button>
+                <div className="profile-new-component-button-container"><button className="profile-new-component-button">Create new component</button></div>
             </div>
         </div>
         <div className="profile-main-content-container">
