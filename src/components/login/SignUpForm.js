@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CountryList } from '../../components'
 
-function SignUpForm({ toggle, setToggle }) {
+function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const navigate = useNavigate();
 
     const [username, setUserName] = React.useState('')
@@ -54,6 +54,7 @@ function SignUpForm({ toggle, setToggle }) {
             setLastName('')
             setEmail('')
             setProfilePicture('')
+            setLoggedIn(true)
             setCountry('')
 
             navigate('/')
