@@ -8,6 +8,7 @@ export { default as LoginForm } from "./login/LoginForm";
 export { default as SignUpForm } from "./login/SignUpForm";
 export { default as MainPage } from "./MainPage/MainPage";
 export { default as Sidebar } from "./MainPage/Sidebar";
+export { default as SearchComponent } from "./MainPage/SearchComponent";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as DropDownItems } from "./navbar/DropDownItems";
 export { default as Footer } from "./footer/Footer";
@@ -18,4 +19,4 @@ export { default as UserPage } from "./users/UserPage";
 export { default as CountryList } from "./login/CountryList";
 export { default as NotFoundPage } from "./404Page/NotFoundPage";
 export { getSingleUser } from "../store/users/singleUserSlice";
-export { default as Navigation} from './navigation/Navigation'
+export { default as Navigation } from "./navigation/Navigation";
