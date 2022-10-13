@@ -20,3 +20,4 @@ export { default as CountryList } from "./login/CountryList";
 export { default as NotFoundPage } from "./404Page/NotFoundPage";
 export { getSingleUser } from "../store/users/singleUserSlice";
 export { default as Navigation } from "./navigation/Navigation";
+export { default as SearchUsers } from './searchUsers/SearchUsers'

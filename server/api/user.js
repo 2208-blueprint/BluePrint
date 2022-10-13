@@ -31,8 +31,12 @@ router.get('/profile', requireToken, async(req,res,next) => {
 router.get('/allUsers', async(req,res,next) => {
   try {
     const users = await User.findAll({
-      attributes: ['username', 'firstName', 'lastName', 'img'],
-      include: Component
+      attributes: ['username', 'firstName', 'lastName', 'img', 'id'],
+      include: [Component, {
+        model: User,
+        as: 'followers',
+        attributes: ['id', 'username', 'img']
+      }]
     })
     res.send(users)
   } catch(err) {
