@@ -9,10 +9,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function ProfilePage() {
     const [user, setUser] = React.useState()
+    const [savedComponents, setSavedComponents] = React.useState([])
+    const [followers, setFollowers] = React.useState([])
 
     const navigate = useNavigate();
     const toastPopup = (msg) => {
         toast.dark(msg, { autoClose: 2000 })
+    }
+
+    const uploadNavigate = (link) => {
+        navigate(link)
     }
 
     React.useEffect(() => {
@@ -26,8 +32,14 @@ function ProfilePage() {
                         }
                     })
                     console.log(data);
-
                     setUser(data)
+
+                    const followers = await Axios.get('api/users/followers');
+                    setFollowers(followers.data)
+
+                    const savedComponents = data.components.filter((component) => component.user_component.isSaved)
+
+                    setSavedComponents(savedComponents)
                 }
                 else {
                     navigate('/login')
@@ -39,6 +51,7 @@ function ProfilePage() {
             }
         }
         getUser()
+
     }, [])
 
   return (
@@ -51,9 +64,9 @@ function ProfilePage() {
                 <div className="profile-category-link"><b>{user?.firstName}</b></div>
                 <div className="profile-category-link username"><small>{user?.username}</small></div>
                 <div className="profile-category-link location"><FaMapMarkerAlt /><small>{user?.country}</small></div>
-                <div className="profile-category-link followers"><small><BsPeople /> 0 Followers</small></div>
+                <div className="profile-category-link followers"><small><BsPeople /> {followers ? followers.length : '0'} Followers</small></div>
                 <div className="profile-category-link following"><small><MdPeopleOutline /> 0 Following</small></div>
-                <div className="profile-category-link favorited"><small><BsBookmarkStar /> 0 Favorited</small></div>
+                <div className="profile-category-link favorited"><small><BsBookmarkStar /> {savedComponents ? savedComponents.length : '0'} Favorited</small></div>
                 <div className="profile-category-link likes"><small><BsHeartFill /> 0 Likes</small></div>
                 <hr></hr>
                 <div className="profile-category-link inbox"><p className='my-inbox'><MdOutlineMail />My Inbox</p></div>
@@ -72,6 +85,21 @@ function ProfilePage() {
                 </div>
                 <div className="profile-user-extras-left">
                     <h1>My uploads</h1>
+                    <div className="profile-user-uploads">
+                        {user?.components.map((component, i) => {
+                            if (component.user_component.isAuthor) {
+                                return <div key={i} className="profile-user-single-upload" onClick={() => uploadNavigate(`/components/${component.id}`)}>
+                                            <div className="user-upload-image"><img src={component.img} alt=''/></div>
+                                            <p>{component.name}</p>
+                                            <div className="single-user-upload-frameworks">
+                                                <div className="single-user-upload-framework">{component.framework}</div>
+                                                <div className="single-user-upload-framework">{component.stylingFramework}</div>
+                                            </div>
+                                        </div>
+
+                            }})
+                        }
+                    </div>
                 </div>
             </div>
                 <div className="profile-user-extras-right">
