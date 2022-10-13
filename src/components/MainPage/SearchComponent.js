@@ -27,13 +27,18 @@ function SearchComponent() {
   const searchResult = [];
   let { keywords } = useParams();
   keywords = keywords.split("+");
+  const ignoreWords = ["the", "and", "of", "in", "a"];
+  const filteredKeywords = [];
+  keywords.forEach((word) => {
+    if (!ignoreWords.includes(word)) filteredKeywords.push(word);
+  });
   components.forEach((component) => {
     console.log(component, "component");
-    for (let i = 0; i < keywords.length; i++) {
+    for (let i = 0; i < filteredKeywords.length; i++) {
       const componentAuthor = component.users?.find(
         (user) => user["user_component"].isAuthor
       );
-      let currentWord = keywords[i];
+      let currentWord = filteredKeywords[i];
 
       if (
         component.name?.toLowerCase().indexOf(currentWord.toLowerCase()) >= 0 ||
@@ -56,7 +61,7 @@ function SearchComponent() {
         }
         cache[component.name] = true;
         searchResult.push(component);
-      }
+      } else break;
     }
   });
 
@@ -69,6 +74,13 @@ function SearchComponent() {
           <Sidebar />
         </div>
         <div className="main-page-content-container">
+          <div className="search-result-search-term">
+            {`${keywords.join(" ")}`}
+            <div className="search-result-search-term-number">{`${
+              searchResult.length
+            } ${searchResult.length === 1 ? "match" : "matches"}`}</div>
+          </div>
+
           <div className="main-page-list-content-container">
             {isLoading && <ContentSkeleton cards={9} />}
             {searchResult.map((component, i) => {
@@ -76,6 +88,12 @@ function SearchComponent() {
                 <ComponentCard componentId={component?.id} key={component.id} />
               );
             })}
+            {searchResult.length === 0 ? (
+              <div className="search-result-search-term-no-results">
+                {" "}
+                No Results
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
