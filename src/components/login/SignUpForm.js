@@ -3,6 +3,7 @@ import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CountryList } from '../../components'
 
 function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const [email, setEmail] = React.useState('')
     const [profilePicture, setProfilePicture] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [country, setCountry] = React.useState('')
 
     const toastError = (err) => toast.error(err);
     const toastCreate = (msg) => toast.success(msg);
@@ -27,6 +29,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
             lastName: lastName,
             email: email,
             img: profilePicture,
+            country: country,
         };
 
         if (!profilePicture.length) {
@@ -36,6 +39,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
             firstName: firstName,
             lastName: lastName,
             email: email,
+            country: country,
         };
         }
 
@@ -51,6 +55,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
             setEmail('')
             setProfilePicture('')
             setLoggedIn(true)
+            setCountry('')
 
             navigate('/')
             toastCreate('Account created & logged in!')
@@ -85,6 +90,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                         <input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} required/>
                         <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} required/>
                         <input type='text' placeholder='Profile picture URL (optional)' onChange={(e) => setProfilePicture(e.target.value)} value={profilePicture}/>
+                        <CountryList country={country} setCountry={setCountry}/>
                         <button className='signup-submit-button'>Sign Up</button>
                     </form>
                 </div>

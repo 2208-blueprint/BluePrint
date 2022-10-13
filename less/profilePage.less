@@ -2,7 +2,7 @@
 
 .profile-wrapper {
     display: flex;
-    height: calc(100vh - 80px);
+    height: 100vh;
     width: 100vw;
     background-color: @background-color;
 
@@ -43,6 +43,126 @@
             .profile-category-link {
                 display: flex;
                 align-items: center;
+                margin: 2px 0;
+            }
+
+            .location {
+                margin: 5px 0 10px 0;
+
+                svg {
+                    margin: 0 3px 0 0;
+                }
+            }
+            .followers {
+                svg {
+                    vertical-align: middle;
+                    margin: 0 5px 0 0;
+                    color: rgb(41, 231, 228);
+                }
+            }
+            .following {
+                svg {
+                    vertical-align: middle;
+                    margin: 0 5px 0 0;
+                    color: greenyellow;
+                }
+            }
+            .favorited {
+                svg {
+                    vertical-align: middle;
+                    margin: 0 5px 0 0;
+                    color: gold;
+                }
+            }
+            .likes {
+                svg {
+                    vertical-align: middle;
+                    margin: 0 5px 0 0;
+                    color: red;
+                }
+            }
+
+            p {
+                margin: 0;
+            }
+
+            hr {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            .inbox {
+                display: flex;
+                align-items: center;
+
+                .my-inbox {
+                    svg {
+                        vertical-align: middle;
+                        margin: 0 5px 0 0;
+                        color: #b879ff;
+                    }
+                }
+            }
+
+            .profile-new-component-button {
+                width: 220px;
+                height: 50px;
+                border: none;
+                outline: none;
+                color: #fff;
+                background: #111;
+                cursor: pointer;
+                position: relative;
+                z-index: 0;
+                border-radius: 10px;
+                font-size: 15px;
+            }
+
+            .profile-new-component-button:before {
+                content: '';
+                background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+                position: absolute;
+                top: -2px;
+                left:-2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 1;
+                transition: opacity .3s ease-in-out;
+                border-radius: 10px;
+            }
+
+            .profile-new-component-button:active {
+                color: #000
+            }
+
+            .profile-new-component-button:active:after {
+                background: transparent;
+            }
+
+            .profile-new-component-button:hover:before {
+                opacity: 1;
+            }
+
+            .profile-new-component-button:after {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #111;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% { background-position: 0 0; }
+                50% { background-position: 400% 0; }
+                100% { background-position: 0 0; }
             }
         }
     }
@@ -57,13 +177,75 @@
         padding: 0 30px;
 
         .profile-user-info-container {
+            color: white;
+            justify-content: flex-start;
             display: flex;
-            width: 100%;
+            flex-direction: column;
+            flex: 0.5;
+            width: 90%;
             height: 100%;
-            border: 1px solid black;
             border-radius: 5px;
-            margin: 30px 30px 15px 30px;
+            margin: 30px 30px 5px 30px;
+            background: rgb(191,213,221);
+            background: radial-gradient(circle, rgba(191,213,221,1) 0%, rgba(107,141,157,1) 100%);
+            border-radius: 5px;
+            box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+            -webkit-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+            -moz-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
 
+            .profile-user-name {
+                .profile-country-span {
+                    margin: 0 0 0 20px;
+
+                    svg {
+                        margin: 0 3px 0 0;
+                    }
+                }
+            }
+
+            .profile-new-component-button-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        .profile-user-extras-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            height: 100%;
+            width: 90%;
+
+            .profile-user-extras-left {
+                color: white;
+                display: flex;
+                justify-content: center;
+                height: 90%;
+                flex: 1;
+                border-radius: 5px;
+                margin: 5px 15px 0 0;
+                background: rgb(191,213,221);
+                background: radial-gradient(circle, rgba(191,213,221,1) 0%, rgba(107,141,157,1) 100%);
+                box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+                -webkit-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+                -moz-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+            }
+            .profile-user-extras-right {
+                color: white;
+                display: flex;
+                justify-content: center;
+                height: 90%;
+                flex: 1;
+                border-radius: 5px;
+                margin: 5px 0 0 15px;
+                background: rgb(191,213,221);
+                background: radial-gradient(circle, rgba(191,213,221,1) 0%, rgba(107,141,157,1) 100%);
+                box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+                -webkit-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+                -moz-box-shadow: 8px 10px 2px -4px rgba(0,0,0,0.78);
+            }
         }
     }
 }
