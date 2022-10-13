@@ -41,6 +41,7 @@ async function seed() {
     password: "test",
     firstName: 'Cathal',
     lastName: 'O Cuinneagain',
+    country: 'Ireland',
     img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
   });
   const alec = await User.create({
