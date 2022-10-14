@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleUser } from "../../store/users/singleUserSlice";
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CommentsSection = (props) => {
 
@@ -14,6 +16,7 @@ const CommentsSection = (props) => {
     const [temp, setTemp] = React.useState(false)
 
     const user = useSelector(state => state.singleUser)
+    const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
 
     const params = useParams()
     const dispatch = useDispatch()
@@ -29,6 +32,7 @@ const CommentsSection = (props) => {
         setComment('')
         const {data} = await axios.get(`/api/comments/component/${params.id}`)
         setComments(data)
+        toastPopup('✏️ Comment posted!')
         dispatch(getSingleUser())
 
     }
@@ -44,6 +48,7 @@ const CommentsSection = (props) => {
                 authorization: window.localStorage.getItem('token')
             }
         })
+        toastPopup('❤️ Comment liked!')
         const {data} = await axios.get(`/api/comments/component/${params.id}`)
         dispatch(getSingleUser())
         setComments(data)
@@ -57,6 +62,7 @@ const CommentsSection = (props) => {
                 authorization: window.localStorage.getItem('token')
             }
         })
+        toastPopup("💔 Comment unliked!")
         const {data} = await axios.get(`/api/comments/component/${params.id}`)
         dispatch(getSingleUser())
         setComments(data)
@@ -69,7 +75,7 @@ const CommentsSection = (props) => {
             }
         }
         return false
-        
+
     }
 
     // another function
@@ -102,31 +108,31 @@ const CommentsSection = (props) => {
     },[])
 
     console.log(comments)
-    
+
     return (
         <div id="comments-root">
             <h1>Comments</h1>
             <div id="comments-list">
-            {props.loggin ? 
+            {props.loggin ?
             <div id="comments-form" className='comment-box'>
                 <p className='comment-name'>Write your own comment:</p>
                 <input value={comment} onChange={(event)=>setComment(event.target.value)}></input><button onClick={submitComment}>Submit</button>
             </div>
             : <div></div>}
-            {comments?.map((comment) => 
+            {comments?.map((comment) =>
                 <div className='comment-box' key={comment.id}>
-                    <div className="comment-name">{comment.users[0].username} 
-                    {props.loggin && ownComment(comment.id) ? <div className="comment-heart">{likedAlready(comment.id) 
+                    <div className="comment-name">{comment.users[0].username}
+                    {props.loggin && ownComment(comment.id) ? <div className="comment-heart">{likedAlready(comment.id)
                     ? <span className='comment-hearted' onClick={unlikeHandler} value={comment.id}><IconContext.Provider
-                    value={{ size: "25px"}} 
+                    value={{ size: "25px"}}
                   >
                     <FaHeart/>
                   </IconContext.Provider></span>
                     :<span onClick={likeHandler} value={comment.id}><IconContext.Provider
-                    value={{ size: "25px"}} 
+                    value={{ size: "25px"}}
                   >
                     <FaRegHeart/>
-                  </IconContext.Provider></span>}</div> 
+                  </IconContext.Provider></span>}</div>
                     : <div></div>}
                     <span>{(comment.users.length - 1) + '  Like(s)'}</span>
                     <span className="comment-date">{convertDate(comment.createdAt)}</span>

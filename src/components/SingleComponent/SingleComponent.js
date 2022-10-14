@@ -13,7 +13,7 @@ import axios from "axios";
 import {useParams} from 'react-router-dom'
 import anime from "animejs/lib/anime.es.js"
 import CommentsSection from "./CommentsSection";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -38,7 +38,8 @@ function SingleComponent() {
   const [loggin, setLoggin] = useState(false)
 
   const params = useParams()
-  const toastSuccess = (msg) => toast.success(msg);
+  const toastSuccess = (msg) => toast.dark(msg, { autoClose: 2000});
+  const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -98,12 +99,14 @@ function SingleComponent() {
             duration: 200,
             easing: 'easeOutCubic'
           })
+          toastPopup("❤️ Liked!")
         } else {
           await axios.delete(`/api/components/${params.id}/remove-favorite`, {
             headers: {
               authorization: window.localStorage.getItem('token')
             }
           });
+          toastPopup("💔 Unliked!")
         }
         setLiked(!liked);
       }
@@ -128,12 +131,14 @@ function SingleComponent() {
             duration: 200,
             easing: 'easeOutCubic'
           })
+          toastPopup("💾 Saved to your profile!");
         } else {
           await axios.delete(`/api/components/${params.id}/remove-save`, {
             headers: {
               authorization: window.localStorage.getItem('token')
             }
           });
+          toastPopup("💾 Removed from your profile!");
         }
         setSaved(!saved);
       }
@@ -227,12 +232,12 @@ function SingleComponent() {
       </a>
       {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
         {liked ? <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
-                    value={{ size: "40px"}} 
+                    value={{ size: "40px"}}
                   >
                     <FaHeart/>
                   </IconContext.Provider></span>
                   :<span value={params.id}><IconContext.Provider
-                  value={{ size: "40px"}} 
+                  value={{ size: "40px"}}
                 >
                   <FaRegHeart/>
                 </IconContext.Provider></span>}
@@ -240,12 +245,12 @@ function SingleComponent() {
       : <div></div>}
       {loggin ? <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
         {saved ? <span className='singlecomp-saved' value={params.id}><IconContext.Provider
-                    value={{ size: "40px"}} 
+                    value={{ size: "40px"}}
                   >
                     <FaSave/>
                   </IconContext.Provider></span>
                   :<span value={params.id}><IconContext.Provider
-                  value={{ size: "40px"}} 
+                  value={{ size: "40px"}}
                 >
                   <FaSave/>
                 </IconContext.Provider></span>}
