@@ -92,7 +92,6 @@ function CreateComponent() {
         type: type,
         framework: form[0],
         stylingFramework: form[1],
-        img: img,
         markup: markup,
         stylesheet: stylesheet
     })
