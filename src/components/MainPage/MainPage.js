@@ -2,13 +2,15 @@ import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ContentSkeleton from "./ContentSkeleton";
-import { ToastContainer, toast } from "react-toastify";
+import Leaderboard from "./Leaderboard";
 import "react-toastify/dist/ReactToastify.css";
 import ComponentCard from "./ComponentCard";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import { getSingleUser } from "../../store/users/singleUserSlice";
 import { useDispatch } from "react-redux";
+import { IconContext } from "react-icons";
+import { BsQuestionCircleFill } from "react-icons/bs";
 
 function MainPage() {
   //   const [users, setUsers] = React.useState([]);
@@ -27,6 +29,7 @@ function MainPage() {
   React.useEffect(() => {
     async function getComponents() {
       const { data } = await axios.get("/api/components");
+
       setComponents(data);
       setIsLoading(false);
     }
@@ -44,6 +47,44 @@ function MainPage() {
         <div className="main-page-content-container">
           <div className="main-page-featured-container">
             {isLoading && <Skeleton containerClassName="skeleton-container" />}
+            <div className="leaderboard-user-title-container">
+              <div className="leaderboard-top-users">
+                Top Users{" "}
+                <div className="leaderboard-tooltip">
+                  <IconContext.Provider
+                    value={{
+                      size: "20px",
+                      className: "leaderboard-row-icon-coins",
+                    }}
+                  >
+                    <BsQuestionCircleFill />
+                  </IconContext.Provider>
+                  <span className="tooltiptext-q">
+                    You earn points when users follow you, or save and/or
+                    favorite your components. Get points, earn badges, and climb
+                    to the top of the leaderboard!
+                  </span>
+                </div>
+              </div>
+              <div className="leaderboard-top-users">
+                Top Components{" "}
+                <div className="leaderboard-tooltip">
+                  <IconContext.Provider
+                    value={{
+                      size: "20px",
+                      className: "leaderboard-row-icon-coins",
+                    }}
+                  >
+                    <BsQuestionCircleFill />
+                  </IconContext.Provider>
+                  <span className="tooltiptext-q">
+                    Points are awarded based on the combined number of favorites
+                    and saves. Favorites are worth 10, saves are worth 20.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <Leaderboard />
           </div>
           <div className="main-page-list-content-container">
             {isLoading && <ContentSkeleton cards={9} />}

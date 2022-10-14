@@ -3,8 +3,8 @@ const db = require("./database.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const Comment = require('./Comment')
-const Component = require('./Component')
+const Comment = require("./Comment");
+const Component = require("./Component");
 
 // if not in production environment, I want access to the JWT key
 if (process.env.NODE_ENV !== "production") {
@@ -38,7 +38,7 @@ const User = db.define("user", {
   },
   country: {
     type: Sequelize.STRING,
-    defaultValue: 'Not specified',
+    defaultValue: "Not specified",
   },
   img: {
     type: Sequelize.STRING,
@@ -47,6 +47,18 @@ const User = db.define("user", {
     },
     defaultValue:
       "https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
+  },
+  highestRank: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  wasFirst: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  hadTopComponent: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
@@ -84,13 +96,16 @@ User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id, {
-      include: [Comment, Component]
+      include: [
+        { model: Comment },
+        { model: Component },
+        { model: User, attributes: ["username"] },
+      ],
     });
     if (!user) {
       throw "No user with that token found";
     }
     return user;
-
   } catch (ex) {
     const error = Error("Bad token");
     error.status = 401;

@@ -18,5 +18,8 @@ export { default as AllUsersPage } from "./users/AllUsersPage";
 export { default as UserPage } from "./users/UserPage";
 export { default as CountryList } from "./login/CountryList";
 export { default as NotFoundPage } from "./404Page/NotFoundPage";
+export { default as Leaderboard } from "./MainPage/Leaderboard";
+export { default as LeaderboardRow } from "./MainPage/LeaderboardRow";
+export { default as LeaderboardRowComponent } from "./MainPage/LeaderboardRowComponent";
 export { getSingleUser } from "../store/users/singleUserSlice";
 export { default as Navigation } from "./navigation/Navigation";

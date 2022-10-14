@@ -44,6 +44,10 @@ const Component = db.define("component", {
       this.setDataValue("tags", val?.join(";"));
     },
   },
+  wasFirst: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
   // less: {
   //   type: Sequelize.TEXT,
   // },

@@ -1,0 +1,162 @@
+@import "variables";
+.leaderboard-main-container {
+  color: rgba(255, 255, 255, 0.91);
+  border: 1px solid rgba(128, 128, 128, 0.751);
+  width: 100%;
+  //   min-width: 720px;
+  max-width: 1020px;
+  height: 100%;
+  min-height: 171px;
+  align-self: flex-start;
+  display: flex;
+  font-family: "Inter", sans-serif;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+.leaderboard-user-main-container {
+  width: 50%;
+  height: 100%;
+  //   background-color: rgb(9, 20, 26);
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+}
+.leaderboard-component-main-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.leaderboard-user-info-container {
+  display: flex;
+  align-items: center;
+  height: 20%;
+  padding-left: 4px;
+  border-top: 1px solid gray;
+  a:hover {
+    color: @tertiary-color;
+  }
+}
+.leaderboard-first {
+  display: flex;
+  align-items: center;
+  height: 20%;
+  padding-left: 4px;
+  a:hover {
+    color: @tertiary-color;
+  }
+}
+.leaderboard-user-title-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  max-width: 1020px;
+}
+.leaderboard-user-info-username {
+  height: 100%;
+  width: 41%;
+  // background-color: rgb(155, 51, 51);
+  display: flex;
+  align-items: center;
+  a {
+    color: white;
+  }
+}
+.leaderboard-user-info-saves {
+  height: 100%;
+  width: 19%;
+  // background-color: rgb(128, 202, 177);
+  display: flex;
+  align-items: center;
+  cursor: auto;
+}
+.leaderboard-user-info-follows {
+  height: 100%;
+  width: 19%;
+  //background-color: purple;
+  display: flex;
+  align-items: center;
+  cursor: auto;
+}
+.leaderboard-user-info-points {
+  height: 100%;
+  //background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  cursor: auto;
+  width: 21%;
+}
+
+.leaderboard-top-users {
+  width: 50%;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-size: 25px;
+}
+.leaderboard-row-icon {
+  color: rgb(202, 96, 114);
+  margin-right: 5px;
+}
+.leaderboard-row-icon-follow {
+  color: rgb(235, 220, 158);
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.leaderboard-row-icon-coins {
+  color: @tertiary-color;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  font-size: 12px;
+  z-index: 2;
+  transition-duration: 0.4s;
+  //   transition-timing-function: ease-in;
+  transition-delay: 0.4s;
+  top: -25px;
+  left: 100%;
+  opacity: 0;
+}
+.tooltiptext-q {
+  visibility: hidden;
+  width: 190px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  font-size: 12px;
+  z-index: 1;
+  transition-duration: 0.4s;
+  //   transition-timing-function: ease-in;
+  transition-delay: 0.4s;
+  top: -35px;
+  left: 100%;
+  opacity: 0;
+}
+.leaderboard-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.leaderboard-tooltip:hover .tooltiptext-q {
+  visibility: visible;
+  opacity: 1;
+}
+.leaderboard-tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
