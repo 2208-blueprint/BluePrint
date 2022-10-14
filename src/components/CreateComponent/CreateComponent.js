@@ -29,7 +29,8 @@ function CreateComponent() {
   const [name, setName] = useState('')
   const [type, setType] = useState('')
   const [desc, setDesc] = useState('')
-  const [img, setImg] = useState('')
+  const [tags, setTags] = useState([])
+  const [singleTag, setSingleTag] = useState('')
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -86,16 +87,37 @@ function CreateComponent() {
     } else {
         stylesheet = less
     }
-    const {data} = await axios.post('/api/components/test-create', {
+    const {data} = await axios.post('/api/components/create', {
         name: name,
         description: desc,
         type: type,
         framework: form[0],
         stylingFramework: form[1],
         markup: markup,
-        stylesheet: stylesheet
+        stylesheet: stylesheet,
+        tags: tags
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
     })
     navigate(`/components/${data.id}`)
+  }
+
+  function addTag() {
+    setTags([...tags, singleTag])
+    setSingleTag('')
+  }
+
+  function removeTag(tagName) {
+    const tagList = tags
+    setTags(tagList.filter((tag) => {
+      if (tag === tagName) {
+        return false
+      } else {
+        return true
+      }
+    }))
   }
 
   React.useEffect(() => {
@@ -111,6 +133,7 @@ function CreateComponent() {
       `);
   }, [html, css, js]);
 
+  console.log(tags)
 
   return (
     <div id="createcomp-root">
@@ -179,7 +202,7 @@ function CreateComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div
@@ -215,7 +238,7 @@ function CreateComponent() {
             width="100%"
             fontSize="1.5rem"
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div
@@ -233,7 +256,7 @@ function CreateComponent() {
             fontSize="1.5rem"
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div
@@ -251,7 +274,7 @@ function CreateComponent() {
             fontSize="1.5rem"
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div id ="createcomp-submission">
@@ -284,8 +307,15 @@ function CreateComponent() {
             <div>
                 <textarea onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
             </div>
-            <div>Image Url:&nbsp;&nbsp;
-                <input onChange={(event)=>setImg(event.target.value)}></input>
+            <div>Tags:&nbsp;&nbsp;
+                <input value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
+            </div>
+            <div className="createcomp-tags-container">
+              {tags?.map((tag, i) => 
+                <div className="createcomp-tag" key={i}>
+                  <span>{tag}</span>&nbsp;&nbsp;<span onClick={()=>removeTag(tag)} className="createcomp-x">X</span>
+                </div>
+              )}
             </div>
             <button onClick={submitComponent}>Submit</button>
         </div>

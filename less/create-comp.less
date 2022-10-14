@@ -149,7 +149,7 @@ a.createcomp-back {
   font-family: "Inter", "sans-serif";
   background-color: @secondary-color;
   width: 300px;
-  height: 600px;
+  height: 700px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -200,5 +200,31 @@ a.createcomp-back {
 
   button:hover {
     background-color: #1a6da4;
+  }
+
+  .createcomp-tag-button {
+    height: 30px;
+    min-width: 70px;
+  }
+
+  .createcomp-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
+    .createcomp-tag {
+      height: 30px;
+      background-color: @background-color;
+      color: white;
+      font-size: 0.75rem;
+      padding: 4px;
+      margin: 3px;
+
+      .createcomp-x {
+        color: @tertiary-color;
+        cursor: pointer;
+      }
+    }
   }
 }
