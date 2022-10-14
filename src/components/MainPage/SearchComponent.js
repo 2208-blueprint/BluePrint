@@ -54,7 +54,7 @@ function SearchComponent() {
         component.stylingFramework
           ?.toLowerCase()
           .indexOf(currentWord.toLowerCase()) >= 0 ||
-        component.tags?.indexOf(currentWord.toLowerCase()) >= 0
+        component.tags?.toLowerCase().indexOf(currentWord.toLowerCase()) >= 0
       ) {
         if (cache[component.name]) {
           continue;

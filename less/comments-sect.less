@@ -5,7 +5,9 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
     max-width: 1000px;
+    min-width: 725px;
     background-color: @secondary-color;
     padding: 8px;
     color: @tertiary-color;
@@ -78,6 +80,40 @@
 
             .comment-content {
                 color: white
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #comments-root {
+        min-width: 600px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #comments-root {
+        min-width: 10px;
+
+        p {
+            font-size: 0.75rem;
+        }
+
+        #comments-list {
+            #comments-form {
+                p {
+                    font-size: 1rem;
+                }
+                input {
+                    width: 150px;
+                    font-size: 0.75rem;
+                }
+            }
+
+            .comment-box {
+                .comment-name {
+                    font-size: 0.75rem;
+                }
             }
         }
     }
