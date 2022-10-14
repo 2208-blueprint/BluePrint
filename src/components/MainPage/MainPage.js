@@ -8,7 +8,7 @@ import ComponentCard from "./ComponentCard";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import { getSingleUser } from "../../store/users/singleUserSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconContext } from "react-icons";
 import { BsQuestionCircleFill } from "react-icons/bs";
 
@@ -17,6 +17,7 @@ function MainPage() {
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const dispatch = useDispatch();
+  dispatch(getSingleUser());
 
   //   React.useEffect(() => {
   //     fetch("https://jsonplaceholder.typicode.com/users")
@@ -29,12 +30,10 @@ function MainPage() {
   React.useEffect(() => {
     async function getComponents() {
       const { data } = await axios.get("/api/components");
-
       setComponents(data);
       setIsLoading(false);
     }
     getComponents();
-    dispatch(getSingleUser());
   }, []);
 
   return (
@@ -91,17 +90,13 @@ function MainPage() {
             {components.map((component, i) => {
               return (
                 <div>
-                  <ComponentCard componentId={component.id} key={i} />
+                  <ComponentCard
+                    componentId={component.id}
+                    key={component.id}
+                  />
                 </div>
               );
             })}
-            {/* {users.map((user, i) => {
-              return (
-                <div key={i} className="main-page-content-list-element">
-                  {user.name}
-                </div>
-              );
-            })} */}
           </div>
         </div>
       </div>

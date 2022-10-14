@@ -52,6 +52,10 @@ const User = db.define("user", {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
+  currentPoints: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
   wasFirst: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
@@ -96,11 +100,7 @@ User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id, {
-      include: [
-        { model: Comment },
-        { model: Component },
-        { model: User, attributes: ["username"] },
-      ],
+      include: [Comment, Component],
     });
     if (!user) {
       throw "No user with that token found";

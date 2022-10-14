@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LeaderboardRow from "./LeaderboardRow";
 import LeaderboardRowComponent from "./LeaderboardRowComponent";
@@ -82,6 +82,35 @@ const componentData = [
 ];
 
 function Leaderboard() {
+  const [topComponents, setTopComponents] = useState([]);
+  useEffect(() => {
+    const getTopComponents = async () => {
+      const { data } = await axios.get("api/admin/top-components");
+      const parsedData = data.map((component) => {
+        let favorites = 0;
+        let saves = 0;
+        for (let i = 0; i < component.users.length; i++) {
+          const user = component.users[i];
+          if (user["user_component"]?.isFavorite) {
+            favorites++;
+          }
+          if (user["user_component"]?.isSaved) {
+            saves++;
+          }
+        }
+
+        return {
+          id: component.id,
+          name: component.name,
+          favorites,
+          saves,
+          points: component.currentPoints,
+        };
+      });
+      setTopComponents(parsedData);
+    };
+    getTopComponents();
+  }, []);
   return (
     <>
       <div className="leaderboard-main-container">
@@ -104,7 +133,7 @@ function Leaderboard() {
         </div>
         <div className="leaderboard-component-main-container">
           {" "}
-          {componentData.map((component, i) => (
+          {topComponents.map((component, i) => (
             <LeaderboardRowComponent
               key={component.id}
               id={component.id}

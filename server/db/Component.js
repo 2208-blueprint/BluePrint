@@ -48,6 +48,10 @@ const Component = db.define("component", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  currentPoints: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
   // less: {
   //   type: Sequelize.TEXT,
   // },
