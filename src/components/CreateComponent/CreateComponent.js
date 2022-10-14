@@ -308,7 +308,7 @@ function CreateComponent() {
                 <textarea onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
             </div>
             <div>Tags:&nbsp;&nbsp;
-                <input value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
+                <input placeholder="one word tag" value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
             </div>
             <div className="createcomp-tags-container">
               {tags?.map((tag, i) => 

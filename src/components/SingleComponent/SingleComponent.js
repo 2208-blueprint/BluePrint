@@ -10,7 +10,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import anime from "animejs/lib/anime.es.js"
 import CommentsSection from "./CommentsSection";
 import { toast } from 'react-toastify';
@@ -38,6 +38,7 @@ function SingleComponent() {
   const [loggin, setLoggin] = useState(false)
 
   const params = useParams()
+  const navigate = useNavigate()
   const toastSuccess = (msg) => toast.dark(msg, { autoClose: 2000});
   const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
 
@@ -230,6 +231,9 @@ function SingleComponent() {
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
+      <div className='singlecomp-title-author'>
+        <span>{title} by </span><span onClick={()=>navigate(`/users/${author.id}`)} className="singlecomp-author"> {author.username}</span>
+      </div>
       {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
         {liked ? <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
                     value={{ size: "40px"}}
@@ -299,6 +303,9 @@ function SingleComponent() {
           Sass
         </button>
       </div>
+        <div className="singlecomp-color-picker-cont">Color: &nbsp;
+          <input className="singlecomp-color-picker" type="color"></input>
+        </div>
         <div className="singlecomp-clipboard" onClick={copyClipboard}>
             <img src="/copy.png"></img>
         </div>
@@ -404,8 +411,8 @@ function SingleComponent() {
           <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
           <h2>Selected: {color}</h2>
         </div>
+        <CommentsSection loggin={loggin}/>
       </div>
-      <CommentsSection loggin={loggin}/>
     </div>
   );
 }

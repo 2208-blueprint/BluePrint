@@ -29,6 +29,21 @@ body {
   cursor: pointer;
   transition: 0.25s ease;
 }
+#singlecomp-top .singlecomp-title-author {
+  margin-left: 50px;
+  font-family: 'Inter';
+}
+#singlecomp-top .singlecomp-title-author span {
+  font-size: 1.75rem;
+  cursor: default;
+}
+#singlecomp-top .singlecomp-title-author .singlecomp-author {
+  color: #8bd1ff;
+  font-weight: 500;
+}
+#singlecomp-top .singlecomp-title-author .singlecomp-author:hover {
+  text-decoration: underline;
+}
 #singlecomp-top #singlecomp-heart {
   font-family: 'Inter', 'sans-serif';
   font-size: 3rem;
@@ -50,7 +65,7 @@ body {
 }
 #singlecomp-editors {
   display: flex;
-  gap: 10px;
+  justify-content: flex-start;
   flex-wrap: wrap;
   font-family: monospace;
   width: 94%;
@@ -159,7 +174,7 @@ a.singlecomp-back div span {
 #singlecomp-color-picker {
   height: 300px;
   padding: 20px;
-  display: flex;
+  display: none;
   flex-direction: column;
   font-family: 'Inter', 'sans-serif';
   color: #47B5FF;
@@ -173,13 +188,25 @@ a.singlecomp-back div span {
   height: 100px;
   width: 200px;
 }
+.singlecomp-color-picker-cont {
+  font-family: "Inter";
+  color: #47B5FF;
+  font-size: 1.25rem;
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+.singlecomp-color-picker-cont input {
+  width: 100px;
+  height: 40px;
+}
 #singlecomp-userinfo {
   font-family: 'Inter', 'sans-serif';
   background-color: #0F4C75;
   width: 300px;
   height: 300px;
   padding: 20px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -195,6 +222,17 @@ a.singlecomp-back div span {
   margin: 10px;
   font-size: 1rem;
   color: #47B5FF;
+}
+@media only screen and (max-width: 600px) {
+  #singlecomp-userinfo {
+    display: flex;
+  }
+  #singlecomp-top .singlecomp-title-author {
+    display: none;
+  }
+  .singlecomp-color-picker-cont {
+    display: none;
+  }
 }
 .login-main-container {
   display: flex;
@@ -1097,7 +1135,9 @@ body {
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
+  margin-top: 20px;
   max-width: 1000px;
+  min-width: 725px;
   background-color: #0F4C75;
   padding: 8px;
   color: #47B5FF;
@@ -1161,6 +1201,29 @@ body {
 }
 #comments-root #comments-list .comment-box .comment-content {
   color: white;
+}
+@media only screen and (max-width: 900px) {
+  #comments-root {
+    min-width: 600px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #comments-root {
+    min-width: 10px;
+  }
+  #comments-root p {
+    font-size: 0.75rem;
+  }
+  #comments-root #comments-list #comments-form p {
+    font-size: 1rem;
+  }
+  #comments-root #comments-list #comments-form input {
+    width: 150px;
+    font-size: 0.75rem;
+  }
+  #comments-root #comments-list .comment-box .comment-name {
+    font-size: 0.75rem;
+  }
 }
 .card-skeleton {
   width: 350px;
