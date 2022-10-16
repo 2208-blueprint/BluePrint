@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {signOut} from "firebase/auth"
+import { auth } from '../../firebase'
+import { AuthContext } from '../firebase/AuthContext'
 
 function ChatNavbar() {
+  const {currentUser} = useContext(AuthContext)
+
   return (
     <div className='firebase-navbar'>
-        <span className="firebase-logo">BluePrint Chat</span>
+        <span className="firebase-logo">Inbox</span>
         <div className="firebase-user">
-            <img src="https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg" alt="" />
-            <span>Cathal</span>
-            <button>Logout</button>
+            <span>{currentUser.displayName}</span>
+            <img src={currentUser.photoURL} alt="" />
         </div>
     </div>
   )

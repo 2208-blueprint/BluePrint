@@ -84,7 +84,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                   try {
                     //Update profile
                     await updateProfile(res.user, {
-                      username,
+                      displayName: username,
                       photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
                     //create user on firestore
