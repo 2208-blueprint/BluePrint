@@ -19,14 +19,6 @@ function MainPage() {
   const dispatch = useDispatch();
   dispatch(getSingleUser());
 
-  //   React.useEffect(() => {
-  //     fetch("https://jsonplaceholder.typicode.com/users")
-  //       .then((res) => res.json())
-  //       .then((users) => {
-  //         setUsers(users);
-  //         setIsLoading(false);
-  //       });
-  //   }, []);
   React.useEffect(() => {
     async function getComponents() {
       const { data } = await axios.get("/api/components");

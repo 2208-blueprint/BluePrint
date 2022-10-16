@@ -53,5 +53,21 @@ router.get("/top-components", async (req, res, next) => {
     next(ex);
   }
 });
+router.get("/top-users", async (req, res, next) => {
+  try {
+    const topUsers = await User.findAll({
+      limit: 5,
+      order: [["currentPoints", "DESC"]],
+      include: {
+        model: Component,
+        through: { where: { isAuthor: true } },
+        required: true,
+      },
+    });
+    res.send(topUsers);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 module.exports = router;

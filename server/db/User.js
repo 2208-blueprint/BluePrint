@@ -119,8 +119,10 @@ User.beforeCreate(async (user) => {
 });
 
 User.beforeUpdate(async (user) => {
-  let hashed = await bcrypt.hash(user.password, 5);
-  user.password = hashed;
+  if (user.password) {
+    let hashed = await bcrypt.hash(user.password, 5);
+    user.password = hashed;
+  }
 });
 
 /**

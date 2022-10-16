@@ -83,6 +83,7 @@ const componentData = [
 
 function Leaderboard() {
   const [topComponents, setTopComponents] = useState([]);
+  const [topUsers, setTopUsers] = useState([]);
   useEffect(() => {
     const getTopComponents = async () => {
       const { data } = await axios.get("api/admin/top-components");
@@ -111,11 +112,35 @@ function Leaderboard() {
     };
     getTopComponents();
   }, []);
+
+  useEffect(() => {
+    const getTopUsers = async () => {
+      const { data } = await axios.get("api/admin/top-users");
+      const parsedData = [];
+      console.log(data[0]);
+      for (let i = 0; i < data.length; i++) {
+        const user = data[i];
+        const followers = await axios.get(`api/users/${user.id}/followers`);
+        const followerCount = followers.data.length;
+        const componentCount = user.components.length;
+
+        parsedData.push({
+          id: user.id,
+          username: user.username,
+          componentCount,
+          followerCount,
+          points: user.currentPoints,
+        });
+      }
+      setTopUsers(parsedData);
+    };
+    getTopUsers();
+  }, []);
   return (
     <>
       <div className="leaderboard-main-container">
         <div className="leaderboard-user-main-container">
-          {userdata.map((user, i) => (
+          {topUsers.map((user, i) => (
             <LeaderboardRow
               key={user.id}
               id={user.id}
@@ -125,8 +150,8 @@ function Leaderboard() {
                   ? user.username.slice(0, 12) + "..."
                   : user.username
               }`}
-              componentLikes={user.componentLikes}
-              follows={user.follows}
+              componentCount={user.componentCount}
+              followerCount={user.followerCount}
               points={user.points}
             />
           ))}

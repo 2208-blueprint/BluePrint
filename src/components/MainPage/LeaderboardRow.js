@@ -10,8 +10,8 @@ import { FaCoins } from "react-icons/fa";
 function LeaderboardRow({
   order,
   username,
-  componentLikes,
-  follows,
+  componentCount,
+  followerCount,
   points,
   id,
 }) {
@@ -40,9 +40,9 @@ function LeaderboardRow({
             <BsFillBookmarkHeartFill />
           </IconContext.Provider>
 
-          <span className="tooltiptext">Total component likes/saves</span>
+          <span className="tooltiptext">Published components</span>
         </div>
-        {componentLikes}
+        {componentCount}
       </div>
       <div className="leaderboard-user-info-follows">
         {" "}
@@ -53,7 +53,7 @@ function LeaderboardRow({
             <BsPersonCheckFill />
           </IconContext.Provider>
           <span className="tooltiptext">Total followers</span>
-          {follows}
+          {followerCount}
         </div>
       </div>
       <div className="leaderboard-user-info-points">

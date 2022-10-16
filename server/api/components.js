@@ -116,24 +116,25 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
       include: {
         model: User,
         through: { where: { isAuthor: true } },
-        attributes: ["username", "id", "highestRank", "currentPoints"],
+        attributes: ["id", "highestRank", "currentPoints"],
       },
     });
     const points = component.currentPoints + 10;
-    // const componentAuthor = component.users[0];
-    // const userPoints = componentAuthor.currentPoints + 10;
-    // if (userPoints > componentAuthor.highestRank) {
-    //   await componentAuthor.update({
-    //     currentPoints: userPoints,
-    //     highestRank: userPoints,
-    //   });
-    // } else {
-    // await componentAuthor.update({
-    //   currentPoints: userPoints,
-    // });
-    // }
+    const componentAuthor = component.users[0];
+    const userPoints = componentAuthor.currentPoints + 10;
+    if (userPoints > componentAuthor.highestRank) {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+        highestRank: userPoints,
+      });
+      console.log(componentAuthor.currentPoints);
+    } else {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+      console.log(componentAuthor.currentPoints);
+    }
     await component.update({ currentPoints: points });
-    console.log(component.currentPoints);
     await component.addUser(user, { through: { isFavorite: true } });
     res.sendStatus(201);
   } catch (error) {
@@ -149,7 +150,18 @@ router.delete(
     try {
       const id = req.params.componentId;
       const user = req.user;
-      const component = await Component.findByPk(id);
+      const component = await Component.findByPk(id, {
+        include: {
+          model: User,
+          through: { where: { isAuthor: true } },
+          attributes: ["id", "currentPoints"],
+        },
+      });
+      const componentAuthor = component.users[0];
+      const userPoints = componentAuthor.currentPoints - 10;
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
       const points = component.currentPoints - 10;
       await component.update({ currentPoints: points });
       console.log(component.currentPoints);
@@ -167,8 +179,26 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
   try {
     const id = req.params.componentId;
     const user = req.user;
-    const component = await Component.findByPk(id);
+    const component = await Component.findByPk(id, {
+      include: {
+        model: User,
+        through: { where: { isAuthor: true } },
+        attributes: ["id", "highestRank", "currentPoints"],
+      },
+    });
     const points = component.currentPoints + 20;
+    const componentAuthor = component.users[0];
+    const userPoints = componentAuthor.currentPoints + 20;
+    if (userPoints > componentAuthor.highestRank) {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+        highestRank: userPoints,
+      });
+    } else {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+    }
     await component.update({ currentPoints: points });
     console.log(component.currentPoints);
     await component.addUser(user, { through: { isSaved: true } });
@@ -187,8 +217,19 @@ router.delete(
     try {
       const id = req.params.componentId;
       const user = req.user;
-      const component = await Component.findByPk(id);
+      const component = await Component.findByPk(id, {
+        include: {
+          model: User,
+          through: { where: { isAuthor: true } },
+          attributes: ["id", "currentPoints"],
+        },
+      });
       const points = component.currentPoints - 20;
+      const componentAuthor = component.users[0];
+      const userPoints = componentAuthor.currentPoints - 20;
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
       await component.update({ currentPoints: points });
       console.log(component.currentPoints);
       await component.addUser(user, { through: { isSaved: false } });
