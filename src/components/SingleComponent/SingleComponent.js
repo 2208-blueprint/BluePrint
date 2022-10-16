@@ -10,10 +10,10 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import anime from "animejs/lib/anime.es.js"
 import CommentsSection from "./CommentsSection";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -38,7 +38,9 @@ function SingleComponent() {
   const [loggin, setLoggin] = useState(false)
 
   const params = useParams()
-  const toastSuccess = (msg) => toast.success(msg);
+  const navigate = useNavigate()
+  const toastSuccess = (msg) => toast.dark(msg, { autoClose: 2000});
+  const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
 
   function onChangeHTML(newValue) {
     setHTML(newValue);
@@ -98,12 +100,14 @@ function SingleComponent() {
             duration: 200,
             easing: 'easeOutCubic'
           })
+          toastPopup("❤️ Liked!")
         } else {
           await axios.delete(`/api/components/${params.id}/remove-favorite`, {
             headers: {
               authorization: window.localStorage.getItem('token')
             }
           });
+          toastPopup("💔 Unliked!")
         }
         setLiked(!liked);
       }
@@ -128,12 +132,14 @@ function SingleComponent() {
             duration: 200,
             easing: 'easeOutCubic'
           })
+          toastPopup("💾 Saved to your profile!");
         } else {
           await axios.delete(`/api/components/${params.id}/remove-save`, {
             headers: {
               authorization: window.localStorage.getItem('token')
             }
           });
+          toastPopup("💾 Removed from your profile!");
         }
         setSaved(!saved);
       }
@@ -225,14 +231,17 @@ function SingleComponent() {
       <a href="/" className="singlecomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
+      <div className='singlecomp-title-author'>
+        <span>{title} by </span><span onClick={()=>navigate(`/users/${author.id}`)} className="singlecomp-author"> {author.username}</span>
+      </div>
       {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
         {liked ? <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
-                    value={{ size: "40px"}} 
+                    value={{ size: "40px"}}
                   >
                     <FaHeart/>
                   </IconContext.Provider></span>
                   :<span value={params.id}><IconContext.Provider
-                  value={{ size: "40px"}} 
+                  value={{ size: "40px"}}
                 >
                   <FaRegHeart/>
                 </IconContext.Provider></span>}
@@ -240,12 +249,12 @@ function SingleComponent() {
       : <div></div>}
       {loggin ? <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
         {saved ? <span className='singlecomp-saved' value={params.id}><IconContext.Provider
-                    value={{ size: "40px"}} 
+                    value={{ size: "40px"}}
                   >
                     <FaSave/>
                   </IconContext.Provider></span>
                   :<span value={params.id}><IconContext.Provider
-                  value={{ size: "40px"}} 
+                  value={{ size: "40px"}}
                 >
                   <FaSave/>
                 </IconContext.Provider></span>}
@@ -294,6 +303,9 @@ function SingleComponent() {
           Sass
         </button>
       </div>
+        <div className="singlecomp-color-picker-cont">Color: &nbsp;
+          <input className="singlecomp-color-picker" type="color"></input>
+        </div>
         <div className="singlecomp-clipboard" onClick={copyClipboard}>
             <img src="/copy.png"></img>
         </div>
@@ -399,8 +411,8 @@ function SingleComponent() {
           <input onChange={(event)=>setColor(event.target.value)} type="color"></input>
           <h2>Selected: {color}</h2>
         </div>
+        <CommentsSection loggin={loggin}/>
       </div>
-      <CommentsSection loggin={loggin}/>
     </div>
   );
 }

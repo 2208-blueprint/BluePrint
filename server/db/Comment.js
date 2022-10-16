@@ -5,7 +5,6 @@ const Comment = db.define("comment", {
   message: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
   },
 });
 // Comment.prototype.getReplyingTo = async function () {

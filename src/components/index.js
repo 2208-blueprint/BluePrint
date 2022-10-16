@@ -23,3 +23,4 @@ export { default as LeaderboardRow } from "./MainPage/LeaderboardRow";
 export { default as LeaderboardRowComponent } from "./MainPage/LeaderboardRowComponent";
 export { getSingleUser } from "../store/users/singleUserSlice";
 export { default as Navigation } from "./navigation/Navigation";
+export { default as SearchUsers } from './searchUsers/SearchUsers'

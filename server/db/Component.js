@@ -24,7 +24,7 @@ const Component = db.define("component", {
   },
   img: {
     type: Sequelize.STRING,
-    defaultValue: "../../public/component-placeholder-image.png",
+    defaultValue: "/component-placeholder-image.png",
   },
   preview_video: {
     type: Sequelize.STRING,

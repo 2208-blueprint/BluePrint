@@ -52,7 +52,7 @@ router.post("/create", requireToken, async (req, res, next) => {
     const component = await Component.create(req.body);
     const user = req.user;
     user.addComponent(component, { through: { isAuthor: true } });
-    res.sendStatus(201);
+    res.status(201).send(component);
   } catch (error) {
     next(error);
   }

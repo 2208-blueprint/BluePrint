@@ -5,6 +5,7 @@ import { getSingleUser } from '../../store/users/singleUserSlice'
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { ToastContainer, toast } from 'react-toastify';
+import Sidebar from '../MainPage/Sidebar.js'
 
 function Navigation({loggedIn, setLoggedIn}){
 
@@ -80,11 +81,13 @@ function Navigation({loggedIn, setLoggedIn}){
                     <a onClick={() => {logoutHandler()
                     setToggle(!toggle)}} className="navigation-logout">LOGOUT</a>
                     <Link onClick={()=>setToggle(!toggle)} to='/profile/create'>CREATE COMPONENT</Link>
+                    <Sidebar/>
                 </>
                 :
                 <>
                     <Link onClick={()=>setToggle(!toggle)} className="navigation-logout" to='/login'>LOGIN</Link>
                     <Link onClick={()=>setToggle(!toggle)} to='/login'>CREATE COMPONENT</Link>
+                    <Sidebar/>
                 </>
                 }
             </div>
