@@ -6,7 +6,6 @@ import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase
 import { app } from '../../firebase'
 import { ChatSideBar, ChatNavbar, Chat } from '../index'
 import Axios from 'axios'
-import testImage from '../images/cog3.png'
 
 
 function fireBaseChat() {
@@ -14,9 +13,6 @@ function fireBaseChat() {
     const [user, setUser] = React.useState()
     const [err, setErr] = React.useState(false)
     const [loading, setLoading] = React.useState(false);
-
-    // const storage = getStorage();
-    // const auth = getAuth(app);
 
 
     React.useEffect(() => {
@@ -31,23 +27,6 @@ function fireBaseChat() {
                     })
                     console.log(data);
                     setUser(data)
-
-                    // const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
-                //     console.log(res);
-
-                //     const storageRef = ref(storage, data.username);
-                //     const uploadTask = uploadBytesResumable(storageRef, data.img);
-
-                //     uploadTask.on(
-                //         (error) => {
-                //             setErr(true)
-                //         },
-                //         () => {
-                //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                //             console.log('File available at', downloadURL);
-                //         });
-                //     }
-                // );
                 }
                 else {
                     navigate('/login')
