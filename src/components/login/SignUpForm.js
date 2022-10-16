@@ -6,10 +6,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CountryList } from '../../components'
 import { getSingleUser } from '../../store/users/singleUserSlice'
 import { useDispatch } from 'react-redux'
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { app, db } from '../../firebase'
 
 function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const auth = getAuth(app);
+    const storage = getStorage();
 
     const [username, setUserName] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
@@ -18,6 +24,8 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const [profilePicture, setProfilePicture] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [country, setCountry] = React.useState('')
+    const [err, setErr] = React.useState(false)
+    const [loading, setLoading] = React.useState(false);
 
     const toastError = (err) => toast.error(err);
     const toastCreate = (msg) => toast.success(msg);
@@ -47,9 +55,50 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
         }
 
         try {
-            const auth = await Axios.post('/api/auth/signup', newUserObj)
-            const { token } = auth.data
+            const authorization = await Axios.post('/api/auth/signup', newUserObj)
+            const { token } = authorization.data
+
             window.localStorage.setItem('token', token);
+
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            res.displayName = username;
+            if (!profilePicture) {
+                res.photoURL = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+            }
+            else {
+                res.photoURL = profilePicture;
+            }
+
+            const date = new Date().getTime();
+            const storageRef = ref(storage, `${username + date}`);
+
+            await uploadBytesResumable(storageRef, profilePicture).then(() => {
+                getDownloadURL(storageRef).then(async (downloadURL) => {
+                  try {
+                    //Update profile
+                    await updateProfile(res.user, {
+                      username,
+                      photoURL: profilePicture,
+                    });
+                    //create user on firestore
+                    await setDoc(doc(db, "users", res.user.uid), {
+                      uid: res.user.uid,
+                      username,
+                      email,
+                      photoURL: profilePicture,
+                    });
+
+                    //create empty user chats on firestore
+                    await setDoc(doc(db, "userChats", res.user.uid), {});
+                    navigate("/");
+                  } catch (err) {
+                    console.log(err);
+                    setErr(true);
+                    setLoading(false);
+                  }
+                });
+              });
+
 
             setUserName('');
             setPassword('');
@@ -65,14 +114,17 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
             toastCreate('Account created & logged in!')
         }
         catch(error) {
-            if (error.response.data === 'Validation error: Validation isEmail on email failed'){
-                toastError('Invalid email')
-            }
-            if (error.response.data === 'Validation error'){
-                toastError('Username already in use')
-            }
-            if (error.response.data === 'Validation error: Validation isUrl on img failed'){
-                toastError('Invalid profile picture URL')
+
+            if (error.response) {
+                if (error.response.data === 'Validation error: Validation isEmail on email failed'){
+                    toastError('Invalid email')
+                }
+                if (error.response.data === 'Validation error'){
+                    toastError('Username already in use')
+                }
+                if (error.response.data === 'Validation error: Validation isUrl on img failed'){
+                    toastError('Invalid profile picture URL')
+                }
             }
             console.log(error)
         }

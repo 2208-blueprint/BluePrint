@@ -1,23 +1,23 @@
 import React from 'react'
 import {initializeApp} from 'firebase/app';
 import {getMessaging, getToken, onMessage} from 'firebase/messaging';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { app } from '../../firebase'
 import { ChatSideBar, ChatNavbar, Chat } from '../index'
+import Axios from 'axios'
+import testImage from '../images/cog3.png'
 
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDw9hYM1Xfh5VV3PCio4kQS8XD3d4QFWQQ",
-  authDomain: "blueprint-e65e7.firebaseapp.com",
-  projectId: "blueprint-e65e7",
-  storageBucket: "blueprint-e65e7.appspot.com",
-  messagingSenderId: "467520123270",
-  appId: "1:467520123270:web:effd61eb49f854a85d3c07",
-  measurementId: "G-1NWB7FPPCG"
-};
 
 function fireBaseChat() {
 
     const [user, setUser] = React.useState()
+    const [err, setErr] = React.useState(false)
+    const [loading, setLoading] = React.useState(false);
+
+    // const storage = getStorage();
+    // const auth = getAuth(app);
+
 
     React.useEffect(() => {
         async function getUser() {
@@ -32,12 +32,22 @@ function fireBaseChat() {
                     console.log(data);
                     setUser(data)
 
-                    const followers = await Axios.get('api/users/followers');
-                    setFollowers(followers.data)
+                    // const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
+                //     console.log(res);
 
-                    const savedComponents = data.components.filter((component) => component.user_component.isSaved)
+                //     const storageRef = ref(storage, data.username);
+                //     const uploadTask = uploadBytesResumable(storageRef, data.img);
 
-                    setSavedComponents(savedComponents)
+                //     uploadTask.on(
+                //         (error) => {
+                //             setErr(true)
+                //         },
+                //         () => {
+                //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                //             console.log('File available at', downloadURL);
+                //         });
+                //     }
+                // );
                 }
                 else {
                     navigate('/login')
@@ -45,6 +55,7 @@ function fireBaseChat() {
                 }
             }
             catch(err) {
+                setErr(true)
                 console.log(err);
             }
         }

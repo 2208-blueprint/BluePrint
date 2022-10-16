@@ -5,7 +5,6 @@ const Comment = db.define("comment", {
   message: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
   },
 });
 // Comment.prototype.getReplyingTo = async function () {
@@ -17,7 +16,7 @@ const Comment = db.define("comment", {
 
 module.exports = Comment;
 
-/* 
+/*
 comment belongs to component
 component has many comments
 

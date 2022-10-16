@@ -28,6 +28,7 @@ async function seed() {
     password: "test",
     firstName: "Thomas",
     lastName: "Bak",
+    email: 'email3@gmail.com',
   });
 
   const ben = await User.create({
@@ -35,12 +36,14 @@ async function seed() {
     password: "test",
     firstName: "Benjamin",
     lastName: "Lee",
+    email: 'email2@gmail.com',
   });
   const cathal = await User.create({
     username: "Cathal",
     password: "test",
     firstName: 'Cathal',
     lastName: 'O Cuinneagain',
+    email: 'email1@gmail.com',
     country: 'Ireland',
     img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
   });
@@ -49,6 +52,7 @@ async function seed() {
     password: "test",
     firstName: "Alec",
     lastName: "Butterfield",
+    email: 'email4@gmail.com',
   });
   //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
   ben.addFollowing(thomas);
