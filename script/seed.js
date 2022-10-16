@@ -24,22 +24,24 @@ async function seed() {
   await db.sync({ force: true });
 
   const thomas = await User.create({
-    username: "Thomas",
+    username: "tombak",
     password: "test",
     firstName: "Thomas",
     lastName: "Bak",
+    country: 'USA',
     email: 'email3@gmail.com',
   });
 
   const ben = await User.create({
-    username: "Ben",
+    username: "benji",
     password: "test",
     firstName: "Benjamin",
     lastName: "Lee",
+    country: 'USA',
     email: 'email2@gmail.com',
   });
   const cathal = await User.create({
-    username: "Cathal",
+    username: "cathal1990",
     password: "test",
     firstName: 'Cathal',
     lastName: 'O Cuinneagain',
@@ -48,10 +50,11 @@ async function seed() {
     img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
   });
   const alec = await User.create({
-    username: "Alec",
+    username: "butters",
     password: "test",
     firstName: "Alec",
     lastName: "Butterfield",
+    country: 'USA',
     email: 'email4@gmail.com',
   });
   //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.

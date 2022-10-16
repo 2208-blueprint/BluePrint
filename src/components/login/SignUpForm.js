@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CountryList } from '../../components'
 import { getSingleUser } from '../../store/users/singleUserSlice'
 import { useDispatch } from 'react-redux'
-import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { app, db } from '../../firebase'
@@ -32,6 +32,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        const defaultProfilePicture = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
 
         let newUserObj = {
             username: username,
@@ -44,14 +45,15 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
         };
 
         if (!profilePicture.length) {
-        newUserObj = {
-            username: username,
-            password: password,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            country: country,
-        };
+            newUserObj = {
+                username: username,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                country: country,
+                img: defaultProfilePicture,
+            };
         }
 
         try {
@@ -62,8 +64,9 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
 
             const res = await createUserWithEmailAndPassword(auth, email, password);
             res.displayName = username;
+
             if (!profilePicture) {
-                res.photoURL = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+                res.photoURL = defaultProfilePicture;
             }
             else {
                 res.photoURL = profilePicture;
@@ -72,20 +75,24 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
             const date = new Date().getTime();
             const storageRef = ref(storage, `${username + date}`);
 
-            await uploadBytesResumable(storageRef, profilePicture).then(() => {
+            const metadata = {
+                contentType: 'image/png',
+              };
+
+            await uploadBytesResumable(storageRef, profilePicture, metadata).then(() => {
                 getDownloadURL(storageRef).then(async (downloadURL) => {
                   try {
                     //Update profile
                     await updateProfile(res.user, {
                       username,
-                      photoURL: profilePicture,
+                      photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
                     //create user on firestore
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
                       username,
                       email,
-                      photoURL: profilePicture,
+                      photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
 
                     //create empty user chats on firestore
@@ -98,6 +105,8 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                   }
                 });
               });
+
+              await signInWithEmailAndPassword(auth, email, password);
 
 
             setUserName('');
@@ -145,7 +154,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                         <input type='text' placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} value={lastName} required/>
                         <input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} required/>
                         <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} required/>
-                        <input type='text' placeholder='Profile picture URL (optional)' onChange={(e) => setProfilePicture(e.target.value)} value={profilePicture}/>
+                        <input type='input' placeholder='Profile picture URL (optional)' onChange={(e) => setProfilePicture(e.target.value)} value={profilePicture}/>
                         <CountryList country={country} setCountry={setCountry}/>
                         <button className='signup-submit-button'>Sign Up</button>
                     </form>

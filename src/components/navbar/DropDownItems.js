@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { signOut } from "firebase/auth"
+import { auth } from '../../firebase'
+import { AuthContext } from '../firebase/AuthContext'
 
 function DropDownItems({ setDropDown, loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
