@@ -28,8 +28,8 @@ async function seed() {
     password: "test",
     firstName: "Thomas",
     lastName: "Bak",
-    country: 'USA',
-    email: 'email3@gmail.com',
+    country: "USA",
+    email: "email3@gmail.com",
   });
 
   const ben = await User.create({
@@ -37,25 +37,25 @@ async function seed() {
     password: "test",
     firstName: "Benjamin",
     lastName: "Lee",
-    country: 'USA',
-    email: 'email2@gmail.com',
+    country: "USA",
+    email: "email2@gmail.com",
   });
   const cathal = await User.create({
     username: "cathal1990",
     password: "test",
-    firstName: 'Cathal',
-    lastName: 'O Cuinneagain',
-    email: 'email1@gmail.com',
-    country: 'Ireland',
-    img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
+    firstName: "Cathal",
+    lastName: "O Cuinneagain",
+    email: "email1@gmail.com",
+    country: "Ireland",
+    img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
   });
   const alec = await User.create({
     username: "butters",
     password: "test",
     firstName: "Alec",
     lastName: "Butterfield",
-    country: 'USA',
-    email: 'email4@gmail.com',
+    country: "USA",
+    email: "email4@gmail.com",
   });
   //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
   ben.addFollowing(thomas);
@@ -1351,7 +1351,7 @@ async function seed() {
 
   await Component.create({
     name: "Wallet Button",
-    type: "Button",
+    type: "button",
     tags: ["cute"],
     framework: "html",
     stylingFramework: "css",
@@ -1474,7 +1474,7 @@ async function seed() {
   });
   await Component.create({
     name: `Cyberpunk 2077 Glitch Button`,
-    type: `Button`,
+    type: `button`,
     tags: ["videogames"],
     framework: `html`,
     stylingFramework: `css`,

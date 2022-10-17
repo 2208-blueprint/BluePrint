@@ -34,10 +34,10 @@ router.get("/component/:componentId", async (req, res, next) => {
     const component = await Component.findByPk(id);
     const comments = await Comment.findAll({
       where: {
-        componentId: component.id
+        componentId: component.id,
       },
-      include: User
-    })
+      include: User,
+    });
     res.send(comments);
   } catch (error) {
     next(error);
@@ -46,19 +46,23 @@ router.get("/component/:componentId", async (req, res, next) => {
 
 // add comment to component
 // WORKS
-router.put('/component/:componentId/addcomment', requireToken, async (req,res,next) => {
-  try {
-    const id = req.params.componentId;
-    const component = await Component.findByPk(id);
-    const comment = await Comment.create(req.body)
-    component.addComment(comment)
-    const user = req.user
-    await user.addComment(comment, { through: { isAuthor: true } });
-    res.send(comment)
-  } catch(error) {
-    next(error)
+router.put(
+  "/component/:componentId/addcomment",
+  requireToken,
+  async (req, res, next) => {
+    try {
+      const id = req.params.componentId;
+      const component = await Component.findByPk(id);
+      const comment = await Comment.create(req.body);
+      component.addComment(comment);
+      const user = req.user;
+      await user.addComment(comment, { through: { isAuthor: true } });
+      res.send(comment);
+    } catch (error) {
+      next(error);
+    }
   }
-})
+);
 
 // //get all likes on a comment
 // router.get("/:commentId/likes", async (req, res, next) => {
@@ -79,7 +83,7 @@ router.post("/:commentId/like", requireToken, async (req, res, next) => {
     const id = req.params.commentId;
     const user = req.user;
     const comment = await Comment.findByPk(id);
-    await comment.addUser(user)
+    await comment.addUser(user);
     res.sendStatus(201);
   } catch (error) {
     next(error);
