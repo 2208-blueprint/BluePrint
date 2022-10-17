@@ -25,7 +25,6 @@ function ChatSearch() {
   const toastError = (err) => toast.error(err);
 
   const handleSearch = async () => {
-    console.log('1');
 
     const q = query(
       collection(db, "users"),
