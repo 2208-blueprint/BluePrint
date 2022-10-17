@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleUser } from '../../store/users/singleUserSlice'
@@ -6,11 +6,15 @@ import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import Sidebar from '../MainPage/Sidebar.js'
+import { AuthContext } from '../firebase/AuthContext'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 
 function Navigation({loggedIn, setLoggedIn}){
 
     const [toggle, setToggle]=React.useState(true);
     const user = useSelector(state => state.singleUser)
+    const { currentUser } = useContext(AuthContext)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -26,7 +30,8 @@ function Navigation({loggedIn, setLoggedIn}){
         }
     },[])
 
-    const logoutHandler = () => {
+    const logoutHandler = async() => {
+        await signOut(auth)
         window.localStorage.removeItem('token')
         setLoggedIn(false)
         toastSuccess('Successfully logged out!')
@@ -48,7 +53,7 @@ function Navigation({loggedIn, setLoggedIn}){
             <a className="navigation-logo" href="/"><img src={'/trianglify-lowres.png'} alt="Logo Here"/></a>
 
             <div className="navigation-link-wrapper">
-                {loggedIn ? 
+                {loggedIn ?
                 <>
                     <Link to='/profile/create'>CREATE COMPONENT</Link>
                     <a onClick={logoutHandler} className="navigation-logout">LOGOUT</a>
@@ -71,7 +76,7 @@ function Navigation({loggedIn, setLoggedIn}){
                 </IconContext.Provider>
             </div>
             <div className="navigation-side-bar" style={style}>
-            {loggedIn ? 
+            {loggedIn ?
                 <>
                     <div onClick={() => {profileHandler()
                     setToggle(!toggle)}} className="navigation-profile">
