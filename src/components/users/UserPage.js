@@ -42,25 +42,46 @@ function UserPage() {
     }
     return(
         <>
-        <div className="single-user-main-container">
-            <div className="user-page-header-container">
-                <img alt='user-image'/>
-                <div className="user-page-title"></div>
-                <div className="user-page-info-container">
-                    <div className="user-number-components-made"></div>
-                    <div className="user-number-followers">15 followers</div>
-                    <button onClick={handleMessageMeButton} className="user-message-me-button">Message me!</button>
+        <div className="single-user-page-main-container">
+            <div className="single-user-page-title-container">
+                <div className="single-user-page-user-pic">
+                    <img alt="user_pic.png"/>
+                </div>
+                <div className="single-user-page-user-name-rank-container">
+                    <div className="single-user-page-user-name">
+                        User Name
+                    </div>
+                    <div className="single-user-page-rank-achievements">
+                        Rank/achievements   
                 </div>
             </div>
-
-            <div className="user-page-components-container">
-
-            {componentsMade.map((component, i) => 
-                    <div key={i} value={i + 1} onClick={handleSelectComponent} className="user-page-single-component-container">
-                        Component #{component}
-                    </div>
-                )}
+                <div className="single-user-page-user-stats-container">
+                    <span>Components made</span>
+                    <span>Followers</span>
+                    <span>Total Favorites</span>
+                    <span>Total Saves</span>
+                    <span>Bluepoints</span>
+                </div>
             </div>
+            <div className="single-user-page-search-container">
+                <div className="single-user-page-search-bar">
+                    Search bar
+                </div>
+                <div className="single-user-page-filter">
+                    Filter by...
+                </div>
+            </div>
+            <div className="single-user-page-component-list-container">
+                <div className="single-user-page-single-component">
+                    Single Component
+                </div>
+                <div className="single-user-page-single-component">
+                    Single Component
+                </div>
+                <div className="single-user-page-single-component">
+                    Single Component
+                </div>
+            </div>           
         </div>
         </>
     )
