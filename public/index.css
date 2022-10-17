@@ -1086,21 +1086,42 @@ body {
 }
 .single-user-page-main-container {
   font-family: 'Inter', sans-serif;
-  background-color: green;
+  background-color: #09141a;
   color: white;
-  height: 90vh;
+  height: 85vh;
   width: 100vw;
 }
 .single-user-page-main-container .single-user-page-title-container {
-  background-color: maroon;
+  background-color: #09141a;
   display: flex;
   justify-content: center;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic .single-user-page-user-img {
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  width: 110px;
+  height: 110px;
+  margin: 20px;
+  border-radius: 50%;
+  margin: 2.5%;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
-  background-color: blue;
+  background-color: #09141a;
+  display: flex;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
+  height: 35%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
-  background-color: rebeccapurple;
+  background-color: #09141a;
   display: flex;
   flex-direction: column;
 }
@@ -1113,11 +1134,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   background-color: black;
+  justify-content: center;
 }
 .single-user-page-main-container .single-user-page-component-list-container .single-user-page-single-component {
-  background-color: blue;
-  padding: 8px;
-  margin: 8px;
+  display: flex;
+  flex-wrap: wrap;
 }
 #comments-root {
   font-family: 'Inter', 'sans-serif';
