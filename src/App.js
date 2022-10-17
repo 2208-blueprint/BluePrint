@@ -47,7 +47,7 @@ function App() {
         <Route path="/redirect" element={<Redirect />}></Route>
         <Route path="/:badpath" element={<NotFoundPage />}></Route>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
