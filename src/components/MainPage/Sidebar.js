@@ -15,6 +15,7 @@ function Sidebar() {
     setSearchBarInput("");
     navigate(`/components/search/${keywords}`);
   };
+
   return (
     <div className="side-bar-container-main">
       <div className="side-bar-container-searchbar-container">
@@ -35,18 +36,78 @@ function Sidebar() {
       </div>
       <div className="side-bar-container-categories">
         <div className="side-bar-container-category-heading">CATEGORIES</div>
-        <div className="side-bar-container-category">ANIMATION</div>
-        <div className="side-bar-container-category">BUTTONS</div>
-        <div className="side-bar-container-category">DROP DOWNS</div>
-        <div className="side-bar-container-category">FOOTERS</div>
-        <div className="side-bar-container-category">FORMS</div>
-        <div className="side-bar-container-category">GRAPHICS</div>
-        <div className="side-bar-container-category">ICONS</div>
-        <div className="side-bar-container-category">INFO-CARDS</div>
-        <div className="side-bar-container-category">MOBILE-FRIENDLY</div>
-        <div className="side-bar-container-category">NAVBARS</div>
-        <div className="side-bar-container-category">SLIDERS</div>
-        <div className="side-bar-container-category">MISC</div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/animation`)}
+        >
+          ANIMATION
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/button`)}
+        >
+          BUTTONS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/drop-down`)}
+        >
+          DROP-DOWNS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/footer`)}
+        >
+          FOOTERS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/form`)}
+        >
+          FORMS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/graphic`)}
+        >
+          GRAPHICS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/icon`)}
+        >
+          ICONS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/info-card`)}
+        >
+          INFO-CARDS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/mobile`)}
+        >
+          MOBILE-FRIENDLY
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/navbar`)}
+        >
+          NAVBARS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/slider`)}
+        >
+          SLIDERS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/category/misc`)}
+        >
+          MISC
+        </div>
         <div
           className="side-bar-container-category-heading"
           id="side-bar-framework"

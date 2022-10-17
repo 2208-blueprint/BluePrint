@@ -8,10 +8,23 @@ const Component = db.define("component", {
     unique: true,
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   type: {
-    type: Sequelize.STRING,
+    type: Sequelize.ENUM(
+      "animation",
+      "button",
+      "drop-down",
+      "footer",
+      "form",
+      "graphic",
+      "icon",
+      "info-card",
+      "mobile",
+      "navbar",
+      "slider",
+      "misc"
+    ),
     allowNull: false,
   },
   framework: {
@@ -51,6 +64,9 @@ const Component = db.define("component", {
   currentPoints: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
+  },
+  src: {
+    type: Sequelize.STRING,
   },
   // less: {
   //   type: Sequelize.TEXT,

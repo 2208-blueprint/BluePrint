@@ -39,10 +39,10 @@ async function seed() {
   const cathal = await User.create({
     username: "Cathal",
     password: "test",
-    firstName: 'Cathal',
-    lastName: 'O Cuinneagain',
-    country: 'Ireland',
-    img: 'https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg'
+    firstName: "Cathal",
+    lastName: "O Cuinneagain",
+    country: "Ireland",
+    img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
   });
   const alec = await User.create({
     username: "Alec",
@@ -1344,7 +1344,7 @@ async function seed() {
 
   await Component.create({
     name: "Wallet Button",
-    type: "Button",
+    type: "button",
     tags: ["cute"],
     framework: "html",
     stylingFramework: "css",
@@ -1467,7 +1467,7 @@ async function seed() {
   });
   await Component.create({
     name: `Cyberpunk 2077 Glitch Button`,
-    type: `Button`,
+    type: `button`,
     tags: ["videogames"],
     framework: `html`,
     stylingFramework: `css`,

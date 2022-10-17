@@ -240,4 +240,18 @@ router.delete(
   }
 );
 
+router.get("/category/:type", async (req, res, next) => {
+  try {
+    const target = req.params.type;
+    const sortedComponents = await Component.findAll({
+      where: {
+        type: target,
+      },
+    });
+    res.send(sortedComponents);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

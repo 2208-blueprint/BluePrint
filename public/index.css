@@ -1265,6 +1265,7 @@ body {
   font-family: "Inter", sans-serif;
   text-align: center;
   transition: all 0.2s ease-in-out;
+  border-radius: 10px;
 }
 .component-card-cover .component-card-info {
   opacity: 1;
@@ -1284,6 +1285,7 @@ body {
 iframe {
   background-color: #ffffff;
   box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
+  border-radius: 10px;
 }
 .component-card-info {
   font-weight: 600;
@@ -1458,7 +1460,7 @@ iframe {
   }
 }
 .profile-wrapper {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -1466,6 +1468,23 @@ iframe {
   height: 100vh;
   width: 100vw;
   background-color: #09141a;
+}
+.profile-wrapper .profile-picture-crown {
+  position: absolute;
+  z-index: 999;
+  color: #47B5FF;
+  margin-top: 200px;
+  margin-left: 160px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-wrapper .profile-picture-crown-invis {
+  opacity: 0;
 }
 .profile-wrapper .profile-sidebar {
   display: flex;
@@ -1560,7 +1579,7 @@ iframe {
   font-size: 15px;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container .profile-new-component-button:before {
-  content: '';
+  content: "";
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   position: absolute;
   top: -2px;
@@ -1586,7 +1605,7 @@ iframe {
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container .profile-new-component-button:after {
   z-index: -1;
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1920,11 +1939,12 @@ iframe {
 .side-bar-container-main {
   background-color: #09141a;
   font-family: "Inter", sans-serif;
-  margin-top: 20px;
+  margin-top: 25px;
   position: fixed;
   height: calc(100vh - 60px);
   top: 70px;
   margin-left: 70px;
+  padding-right: 10px;
   font-family: "Inter", "sans-serif";
   overflow: auto;
 }
@@ -2259,4 +2279,27 @@ iframe {
   #search-user-root .search-user-results .search-user-card {
     max-width: 100%;
   }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #09141a;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #213642;
+  border-radius: 30px;
+  height: 30px;
+  z-index: 999;
+  height: 15px;
+  background-clip: content-box;
+  opacity: 0;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  width: 20px;
 }
