@@ -16,6 +16,8 @@
 @import "notFoundPage.less";
 @import "sidebar.less";
 @import "searchResult.less";
+@import "leaderboard.less";
+@import "search-users.less";
 @import "firebaseChat.less";
 
 // *{
@@ -24,3 +26,30 @@
 //     padding: 0;
 //     box-sizing: border-box;
 // }
+/* width */
+::-webkit-scrollbar {
+  //   width: 0px;
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #09141a;
+
+  //   opacity: 0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(33, 54, 66);
+  border-radius: 30px;
+  z-index: 999;
+  background-clip: content-box;
+  opacity: 0;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  width: 20px;
+}
