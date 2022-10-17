@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme={"dark"} />
+      <ToastContainer theme={"dark"} position="top-center" autoClose={2000}/>
       {/* <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> */}
       <Navigation setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       <Routes>

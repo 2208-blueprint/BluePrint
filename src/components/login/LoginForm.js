@@ -67,7 +67,6 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
 
   return (
       <div className='login-main-container'>
-        <ToastContainer />
         <div className='login-signup-wrapper'>
             <div className='login-signup-form-container'>
               <div className='login-form-container-top'>
