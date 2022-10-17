@@ -9,6 +9,7 @@ function Chat() {
   return (
     <div className='firebase-chat'>
         <div className="firebase-chat-info">
+          <span><img src={data.user?.photoURL} /></span>
             <span>{data.user?.displayName}</span>
             <div className="firebase-chat-icons">
                 <HiOutlineUserAdd />

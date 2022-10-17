@@ -85,7 +85,6 @@ function ChatInput() {
         value={text}
         />
         <div className="firebase-send">
-            <IoMdAttach />
             <input
             type='file'
             style={{display: 'none'}}

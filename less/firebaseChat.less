@@ -34,12 +34,14 @@
                 }
                 .firebase-user {
                     display: flex;
+                    align-items: center;
                     gap: 10px;
+                    font-size: 20px;
 
                     img {
                         background-color: white;
-                        height: 24px;
-                        width: 24px;
+                        height: 40px;
+                        width: 40px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -56,16 +58,19 @@
             }
 
             .firebase-search {
-                border-bottom: 1px solid white;
+                border-bottom: 1px solid gray;
 
                 .firebase-searchform {
                     input {
                         background-color: transparent;
                         border: none;
                         color: white;
+                        height: 40px;
+                        outline: none;
 
                         &::placeholder {
                             color: lightgray;
+                            padding-left: 5px;
                         }
                     }
                 }
@@ -113,6 +118,14 @@
                 align-items: center;
                 padding: 10px;
                 color: white;
+                font-size: 20px;
+            }
+
+            img {
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
             }
 
             .firebase-chat-icons {
@@ -130,6 +143,7 @@
                 color: @background-color;
                 padding: 10px;
                 height: calc(100% - 160px);
+                width: 100%;
                 overflow: scroll;
 
                 .firebase-chat-message {
@@ -140,6 +154,8 @@
                     .firebase-message-info {
                         display: flex;
                         flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
                         color: gray;
                         font-weight: 300;
 
@@ -168,16 +184,10 @@
 
                     &.owner {
                         flex-direction: row-reverse;
+                        margin-right: 5px;
 
                         .firebase-message-content {
                             align-items: flex-end;
-                        }
-
-                        img {
-                            width: 40px;
-                            height: 40px;
-                            border-radius: 50%;
-                            object-fit: cover;
                         }
 
                         p {
@@ -222,6 +232,7 @@
 
                     button {
                         border: none;
+                        border-radius: 5px;
                         padding: 10px 15px;
                         color: white;
                         background-color: @tertiary-color;
@@ -230,6 +241,9 @@
 
                 svg {
                     color: @background-color;
+                }
+                svg:hover {
+                    background-color: lightgray;
                 }
             }
         }

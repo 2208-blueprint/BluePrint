@@ -12,6 +12,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "./AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ChatSearch() {
   const [username, setUsername] = useState("");
@@ -20,19 +22,27 @@ function ChatSearch() {
 
   const { currentUser } = useContext(AuthContext);
 
+  const toastError = (err) => toast.error(err);
+
   const handleSearch = async () => {
+    console.log('1');
+
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
     );
 
     try {
+
       const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) { return toastError('User not found!') }
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
       });
+
     } catch (err) {
-      setErr(true);
+      console.log(err);
     }
   };
 
@@ -84,7 +94,7 @@ function ChatSearch() {
         <div className="firebase-searchform">
             <input
             type="text"
-            placeholder=' Find a user...'
+            placeholder=' Search users...'
             onKeyDown={handleKey}
             onChange={(e) => setUsername(e.target.value)}
             value={username}

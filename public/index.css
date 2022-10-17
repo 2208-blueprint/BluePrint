@@ -1698,6 +1698,7 @@ iframe {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .navigation-logo img {
   height: 50px;
@@ -1968,12 +1969,14 @@ iframe {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user {
   display: flex;
+  align-items: center;
   gap: 10px;
+  font-size: 20px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user img {
   background-color: white;
-  height: 24px;
-  width: 24px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1985,15 +1988,18 @@ iframe {
   outline: none;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid gray;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input {
   background-color: transparent;
   border: none;
   color: white;
+  height: 40px;
+  outline: none;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input::placeholder {
   color: lightgray;
+  padding-left: 5px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat {
   display: flex;
@@ -2031,6 +2037,13 @@ iframe {
   align-items: center;
   padding: 10px;
   color: white;
+  font-size: 20px;
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons {
   display: flex;
@@ -2045,6 +2058,7 @@ iframe {
   color: #09141a;
   padding: 10px;
   height: calc(100% - 160px);
+  width: 100%;
   overflow: scroll;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message {
@@ -2055,6 +2069,8 @@ iframe {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message .firebase-message-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: gray;
   font-weight: 300;
 }
@@ -2080,15 +2096,10 @@ iframe {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner {
   flex-direction: row-reverse;
+  margin-right: 5px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner .firebase-message-content {
   align-items: flex-end;
-}
-.firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner p {
   background-color: #76befa;
@@ -2125,10 +2136,14 @@ iframe {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input .firebase-send button {
   border: none;
+  border-radius: 5px;
   padding: 10px 15px;
   color: white;
   background-color: #47B5FF;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg {
   color: #09141a;
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg:hover {
+  background-color: lightgray;
 }
