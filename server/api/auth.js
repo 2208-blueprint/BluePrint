@@ -34,7 +34,7 @@ router.get('/login/failed', (req, res) => {
 router.get('/login/success', async(req, res, next) => {
   const userName = require('crypto').randomBytes(64).toString('hex')
   const password = require('crypto').randomBytes(64).toString('hex')
-console.log(req.user);
+
 
   let email = '';
   let profilePicUrl = '';
@@ -121,8 +121,6 @@ router.post("/signup", async (req, res, next) => {
     });
     if (!newUser) {
       newUser = await User.create(req.body);
-      console.log(newUser);
-      console.log(req.body);
 
       res.status(200).send({ token: await User.authenticate(req.body) });
     } else {

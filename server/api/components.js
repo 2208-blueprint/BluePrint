@@ -2,6 +2,7 @@ const User = require("../db/User.js");
 const Component = require("../db/Component.js");
 const Comment = require("../db/Comment.js");
 const router = require("express").Router();
+const sequelize = require;
 
 const requireToken = async (req, res, next) => {
   try {
@@ -111,7 +112,29 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
   try {
     const id = req.params.componentId;
     const user = req.user;
-    const component = await Component.findByPk(id);
+    const component = await Component.findByPk(id, {
+      include: {
+        model: User,
+        through: { where: { isAuthor: true } },
+        attributes: ["id", "highestRank", "currentPoints"],
+      },
+    });
+    const points = component.currentPoints + 10;
+    const componentAuthor = component.users[0];
+    const userPoints = componentAuthor.currentPoints + 10;
+    if (userPoints > componentAuthor.highestRank) {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+        highestRank: userPoints,
+      });
+      console.log(componentAuthor.currentPoints);
+    } else {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+      console.log(componentAuthor.currentPoints);
+    }
+    await component.update({ currentPoints: points });
     await component.addUser(user, { through: { isFavorite: true } });
     res.sendStatus(201);
   } catch (error) {
@@ -127,7 +150,21 @@ router.delete(
     try {
       const id = req.params.componentId;
       const user = req.user;
-      const component = await Component.findByPk(id);
+      const component = await Component.findByPk(id, {
+        include: {
+          model: User,
+          through: { where: { isAuthor: true } },
+          attributes: ["id", "currentPoints"],
+        },
+      });
+      const componentAuthor = component.users[0];
+      const userPoints = componentAuthor.currentPoints - 10;
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+      const points = component.currentPoints - 10;
+      await component.update({ currentPoints: points });
+      console.log(component.currentPoints);
       await component.addUser(user, { through: { isFavorite: false } });
       res.sendStatus(204);
     } catch (error) {
@@ -142,7 +179,28 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
   try {
     const id = req.params.componentId;
     const user = req.user;
-    const component = await Component.findByPk(id);
+    const component = await Component.findByPk(id, {
+      include: {
+        model: User,
+        through: { where: { isAuthor: true } },
+        attributes: ["id", "highestRank", "currentPoints"],
+      },
+    });
+    const points = component.currentPoints + 20;
+    const componentAuthor = component.users[0];
+    const userPoints = componentAuthor.currentPoints + 20;
+    if (userPoints > componentAuthor.highestRank) {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+        highestRank: userPoints,
+      });
+    } else {
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+    }
+    await component.update({ currentPoints: points });
+    console.log(component.currentPoints);
     await component.addUser(user, { through: { isSaved: true } });
     res.sendStatus(201);
   } catch (error) {
@@ -159,7 +217,21 @@ router.delete(
     try {
       const id = req.params.componentId;
       const user = req.user;
-      const component = await Component.findByPk(id);
+      const component = await Component.findByPk(id, {
+        include: {
+          model: User,
+          through: { where: { isAuthor: true } },
+          attributes: ["id", "currentPoints"],
+        },
+      });
+      const points = component.currentPoints - 20;
+      const componentAuthor = component.users[0];
+      const userPoints = componentAuthor.currentPoints - 20;
+      await componentAuthor.update({
+        currentPoints: userPoints,
+      });
+      await component.update({ currentPoints: points });
+      console.log(component.currentPoints);
       await component.addUser(user, { through: { isSaved: false } });
       res.sendStatus(204);
     } catch (error) {
@@ -167,5 +239,35 @@ router.delete(
     }
   }
 );
+
+router.get("/category/:type", async (req, res, next) => {
+  try {
+    const target = req.params.type;
+    let sortedComponents;
+    if (target === "less" || target === "css") {
+      sortedComponents = await Component.findAll({
+        where: {
+          stylingFramework: target,
+        },
+      });
+    } else if (target === "html" || target === "react") {
+      sortedComponents = await Component.findAll({
+        where: {
+          framework: target,
+        },
+      });
+    } else {
+      sortedComponents = await Component.findAll({
+        where: {
+          type: target,
+        },
+      });
+    }
+
+    res.send(sortedComponents);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

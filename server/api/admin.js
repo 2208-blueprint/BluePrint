@@ -1,4 +1,5 @@
 const User = require("../db/User.js");
+const Component = require("../db/Component.js");
 const router = require("express").Router();
 
 const requireToken = async (req, res, next) => {
@@ -31,6 +32,40 @@ router.put("/delete-user/:id", requireToken, async (req, res, next) => {
     const user = await User.findByPk(req.params.id);
     await user.destroy();
     res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
+  }
+});
+router.get("/top-components", async (req, res, next) => {
+  try {
+    const topComponents = await Component.findAll({
+      limit: 5,
+      order: [["currentPoints", "DESC"]],
+      include: {
+        model: User,
+        through: { isSaved: true, isFavorite: true },
+        attributes: ["username"],
+      },
+    });
+
+    res.send(topComponents);
+  } catch (ex) {
+    next(ex);
+  }
+});
+router.get("/top-users", async (req, res, next) => {
+  try {
+    const topUsers = await User.findAll({
+      limit: 5,
+      order: [["currentPoints", "DESC"]],
+      include: {
+        model: Component,
+        through: { where: { isAuthor: true } },
+        required: true,
+      },
+    });
+    await topUsers[0].update({ wasFirst: true });
+    res.send(topUsers);
   } catch (ex) {
     next(ex);
   }
