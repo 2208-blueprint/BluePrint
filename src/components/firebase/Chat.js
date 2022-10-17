@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { ChatContext } from "./ChatContext";
 import { Messages, ChatInput } from '../'
 import { HiOutlineUserAdd, HiDotsHorizontal } from "react-icons/hi";
 
 function Chat() {
+  const { data } = useContext(ChatContext);
+
   return (
     <div className='firebase-chat'>
         <div className="firebase-chat-info">
-            <span>Jane</span>
+            <span>{data.user?.displayName}</span>
             <div className="firebase-chat-icons">
                 <HiOutlineUserAdd />
                 <HiDotsHorizontal />
             </div>
         </div>
         <Messages />
-        <ChatInput />    </div>
+        <ChatInput />
+      </div>
   )
 }
 

@@ -32,6 +32,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        const displayName = username;
         const defaultProfilePicture = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
 
         let newUserObj = {
@@ -90,7 +91,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                     //create user on firestore
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
-                      username,
+                      displayName: displayName,
                       email,
                       photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
