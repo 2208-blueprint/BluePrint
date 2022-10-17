@@ -30,8 +30,12 @@ body {
   transition: 0.25s ease;
 }
 #singlecomp-top .singlecomp-title-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-left: 50px;
   font-family: 'Inter';
+  margin-right: auto;
 }
 #singlecomp-top .singlecomp-title-author span {
   font-size: 1.75rem;
@@ -44,6 +48,30 @@ body {
 #singlecomp-top .singlecomp-title-author .singlecomp-author:hover {
   text-decoration: underline;
 }
+#singlecomp-top .singlecomp-title-author #singlecomp-follow {
+  cursor: pointer;
+  margin-left: 20px;
+}
+#singlecomp-top .singlecomp-title-author .singlecomp-tooltip {
+  visibility: hidden;
+  height: 100px;
+  width: 100px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  z-index: 999;
+  transition-duration: 0.4s;
+  transition-delay: 0.4s;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
+}
+#singlecomp-top .singlecomp-title-author #singlecomp-follow:hover .singlecomp-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 #singlecomp-top #singlecomp-heart {
   font-family: 'Inter', 'sans-serif';
   font-size: 3rem;
@@ -52,12 +80,50 @@ body {
 #singlecomp-top #singlecomp-heart .singlecomp-hearted {
   color: #ca6072;
 }
+#singlecomp-top #singlecomp-heart .singlecomp-tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: absolute;
+  right: 50px;
+  opacity: 0;
+  z-index: 999;
+  transition-duration: 0.4s;
+  transition-delay: 0.4s;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
+}
+#singlecomp-top #singlecomp-heart:hover .singlecomp-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 #singlecomp-top #singlecomp-save {
   font-family: 'Inter', 'sans-serif';
   font-size: 3rem;
 }
 #singlecomp-top #singlecomp-save .singlecomp-saved {
   color: #ca6072;
+}
+#singlecomp-top #singlecomp-save .singlecomp-tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: absolute;
+  right: 20px;
+  opacity: 0;
+  z-index: 999;
+  transition-duration: 0.4s;
+  transition-delay: 0.4s;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
+}
+#singlecomp-top #singlecomp-save:hover .singlecomp-tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 .singlecomp-grow {
   animation-name: grow;
@@ -2192,6 +2258,7 @@ iframe {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  min-height: 80vh;
 }
 #search-user-root .search-user-bar-container {
   margin-top: 30px;
