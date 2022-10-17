@@ -8,6 +8,8 @@ import Axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getSingleUser } from "../../store/users/singleUserSlice";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function LoginForm({ toggle, setToggle, setLoggedIn }) {
   const [username, setUserName] = React.useState("");
@@ -37,12 +39,17 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
     };
 
     try {
-      const auth = await Axios.post("/api/auth/login", loginObj);
-
-      const { token } = auth.data;
-      console.log(auth);
-
+      const authorize = await Axios.post("/api/auth/login", loginObj);
+      const { token } = authorize.data;
       window.localStorage.setItem("token", token);
+
+      const currentUser = await Axios.get("api/profile", {
+        headers: {
+          authorization: token,
+        },
+      });
+
+      await signInWithEmailAndPassword(auth, currentUser.data.email, password);
 
       setUserName("");
       setPassword("");

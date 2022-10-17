@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   CreateComponent,
@@ -6,6 +6,7 @@ import {
   Redirect,
   ProfilePage,
   NotFoundPage,
+  FireBaseChat
 } from "./components";
 import { SingleComponent } from "./components";
 import { LoginPage } from "./components";
@@ -20,9 +21,13 @@ import UserPage from "./components/users/UserPage";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from './components/firebase/AuthContext'
+
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const { currentUser } = useContext(AuthContext);
+
 
   return (
     <>
@@ -50,6 +55,7 @@ function App() {
           element={<LoginPage setLoggedIn={setLoggedIn} />}
         ></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route path="/chat" element={<FireBaseChat />}></Route>
         <Route path="/redirect" element={<Redirect />}></Route>
         <Route path="/:badpath" element={<NotFoundPage />}></Route>
       </Routes>

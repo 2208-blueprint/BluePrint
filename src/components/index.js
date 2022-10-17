@@ -25,3 +25,12 @@ export { default as LeaderboardRowComponent } from "./MainPage/LeaderboardRowCom
 export { getSingleUser } from "../store/users/singleUserSlice";
 export { default as Navigation } from "./navigation/Navigation";
 export { default as SearchUsers } from "./searchUsers/SearchUsers";
+export { default as FireBaseChat } from "./firebase/FireBaseChat";
+export { default as Chat } from "./firebase/Chat";
+export { default as Chats } from "./firebase/Chats";
+export { default as ChatNavbar } from "./firebase/ChatNavbar";
+export { default as ChatSideBar } from "./firebase/ChatSidebar";
+export { default as ChatSearch } from "./firebase/ChatSearch";
+export { default as Message } from "./firebase/Message";
+export { default as Messages } from "./firebase/Messages";
+export { default as ChatInput } from "./firebase/ChatInput";
