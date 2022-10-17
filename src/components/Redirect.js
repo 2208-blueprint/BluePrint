@@ -15,8 +15,10 @@ function Redirect() {
         async function test() {
           try{
             const {data} = await Axios.get('/api/auth/login/success')
+            console.log(data.user);
+
             window.localStorage.setItem('token', data.token)
-            navigate('/')
+            // navigate('/')
             toastLogin('You are logged in!')
           }
           catch(e) {

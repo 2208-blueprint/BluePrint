@@ -76,9 +76,16 @@ function ChatInput() {
     setImg(null);
   };
 
+  const handleKey = (e) => {
+    console.log(e);
+
+    e.code === "Enter" && handleSend();
+  };
+
+
   return (
     <div className='firebase-chat-input'>
-        <input
+        <input onKeyDown={(e) => handleKey(e)}
         type='text'
         placeholder='Type somthing...'
         onChange={(e) => setText(e.target.value)}
