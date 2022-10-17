@@ -3,10 +3,12 @@ const path = require('path')
 const cors = require('cors')
 const volleyball = require('volleyball')
 const app = express()
+const jwt = require('jsonwebtoken')
 const passport = require('passport');
 const passportSetup = require('./passport');
 const authRoute = require('./api/auth')
 const cookieSession = require("cookie-session");
+
 
 // static middleware
 app.use(express.static(path.join(__dirname, '..','/public')))

@@ -16,7 +16,7 @@ const Comment = db.define("comment", {
 
 module.exports = Comment;
 
-/* 
+/*
 comment belongs to component
 component has many comments
 
