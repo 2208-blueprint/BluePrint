@@ -10,7 +10,6 @@ export { default as MainPage } from "./MainPage/MainPage";
 export { default as Sidebar } from "./MainPage/Sidebar";
 export { default as SearchComponent } from "./MainPage/SearchComponent";
 export { default as CategoryComponent } from "./MainPage/CategoryComponent";
-export { default as FrameworkComponent } from "./MainPage/FrameworkComponent";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as DropDownItems } from "./navbar/DropDownItems";
 export { default as Footer } from "./footer/Footer";

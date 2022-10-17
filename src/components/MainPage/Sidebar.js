@@ -116,25 +116,25 @@ function Sidebar() {
         </div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/framework/react`)}
+          onClick={() => navigate(`/components/category/react`)}
         >
           REACT
         </div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/framework/${"html"}`)}
+          onClick={() => navigate(`/components/category/${"html"}`)}
         >
           HTML
         </div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/framework/css`)}
+          onClick={() => navigate(`/components/category/css`)}
         >
           CSS
         </div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/framework/less`)}
+          onClick={() => navigate(`/components/category/less`)}
         >
           LESS
         </div>

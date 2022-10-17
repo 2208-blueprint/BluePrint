@@ -243,19 +243,6 @@ router.delete(
 router.get("/category/:type", async (req, res, next) => {
   try {
     const target = req.params.type;
-    const sortedComponents = await Component.findAll({
-      where: {
-        type: target,
-      },
-    });
-    res.send(sortedComponents);
-  } catch (err) {
-    next(err);
-  }
-});
-router.get("/framework/:framework", async (req, res, next) => {
-  try {
-    const target = req.params.framework;
     let sortedComponents;
     if (target === "less" || target === "css") {
       sortedComponents = await Component.findAll({
@@ -263,13 +250,20 @@ router.get("/framework/:framework", async (req, res, next) => {
           stylingFramework: target,
         },
       });
-    } else {
+    } else if (target === "html" || target === "react") {
       sortedComponents = await Component.findAll({
         where: {
           framework: target,
         },
       });
+    } else {
+      sortedComponents = await Component.findAll({
+        where: {
+          type: target,
+        },
+      });
     }
+
     res.send(sortedComponents);
   } catch (err) {
     next(err);

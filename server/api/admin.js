@@ -64,7 +64,7 @@ router.get("/top-users", async (req, res, next) => {
         required: true,
       },
     });
-    // await topUsers[0].update({ wasFirst: true });
+    await topUsers[0].update({ wasFirst: true });
     res.send(topUsers);
   } catch (ex) {
     next(ex);

@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom";
 function CategoryComponent() {
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [title, setTitle] = React.useState(true);
+  const [length, setLength] = React.useState(0);
   const { type } = useParams();
 
   React.useEffect(() => {
@@ -20,6 +22,8 @@ function CategoryComponent() {
       const { data } = await axios.get(`/api/components/category/${type}`);
       console.log(data);
       setComponents(data);
+      setLength(data.length);
+      setTitle(type);
       setIsLoading(false);
     }
     getComponents();
@@ -35,10 +39,17 @@ function CategoryComponent() {
         </div>
         <div className="main-page-content-container">
           <div className="search-result-search-term">
-            {type === "misc" || type === "mobile" ? type : `${type}s`}
-            <div className="search-result-search-term-number">{`${
-              components?.length
-            } ${components?.length === 1 ? "match" : "matches"}`}</div>
+            {title === "misc" ||
+            title === "mobile" ||
+            title === "react" ||
+            title === "html" ||
+            title === "css" ||
+            title === "less"
+              ? title
+              : `${title}s`}
+            <div className="search-result-search-term-number">{`${length} ${
+              length === 1 ? "match" : "matches"
+            }`}</div>
           </div>
 
           <div className="main-page-list-content-container">
