@@ -16,6 +16,7 @@ import { DropDownItems } from "./components";
 import { SearchComponent } from "./components";
 import { AllUsersPage } from "./components";
 import { Navigation, SearchUsers } from "./components";
+import { CategoryComponent } from "./components";
 import UserPage from "./components/users/UserPage";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -36,13 +37,18 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/users" element={<AllUsersPage />}></Route>
-        <Route path="/users/search" element={<SearchUsers/>}></Route>
+        <Route path="/users/search" element={<SearchUsers />}></Route>
         <Route path="/users/:id" element={<UserPage />}></Route>
         <Route path="/components/:id" element={<SingleComponent />}></Route>
         <Route
           path="/components/search/:keywords"
           element={<SearchComponent />}
         ></Route>
+        <Route
+          path="/components/category/:type"
+          element={<CategoryComponent />}
+        ></Route>
+
         <Route path="/profile/create" element={<CreateComponent />}></Route>
         <Route
           path="/login"
