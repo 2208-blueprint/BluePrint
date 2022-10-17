@@ -253,5 +253,27 @@ router.get("/category/:type", async (req, res, next) => {
     next(err);
   }
 });
+router.get("/framework/:framework", async (req, res, next) => {
+  try {
+    const target = req.params.framework;
+    let sortedComponents;
+    if (target === "less" || target === "css") {
+      sortedComponents = await Component.findAll({
+        where: {
+          stylingFramework: target,
+        },
+      });
+    } else {
+      sortedComponents = await Component.findAll({
+        where: {
+          framework: target,
+        },
+      });
+    }
+    res.send(sortedComponents);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

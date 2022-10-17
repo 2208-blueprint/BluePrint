@@ -114,10 +114,30 @@ function Sidebar() {
         >
           FRAMEWORKS
         </div>
-        <div className="side-bar-container-category">REACT</div>
-        <div className="side-bar-container-category">HTML</div>
-        <div className="side-bar-container-category">CSS</div>
-        <div className="side-bar-container-category">LESS</div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/framework/react`)}
+        >
+          REACT
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/framework/${"html"}`)}
+        >
+          HTML
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/framework/css`)}
+        >
+          CSS
+        </div>
+        <div
+          className="side-bar-container-category"
+          onClick={() => navigate(`/components/framework/less`)}
+        >
+          LESS
+        </div>
         <div
           className="side-bar-container-category-heading"
           id="side-bar-resources"

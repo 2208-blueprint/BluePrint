@@ -16,6 +16,7 @@ import { SearchComponent } from "./components";
 import { AllUsersPage } from "./components";
 import { Navigation, SearchUsers } from "./components";
 import { CategoryComponent } from "./components";
+import { FrameworkComponent } from "./components";
 import UserPage from "./components/users/UserPage";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -42,6 +43,10 @@ function App() {
         <Route
           path="/components/category/:type"
           element={<CategoryComponent />}
+        ></Route>
+        <Route
+          path="/components/framework/:framework"
+          element={<FrameworkComponent />}
         ></Route>
         <Route path="/profile/create" element={<CreateComponent />}></Route>
         <Route
