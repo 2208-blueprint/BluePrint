@@ -11,7 +11,6 @@ import {
 import { db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { IoMdAttach } from "react-icons/io";
 import { BsImage } from "react-icons/bs";
 
 function ChatInput() {

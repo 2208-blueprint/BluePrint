@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from "axios";
 
 const SearchUsers = () => {
@@ -88,11 +88,11 @@ const SearchUsers = () => {
                 </div>
             </div>
             <div className="search-user-results">
-                {filteredUsers?.length === 0 ? 
+                {filteredUsers?.length === 0 ?
                 <div className="search-user-none">
                     <h1>No users found with "{search}"</h1>
-                </div> 
-                : filteredUsers?.map((user) => 
+                </div>
+                : filteredUsers?.map((user) =>
                     <div className="search-user-card" key={user.id} value={user.id}>
                         <img src={user.img}></img>
                         <div className="search-user-text">

@@ -1,12 +1,12 @@
 import React from 'react'
 import Axios from 'axios'
-import {useNavigate} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { db, auth, storage } from '../firebase'
 import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function Redirect() {
 

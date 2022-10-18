@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSingleUser } from '../../store/users/singleUserSlice'
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Sidebar from '../MainPage/Sidebar.js'
 import { AuthContext } from '../firebase/AuthContext'
 import { auth } from '../../firebase'
