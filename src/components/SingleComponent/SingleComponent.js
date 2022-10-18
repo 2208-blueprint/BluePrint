@@ -276,8 +276,8 @@ function SingleComponent() {
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
       <div className='singlecomp-title-author'>
-        <span>{title} by </span><span onClick={()=>navigate(`/users/${author.id}`)} className="singlecomp-author"> {author.username}</span>
-        {loggin && !amCreator ? 
+        <span>{title} by </span><span onClick={author.username ? ()=>navigate(`/users/${author.id}`) : ()=>navigate('/')} className="singlecomp-author"> {author.username ? author.username : 'BluePrint Community'}</span>
+        {(loggin && !amCreator && author.username) ? 
          (followed ? <div onClick={followHandler} id ="singlecomp-follow">
           <IconContext.Provider value={{size: "40px"}}>
             <BsPersonCheckFill/>
@@ -462,8 +462,8 @@ function SingleComponent() {
         </div>
         <div id ="singlecomp-userinfo">
             <h1>{title}</h1>
-            <h1>By {author.username}</h1>
-            <a href={`/users/${author.id}`}>See more from {author.username}</a>
+            <h1>By {author.username ? author.username : 'BluePrint Community'}</h1>
+            <a href={author.username ? `/users/${author.id}` : '/'}>See more from {author.username ? author.username : 'BluePrint Community'}</a>
         </div>
         <div id="singlecomp-color-picker">
           <h1>Color Selector Tool</h1>
