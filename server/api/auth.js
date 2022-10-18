@@ -36,6 +36,7 @@ router.get('/login/success', async(req, res, next) => {
   const password = require('crypto').randomBytes(64).toString('hex')
 
 
+
   let email = '';
   let profilePicUrl = '';
 
@@ -60,9 +61,9 @@ router.get('/login/success', async(req, res, next) => {
 
   if (!userCheck) {
     const newUser = await User.create({
-      username: userName,
-      firstName: 'Not Provided',
-      lastName: 'Not Provided',
+      username: req.user.displayName,
+      firstName: req.user['_json'].given_name,
+      lastName: req.user['_json'].family_name,
       password: password,
       email,
       img: profilePicUrl,
@@ -78,8 +79,10 @@ router.get('/login/success', async(req, res, next) => {
           success: true,
           message: 'Login successful',
           user: req.user,
+          password: password,
           // jwt token here or cookies
           token: token,
+          img: profilePicUrl,
       })
   }
 })
