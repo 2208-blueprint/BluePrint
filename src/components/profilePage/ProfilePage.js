@@ -17,6 +17,7 @@ function ProfilePage() {
   const [rank, setRank] = React.useState("");
   const [rankColor, setRankColor] = React.useState("");
 
+
   const navigate = useNavigate();
   const toastPopup = (msg) => {
     toast.dark(msg, { autoClose: 2000 });
@@ -73,6 +74,7 @@ function ProfilePage() {
     }
     getUser();
   }, []);
+console.log(savedComponents);
 
   return (
     <div className="profile-wrapper">
@@ -141,7 +143,7 @@ function ProfilePage() {
           </div>
           <hr></hr>
           <div className="profile-new-component-button-container">
-            <button className="profile-new-component-button">
+            <button className="profile-new-component-button" onClick={() => navigate('/profile/create')}>
               Create new component
             </button>
           </div>
@@ -169,6 +171,7 @@ function ProfilePage() {
                   <small>{user?.country}</small>
                 </div>
             </div>
+            <hr></hr>
             <div className="profile-user-info-right">
                 <h1>Achievements</h1>
                 <div className="profile-achievements rank">Rank: {rank}</div>
@@ -217,6 +220,34 @@ function ProfilePage() {
         </div>
         <div className="profile-user-extras-right">
           <h1>My favorites</h1>
+          <div className="profile-user-saved-components">
+              {savedComponents?.map((component, i) => {
+                if (!component.user_component.isAuthor) {
+                  return (
+                    <div
+                      key={'saved' + i}
+                      className="profile-user-single-saved"
+                      onClick={() =>
+                        uploadNavigate(`/components/${component.id}`)
+                      }
+                    >
+                      <div className="user-saved-image">
+                        <img src={component.img} alt="" />
+                      </div>
+                      <p>{component.name}</p>
+                      <div className="single-user-saved-frameworks">
+                        <div className="single-user-saved-framework">
+                          {component.framework}
+                        </div>
+                        <div className="single-user-saved-framework">
+                          {component.stylingFramework}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
         </div>
       </div>
     </div>

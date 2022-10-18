@@ -37,7 +37,6 @@ function Redirect() {
             const querySnapshot = await getDocs(q);
 console.log(querySnapshot);
 
-            console.log();
 
             if (querySnapshot.empty) {
               const res = await createUserWithEmailAndPassword(auth, socialLoginEmail, data.password);
