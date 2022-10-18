@@ -1,5 +1,10 @@
 @import "variables";
 
+@keyframes fadein {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
 #navigation-root-container {
   width: 100%;
   position: static;
@@ -16,6 +21,51 @@
   z-index: 999;
   font-family: "Inter", "sans-serif";
   width: 100%;
+}
+
+.navigation-fall-down {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  right: 40px;
+  top: 94px;
+  padding: 16px;
+  color: white;
+  background-color: rgb(32, 33, 45);
+  animation: fadein 0.25s;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    width: fit-content;
+    height: auto;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    padding: 15px;
+    // box-shadow: 3px 3px 0px 0px rgb(130, 149, 176);
+    transition: 0.25s ease;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  a:hover {
+    // box-shadow: none;
+    background-color: #14669d;
+  }
+
+  .navigation-logout {
+    background-color: #0f507b;
+    cursor: pointer;
+    align-self: center;
+  }
+
+  .navigation-logout:hover {
+    background-color: #0f4467;
+  }
 }
 
 .navigation-link-wrapper {
@@ -35,6 +85,13 @@
     padding: 15px;
     // box-shadow: 3px 3px 0px 0px rgb(130, 149, 176);
     transition: 0.25s ease;
+  }
+
+  .navigation-search-button {
+    background-color: @background-color;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   a:hover {
@@ -101,6 +158,14 @@
   width: 100%;
   display: none;
   z-index: 999;
+
+  .navigation-search-button {
+    background-color: @background-color;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   a {
     background-color: #1a83c8;
     color: white;
