@@ -16,6 +16,7 @@ import CommentsSection from "./CommentsSection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
+import { BsPersonPlusFill, BsPersonCheckFill} from 'react-icons/bs'
 import { IconContext } from "react-icons";
 
 function SingleComponent() {
@@ -34,8 +35,10 @@ function SingleComponent() {
   })
   const [liked, setLiked] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [followed, setFollowed] = useState(false)
   const [author, setAuthor] = useState({username: '', id:0})
   const [loggin, setLoggin] = useState(false)
+  const [amCreator, setAmCreator] = useState(false)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -148,6 +151,32 @@ function SingleComponent() {
     }
   }
 
+  async function followHandler(e) {
+    try {
+      e.preventDefault();
+      if (window.localStorage.token) {
+        if (!followed) {
+          await axios.put(`/api/users/follow/${author.id}`,{},{
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+          toastPopup(`Now following ${author.username}`)
+        } else {
+          await axios.put(`/api/users/unfollow/${author.id}`,{},{
+            headers: {
+              authorization: window.localStorage.getItem('token')
+            }
+          });
+          toastPopup(`Unfollowed ${author.username}`)
+        }
+        setFollowed(!followed)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   // if any of those changes, then re define the source for the iframe
   React.useEffect(() => {
     setSrcDoc(`
@@ -169,6 +198,8 @@ function SingleComponent() {
       // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
       let currentUser
+      let currentFollowers
+      let currentAuthor
 
       if (window.localStorage.getItem('token')) {
         const profile = await axios.get(`/api/users/profile`, {
@@ -176,7 +207,13 @@ function SingleComponent() {
             authorization: window.localStorage.getItem('token')
           }
         });
+        const followers = await axios.get('/api/users/following', {
+          headers: {
+            authorization: window.localStorage.getItem('token')
+          }
+        })
         currentUser = profile.data
+        currentFollowers = followers.data
       }
 
       if (data.framework === 'html') {
@@ -195,6 +232,7 @@ function SingleComponent() {
       for (let i = 0; i < data.users.length; i++) {
         if (data.users[i].user_component.isAuthor) {
           setAuthor(data.users[i])
+          currentAuthor = data.users[i]
         }
       }
       if (window.localStorage.getItem('token')) {
@@ -209,6 +247,12 @@ function SingleComponent() {
         }
         if (componentLikes.find((user) => user.id === currentUser.id)) {
           setLiked(true);
+        }
+        if (currentFollowers.find((user) => user.id === currentAuthor.id)) {
+          setFollowed(true)
+        }
+        if (currentAuthor.id === currentUser.id) {
+          setAmCreator(true)
         }
       }
     }
@@ -233,9 +277,22 @@ function SingleComponent() {
       </a>
       <div className='singlecomp-title-author'>
         <span>{title} by </span><span onClick={()=>navigate(`/users/${author.id}`)} className="singlecomp-author"> {author.username}</span>
+        {loggin && !amCreator ? 
+         (followed ? <div onClick={followHandler} id ="singlecomp-follow">
+          <IconContext.Provider value={{size: "40px"}}>
+            <BsPersonCheckFill/>
+          </IconContext.Provider>
+          <span className="singlecomp-tooltip">Unfollow User</span>
+        </div> : <div onClick={followHandler} id="singlecomp-follow">
+          <IconContext.Provider value={{size: "40px"}}>
+            <BsPersonPlusFill/>
+          </IconContext.Provider>
+          <span className="singlecomp-tooltip">Follow User</span>
+        </div>) : <div></div>}
       </div>
       {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
-        {liked ? <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
+        {liked ?
+        <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
                     value={{ size: "40px"}}
                   >
                     <FaHeart/>
@@ -245,6 +302,7 @@ function SingleComponent() {
                 >
                   <FaRegHeart/>
                 </IconContext.Provider></span>}
+                {/* <span className="singlecomp-tooltip">Like</span> */}
         </div>
       : <div></div>}
       {loggin ? <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
@@ -258,6 +316,7 @@ function SingleComponent() {
                 >
                   <FaSave/>
                 </IconContext.Provider></span>}
+                {/* <span className="singlecomp-tooltip">Save</span> */}
         </div>
       : <div></div>}
       </div>

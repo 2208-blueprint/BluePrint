@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme={"dark"} />
+      <ToastContainer theme={"dark"} position="top-center" autoClose={2000}/>
       {/* <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> */}
       <Navigation setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       <Routes>
@@ -59,7 +59,7 @@ function App() {
         <Route path="/redirect" element={<Redirect />}></Route>
         <Route path="/:badpath" element={<NotFoundPage />}></Route>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

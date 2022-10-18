@@ -83,6 +83,15 @@ router.get("/followers", requireToken, async (req, res, next) => {
     next(error);
   }
 });
+router.get("/following", requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const following = await user.getFollowing();
+    res.send(following);
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/:userId/followers", async (req, res, next) => {
   try {
     const id = req.params.userId;
