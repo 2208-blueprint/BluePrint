@@ -4,6 +4,10 @@ const passport = require('passport');
 const CLIENT_URL = 'http://localhost:3000/api/auth/login/success';
 const jwt = require('jsonwebtoken')
 
+if (process.env.NODE_ENV !== "production") {
+  require("../../secrets.js");
+}
+
 
 const requireToken = async (req, res, next) => {
   try {
@@ -32,10 +36,7 @@ router.get('/login/failed', (req, res) => {
 })
 
 router.get('/login/success', async(req, res, next) => {
-  const userName = require('crypto').randomBytes(64).toString('hex')
-  const password = require('crypto').randomBytes(64).toString('hex')
-
-
+  const password = process.env.RPW;
 
   let email = '';
   let profilePicUrl = '';

@@ -22,15 +22,25 @@ function Redirect() {
           try{
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
+            console.log(data);
 
             const usersRef = collection(db, 'users')
+            let socialLoginEmail = '';
 
-            const q = query(usersRef, where("displayName", "==", data.user.displayName))
+            if (data.user.provider !== 'twitch') {
+              socialLoginEmail = data.user.emails[0].value;
+            }
+            else {
+              socialLoginEmail = data.user.email;
+            }
+
+            const q = query(usersRef, where("email", "==", socialLoginEmail))
             const querySnapshot = await getDocs(q);
+
 
             console.log(data);
             if (querySnapshot.empty) {
-              const res = await createUserWithEmailAndPassword(auth, data.user.emails[0].value, data.password);
+              const res = await createUserWithEmailAndPassword(auth, socialLoginEmail, data.password);
               console.log(res);
 
               res.displayName = data.user.displayName;
@@ -53,14 +63,14 @@ function Redirect() {
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
                       displayName: data.user.displayName,
-                      email: data.user.emails[0].value,
+                      email: socialLoginEmail,
                       photoURL: data.user.photos[0].value ? data.user.photos[0].value : defaultProfilePicture,
                     });
 
                     //create empty user chats on firestore
                     await setDoc(doc(db, "userChats", res.user.uid), {});
 
-                    await signInWithEmailAndPassword(auth, data.user.emails[0].value, data.password)
+                    await signInWithEmailAndPassword(auth, socialLoginEmail, data.password)
 
                     navigate("/");
                   } catch (err) {
@@ -72,10 +82,11 @@ function Redirect() {
               });
             }
             else {
-              await signInWithEmailAndPassword(auth, data.user.emails[0].value, data.password);
+              await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
             navigate('/')
+            window.location.reload(false)
             toastLogin('You are logged in!')
           }
           catch(e) {
