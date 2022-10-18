@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { BsPeople, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
+import { BsPeople, BsBookmarkStar, BsHeartFill, BsCardChecklist, BsPencilFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import { GiGearHammer } from "react-icons/gi";
@@ -140,10 +140,6 @@ function ProfilePage() {
             </p>
           </div>
           <hr></hr>
-          <div className="profile-category-link">
-            <p>Placeholder</p>
-          </div>
-          <hr></hr>
           <div className="profile-new-component-button-container">
             <button className="profile-new-component-button">
               Create new component
@@ -154,17 +150,37 @@ function ProfilePage() {
       <div className="profile-main-content-container">
         <div className="profile-user-extras-container">
           <div className="profile-user-info-container">
-            <h1>My info</h1>
-            <div className="profile-user-name">
-              {`${user?.firstName} ${user?.lastName}`}{" "}
-              <span className="profile-country-span">
-                <FaMapMarkerAlt />
-                <small>{user?.country}</small>
-              </span>
+            <div className="profile-user-info-left">
+              <h1>My info</h1>
+              <div className="profile-user-name">
+                <BsPencilFill />
+                {`${user?.firstName} ${user?.lastName}`}{" "}
+              </div>
+              <div className="profile-user-email">
+                <MdOutlineMail />
+                {user?.email}
+              </div>
+              <div className="profile-user-member-since">
+                <BsCardChecklist />
+                <small>Joined: {user?.createdAt.slice(0, 10)}</small>
+              </div>
+                <div className="profile-country-span">
+                  <FaMapMarkerAlt />
+                  <small>{user?.country}</small>
+                </div>
             </div>
-            <div className="profile-user-email">
-              <MdOutlineMail />
-              {user?.email}
+            <div className="profile-user-info-right">
+                <h1>Achievements</h1>
+                <div className="profile-achievements rank">Rank: {rank}</div>
+                <div className="profile-achievements points">Points: {user?.highestRank}</div>
+                <div className="profile-achievements badges">Badges: <GiGearHammer
+                  style={{
+                    marginLeft: "8px",
+                  }}
+                  size="20px"
+                  color={rankColor}
+                />
+              </div>
             </div>
           </div>
           <div className="profile-user-extras-left">

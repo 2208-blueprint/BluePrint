@@ -233,7 +233,6 @@
     .profile-user-info-container {
       color: @secondary-color;
       display: flex;
-      flex-direction: column;
       justify-content: flex-start;
       flex: 0.5;
       width: 100%;
@@ -252,23 +251,81 @@
 
       h1 {
         display: flex;
-        margin: 10px;
+        margin: 10px 10px 25px 10px;
       }
 
-      .profile-user-name {
-        .profile-country-span {
-          margin: 0 0 0 20px;
 
-          svg {
-            margin: 0 3px 0 0;
-          }
+      .profile-user-email {
+        margin: 0 0 10px 10px;
+
+        svg {
+          vertical-align: middle;
+          margin: 0 10px 0 0;
         }
+
+      }
+      .profile-user-member-since {
+        margin: 0 0 10px 10px;
+
+        svg {
+          vertical-align: middle;
+          margin: 0 10px 0 0;
+        }
+
+      }
+      .profile-user-name {
+        margin: 0 0 10px 10px;
+
+        svg {
+          vertical-align: middle;
+          margin: 0 10px 0 0;
+        }
+
+      }
+      .profile-country-span {
+        margin: 0 0 10px 10px;
+
+        svg {
+          vertical-align: middle;
+          margin: 0 10px 0 0;
+        }
+
       }
 
       .profile-new-component-button-container {
         display: flex;
         justify-content: center;
         width: 100%;
+      }
+
+      .profile-user-info-left {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        border-right: 1px solid @background-color;
+
+      }
+      .profile-user-info-right {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        margin: 0 0 0 10px;
+
+        .profile-achievements {
+          margin: 0 0 10px 0;
+
+          svg {
+            vertical-align: middle;
+          }
+        }
+
+        h1 {
+          display: flex;
+          margin: 15px 10px 25px 0;
+          font-size: 25px;
+        }
       }
     }
 

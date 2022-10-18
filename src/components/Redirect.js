@@ -22,7 +22,6 @@ function Redirect() {
           try{
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
-            console.log(data);
 
             const usersRef = collection(db, 'users')
             let socialLoginEmail = '';
@@ -36,9 +35,10 @@ function Redirect() {
 
             const q = query(usersRef, where("email", "==", socialLoginEmail))
             const querySnapshot = await getDocs(q);
+console.log(querySnapshot);
 
+            console.log();
 
-            console.log(data);
             if (querySnapshot.empty) {
               const res = await createUserWithEmailAndPassword(auth, socialLoginEmail, data.password);
               console.log(res);
