@@ -22,13 +22,13 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
   const toastLogin = (msg) => toast.success(msg);
 
   const google = async () => {
-    window.open("http://localhost:3000/auth/google", "_self");
+    window.open("https://fsa-blueprint.herokuapp.com/auth/google", "_self");
   };
   const github = async () => {
-    window.open("http://localhost:3000/auth/github", "_self");
+    window.open("https://fsa-blueprint.herokuapp.com/auth/github", "_self");
   };
   const twitchtv = async () => {
-    window.open("http://localhost:3000/auth/twitch", "_self");
+    window.open("https://fsa-blueprint.herokuapp.com/auth/twitch", "_self");
   };
 
   const handleSubmit = async (e) => {
