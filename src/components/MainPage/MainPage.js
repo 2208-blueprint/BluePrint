@@ -10,12 +10,19 @@ import axios from "axios";
 import { getSingleUser } from "../../store/users/singleUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { IconContext } from "react-icons";
-import { BsQuestionCircleFill } from "react-icons/bs";
+import {
+  BsQuestionCircleFill,
+  BsArrowRightShort,
+  BsArrowLeftShort,
+} from "react-icons/bs";
 
 function MainPage() {
   //   const [users, setUsers] = React.useState([]);
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [componentsPerPage, setComponentsPerPage] = React.useState(6);
+
   const dispatch = useDispatch();
   dispatch(getSingleUser());
 
@@ -27,6 +34,25 @@ function MainPage() {
     }
     getComponents();
   }, []);
+
+  const lastPostIndex = currentPage * componentsPerPage;
+  const firstPostIndex = lastPostIndex - componentsPerPage;
+  const currentComponents = components.slice(firstPostIndex, lastPostIndex);
+  const totalPages = Math.ceil(components.length / componentsPerPage);
+
+  const nextPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const previousPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div className="main-page-main-container">
@@ -77,18 +103,40 @@ function MainPage() {
             </div>
             <Leaderboard />
           </div>
-          <div className="main-page-list-content-container">
-            {isLoading && <ContentSkeleton cards={9} />}
-            {components.map((component, i) => {
-              return (
-                <div>
-                  <ComponentCard
-                    componentId={component.id}
-                    key={component.id}
-                  />
-                </div>
-              );
-            })}
+          <div className="mainPage-button-container">
+            <button onClick={previousPage} className="main-page-prev-button">
+              <IconContext.Provider
+                value={{
+                  size: "30px",
+                  className: "main-page-pagination-arrow",
+                }}
+              >
+                <BsArrowLeftShort />
+              </IconContext.Provider>
+            </button>
+            <button onClick={nextPage} className="main-page-next-button">
+              <IconContext.Provider
+                value={{
+                  size: "30px",
+                  className: "main-page-pagination-arrow",
+                }}
+              >
+                <BsArrowRightShort />
+              </IconContext.Provider>
+            </button>
+            <div className="main-page-list-content-container">
+              {isLoading && <ContentSkeleton cards={9} />}
+              {currentComponents.map((component, i) => {
+                return (
+                  <div>
+                    <ComponentCard
+                      componentId={component.id}
+                      key={component.id}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

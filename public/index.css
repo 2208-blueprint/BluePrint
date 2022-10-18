@@ -808,6 +808,40 @@ a.createcomp-back div span {
 body {
   background-color: #09141a;
 }
+.mainPage-button-container {
+  position: relative;
+}
+.main-page-prev-button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  left: -50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.9;
+}
+.main-page-next-button {
+  width: 60px;
+  height: 60px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.9;
+}
+.main-page-pagination-arrow {
+  color: white;
+}
 .main-page-wrapper {
   display: flex;
   background-color: #09141a;
