@@ -1,8 +1,8 @@
 import React from "react";
+import ContentSkeleton from "./ContentSkeleton";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import ContentSkeleton from "./ContentSkeleton";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ComponentCard from "./ComponentCard";
 import Sidebar from "./Sidebar";

@@ -1,7 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CountryList } from '../../components'
 import { getSingleUser } from '../../store/users/singleUserSlice'
@@ -142,7 +142,6 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
 
     return (
     <div className='signup-main-container'>
-        <ToastContainer />
         <div className='signup-wrapper'>
             <div className='signup-form-container'>
                 <div className='signup-form-container-top'>

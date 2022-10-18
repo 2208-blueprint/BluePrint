@@ -8,8 +8,8 @@ const store = configureStore({
     singleUser: singleUserSlice,
     login: loginSlice,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(reduxLogger),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware().concat(reduxLogger),
 });
 
 export default store;
