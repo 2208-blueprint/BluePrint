@@ -2,19 +2,24 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleUser } from '../../store/users/singleUserSlice'
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaUserCircle } from "react-icons/fa";
+import { BsSearch } from "react-icons/bs";
+import { BiDownArrow, BiUpArrow } from 'react-icons/bi'
+import { MdMailOutline } from 'react-icons/md'
 import { IconContext } from "react-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import Sidebar from '../MainPage/Sidebar.js'
 import { AuthContext } from '../firebase/AuthContext'
 import { auth } from '../../firebase'
 import { signOut } from 'firebase/auth'
+import anime from "animejs/lib/anime.es.js"
 
 function Navigation({loggedIn, setLoggedIn}){
 
     const [toggle, setToggle]=React.useState(true);
     const user = useSelector(state => state.singleUser)
     const { currentUser } = useContext(AuthContext)
+    const [show, setShow] = React.useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -47,6 +52,10 @@ function Navigation({loggedIn, setLoggedIn}){
         right: (toggle ? "-100%":"0")
     }
 
+    const fallDownHandler = () => {
+        setShow(!show)
+    }
+
     return(
         <div id="navigation-root-container">
         <nav className="navigation">
@@ -56,19 +65,58 @@ function Navigation({loggedIn, setLoggedIn}){
                 {loggedIn ?
                 <>
                     <Link to='/profile/create'>CREATE COMPONENT</Link>
-                    <a onClick={logoutHandler} className="navigation-logout">LOGOUT</a>
-                    <div onClick={profileHandler} className="navigation-profile">
+                    <div onClick={fallDownHandler} className="navigation-profile">
                         <img src={user?.img}></img>
                         <p>{user?.username}</p>
+                        <span className="navigation-down-arrow">
+                        {show ? <IconContext.Provider value={{size: '18px'}}>
+                            <BiDownArrow/>
+                        </IconContext.Provider> : 
+                        <IconContext.Provider value={{size: '18px'}}>
+                            <BiUpArrow/>
+                        </IconContext.Provider>}
+                        </span>
                     </div>
                 </>
                 :
                 <>
                     <Link to='/login'>CREATE COMPONENT</Link>
                     <Link className="navigation-logout" to='/login'>LOGIN</Link>
+                    <Link className="navigation-search-button" to='/users/search'>
+                        <IconContext.Provider value={{size: '20px'}}>
+                            <BsSearch/>
+                        </IconContext.Provider>
+                        Search Users
+                        </Link>
                 </>
                 }
             </div>
+            
+            {show ? <div className="navigation-fall-down">
+                <a onClick={()=>{
+                    navigate('/profile')
+                    setShow(!show)
+                    }}><IconContext.Provider value={{size: '20px'}}>
+                        <FaUserCircle/>
+                    </IconContext.Provider>My Profile
+                </a>
+                <a onClick={()=>{
+                    navigate('/chat')
+                    setShow(!show)
+                    }}><IconContext.Provider value={{size: '20px'}}>
+                        <MdMailOutline/>
+                    </IconContext.Provider>Chat
+                </a>
+                <a onClick={()=>{
+                    navigate('/users/search')
+                    setShow(!show)
+                    }}>
+                    <IconContext.Provider value={{size: '20px'}}>
+                        <BsSearch/>
+                    </IconContext.Provider>Search Users
+                </a>
+                <a onClick={logoutHandler} className="navigation-logout">LOGOUT</a>
+            </div> : <></>}
 
             <div className="navigation-drop-down" onClick={()=>setToggle(!toggle)}>
                 <IconContext.Provider value={{size: '40px'}}>
@@ -83,6 +131,21 @@ function Navigation({loggedIn, setLoggedIn}){
                         <img src={user?.img}></img>
                         <p>{user?.username}</p>
                     </div>
+                    <div className="navigation-profile" onClick={()=>{
+                    navigate('/chat')
+                    setToggle(!toggle)
+                    }}><IconContext.Provider value={{size: '20px'}}>
+                        <MdMailOutline/>
+                    </IconContext.Provider>Chat
+                    </div>
+                    <a className="navigation-search-button" onClick={()=>{
+                    navigate('/users/search')
+                    setToggle(!toggle)
+                    }}>
+                    <IconContext.Provider value={{size: '20px'}}>
+                        <BsSearch/>
+                    </IconContext.Provider>Search Users
+                    </a>
                     <a onClick={() => {logoutHandler()
                     setToggle(!toggle)}} className="navigation-logout">LOGOUT</a>
                     <Link onClick={()=>setToggle(!toggle)} to='/profile/create'>CREATE COMPONENT</Link>
@@ -90,6 +153,14 @@ function Navigation({loggedIn, setLoggedIn}){
                 </>
                 :
                 <>
+                    <a className="navigation-search-button" onClick={()=>{
+                    navigate('/users/search')
+                    setToggle(!toggle)
+                    }}>
+                    <IconContext.Provider value={{size: '20px'}}>
+                        <BsSearch/>
+                    </IconContext.Provider>Search Users
+                    </a>
                     <Link onClick={()=>setToggle(!toggle)} className="navigation-logout" to='/login'>LOGIN</Link>
                     <Link onClick={()=>setToggle(!toggle)} to='/login'>CREATE COMPONENT</Link>
                     <Sidebar/>

@@ -1282,7 +1282,7 @@ body {
 }
 @media only screen and (max-width: 600px) {
   #comments-root {
-    min-width: 10px;
+    min-width: 275px;
   }
   #comments-root p {
     font-size: 0.75rem;
@@ -1821,6 +1821,14 @@ iframe {
 .profile-wrapper .profile-main-content-container .profile-user-extras-container .profile-user-extras-left .profile-user-uploads .profile-user-single-upload:hover {
   background-color: rgba(15, 76, 117, 0.5);
 }
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 #navigation-root-container {
   width: 100%;
   position: static;
@@ -1836,6 +1844,44 @@ iframe {
   z-index: 999;
   font-family: "Inter", "sans-serif";
   width: 100%;
+}
+.navigation-fall-down {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  right: 40px;
+  top: 94px;
+  padding: 16px;
+  color: white;
+  background-color: #20212d;
+  animation: fadein 0.25s;
+}
+.navigation-fall-down a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  width: fit-content;
+  height: auto;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  padding: 15px;
+  transition: 0.25s ease;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.navigation-fall-down a:hover {
+  background-color: #14669d;
+}
+.navigation-fall-down .navigation-logout {
+  background-color: #0f507b;
+  cursor: pointer;
+  align-self: center;
+}
+.navigation-fall-down .navigation-logout:hover {
+  background-color: #0f4467;
 }
 .navigation-link-wrapper {
   display: flex;
@@ -1853,6 +1899,12 @@ iframe {
   text-decoration: none;
   padding: 15px;
   transition: 0.25s ease;
+}
+.navigation-link-wrapper .navigation-search-button {
+  background-color: #09141a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .navigation-link-wrapper a:hover {
   background-color: #14669d;
@@ -1897,6 +1949,12 @@ iframe {
   width: 100%;
   display: none;
   z-index: 999;
+}
+.navigation-side-bar .navigation-search-button {
+  background-color: #09141a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .navigation-side-bar a {
   background-color: #1a83c8;
