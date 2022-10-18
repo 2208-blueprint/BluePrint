@@ -27,7 +27,7 @@ function CreateComponent() {
   // form section
   const [form, setForm] = useState(['html', 'css'])
   const [name, setName] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('animation')
   const [desc, setDesc] = useState('')
   const [tags, setTags] = useState([])
   const [singleTag, setSingleTag] = useState('')
@@ -283,6 +283,18 @@ function CreateComponent() {
             <select onChange={(event)=>{
               setForm([event.target.value, form[1]])
               setView(event.target.value === 'html' ? 'html' : 'js')
+              if (event.target.value === 'react') {
+                setJS(
+              `const App = () => {
+  return (
+    <div>Your Component Here</div>
+  )
+}
+              
+ReactDOM.render(<App/>, document.getElementById('root'))`)
+              } else {
+                setJS('')
+              }
               }}>
                 <option value="html">HTML</option>
                 <option value="react">React</option>
@@ -301,7 +313,20 @@ function CreateComponent() {
                 <input onChange={(event)=>setName(event.target.value)}></input>
             </div>
             <div>Type:&nbsp;&nbsp;
-                <input onChange={(event)=>setType(event.target.value)}></input>
+                <select onChange={(event)=>setType(event.target.value)}>
+                  <option value="animation">animation</option>
+                  <option value="button">button</option>
+                  <option value="drop-down">drop-down</option>
+                  <option value="footer">footer</option>
+                  <option value="form">form</option>
+                  <option value="graphic">graphic</option>
+                  <option value="icon">icon</option>
+                  <option value="info-card">info-card</option>
+                  <option value="mobile">mobile</option>
+                  <option value="navbar">navbar</option>
+                  <option value="slider">slider</option>
+                  <option value="misc">misc</option>
+                </select>
             </div>
             <h2>Description:</h2>
             <div>
