@@ -1148,51 +1148,60 @@ body {
   margin: 30px 10px 10px 10px;
   background-color: lightgray;
 }
-.user-page-header-container {
-  display: flex;
-  justify-content: space-between;
+.single-user-page-main-container {
+  font-family: 'Inter', sans-serif;
+  background-color: #09141a;
+  color: white;
+  width: 100vw;
 }
-.user-page-header-container .user-page-image {
-  display: flex;
-}
-.user-page-header-container .user-page-title {
-  display: flex;
-}
-.user-page-components {
-  display: flex;
-}
-.user-single-user-main-container {
-  border: 1px solid gray;
-  border-radius: 4px;
+.single-user-page-main-container .single-user-page-title-container {
+  background-color: #09141a;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  margin: 30px 10px 10px 10px;
-  background-color: lightgray;
 }
-.single-user-main-container .user-page-header-container .user-page-info-container {
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic .single-user-page-user-img {
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  width: 110px;
+  height: 110px;
+  margin: 20px;
+  border-radius: 50%;
+  margin: 2.5%;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
+  background-color: #09141a;
   display: flex;
   flex-direction: column;
 }
-.single-user-main-container .user-page-components-container {
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
+  height: 35%;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
+  background-color: #09141a;
+  display: flex;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-search-container {
+  display: flex;
+  background-color: grey;
+  justify-content: space-around;
+}
+.single-user-page-main-container .single-user-page-component-list-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-}
-.single-user-main-container .user-page-components-container .user-page-single-component-container {
-  border: 1px solid gray;
-  border-radius: 4px;
-  display: flex;
+  background-color: black;
   justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  margin: 30px 10px 10px 10px;
-  background-color: lightgray;
+}
+.single-user-page-main-container .single-user-page-component-list-container .single-user-page-single-component {
+  display: flex;
+  flex-wrap: wrap;
 }
 #comments-root {
   font-family: 'Inter', 'sans-serif';

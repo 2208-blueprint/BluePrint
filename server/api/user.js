@@ -192,7 +192,7 @@ router.get("/:id", async (req, res, next) => {
           attributes: ["id", "username", "img"],
         },
       ],
-      attributes: ["username", "firstName", "lastName", "img"],
+      attributes: ["username", "firstName", "lastName", "img", "currentPoints"],
     });
     res.send(user);
   } catch (error) {
