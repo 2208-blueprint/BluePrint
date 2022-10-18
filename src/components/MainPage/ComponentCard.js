@@ -13,8 +13,9 @@ import { IconContext } from "react-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsHeartFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
-function ComponentCard({ componentId }) {
+function ComponentCard({ componentId, loadRight, loadLeft }) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [less, setLess] = useState("");
@@ -33,8 +34,8 @@ function ComponentCard({ componentId }) {
   const [component, setComponent] = useState("");
 
   const toastPopup = (msg) => {
-    toast.dark(msg, { autoClose: 2000 })
-  }
+    toast.dark(msg, { autoClose: 2000 });
+  };
 
   async function likeHandler(e) {
     const token = window.localStorage.getItem("token");
@@ -180,7 +181,23 @@ function ComponentCard({ componentId }) {
     });
   }, [less]);
   return (
-    <div className="component-card-outer">
+    <motion.div
+      className="component-card-outer"
+      // initial={{
+      //   scale:1.05,
+      //   opacity: 0,
+      //   x: loadRight ? 200 : loadLeft ? -200 : 0,
+      // }}
+      // animate={{
+      //   x: 0,
+      //   opacity: 1,
+      //   scale: 1,
+      // }}
+      // transition={{
+      //   type: "tween",
+      //   duration: 0.5,
+      // }}
+    >
       <Link
         to={`/components/${componentId}`}
         style={{ textDecoration: "none" }}
@@ -264,7 +281,7 @@ function ComponentCard({ componentId }) {
         <div className="component-card-types">{markup}</div>
         <div className="component-card-types">{styling}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 export default ComponentCard;
