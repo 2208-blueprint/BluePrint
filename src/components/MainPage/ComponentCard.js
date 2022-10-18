@@ -171,7 +171,7 @@ function ComponentCard({ componentId }) {
       }
     }
     getComp();
-  }, []);
+  }, [componentId]);
 
   // compile the less into css if less changes
   React.useEffect(() => {

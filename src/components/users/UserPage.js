@@ -18,9 +18,12 @@ function UserPage() {
     const [rank, setRank] = useState("");
     const [rankColor, setRankColor] = useState("");
     const [points, setPoints] = useState(0)
-    const [totalFavs, setTotalFavs] = useState(0);
-    const [totalSaves, setTotalSaves] = useState(0);
+    // const [totalFavs, setTotalFavs] = useState(0);
+    // const [totalSaves, setTotalSaves] = useState(0);
     const [searchBarInput, setSearchBarInput] = useState("");
+    const [componentsArray, setComponentsArray] = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [type, setType] = useState('');
     
     //Get current user number from URL path
     let curUserNum = window.location.pathname
@@ -33,7 +36,8 @@ function UserPage() {
                 if (curUserNum) {
             
                 const { data } = await Axios.get(`/api/users/${curUserNum}`);
-                setCurUser(data) 
+                setCurUser(data)
+
                 console.log('First data: ',data)
 
                 if (data.highestRank >= 1000) {
@@ -54,7 +58,9 @@ function UserPage() {
                   }
             
                 console.log('Data: ', data)
-                
+                setPoints(data.currentPoints)
+                setComponentsArray(data.components)
+                setFiltered(data.components)
                 }
             }
             catch(e) {
@@ -62,10 +68,6 @@ function UserPage() {
             }
         }
         getCurrentUser() 
-
-        // if (!points){
-        //     setPoints(curUser.points)
-        // }
         
     },[])
 
@@ -73,54 +75,96 @@ function UserPage() {
         async function getComponentSavesAndFavs() {
             try {
 
-            // if (curUser) {
-            
-            const {data}  = await axios.get("/api/components")
-            console.log('Get Components Data: ', data);
-            console.log('First Component: ', data[0].users[0].username)
-            console.log('curUser.username: ', curUser)
-              const userComponents = data.filter(component => 
-                (component.users[0].username) === curUser?.username);
-                console.log('get Component Saves and Favs: ',userComponents)
-            //   }
+            console.log('ComponentsArray: ',componentsArray)
             } catch(e) {
                 console.error(e)
             }
+        }
+        getComponentSavesAndFavs();
+    }, [componentsArray])
 
+    React.useEffect(() => {
+        async function getUserBlueprintPoints() {
+            try {
+
+            // console.log('ComponentsArray: ',componentsArray)
+            } catch(e) {
+                console.error(e)
+            }
+        }
+        getUserBlueprintPoints();
+    }, [])
+
+    // React.useEffect(() => {
+    //     async function getComponentSavesAndFavs() {
+    //         try {
+
+    //         if (curUser) {
             
-            //   parsedData.push({
-            //     id: user.id,
-            //     username: user.username,
-            //     componentCount,
-            //     followerCount,
-            //     points: user.currentPoints,
-            //   });
+    //         const {data}  = await axios.get("/api/components")
+    //         console.log('Get Components Data: ', data);
+    //         console.log('First Component: ', data[0].users[0].username)
+    //         console.log('curUser.username: ', curUser)
+    //           const userComponents = data.filter(component => 
+    //             (component.users[0].username) === curUser?.username);
+    //             console.log('get Component Saves and Favs: ',userComponents)
+    //           }
+    //         } catch(e) {
+    //             console.error(e)
+    //         }
             
-            // setTopUsers(parsedData);
-          };
-        getComponentSavesAndFavs()
-    },[])
-
-
+    //           parsedData.push({
+    //             id: user.id,
+    //             username: user.username,
+    //             componentCount,
+    //             followerCount,
+    //             points: user.currentPoints,
+    //           });
+            
+    //         setTopUsers(parsedData);
+    //       };
+    //     getComponentSavesAndFavs()
+    // },[])
 
     console.log('Cur user: ', curUser)
     
     
-
-    let componentsArray = curUser?.components
   
     function handleMessageMeButton(evt){
         evt.preventDefault()
     }
 
     const handleSearch = () => {
+        console.log('Search bar input: ', searchBarInput)
         if (searchBarInput === "") {
+            setFiltered(componentsArray)
           return;
         }
-        let keywords = searchBarInput.split(" ").join("+");
-        setSearchBarInput("");
-        navigate(`/components/search/${keywords}`);
+        const filterArray = componentsArray.filter((component) => {
+            return component.name.includes(searchBarInput)
+        })
+        setFiltered(filterArray)
+        // let keywords = searchBarInput.split(" ").join("+");
+        // setSearchBarInput("");
+        // navigate(`/components/search/${keywords}`);
       };
+      console.log('filtered: ', filtered)
+    
+      React.useEffect (() => {
+        const handleSelectFilter = () => {
+            if (type === "all") {
+                setFiltered(componentsArray)
+                return;
+            }
+            const filterArray = componentsArray.filter((component) => {
+                return component.type.includes(type)
+            })
+            setFiltered(filterArray)
+        }
+        handleSelectFilter();
+
+      },[type])
+   
 
     return(
         <>
@@ -128,9 +172,9 @@ function UserPage() {
             <div className="single-user-page-title-container">
                 <div className="single-user-page-user-pic">
                     <img className="single-user-page-user-img" src={curUser?.img} alt="user_pic.png"/>
-                    <button className="single-user-page-message-me-button">
+                    {/* <button className="single-user-page-message-me-button">
                         Message me!
-                    </button>
+                    </button> */}
                  
                 </div>
                 <div className="single-user-page-user-name-rank-container">
@@ -144,8 +188,8 @@ function UserPage() {
                 <div className="single-user-page-user-stats-container">
                     <span>Components made: {curUser?.components?.length}</span>
                     <span>Followers: {curUser?.followers?.length}</span>
-                    <span>Total Favorites:</span>
-                    <span>Total Saves:</span>
+                    {/* <span>Total Favorites:</span>
+                    <span>Total Saves:</span> */}
                     <span>Bluepoints: {points}</span>
                 </div>
             </div>
@@ -165,11 +209,26 @@ function UserPage() {
                         </IconContext.Provider>
                     </div>
                 <div className="single-user-page-filter">
-                    Filter by...
+                    Filter by type:
+                    <select onChange={(event)=>setType(event.target.value)}>
+                        <option value="all">All</option>
+                        <option value="animation">animation</option>
+                        <option value="button">button</option>
+                        <option value="drop-down">drop-down</option>
+                        <option value="footer">footer</option>
+                        <option value="form">form</option>
+                        <option value="graphic">graphic</option>
+                        <option value="icon">icon</option>
+                        <option value="info-card">info-card</option>
+                        <option value="mobile">mobile</option>
+                        <option value="navbar">navbar</option>
+                        <option value="slider">slider</option>
+                        <option value="misc">misc</option>
+                    </select>
                 </div>
             </div>
             <div className="single-user-page-component-list-container">
-                {componentsArray?.map((component,i) => (
+                {filtered?.map((component,i) => (
                     <div className="single-user-page-single-component">
                         <ComponentCard componentId={component.id} key={i} />
                     </div>
