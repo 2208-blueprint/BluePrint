@@ -21,7 +21,9 @@ function MainPage() {
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [componentsPerPage, setComponentsPerPage] = React.useState(6);
+  const [componentsPerPage, setComponentsPerPage] = React.useState(8);
+  // const [loadRight, setLoadRight] = React.useState(false);
+  // const [loadLeft, setLoadLeft] = React.useState(false);
 
   const dispatch = useDispatch();
   dispatch(getSingleUser());
@@ -43,6 +45,8 @@ function MainPage() {
   const nextPage = (event) => {
     event.preventDefault();
     if (currentPage !== totalPages) {
+      // setLoadRight(true);
+      // setLoadLeft(false);
       setCurrentPage(currentPage + 1);
     }
   };
@@ -50,6 +54,8 @@ function MainPage() {
   const previousPage = (event) => {
     event.preventDefault();
     if (currentPage !== 1) {
+      // setLoadLeft(true);
+      // setLoadRight(false);
       setCurrentPage(currentPage - 1);
     }
   };
@@ -104,26 +110,32 @@ function MainPage() {
             <Leaderboard />
           </div>
           <div className="mainPage-button-container">
-            <button onClick={previousPage} className="main-page-prev-button">
-              <IconContext.Provider
-                value={{
-                  size: "30px",
-                  className: "main-page-pagination-arrow",
-                }}
-              >
-                <BsArrowLeftShort />
-              </IconContext.Provider>
-            </button>
-            <button onClick={nextPage} className="main-page-next-button">
-              <IconContext.Provider
-                value={{
-                  size: "30px",
-                  className: "main-page-pagination-arrow",
-                }}
-              >
-                <BsArrowRightShort />
-              </IconContext.Provider>
-            </button>
+            {currentPage === 1 ? null : (
+              <button onClick={previousPage} className="main-page-prev-button">
+                <IconContext.Provider
+                  value={{
+                    size: "40px",
+                    className: "main-page-pagination-arrow-right",
+                  }}
+                >
+                  <BsArrowLeftShort />
+                </IconContext.Provider>
+              </button>
+            )}
+
+            {currentPage === totalPages ? null : (
+              <button onClick={nextPage} className="main-page-next-button">
+                <IconContext.Provider
+                  value={{
+                    size: "40px",
+                    className: "main-page-pagination-arrow-left",
+                  }}
+                >
+                  <BsArrowRightShort />
+                </IconContext.Provider>
+              </button>
+            )}
+
             <div className="main-page-list-content-container">
               {isLoading && <ContentSkeleton cards={9} />}
               {currentComponents.map((component, i) => {
@@ -132,6 +144,8 @@ function MainPage() {
                     <ComponentCard
                       componentId={component.id}
                       key={component.id}
+                      // loadRight={loadRight}
+                      // loadLeft={loadLeft}
                     />
                   </div>
                 );

@@ -26,6 +26,11 @@ function Sidebar() {
           onChange={(e) => {
             setSearchBarInput(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.code === "Enter") {
+              handleSearch();
+            }
+          }}
         />
         <div className="side-bar-search-button" onClick={handleSearch}>
           {" "}
