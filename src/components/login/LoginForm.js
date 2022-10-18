@@ -5,7 +5,7 @@ import Google from "../images/google.png";
 import Github from "../images/github.png";
 import Twitch from "../images/twitch.png";
 import Axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getSingleUser } from "../../store/users/singleUserSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";

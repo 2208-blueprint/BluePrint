@@ -307,6 +307,7 @@ a.singlecomp-back div span {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(150deg, #09141a 0%, #011018 100%);
+  font-family: "Inter", sans-serif;
 }
 .login-main-container .login-signup-wrapper {
   display: flex;
@@ -873,6 +874,77 @@ a.createcomp-back div span {
 }
 body {
   background-color: #09141a;
+  overflow-x: hidden;
+}
+.mainPage-button-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.main-page-pagination-arrow-right {
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+.main-page-pagination-arrow-left {
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+.main-page-prev-button {
+  width: 65px;
+  height: 95px;
+  display: flex;
+  left: -40px;
+  top: 60px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.main-page-prev-button:hover {
+  opacity: 1;
+  background-color: #47B5FF;
+  transform: scale(1.2);
+}
+.main-page-prev-button:hover .main-page-pagination-arrow-right {
+  color: #09141a;
+}
+.main-page-next-button {
+  width: 65px;
+  height: 95px;
+  top: 60px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.main-page-next-button:hover {
+  opacity: 1;
+  background-color: #47B5FF;
+  transform: scale(1.2);
+}
+.main-page-next-button:hover .main-page-pagination-arrow-left {
+  color: #09141a;
+}
+.main-page-next-button:active {
+  background-color: #9ed8ff;
+}
+.main-page-prev-button:active {
+  background-color: #9ed8ff;
 }
 .main-page-wrapper {
   display: flex;
@@ -883,9 +955,8 @@ body {
   flex-direction: column;
   height: calc(100vh - 100px);
   line-height: 1;
-  background-color: #09141a;
   box-sizing: content-box;
-  width: 400px;
+  width: 380px;
   z-index: 0;
 }
 .main-page-wrapper .main-page-content-container {
@@ -1148,51 +1219,60 @@ body {
   margin: 30px 10px 10px 10px;
   background-color: lightgray;
 }
-.user-page-header-container {
-  display: flex;
-  justify-content: space-between;
+.single-user-page-main-container {
+  font-family: 'Inter', sans-serif;
+  background-color: #09141a;
+  color: white;
+  width: 100vw;
 }
-.user-page-header-container .user-page-image {
-  display: flex;
-}
-.user-page-header-container .user-page-title {
-  display: flex;
-}
-.user-page-components {
-  display: flex;
-}
-.user-single-user-main-container {
-  border: 1px solid gray;
-  border-radius: 4px;
+.single-user-page-main-container .single-user-page-title-container {
+  background-color: #09141a;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  margin: 30px 10px 10px 10px;
-  background-color: lightgray;
 }
-.single-user-main-container .user-page-header-container .user-page-info-container {
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic .single-user-page-user-img {
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  width: 110px;
+  height: 110px;
+  margin: 20px;
+  border-radius: 50%;
+  margin: 2.5%;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
+  background-color: #09141a;
   display: flex;
   flex-direction: column;
 }
-.single-user-main-container .user-page-components-container {
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
+  height: 35%;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
+  background-color: #09141a;
+  display: flex;
+  flex-direction: column;
+}
+.single-user-page-main-container .single-user-page-search-container {
+  display: flex;
+  background-color: grey;
+  justify-content: space-around;
+}
+.single-user-page-main-container .single-user-page-component-list-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-}
-.single-user-main-container .user-page-components-container .user-page-single-component-container {
-  border: 1px solid gray;
-  border-radius: 4px;
-  display: flex;
+  background-color: black;
   justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  margin: 30px 10px 10px 10px;
-  background-color: lightgray;
+}
+.single-user-page-main-container .single-user-page-component-list-container .single-user-page-single-component {
+  display: flex;
+  flex-wrap: wrap;
 }
 #comments-root {
   font-family: 'Inter', 'sans-serif';
@@ -2068,8 +2148,7 @@ iframe {
   position: fixed;
   height: calc(100vh - 100px);
   top: 70px;
-  margin-left: 70px;
-  padding-right: 10px;
+  margin-left: 60px;
   font-family: "Inter", "sans-serif";
   overflow: auto;
 }
@@ -2116,7 +2195,7 @@ iframe {
   color: white;
   font-family: "Inter", "sans-serif";
   margin-top: 40px;
-  width: 250px;
+  width: 260px;
 }
 .side-bar-container-category {
   font-size: 15px;
@@ -2193,7 +2272,7 @@ iframe {
   display: flex;
   align-items: center;
   height: 20%;
-  padding-left: 4px;
+  padding-left: 10px;
   border-top: 1px solid gray;
 }
 .leaderboard-user-info-container a:hover {
@@ -2203,7 +2282,7 @@ iframe {
   display: flex;
   align-items: center;
   height: 20%;
-  padding-left: 4px;
+  padding-left: 10px;
 }
 .leaderboard-first a:hover {
   color: #47B5FF;
@@ -2214,6 +2293,7 @@ iframe {
   align-items: center;
   padding-left: 4px;
   max-width: 1020px;
+  margin-top: 35px;
 }
 .leaderboard-user-info-username {
   height: 100%;
@@ -2411,6 +2491,7 @@ iframe {
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  font-family: "Inter", sans-serif;
 }
 .firebase-chat-wrapper .firebase-chat-container {
   display: flex;

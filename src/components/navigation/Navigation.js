@@ -7,7 +7,7 @@ import { BsSearch } from "react-icons/bs";
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi'
 import { MdMailOutline } from 'react-icons/md'
 import { IconContext } from "react-icons";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Sidebar from '../MainPage/Sidebar.js'
 import { AuthContext } from '../firebase/AuthContext'
 import { auth } from '../../firebase'

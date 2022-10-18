@@ -19,6 +19,7 @@ const requireToken = async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const components = await Component.findAll({
+      order: [["currentPoints", "DESC"]],
       include: [
         {
           model: User,
@@ -121,19 +122,20 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
     });
     const points = component.currentPoints + 10;
     const componentAuthor = component.users[0];
-    const userPoints = componentAuthor.currentPoints + 10;
-    if (userPoints > componentAuthor.highestRank) {
-      await componentAuthor.update({
-        currentPoints: userPoints,
-        highestRank: userPoints,
-      });
-      console.log(componentAuthor.currentPoints);
-    } else {
-      await componentAuthor.update({
-        currentPoints: userPoints,
-      });
-      console.log(componentAuthor.currentPoints);
+    if (componentAuthor) {
+      const userPoints = componentAuthor.currentPoints + 10;
+      if (userPoints > componentAuthor.highestRank) {
+        await componentAuthor.update({
+          currentPoints: userPoints,
+          highestRank: userPoints,
+        });
+      } else {
+        await componentAuthor.update({
+          currentPoints: userPoints,
+        });
+      }
     }
+
     await component.update({ currentPoints: points });
     await component.addUser(user, { through: { isFavorite: true } });
     res.sendStatus(201);
@@ -158,10 +160,12 @@ router.delete(
         },
       });
       const componentAuthor = component.users[0];
-      const userPoints = componentAuthor.currentPoints - 10;
-      await componentAuthor.update({
-        currentPoints: userPoints,
-      });
+      if (componentAuthor) {
+        const userPoints = componentAuthor.currentPoints - 10;
+        await componentAuthor.update({
+          currentPoints: userPoints,
+        });
+      }
       const points = component.currentPoints - 10;
       await component.update({ currentPoints: points });
       console.log(component.currentPoints);
@@ -188,16 +192,18 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
     });
     const points = component.currentPoints + 20;
     const componentAuthor = component.users[0];
-    const userPoints = componentAuthor.currentPoints + 20;
-    if (userPoints > componentAuthor.highestRank) {
-      await componentAuthor.update({
-        currentPoints: userPoints,
-        highestRank: userPoints,
-      });
-    } else {
-      await componentAuthor.update({
-        currentPoints: userPoints,
-      });
+    if (componentAuthor) {
+      const userPoints = componentAuthor.currentPoints + 20;
+      if (userPoints > componentAuthor.highestRank) {
+        await componentAuthor.update({
+          currentPoints: userPoints,
+          highestRank: userPoints,
+        });
+      } else {
+        await componentAuthor.update({
+          currentPoints: userPoints,
+        });
+      }
     }
     await component.update({ currentPoints: points });
     console.log(component.currentPoints);
@@ -226,10 +232,12 @@ router.delete(
       });
       const points = component.currentPoints - 20;
       const componentAuthor = component.users[0];
-      const userPoints = componentAuthor.currentPoints - 20;
-      await componentAuthor.update({
-        currentPoints: userPoints,
-      });
+      if (componentAuthor) {
+        const userPoints = componentAuthor.currentPoints - 20;
+        await componentAuthor.update({
+          currentPoints: userPoints,
+        });
+      }
       await component.update({ currentPoints: points });
       console.log(component.currentPoints);
       await component.addUser(user, { through: { isSaved: false } });
