@@ -11,6 +11,8 @@ import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateComponent() {
   const [html, setHTML] = useState("");
@@ -23,6 +25,10 @@ function CreateComponent() {
   const [color, setColor] = useState('')
 
   const navigate = useNavigate()
+
+  const toastPopup = (msg) => {
+    toast.dark(msg);
+  };
 
   // form section
   const [form, setForm] = useState(['html', 'css'])
@@ -101,6 +107,7 @@ function CreateComponent() {
         authorization: window.localStorage.getItem('token')
       }
     })
+    toastPopup('Component created!')
     navigate(`/components/${data.id}`)
   }
 
@@ -290,7 +297,7 @@ function CreateComponent() {
     <div>Your Component Here</div>
   )
 }
-              
+
 ReactDOM.render(<App/>, document.getElementById('root'))`)
               } else {
                 setJS('')
@@ -336,7 +343,7 @@ ReactDOM.render(<App/>, document.getElementById('root'))`)
                 <input placeholder="one word tag" value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
             </div>
             <div className="createcomp-tags-container">
-              {tags?.map((tag, i) => 
+              {tags?.map((tag, i) =>
                 <div className="createcomp-tag" key={i}>
                   <span>{tag}</span>&nbsp;&nbsp;<span onClick={()=>removeTag(tag)} className="createcomp-x">X</span>
                 </div>
