@@ -1224,6 +1224,7 @@ body {
   background-color: #09141a;
   color: white;
   width: 100vw;
+  min-height: 90vh;
 }
 .single-user-page-main-container .single-user-page-title-container {
   background-color: #09141a;
@@ -1250,24 +1251,113 @@ body {
   background-color: #09141a;
   display: flex;
   flex-direction: column;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
-  height: 35%;
+  font-size: 30px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
   background-color: #09141a;
   display: flex;
   flex-direction: column;
+  margin-left: 8px;
+  margin-top: 5px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-tooltip {
+  visibility: hidden;
+  background-color: #0F4C75;
+  margin-left: 10px;
+  border-radius: 6px;
+  padding: 2px 4px 2px 4px;
+  z-index: 1;
+  position: absolute;
+  transition-duration: 0.4s;
+  transition-delay: 0.2s;
+  opacity: 0;
+  left: 30px;
+  white-space: nowrap;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made {
+  color: tan;
+  padding: 2px 0px 2px 0px;
+  size: 20px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper:hover .single-user-page-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers {
+  color: greenyellow;
+  padding: 2px 0px 2px 0px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper:hover .single-user-page-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints {
+  color: #47B5FF;
+  padding: 2px 0px 2px 0px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper:hover .single-user-page-tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 .single-user-page-main-container .single-user-page-search-container {
   display: flex;
-  background-color: grey;
-  justify-content: space-around;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+.single-user-page-main-container .single-user-page-search-container .single-user-page-searchbar-wrapper {
+  display: flex;
+  margin-right: 8px;
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+.single-user-page-main-container .single-user-page-search-container .single-user-page-searchbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  margin-left: 8px;
+}
+.single-user-page-main-container .single-user-page-search-container .single-user-page-filter {
+  margin-left: 12px;
+  font-family: 'Inter', sans-serif;
+}
+.single-user-page-main-container .single-user-page-search-container .single-user-page-filter-dropdown {
+  font-family: 'Inter', sans-serif;
+  margin-left: 5px;
+  background-color: #20212d;
+  color: #47B5FF;
+  border: none;
+  font-size: 16px;
 }
 .single-user-page-main-container .single-user-page-component-list-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: black;
   justify-content: center;
 }
 .single-user-page-main-container .single-user-page-component-list-container .single-user-page-single-component {
