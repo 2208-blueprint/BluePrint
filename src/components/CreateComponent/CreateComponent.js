@@ -101,7 +101,8 @@ function CreateComponent() {
         stylingFramework: form[1],
         markup: markup,
         stylesheet: stylesheet,
-        tags: tags
+        tags: tags,
+        js: js
     }, {
       headers: {
         authorization: window.localStorage.getItem('token')

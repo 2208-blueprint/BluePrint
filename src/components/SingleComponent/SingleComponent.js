@@ -218,6 +218,7 @@ function SingleComponent() {
 
       if (data.framework === 'html') {
         setHTML(data.markup)
+        setJS(data.js)
       } else {
         setJS(data.markup)
       }
