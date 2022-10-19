@@ -2125,6 +2125,16 @@ iframe {
   font-family: "Inter", "sans-serif";
   width: 100%;
 }
+.navigation .navigation-logo {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: 20px;
+}
+.navigation .navigation-logo .logo-blue {
+  color: #47B5FF;
+}
 .navigation-fall-down {
   position: absolute;
   display: flex;

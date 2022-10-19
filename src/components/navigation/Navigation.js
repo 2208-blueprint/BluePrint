@@ -59,7 +59,7 @@ function Navigation({loggedIn, setLoggedIn}){
     return(
         <div id="navigation-root-container">
         <nav className="navigation">
-            <a className="navigation-logo" href="/"><img src={'/trianglify-lowres.png'} alt="Logo Here"/></a>
+            <a className="navigation-logo" href="/"><span className="logo-blue">Blue</span>Print</a>
 
             <div className="navigation-link-wrapper">
                 {loggedIn ?
