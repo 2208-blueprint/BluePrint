@@ -5,8 +5,10 @@ import Axios from "axios";
 import UserPageComponentCard from "./UserPageComponentCard";
 import ComponentCard from "../MainPage/ComponentCard";
 import axios from "axios";
-import { BsSearch } from "react-icons/bs";
+import { BsPeople, BsSearch, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import { GiGearHammer } from "react-icons/gi";
+import { FaCoins, FaHammer } from "react-icons/fa";
 
 //This is the full "profile page" of a user. The logged-in user can visit this page to see components made by this
 //user, as well as follow the user to see more content from them.
@@ -182,18 +184,29 @@ function UserPage() {
                         {curUser?.username}
                     </div>
                     <div className="single-user-page-rank-achievements">
-                        Rank/achievements   
+                        {rank}  
                 </div>
             </div>
                 <div className="single-user-page-user-stats-container">
-                    <span>Components made: {curUser?.components?.length}</span>
-                    <span>Followers: {curUser?.followers?.length}</span>
+                    <div className="single-user-page-components-made-wrapper">
+                        <FaHammer className="single-user-page-components-made"/> {curUser?.components?.length}
+                        <span className="single-user-page-tooltip"> Components made </span>
+                    </div>
+                    <div className="single-user-page-followers-wrapper">
+                        <BsPeople className="single-user-page-followers"/> {curUser?.followers?.length}
+                        <span className="single-user-page-tooltip"> Followers </span>
+                    </div>
                     {/* <span>Total Favorites:</span>
                     <span>Total Saves:</span> */}
-                    <span>Bluepoints: {points}</span>
+                    <div className="single-user-page-bluepoints-wrapper">
+                        <FaCoins className="single-user-page-bluepoints"/> {points}
+                        <span className="single-user-page-tooltip"> BluePrint Points </span>
+                    </div>
+                    
                 </div>
             </div>
             <div className="single-user-page-search-container">
+                <div className="single-user-page-searchbar">
                 <input
                     type="text"
                     className="side-bar-container-searchbar"
@@ -208,9 +221,10 @@ function UserPage() {
                             <BsSearch />
                         </IconContext.Provider>
                     </div>
+                </div>
                 <div className="single-user-page-filter">
                     Filter by type:
-                    <select onChange={(event)=>setType(event.target.value)}>
+                    <select className="single-user-page-filter-dropdown" onChange={(event)=>setType(event.target.value)}>
                         <option value="all">All</option>
                         <option value="animation">animation</option>
                         <option value="button">button</option>

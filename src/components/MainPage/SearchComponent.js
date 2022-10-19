@@ -20,6 +20,7 @@ function SearchComponent() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [componentsPerPage, setComponentsPerPage] = React.useState(8);
+  const [test, setTest] = React.useState(true)
   let { keywords } = useParams();
   React.useEffect(() => {
     async function getComponents() {
@@ -96,6 +97,31 @@ function SearchComponent() {
     }
   };
   console.log(currentPage);
+
+  function sortHandler(event) {
+    event.preventDefault()
+    let oldArray = components
+    if (event.target.value === "popular") {
+      oldArray.sort((a,b)=>{
+        return b.currentPoints - a.currentPoints
+      })
+    } else if (event.target.value === 'newest') {
+      oldArray.sort((a,b) => {
+        let bTime = b.createdAt
+        let aTime = a.createdAt
+        return bTime.localeCompare(aTime)
+      })
+    } else {
+      oldArray.sort((a,b) => {
+        let bTime = b.createdAt
+        let aTime = a.createdAt
+        return aTime.localeCompare(bTime)
+      })
+    }
+    setComponents(oldArray)
+    setTest(!test)
+  }
+
   return (
     <div className="main-page-main-container">
       <div className="main-page-wrapper">
@@ -109,6 +135,15 @@ function SearchComponent() {
             <div className="search-result-search-term-number">{`${
               searchResult.length
             } ${searchResult.length === 1 ? "match" : "matches"}`}</div>
+          </div>
+          <div className='mainPage-sort-container'>
+            <p>Sort By:</p>
+            <select onChange={sortHandler}>
+              <option value=""></option>
+              <option value="popular">Most Popular</option>
+              <option value="newest">Newest</option>
+              <option value='oldest'>Oldest</option>
+            </select>
           </div>
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (

@@ -86,7 +86,7 @@ function ChatInput() {
     <div className='firebase-chat-input'>
         <input onKeyDown={(e) => handleKey(e)}
         type='text'
-        placeholder='Type somthing...'
+        placeholder='Type something...'
         onChange={(e) => setText(e.target.value)}
         value={text}
         />

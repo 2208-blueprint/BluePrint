@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { BsPeople, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
+import { BsPeople, BsBookmarkStar, BsHeartFill, BsCardChecklist, BsPencilFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import { GiGearHammer } from "react-icons/gi";
@@ -15,6 +15,7 @@ function ProfilePage() {
   const [followers, setFollowers] = React.useState([]);
   const [rank, setRank] = React.useState("");
   const [rankColor, setRankColor] = React.useState("");
+
 
   const navigate = useNavigate();
   const toastPopup = (msg) => {
@@ -126,11 +127,6 @@ function ProfilePage() {
               {savedComponents ? savedComponents.length : "0"} Favorited
             </small>
           </div>
-          <div className="profile-category-link likes">
-            <small>
-              <BsHeartFill /> 0 Likes
-            </small>
-          </div>
           <hr></hr>
           <div className="profile-category-link inbox">
             <p className="my-inbox">
@@ -139,12 +135,8 @@ function ProfilePage() {
             </p>
           </div>
           <hr></hr>
-          <div className="profile-category-link">
-            <p>Placeholder</p>
-          </div>
-          <hr></hr>
           <div className="profile-new-component-button-container">
-            <button className="profile-new-component-button">
+            <button className="profile-new-component-button" onClick={() => navigate('/profile/create')}>
               Create new component
             </button>
           </div>
@@ -153,17 +145,38 @@ function ProfilePage() {
       <div className="profile-main-content-container">
         <div className="profile-user-extras-container">
           <div className="profile-user-info-container">
-            <h1>My info</h1>
-            <div className="profile-user-name">
-              {`${user?.firstName} ${user?.lastName}`}{" "}
-              <span className="profile-country-span">
-                <FaMapMarkerAlt />
-                <small>{user?.country}</small>
-              </span>
+            <div className="profile-user-info-left">
+              <h1>My info</h1>
+              <div className="profile-user-name">
+                <BsPencilFill />
+                {`${user?.firstName} ${user?.lastName}`}{" "}
+              </div>
+              <div className="profile-user-email">
+                <MdOutlineMail />
+                {user?.email}
+              </div>
+              <div className="profile-user-member-since">
+                <BsCardChecklist />
+                <small>Joined: {user?.createdAt.slice(0, 10)}</small>
+              </div>
+                <div className="profile-country-span">
+                  <FaMapMarkerAlt />
+                  <small>{user?.country}</small>
+                </div>
             </div>
-            <div className="profile-user-email">
-              <MdOutlineMail />
-              {user?.email}
+            <hr></hr>
+            <div className="profile-user-info-right">
+                <h1>Achievements</h1>
+                <div className="profile-achievements rank">Rank: {rank}</div>
+                <div className="profile-achievements points">Points: {user?.highestRank}</div>
+                <div className="profile-achievements badges">Badges: <GiGearHammer
+                  style={{
+                    marginLeft: "8px",
+                  }}
+                  size="20px"
+                  color={rankColor}
+                />
+              </div>
             </div>
           </div>
           <div className="profile-user-extras-left">
@@ -200,6 +213,34 @@ function ProfilePage() {
         </div>
         <div className="profile-user-extras-right">
           <h1>My favorites</h1>
+          <div className="profile-user-saved-components">
+              {savedComponents?.map((component, i) => {
+                if (!component.user_component.isAuthor) {
+                  return (
+                    <div
+                      key={'saved' + i}
+                      className="profile-user-single-saved"
+                      onClick={() =>
+                        uploadNavigate(`/components/${component.id}`)
+                      }
+                    >
+                      <div className="user-saved-image">
+                        <img src={component.img} alt="" />
+                      </div>
+                      <p>{component.name}</p>
+                      <div className="single-user-saved-frameworks">
+                        <div className="single-user-saved-framework">
+                          {component.framework}
+                        </div>
+                        <div className="single-user-saved-framework">
+                          {component.stylingFramework}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
         </div>
       </div>
     </div>

@@ -23,47 +23,47 @@ const UserComponent = require("../server/db/UserComponent");
 async function seed() {
   await db.sync({ force: true });
 
-  const thomas = await User.create({
-    username: "tombak",
-    password: "test",
-    firstName: "Thomas",
-    lastName: "Bak",
-    country: "USA",
-    email: "email3@gmail.com",
-  });
+  // const thomas = await User.create({
+  //   username: "tombak",
+  //   password: "test",
+  //   firstName: "Thomas",
+  //   lastName: "Bak",
+  //   country: "USA",
+  //   email: "email3@gmail.com",
+  // });
 
-  const ben = await User.create({
-    username: "benji",
-    password: "test",
-    firstName: "Benjamin",
-    lastName: "Lee",
-    country: "USA",
-    email: "email2@gmail.com",
-  });
-  const cathal = await User.create({
-    username: "cathal1990",
-    password: "test",
-    firstName: "Cathal",
-    lastName: "O Cuinneagain",
-    email: "email1@gmail.com",
-    country: "Ireland",
-    img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
-  });
-  const alec = await User.create({
-    username: "butters",
-    password: "test",
-    firstName: "Alec",
-    lastName: "Butterfield",
-    country: "USA",
-    email: "email4@gmail.com",
-  });
-  //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
-  ben.addFollowing(thomas);
-  cathal.addFollowing(thomas);
-  alec.addFollowing(thomas);
-  //source model cathal has the foreign key of creator_id, thomas has the key of following_id. cathal is adding thomas as a follower (following)
-  cathal.addFollower(thomas);
-  await Comment.create({ message: "hello" });
+  // const ben = await User.create({
+  //   username: "benji",
+  //   password: "test",
+  //   firstName: "Benjamin",
+  //   lastName: "Lee",
+  //   country: "USA",
+  //   email: "email2@gmail.com",
+  // });
+  // const cathal = await User.create({
+  //   username: "cathal1990",
+  //   password: "test",
+  //   firstName: "Cathal",
+  //   lastName: "O Cuinneagain",
+  //   email: "email1@gmail.com",
+  //   country: "Ireland",
+  //   img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
+  // });
+  // const alec = await User.create({
+  //   username: "butters",
+  //   password: "test",
+  //   firstName: "Alec",
+  //   lastName: "Butterfield",
+  //   country: "USA",
+  //   email: "email4@gmail.com",
+  // });
+  // //source model ben has the foreign key of following_id, thomas has the key of creator_id. ben is following the creator thomas.
+  // ben.addFollowing(thomas);
+  // cathal.addFollowing(thomas);
+  // alec.addFollowing(thomas);
+  // //source model cathal has the foreign key of creator_id, thomas has the key of following_id. cathal is adding thomas as a follower (following)
+  // cathal.addFollower(thomas);
+  // await Comment.create({ message: "hello" });
 
   const arr = [];
 
@@ -2625,13 +2625,13 @@ async function seed() {
   //     stylesheet: ``,
   //   });
 
-  for (let i = 0; i < arr.length; i++) {
-    if (i < 5) {
-      thomas.addComponent(arr[i], { through: { isAuthor: true } });
-    } else {
-      ben.addComponent(arr[i], { through: { isAuthor: true } });
-    }
-  }
+  // for (let i = 0; i < arr.length; i++) {
+  //   if (i < 5) {
+  //     thomas.addComponent(arr[i], { through: { isAuthor: true } });
+  //   } else {
+  //     ben.addComponent(arr[i], { through: { isAuthor: true } });
+  //   }
+  // }
 
   console.log("🌱🌱  Seeding Successful  🌱🌱");
 }

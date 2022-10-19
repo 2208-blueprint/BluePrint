@@ -20,6 +20,7 @@ import { CategoryComponent } from "./components";
 import UserPage from "./components/users/UserPage";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from "react-toastify";
+import { Slide, Zoom, Flip, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./components/firebase/AuthContext";
 
@@ -29,7 +30,12 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme={"dark"} position="top-center" autoClose={2000} />
+      <ToastContainer
+        theme={"dark"}
+        position="top-center"
+        autoClose={2000}
+        transition={Flip}
+      />
       {/* <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> */}
       <Navigation setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       <Routes>
