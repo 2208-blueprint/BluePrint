@@ -74,7 +74,7 @@ function Navigation({loggedIn, setLoggedIn}){
             <div className="navigation-link-wrapper">
                 {loggedIn ?
                 <>
-                    <Link to='/profile/create'>CREATE COMPONENT</Link>
+                    <Link to='/profile/create' id="create-component-button">CREATE COMPONENT</Link>
                     <div className="inbox-chat-icon" onClick={() =>
                         {
                         setChatVisible(!chatVisible)
