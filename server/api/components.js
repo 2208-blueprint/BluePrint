@@ -138,6 +138,11 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
 
     await component.update({ currentPoints: points });
     await component.addUser(user, { through: { isFavorite: true } });
+    const favoritedUsers = await component.getUsers();
+    console.log("followingComp", favoritedUsers);
+    if (favoritedUsers.length - 1 === 2) {
+      await componentAuthor.update({ twoFavoriteUnlocked: true });
+    }
     res.sendStatus(201);
   } catch (error) {
     next(error);

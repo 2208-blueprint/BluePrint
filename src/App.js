@@ -6,7 +6,7 @@ import {
   Redirect,
   ProfilePage,
   NotFoundPage,
-  FireBaseChat
+  FireBaseChat,
 } from "./components";
 import { SingleComponent } from "./components";
 import { LoginPage } from "./components";
@@ -20,19 +20,22 @@ import { CategoryComponent } from "./components";
 import UserPage from "./components/users/UserPage";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer, toast } from "react-toastify";
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import { Slide, Zoom, Flip, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from './components/firebase/AuthContext'
-
+import { AuthContext } from "./components/firebase/AuthContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const { currentUser } = useContext(AuthContext);
 
-
   return (
     <>
-      <ToastContainer theme={"dark"} position="top-center" autoClose={2000} transition={Flip}/>
+      <ToastContainer
+        theme={"dark"}
+        position="top-center"
+        autoClose={2000}
+        transition={Flip}
+      />
       {/* <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> */}
       <Navigation setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       <Routes>

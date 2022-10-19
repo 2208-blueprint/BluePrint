@@ -116,6 +116,7 @@ body {
       flex-wrap: wrap;
       width: 100%;
       height: 100%;
+      margin-top: 20px;
 
       .main-page-content-list-element {
         border: 1px solid gray;
@@ -129,5 +130,24 @@ body {
         background-color: lightgray;
       }
     }
+  }
+}
+
+.mainPage-sort-container {
+  color: white;
+  font-size: 1.5rem;
+  font-family: 'Inter', 'sans-serif';
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  
+  select {
+    font-size: 1.5rem;
+    padding: 4px;
+    background-color: rgb(32, 33, 45);
+    border: none;
+    color: @tertiary-color;
   }
 }
