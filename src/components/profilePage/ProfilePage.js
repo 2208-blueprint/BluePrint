@@ -128,13 +128,6 @@ function ProfilePage() {
             </small>
           </div>
           <hr></hr>
-          <div className="profile-category-link inbox">
-            <p className="my-inbox">
-              <MdOutlineMail />
-              My Inbox
-            </p>
-          </div>
-          <hr></hr>
           <div className="profile-new-component-button-container">
             <button className="profile-new-component-button" onClick={() => navigate('/profile/create')}>
               Create new component
