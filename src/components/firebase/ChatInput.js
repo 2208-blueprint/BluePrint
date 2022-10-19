@@ -53,6 +53,7 @@ function ChatInput() {
           text,
           senderId: currentUser.uid,
           date: Timestamp.now(),
+          isRead: false,
         }),
       });
     }
