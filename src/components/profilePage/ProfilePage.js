@@ -129,11 +129,6 @@ console.log(savedComponents);
               {savedComponents ? savedComponents.length : "0"} Favorited
             </small>
           </div>
-          <div className="profile-category-link likes">
-            <small>
-              <BsHeartFill /> 0 Likes
-            </small>
-          </div>
           <hr></hr>
           <div className="profile-category-link inbox">
             <p className="my-inbox">

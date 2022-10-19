@@ -1642,21 +1642,18 @@ iframe {
   color: white;
 }
 .profile-wrapper .profile-sidebar .profile-picture {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 2px solid white;
   border-radius: 50%;
   background-color: gray;
-  height: 220px;
-  width: 220px;
+  min-height: 220px;
+  min-width: 220px;
   margin: 30px 0 30px 0;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
 }
 .profile-wrapper .profile-sidebar .profile-picture img {
   height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container {
   display: flex;
@@ -1673,7 +1670,8 @@ iframe {
   margin: 5px 0 10px 0;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container .location svg {
-  margin: 0 3px 0 0;
+  color: red;
+  margin: 0 7px 0 0;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container .followers svg {
   vertical-align: middle;
