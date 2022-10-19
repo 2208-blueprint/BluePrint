@@ -994,6 +994,23 @@ body {
   margin: 30px 10px 10px 10px;
   background-color: lightgray;
 }
+.mainPage-sort-container {
+  color: white;
+  font-size: 1.5rem;
+  font-family: 'Inter', 'sans-serif';
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+}
+.mainPage-sort-container select {
+  font-size: 1.5rem;
+  padding: 4px;
+  background-color: #20212d;
+  border: none;
+  color: #47B5FF;
+}
 #navbar {
   display: flex;
   justify-content: space-around;

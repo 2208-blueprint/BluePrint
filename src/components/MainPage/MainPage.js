@@ -22,6 +22,8 @@ function MainPage() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [componentsPerPage, setComponentsPerPage] = React.useState(8);
+  const [sortedComponents, setSorted] = React.useState([])
+  const [test, setTest] = React.useState(true)
   // const [loadRight, setLoadRight] = React.useState(false);
   // const [loadLeft, setLoadLeft] = React.useState(false);
 
@@ -33,14 +35,11 @@ function MainPage() {
       const { data } = await axios.get("/api/components");
       setComponents(data);
       setIsLoading(false);
+      setSorted(data)
     }
     getComponents();
   }, []);
 
-  const lastPostIndex = currentPage * componentsPerPage;
-  const firstPostIndex = lastPostIndex - componentsPerPage;
-  const currentComponents = components.slice(firstPostIndex, lastPostIndex);
-  const totalPages = Math.ceil(components.length / componentsPerPage);
 
   const nextPage = (event) => {
     event.preventDefault();
@@ -59,6 +58,35 @@ function MainPage() {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  function sortHandler(event) {
+    event.preventDefault()
+    let oldArray = components
+    if (event.target.value === "popular") {
+      oldArray.sort((a,b)=>{
+        return b.currentPoints - a.currentPoints
+      })
+    } else if (event.target.value === 'newest') {
+      oldArray.sort((a,b) => {
+        let bTime = b.createdAt
+        let aTime = a.createdAt
+        return bTime.localeCompare(aTime)
+      })
+    } else {
+      oldArray.sort((a,b) => {
+        let bTime = b.createdAt
+        let aTime = a.createdAt
+        return aTime.localeCompare(bTime)
+      })
+    }
+    setSorted(oldArray)
+    setTest(!test)
+  }
+
+  const lastPostIndex = currentPage * componentsPerPage;
+  const firstPostIndex = lastPostIndex - componentsPerPage;
+  const currentComponents = sortedComponents.slice(firstPostIndex, lastPostIndex);
+  const totalPages = Math.ceil(sortedComponents.length / componentsPerPage);
 
   return (
     <div className="main-page-main-container">
@@ -108,6 +136,14 @@ function MainPage() {
               </div>
             </div>
             <Leaderboard />
+          </div>
+          <div className='mainPage-sort-container'>
+            <p>Sort By:</p>
+            <select onChange={sortHandler}>
+              <option value="popular">Most Popular</option>
+              <option value="newest">Newest</option>
+              <option value='oldest'>Oldest</option>
+            </select>
           </div>
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (
