@@ -186,7 +186,7 @@ const updateAchievements = async (currentUser) => {
     const userPoints = currentUser.currentPoints;
     const updatedPoints = userPoints + 500;
     await axios.put("/api/admin/awardAchievement", {
-      // wasFirstDisplayed: true,
+      wasFirstDisplayed: true,
       currentPoints: updatedPoints,
       highestRank:
         updatedPoints > currentUser.highestRank
