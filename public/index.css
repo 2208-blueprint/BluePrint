@@ -804,7 +804,7 @@ a.createcomp-back div span {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: 25px;
   border-radius: 0.25rem;
@@ -846,6 +846,7 @@ a.createcomp-back div span {
   border: none;
   cursor: pointer;
   transition: 0.25s ease;
+  align-self: center;
 }
 #createcomp-submission button:hover {
   background-color: #1a6da4;
