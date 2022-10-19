@@ -74,7 +74,6 @@ function ProfilePage() {
     }
     getUser();
   }, []);
-console.log(savedComponents);
 
   return (
     <div className="profile-wrapper">
