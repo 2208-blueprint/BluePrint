@@ -7,9 +7,9 @@ const requireToken = async (req, res, next) => {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
     req.user = user;
-    if (!user.isAdmin) {
-      throw new Error("You don't have admin rights!");
-    }
+    // if (!user.isAdmin) {
+    //   throw new Error("You don't have admin rights!");
+    // }
     next();
   } catch (error) {
     next(error);
@@ -68,6 +68,15 @@ router.get("/top-users", async (req, res, next) => {
     res.send(topUsers);
   } catch (ex) {
     next(ex);
+  }
+});
+router.put("/awardAchievement", requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    await user.update(req.body);
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
   }
 });
 

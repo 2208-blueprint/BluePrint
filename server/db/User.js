@@ -68,6 +68,14 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  twoFavoriteUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twoFavoriteDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 /**
