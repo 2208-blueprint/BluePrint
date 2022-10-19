@@ -102,7 +102,7 @@ function Navigation({loggedIn, setLoggedIn}){
                         </IconContext.Provider>
                         Search Users
                         </Link>
-                    <Link to='/login'>CREATE COMPONENT</Link>
+                    <Link to='/login' id="create-component-button">CREATE COMPONENT</Link>
                     <Link className="navigation-logout" to='/login'>LOGIN</Link>
                 </>
                 }
@@ -164,7 +164,7 @@ function Navigation({loggedIn, setLoggedIn}){
                     </a>
                     <a onClick={() => {logoutHandler()
                     setToggle(!toggle)}} className="navigation-logout">LOGOUT</a>
-                    <Link onClick={()=>setToggle(!toggle)} to='/profile/create'>CREATE COMPONENT</Link>
+                    <Link onClick={()=>setToggle(!toggle)} to='/profile/create' id="create-component-button">CREATE COMPONENT</Link>
                     <Sidebar/>
                 </>
                 :
@@ -178,7 +178,7 @@ function Navigation({loggedIn, setLoggedIn}){
                     </IconContext.Provider>Search Users
                     </a>
                     <Link onClick={()=>setToggle(!toggle)} className="navigation-logout" to='/login'>LOGIN</Link>
-                    <Link onClick={()=>setToggle(!toggle)} to='/login'>CREATE COMPONENT</Link>
+                    <Link onClick={()=>setToggle(!toggle)} to='/login' id="create-component-button">CREATE COMPONENT</Link>
                     <Sidebar/>
                 </>
                 }
