@@ -2717,13 +2717,13 @@ iframe {
 }
 .achievement-title {
   font-size: 16px;
-  color: #cacad0;
+  color: #ffffff;
   margin-top: 8px;
   margin-bottom: 3px;
 }
 .achievement-desc {
   font-size: 12px;
-  color: #cacad0;
+  color: #ffffff;
   font-style: italic;
 }
 .toast-body {

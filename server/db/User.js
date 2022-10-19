@@ -60,6 +60,10 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  wasFirstDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
   hadTopComponent: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
@@ -68,11 +72,43 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  newUserUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+  },
+  newUserDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
   twoFavoriteUnlocked: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
   twoFavoriteDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenFavoriteUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenFavoriteDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveFavoriteUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveFavoriteDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftyFavoriteUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftyFavoriteDisplayed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },

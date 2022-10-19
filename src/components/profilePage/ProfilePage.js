@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function ProfilePage() {
   const [user, setUser] = React.useState();
   const [savedComponents, setSavedComponents] = React.useState([]);
@@ -104,7 +103,7 @@ function ProfilePage() {
           </div>
           <div className="profile-category-link username">
             <small>
-              {user?.username} -- {rank} {`(${user?.highestRank} points)`}
+              {user?.username} -- {rank} {`(peak: ${user?.highestRank} points)`}
             </small>
           </div>
           <div className="profile-category-link location">
