@@ -96,41 +96,6 @@ function UserPage() {
         }
         getUserBlueprintPoints();
     }, [])
-
-    // React.useEffect(() => {
-    //     async function getComponentSavesAndFavs() {
-    //         try {
-
-    //         if (curUser) {
-            
-    //         const {data}  = await axios.get("/api/components")
-    //         console.log('Get Components Data: ', data);
-    //         console.log('First Component: ', data[0].users[0].username)
-    //         console.log('curUser.username: ', curUser)
-    //           const userComponents = data.filter(component => 
-    //             (component.users[0].username) === curUser?.username);
-    //             console.log('get Component Saves and Favs: ',userComponents)
-    //           }
-    //         } catch(e) {
-    //             console.error(e)
-    //         }
-            
-    //           parsedData.push({
-    //             id: user.id,
-    //             username: user.username,
-    //             componentCount,
-    //             followerCount,
-    //             points: user.currentPoints,
-    //           });
-            
-    //         setTopUsers(parsedData);
-    //       };
-    //     getComponentSavesAndFavs()
-    // },[])
-
-    console.log('Cur user: ', curUser)
-    
-    
   
     function handleMessageMeButton(evt){
         evt.preventDefault()
@@ -146,9 +111,6 @@ function UserPage() {
             return component.name.includes(searchBarInput)
         })
         setFiltered(filterArray)
-        // let keywords = searchBarInput.split(" ").join("+");
-        // setSearchBarInput("");
-        // navigate(`/components/search/${keywords}`);
       };
       console.log('filtered: ', filtered)
     
@@ -245,11 +207,15 @@ function UserPage() {
                 </div>
             </div>
             <div className="single-user-page-component-list-container">
-                {filtered?.map((component,i) => (
-                    <div className="single-user-page-single-component">
-                        <ComponentCard componentId={component.id} key={i} />
-                    </div>
-                    )   
+                {filtered?.map((component,i) => {
+                    if (component.user_component.isAuthor) {
+                        return(
+                        <div className="single-user-page-single-component">
+                            <ComponentCard componentId={component.id} key={i} />
+                        </div>
+                        )
+                    } 
+                }  
                 )}
             </div>           
         </div>
