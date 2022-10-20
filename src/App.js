@@ -23,6 +23,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Slide, Zoom, Flip, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./components/firebase/AuthContext";
+import { EditComponent } from './components'
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -44,6 +45,7 @@ function App() {
         <Route path="/users/search" element={<SearchUsers />}></Route>
         <Route path="/users/:id" element={<UserPage />}></Route>
         <Route path="/components/:id" element={<SingleComponent />}></Route>
+        <Route path="/components/:id/edit" element={<EditComponent />}></Route>
         <Route
           path="/components/search/:keywords"
           element={<SearchComponent />}
