@@ -349,7 +349,7 @@ function EditComponent() {
           />
         </div>
         <div id ="createcomp-submission">
-            <h1>Submit Your Creation!</h1>
+            <h1>Edit Your Component!</h1>
             <div>Markup:&nbsp;&nbsp;
             <select value={form} onChange={(event)=>{
               setForm(event.target.value)
@@ -401,7 +401,7 @@ function EditComponent() {
                 </div>
               )}
             </div>
-            <button onClick={submitComponent}>Submit</button>
+            <button onClick={submitComponent}>Edit</button>
         </div>
         <div id="createcomp-color-picker">
           <h1>Color Selector Tool</h1>
