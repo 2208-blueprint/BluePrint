@@ -25,7 +25,6 @@ function fireBaseChat({ chatVisible, setChatVisible }) {
                             authorization: token,
                         }
                     })
-                    console.log(data);
                     setUser(data)
                 }
                 else {

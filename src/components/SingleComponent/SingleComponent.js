@@ -16,7 +16,8 @@ import CommentsSection from "./CommentsSection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
-import { BsPersonPlusFill, BsPersonCheckFill} from 'react-icons/bs'
+import { BsPersonPlusFill, BsPersonCheckFill, BsPencilFill, BsTrashFill} from 'react-icons/bs'
+import { GoPencil } from 'react-icons/go'
 import { IconContext } from "react-icons";
 
 function SingleComponent() {
@@ -263,6 +264,18 @@ function SingleComponent() {
     }
   }, []);
 
+  async function deleteHandler() {
+    const confirmation = confirm('Are you sure to delete this component?') ; 
+    if (confirmation) {
+      await axios.delete(`/api/components/${params.id}`, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      })
+      navigate('/')
+    }
+  }
+
   // compile the less into css if less changes
   React.useEffect(()=> {
     Less.render(less).then(function(output) {
@@ -291,7 +304,13 @@ function SingleComponent() {
           <span className="singlecomp-tooltip">Follow User</span>
         </div>) : <div></div>}
       </div>
-      {loggin ? <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
+      {loggin ? amCreator ? 
+      <div id="singlecomp-heart" onClick={()=>navigate(`/components/${params.id}/edit`)}>
+        <IconContext.Provider value={{size: '40px'}}>
+          <GoPencil/>
+        </IconContext.Provider>
+      </div>
+      : <div id="singlecomp-heart" onClick={likeHandler} value={params.id}>
         {liked ?
         <span className='singlecomp-hearted' value={params.id}><IconContext.Provider
                     value={{ size: "40px"}}
@@ -303,10 +322,15 @@ function SingleComponent() {
                 >
                   <FaRegHeart/>
                 </IconContext.Provider></span>}
-                {/* <span className="singlecomp-tooltip">Like</span> */}
         </div>
       : <div></div>}
-      {loggin ? <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
+      {loggin ? amCreator ? 
+      <div id="singlecomp-save" onClick={deleteHandler}> 
+        <IconContext.Provider value={{size: '40px'}}>
+          <BsTrashFill/>
+        </IconContext.Provider>
+      </div>
+      : <div id="singlecomp-save" onClick={saveHandler} value={params.id}>
         {saved ? <span className='singlecomp-saved' value={params.id}><IconContext.Provider
                     value={{ size: "40px"}}
                   >
@@ -317,7 +341,6 @@ function SingleComponent() {
                 >
                   <FaSave/>
                 </IconContext.Provider></span>}
-                {/* <span className="singlecomp-tooltip">Save</span> */}
         </div>
       : <div></div>}
       </div>
@@ -478,6 +501,3 @@ function SingleComponent() {
 }
 
 export default SingleComponent;
-
-
-
