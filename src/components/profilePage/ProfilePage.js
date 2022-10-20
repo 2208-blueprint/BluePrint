@@ -178,7 +178,7 @@ function ProfilePage() {
           <div className="profile-user-extras-left">
             <h1>My uploads</h1>
             <div className="profile-user-uploads">
-              {user?.components.map((component, i) => {
+              {user?.components.length ? user?.components.map((component, i) => {
                 if (component.user_component.isAuthor) {
                   return (
                     <div
@@ -203,14 +203,18 @@ function ProfilePage() {
                     </div>
                   );
                 }
-              })}
+              })
+            :
+            'You have not uploaded any components!'
+            }
             </div>
           </div>
         </div>
         <div className="profile-user-extras-right">
-          <h1>My favorites</h1>
+          <h1>My saved components</h1>
           <div className="profile-user-saved-components">
-              {savedComponents?.map((component, i) => {
+              {savedComponents?.length ?
+              savedComponents?.map((component, i) => {
                 if (!component.user_component.isAuthor) {
                   return (
                     <div
@@ -235,7 +239,10 @@ function ProfilePage() {
                     </div>
                   );
                 }
-              })}
+              })
+            :
+            'You have not saved any components!'
+            }
             </div>
         </div>
       </div>
