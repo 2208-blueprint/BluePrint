@@ -1727,7 +1727,7 @@ iframe {
 }
 .profile-wrapper .profile-picture-crown {
   position: absolute;
-  z-index: 999;
+  z-index: 50;
   color: #47B5FF;
   margin-top: 200px;
   margin-left: 160px;
@@ -3017,6 +3017,7 @@ iframe {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg {
   color: #09141a;
+  vertical-align: middle;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg:hover {
   background-color: lightgray;

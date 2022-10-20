@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 function ChatSearch() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [allUsers, setAllUsers] = useState(null);
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
@@ -30,6 +31,12 @@ function ChatSearch() {
       collection(db, "users"),
       where("displayName", "==", username)
     );
+    const allUsersFromFirebase = query(
+      collection(db, "users"),
+    );
+    const allUsersSnapshot = await getDocs(allUsersFromFirebase);
+    setAllUsers(allUsersSnapshot)
+
 
     try {
 
