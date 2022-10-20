@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function ProfilePage() {
   const [user, setUser] = React.useState();
   const [savedComponents, setSavedComponents] = React.useState([]);
   const [followers, setFollowers] = React.useState([]);
+  const [allFollowing, setAllFollowing] = React.useState([]);
   const [rank, setRank] = React.useState("");
   const [rankColor, setRankColor] = React.useState("");
 
@@ -58,6 +58,8 @@ function ProfilePage() {
 
           const followers = await Axios.get("api/users/followers");
           setFollowers(followers.data);
+          const following = await Axios.get("api/users/following");
+          setAllFollowing(following.data)
 
           const savedComponents = data.components.filter(
             (component) => component.user_component.isSaved
@@ -105,7 +107,7 @@ function ProfilePage() {
           </div>
           <div className="profile-category-link username">
             <small>
-              {user?.username} -- {rank} {`(${user?.highestRank} points)`}
+              {user?.username} -- {rank} {`(peak: ${user?.highestRank} points)`}
             </small>
           </div>
           <div className="profile-category-link location">
@@ -119,7 +121,7 @@ function ProfilePage() {
           </div>
           <div className="profile-category-link following">
             <small>
-              <MdPeopleOutline /> 0 Following
+              <MdPeopleOutline /> {allFollowing ? allFollowing.length : "0"} Following
             </small>
           </div>
           <div className="profile-category-link favorited">
@@ -127,13 +129,6 @@ function ProfilePage() {
               <BsBookmarkStar />{" "}
               {savedComponents ? savedComponents.length : "0"} Favorited
             </small>
-          </div>
-          <hr></hr>
-          <div className="profile-category-link inbox">
-            <p className="my-inbox">
-              <MdOutlineMail />
-              My Inbox
-            </p>
           </div>
           <hr></hr>
           <div className="profile-new-component-button-container">

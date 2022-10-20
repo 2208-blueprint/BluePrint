@@ -528,6 +528,7 @@ a.singlecomp-back div span {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(150deg, #09141a 0%, #011018 100%);
+  font-family: "Inter", sans-serif;
 }
 .signup-main-container .signup-wrapper {
   display: flex;
@@ -804,7 +805,7 @@ a.createcomp-back div span {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: 25px;
   border-radius: 0.25rem;
@@ -846,6 +847,7 @@ a.createcomp-back div span {
   border: none;
   cursor: pointer;
   transition: 0.25s ease;
+  align-self: center;
 }
 #createcomp-submission button:hover {
   background-color: #1a6da4;
@@ -902,7 +904,7 @@ body {
   background-color: #09141a;
   border: 3px solid #47B5FF;
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   opacity: 0.4;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -982,6 +984,7 @@ body {
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+  margin-top: 20px;
 }
 .main-page-wrapper .main-page-content-container .main-page-list-content-container .main-page-content-list-element {
   border: 1px solid gray;
@@ -1552,7 +1555,7 @@ iframe {
   opacity: 1;
 }
 .component-card-icons {
-  z-index: 100;
+  z-index: 50;
   justify-self: center;
   display: flex;
   transition: all 0.3s ease-in-out;
@@ -2128,6 +2131,16 @@ iframe {
   font-family: "Inter", "sans-serif";
   width: 100%;
 }
+.navigation .navigation-logo {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: 20px;
+}
+.navigation .navigation-logo .logo-blue {
+  color: #47B5FF;
+}
 .navigation-fall-down {
   position: absolute;
   display: flex;
@@ -2292,6 +2305,97 @@ iframe {
     gap: 30px;
   }
 }
+.inbox-chat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.inbox-chat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.inbox-chat-icon:hover {
+  color: #1a83c8;
+  cursor: pointer;
+}
+.chatbox-container-backdrop {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(51, 51, 51, 0.1);
+  backdrop-filter: blur(4px);
+  bottom: 10px;
+  z-index: 100;
+}
+#create-component-button {
+  width: 180px;
+  height: 20px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+#create-component-button:before {
+  content: "";
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+#create-component-button:active {
+  color: #000;
+}
+#create-component-button:active:after {
+  background: transparent;
+}
+#create-component-button:hover:before {
+  opacity: 1;
+}
+#create-component-button:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
 .not-found-bg-image {
   position: absolute;
   width: 100vw;
@@ -2448,6 +2552,7 @@ iframe {
   justify-self: center;
   width: 100%;
   text-align: center;
+  margin-top: 150px;
 }
 .search-result-search-term-number {
   font-size: 16px;
@@ -2543,6 +2648,7 @@ iframe {
   font-family: "Inter", sans-serif;
   color: white;
   font-size: 25px;
+  margin-bottom: 10px;
 }
 .leaderboard-row-icon {
   color: #ca6072;
@@ -2717,12 +2823,18 @@ iframe {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
   flex: 1;
   border-right: 1px solid white;
+  background: rgba(21, 21, 21, 0.65);
+  box-shadow: 0 8px 0 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #414141;
+  background-color: #0F4C75;
   height: 50px;
   padding: 10px;
 }
@@ -2792,8 +2904,8 @@ iframe {
   flex: 2;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
-  height: 50px;
-  background-color: gray;
+  height: 52px;
+  background-color: #0F4C75;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2812,13 +2924,13 @@ iframe {
   gap: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons svg {
-  height: 24px;
+  height: 35px;
   cursor: pointer;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages {
   background-color: #cee3eb;
   color: #09141a;
-  padding: 10px;
+  padding: 10px 10px 10px 10px;
   height: calc(100% - 160px);
   width: 100%;
   overflow: scroll;
@@ -2835,6 +2947,7 @@ iframe {
   align-items: center;
   color: gray;
   font-weight: 300;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message .firebase-message-info img {
   width: 40px;
@@ -2854,7 +2967,9 @@ iframe {
   border-radius: 0px 10px 10px 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message .firebase-message-content img {
-  width: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner {
   flex-direction: row-reverse;
@@ -2908,6 +3023,44 @@ iframe {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg:hover {
   background-color: lightgray;
+}
+#cancel-chat-button {
+  color: #ca6072;
+}
+.achievement-main-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.achievement-info-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+.achievement-unlocked {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.achievement-title {
+  font-size: 16px;
+  color: #ffffff;
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+.achievement-desc {
+  font-size: 12px;
+  color: #ffffff;
+  font-style: italic;
+}
+.toast-body {
+  width: 370px;
+  padding: 0;
+  margin: 0;
+}
+.toast-progress {
+  background: #0F4C75;
+  color: red;
 }
 /* width */
 ::-webkit-scrollbar {

@@ -21,12 +21,18 @@
         .firebase-chat-sidebar {
             flex: 1;
             border-right: 1px solid white;
+            background: rgba( 21, 21, 21, 0.65 );
+            box-shadow: 0 8px 0 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 5.5px );
+            -webkit-backdrop-filter: blur( 5.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
 
             .firebase-navbar {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                background-color: rgb(65, 65, 65);
+                background-color: @secondary-color;
                 height: 50px;
                 padding: 10px;
 
@@ -112,8 +118,8 @@
             flex: 2;
 
             .firebase-chat-info {
-                height: 50px;
-                background-color: gray;
+                height: 52px;
+                background-color: @secondary-color;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -134,7 +140,7 @@
                 gap: 10px;
 
                 svg {
-                    height: 24px;
+                    height: 35px;
                     cursor: pointer;
                 }
             }
@@ -142,7 +148,7 @@
             .firebase-messages {
                 background-color: rgb(206, 227, 235);
                 color: @background-color;
-                padding: 10px;
+                padding: 10px 10px 10px 10px;
                 height: calc(100% - 160px);
                 width: 100%;
                 overflow: scroll;
@@ -159,6 +165,7 @@
                         align-items: center;
                         color: gray;
                         font-weight: 300;
+                        margin-right: 10px;
 
                         img {
                             width: 40px;
@@ -179,7 +186,9 @@
                             border-radius: 0px 10px 10px 10px;
                         }
                         img {
-                            width: 50%;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 0;
                         }
                     }
 
@@ -249,4 +258,8 @@
             }
         }
     }
+}
+
+#cancel-chat-button {
+    color:rgb(202, 96, 114);
 }

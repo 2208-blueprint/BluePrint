@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import updateAchievements from "../achievements/achievementListener";
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -15,6 +17,11 @@ function Sidebar() {
     setSearchBarInput("");
     navigate(`/components/search/${keywords}`);
   };
+  //get current user and pass it into update to listen for achievements
+  const currentUser = useSelector((state) => state.singleUser);
+  useEffect(() => {
+    updateAchievements(currentUser);
+  }, [currentUser]);
 
   return (
     <div className="side-bar-container-main">
