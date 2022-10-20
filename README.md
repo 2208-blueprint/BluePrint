@@ -33,7 +33,7 @@ Created with React, Redux, Express, and PostgreSQL, this app was created complet
 
 BluePrint was created by Thomas Bak, Benjamin Lee, Alec Butterfield, and Cathal O Cuinneagain as a senior capstone project for the Full-time Immersive Web Development course at Fullstack Academy.
 
-| <img style="border-radius:50%; height: 200px" src="https://i.imgur.com/DgLABtG.jpg">  |<img style="border-radius:50%; height: 200px" src="https://i.imgur.com/zFFQOqg.jpg"> | <img style="border-radius:50%; height: 200px" src="https://i.imgur.com/H4mlPwp.jpg"> | <img style="border-radius:50%; height: 200px" src="https://i.imgur.com/Rb1R3Ou.jpg">
+| <img style="border-radius:50%; height: 150px" src="https://i.imgur.com/DgLABtG.jpg">  |<img style="border-radius:50%; height: 150px" src="https://i.imgur.com/04aJNhA.png"> | <img style="border-radius:50%; height: 150px" src="https://i.imgur.com/H4mlPwp.jpg"> | <img style="border-radius:50%; height: 150px" src="https://i.imgur.com/Rb1R3Ou.jpg">
 | :-------------: |:-------------:|:-------------:|:-------------:|
 | Thomas Bak      | Benjamin Lee    | Alec Butterfield | Cathal O Cuinneagain |
 | <img style="height:20px" src="https://cdn-icons-png.flaticon.com/512/174/174857.png">&nbsp;<a href="https://www.linkedin.com/in/thomas-bak/">LinkedIn</a> | <img style="height:20px" src="https://cdn-icons-png.flaticon.com/512/174/174857.png">&nbsp;<a href="https://www.linkedin.com/in/benjamin-g-lee/">LinkedIn</a>    | <img style="height:20px" src="https://cdn-icons-png.flaticon.com/512/174/174857.png">&nbsp;<a href="https://www.linkedin.com/in/alec-butterfield/">LinkedIn</a> | <img style="height:20px" src="https://cdn-icons-png.flaticon.com/512/174/174857.png">&nbsp;<a href="https://www.linkedin.com/in/cathalocuinneagain/">LinkedIn</a> |
