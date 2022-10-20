@@ -132,6 +132,21 @@ function UserPage() {
         <>
         <div className="single-user-page-main-container">
             <div className="single-user-page-title-container">
+            <div className='singlecomp-title-author'>
+        <span>{title} by </span><span onClick={author.username ? ()=>navigate(`/users/${author.id}`) : ()=>navigate('/')} className="singlecomp-author"> {author.username ? author.username : 'BluePrint Community'}</span>
+        {(loggin && !amCreator && author.username) ? 
+         (followed ? <div onClick={followHandler} id ="singlecomp-follow">
+          <IconContext.Provider value={{size: "40px"}}>
+            <BsPersonCheckFill/>
+          </IconContext.Provider>
+          <span className="singlecomp-tooltip">Unfollow User</span>
+        </div> : <div onClick={followHandler} id="singlecomp-follow">
+          <IconContext.Provider value={{size: "40px"}}>
+            <BsPersonPlusFill/>
+          </IconContext.Provider>
+          <span className="singlecomp-tooltip">Follow User</span>
+        </div>) : <div></div>}
+      </div>
                 <div className="single-user-page-user-pic">
                     <img className="single-user-page-user-img" src={curUser?.img} alt="user_pic.png"/>
                 </div>
