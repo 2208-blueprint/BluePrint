@@ -27,10 +27,30 @@
                 margin: 20px;
                 border-radius: 50%;
                 margin: 2.5%;
+
+                
             }
             .single-user-page-message-me-button{
 
             }
+        }
+        .single-user-page-crown {
+            position: absolute;
+            z-index: 2;
+            color: @tertiary-color;
+            margin-top: 85px;
+            margin-right: 90px;
+            background-color: rgb(9, 20, 26);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .single-user-page-crown-invisible {
+            opacity: 0;
+            visibility: hidden;
         }
         .single-user-page-user-name-rank-container {
             background-color:@background-color;
@@ -43,7 +63,8 @@
 
             }
             .single-user-page-rank-achievements{
-
+                display:flex;
+                align-items: center;
             }
         }
         .single-user-page-user-stats-container {
@@ -69,17 +90,22 @@
                 white-space:nowrap;
             }
 
+            .single-user-page-points {
+                display: flex;
+                margin-left: 4px;
+                align-items:flex-start;
+            }
+
             .single-user-page-components-made {
                 color:tan;
                 padding: 2px 0px 2px 0px;
                 size: 20px;
             }
             .single-user-page-components-made-wrapper{
-                display: inline-flex;
+                display: flex;
                 position:relative;
                 align-items: center;
-                justify-content: space-between;
-                width: 30px;
+                width: 100%;
             }
             .single-user-page-components-made-wrapper:hover .single-user-page-tooltip {
                 visibility: visible;
@@ -90,11 +116,10 @@
                 padding: 2px 0px 2px 0px;
             }
             .single-user-page-followers-wrapper {
-                display: inline-flex;
+                display: flex;
                 position:relative;
                 align-items: center;
-                justify-content: space-between;
-                width: 30px;
+                width: 100%;
             }
             .single-user-page-followers-wrapper:hover .single-user-page-tooltip {
                 visibility: visible;
@@ -105,11 +130,11 @@
                 padding: 2px 0px 2px 0px;
             }
             .single-user-page-bluepoints-wrapper {
-                display: inline-flex;
-                position:relative;
+                display: flex;
+                flex-direction: row;
+                position: relative;
                 align-items: center;
-                justify-content: space-between;
-                width: 30px;
+                width: 100%;
             }
             .single-user-page-bluepoints-wrapper:hover .single-user-page-tooltip {
                 visibility: visible;
