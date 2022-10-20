@@ -27,6 +27,7 @@ Created with React, Redux, Express, and PostgreSQL, this app was created complet
 * Passport
 * JWT
 * bcrypt
+* Toastify
 * Less CSS
 
 ## Creators
