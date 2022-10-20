@@ -23,7 +23,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const [email, setEmail] = React.useState('')
     const [profilePicture, setProfilePicture] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [country, setCountry] = React.useState('')
+    const [country, setCountry] = React.useState('United States')
     const [err, setErr] = React.useState(false)
     const [loading, setLoading] = React.useState(false);
 
@@ -134,6 +134,9 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                 }
                 if (error.response.data === 'Validation error: Validation isUrl on img failed'){
                     toastError('Invalid profile picture URL')
+                }
+                if (error.response.data === 'Validation error: Validation len on password failed'){
+                    toastError('Password must be at least 6 characters!')
                 }
             }
             console.log(error)
