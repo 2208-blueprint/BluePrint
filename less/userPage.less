@@ -27,10 +27,30 @@
                 margin: 20px;
                 border-radius: 50%;
                 margin: 2.5%;
+
+                
             }
             .single-user-page-message-me-button{
 
             }
+        }
+        .single-user-page-crown {
+            position: absolute;
+            z-index: 2;
+            color: @tertiary-color;
+            margin-top: 85px;
+            margin-right: 90px;
+            background-color: rgb(9, 20, 26);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .single-user-page-crown-invisible {
+            opacity: 0;
+            visibility: hidden;
         }
         .single-user-page-user-name-rank-container {
             background-color:@background-color;
@@ -43,7 +63,8 @@
 
             }
             .single-user-page-rank-achievements{
-
+                display:flex;
+                align-items: center;
             }
         }
         .single-user-page-user-stats-container {

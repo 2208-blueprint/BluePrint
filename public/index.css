@@ -1267,6 +1267,24 @@ body {
   border-radius: 50%;
   margin: 2.5%;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown {
+  position: absolute;
+  z-index: 2;
+  color: #47B5FF;
+  margin-top: 85px;
+  margin-right: 90px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown-invisible {
+  opacity: 0;
+  visibility: hidden;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
   background-color: #09141a;
   display: flex;
@@ -1276,6 +1294,10 @@ body {
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
   font-size: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-rank-achievements {
+  display: flex;
+  align-items: center;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
   background-color: #09141a;
@@ -1730,7 +1752,7 @@ iframe {
 }
 .profile-wrapper .profile-picture-crown {
   position: absolute;
-  z-index: 999;
+  z-index: 2;
   color: #47B5FF;
   margin-top: 200px;
   margin-left: 160px;
