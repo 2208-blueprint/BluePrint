@@ -1295,17 +1295,21 @@ body {
   left: 30px;
   white-space: nowrap;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-points {
+  display: flex;
+  margin-left: 4px;
+  align-items: flex-start;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made {
   color: tan;
   padding: 2px 0px 2px 0px;
   size: 20px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1316,11 +1320,10 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1331,11 +1334,11 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper:hover .single-user-page-tooltip {
   visibility: visible;

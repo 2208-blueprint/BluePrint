@@ -189,18 +189,21 @@ function UserPage() {
             </div>
                 <div className="single-user-page-user-stats-container">
                     <div className="single-user-page-components-made-wrapper">
-                        <FaHammer className="single-user-page-components-made"/> {curUser?.components?.length}
+                        <FaHammer className="single-user-page-components-made"/>
+                        <span className="single-user-page-points">{curUser?.components?.length}</span>
                         <span className="single-user-page-tooltip"> Components made </span>
                     </div>
                     <div className="single-user-page-followers-wrapper">
-                        <BsPeople className="single-user-page-followers"/> {curUser?.followers?.length}
+                        <BsPeople className="single-user-page-followers"/>
+                        <span className="single-user-page-points">{curUser?.followers?.length}</span>
                         <span className="single-user-page-tooltip"> Followers </span>
                     </div>
                     {/* <span>Total Favorites:</span>
                     <span>Total Saves:</span> */}
                     <div className="single-user-page-bluepoints-wrapper">
-                        <FaCoins className="single-user-page-bluepoints"/> {points}
-                        <span className="single-user-page-tooltip"> BluePrint Points </span>
+                        <FaCoins className="single-user-page-bluepoints"/> 
+                        <span className="single-user-page-points">{points}</span>
+                        <div className="single-user-page-tooltip"> BluePrint Points </div>
                     </div>
                     
                 </div>
