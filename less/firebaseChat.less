@@ -65,15 +65,19 @@
             }
 
             .firebase-search {
-                border-bottom: 1px solid gray;
+                height: calc(100% - 112px);
+                width: 100%;
 
                 .firebase-searchform {
+                    border-bottom: 1px solid gray;
                     input {
                         background-color: transparent;
                         border: none;
                         color: white;
                         height: 40px;
                         outline: none;
+                        padding-left: 10px;
+                        width: 100%;
 
                         &::placeholder {
                             color: lightgray;
@@ -251,6 +255,7 @@
 
                 svg {
                     color: @background-color;
+                    vertical-align: middle;
                 }
                 svg:hover {
                     background-color: lightgray;
@@ -262,4 +267,11 @@
 
 #cancel-chat-button {
     color:rgb(202, 96, 114);
+}
+
+.filtered-users {
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
 }
