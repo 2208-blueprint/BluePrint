@@ -1727,7 +1727,7 @@ iframe {
 }
 .profile-wrapper .profile-picture-crown {
   position: absolute;
-  z-index: 50;
+  z-index: 2;
   color: #47B5FF;
   margin-top: 200px;
   margin-left: 160px;
@@ -2859,6 +2859,10 @@ iframe {
   outline: none;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search {
+  height: calc(100% - 112px);
+  width: 100%;
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform {
   border-bottom: 1px solid gray;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input {
@@ -2867,6 +2871,8 @@ iframe {
   color: white;
   height: 40px;
   outline: none;
+  padding-left: 10px;
+  width: 100%;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input::placeholder {
   color: lightgray;
@@ -3024,6 +3030,12 @@ iframe {
 }
 #cancel-chat-button {
   color: #ca6072;
+}
+.filtered-users {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .achievement-main-container {
   width: 100%;
