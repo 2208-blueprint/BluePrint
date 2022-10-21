@@ -171,6 +171,10 @@ a.singlecomp-back div span {
   height: 40vh;
   margin: 20px;
   background-color: white;
+  resize: both;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
 }
 #singlecomp-iframe iframe {
   border: solid #47B5FF 2px;
@@ -714,6 +718,10 @@ a.createcomp-back div span {
   height: 40vh;
   margin: 20px;
   background-color: white;
+  resize: both;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
 }
 #createcomp-iframe iframe {
   border: solid #47B5FF 2px;
