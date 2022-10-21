@@ -156,19 +156,8 @@ function Sidebar() {
         >
           RESOURCES
         </div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">API LINK HERE</div>
-        <div className="side-bar-container-category">LAST LINK</div>
+        <div className="side-bar-container-category">Useful API's</div>
+        <div className="side-bar-container-category">Useful Tools</div>
       </div>
     </div>
   );

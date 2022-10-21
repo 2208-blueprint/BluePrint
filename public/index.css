@@ -2449,6 +2449,25 @@ iframe {
     background-position: 0 0;
   }
 }
+.notification-icon {
+  height: 20px;
+  width: 20px;
+  margin: 2px 0 0 35px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  position: absolute;
+  align-self: flex-start;
+  justify-self: flex-end;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-icon .notification-number {
+  font-family: "Inter", sans-serif;
+  padding: 0 0 2px 0;
+}
 .not-found-bg-image {
   position: absolute;
   width: 100vw;
@@ -2883,6 +2902,10 @@ iframe {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
+  height: 100%;
+  overflow: scroll;
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
   display: flex;
   align-items: center;
@@ -2913,10 +2936,6 @@ iframe {
   border: none;
   cursor: pointer;
   outline: none;
-}
-.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search {
-  height: calc(100% - 112px);
-  width: 100%;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform {
   border-bottom: 1px solid gray;
