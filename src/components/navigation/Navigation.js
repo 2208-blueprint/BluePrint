@@ -23,6 +23,7 @@ function Navigation({loggedIn, setLoggedIn}){
     const { currentUser } = useContext(AuthContext)
     const [show, setShow] = React.useState(false)
     const [chatVisible, setChatVisible] = React.useState(false)
+    const [unread, setUnread] = React.useState(0)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -80,7 +81,15 @@ function Navigation({loggedIn, setLoggedIn}){
                         setChatVisible(!chatVisible)
                         document.body.style.overflow = chatVisible ? "visible" : "hidden"
                         }
-                        }><GoMail size="40px"/></div>
+                        }><GoMail size="40px"/>
+                        {unread ?
+                            <div className="notification-icon">
+                                <div className="notification-number">{unread && unread}</div>
+                            </div>
+                            :
+                            null
+                        }
+                    </div>
                     <div onClick={fallDownHandler} className="navigation-profile">
                         <img src={user?.img}></img>
                         <p>{user?.username}</p>
@@ -119,7 +128,8 @@ function Navigation({loggedIn, setLoggedIn}){
                 <a onClick={()=>{
                     navigate('/chat')
                     setShow(!show)
-                }}><IconContext.Provider value={{size: '20px'}}>
+                }}>
+                    <IconContext.Provider value={{size: '20px'}}>
                         <MdMailOutline/>
                     </IconContext.Provider>Chat
                 </a>
