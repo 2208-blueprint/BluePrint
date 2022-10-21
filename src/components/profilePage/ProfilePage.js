@@ -1,10 +1,10 @@
 import React from "react";
 import Axios from "axios";
 import { BsPeople, BsBookmarkStar, BsHeartFill, BsCardChecklist, BsPencilFill } from "react-icons/bs";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaRegEdit } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import { GiGearHammer } from "react-icons/gi";
-import { MdPeopleOutline, MdOutlineMail } from "react-icons/md";
+import { MdPeopleOutline, MdOutlineMail, MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,8 @@ function ProfilePage() {
   const [allFollowing, setAllFollowing] = React.useState([]);
   const [rank, setRank] = React.useState("");
   const [rankColor, setRankColor] = React.useState("");
+  const [show, setShow] = React.useState(false)
+  const [img, setImg] = React.useState('')
 
 
   const navigate = useNavigate();
@@ -66,6 +68,7 @@ function ProfilePage() {
           );
 
           setSavedComponents(savedComponents);
+          setImg(data.img)
         } else {
           navigate("/login");
           toastPopup("🖥️ Login to view your profile");
@@ -77,9 +80,38 @@ function ProfilePage() {
     getUser();
   }, []);
 
+  async function handleImg() {
+    let imageToSend
+    if (img === '') {
+      imageToSend = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg'
+    } else {
+      imageToSend = img
+    }
+    await Axios.put(`/api/users/${user.id}`, {
+      img: imageToSend
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    })
+    window.location.reload(false)
+  }
+
   return (
     <div className="profile-wrapper">
       <div className="profile-sidebar">
+        {show ?
+        <div className="profile-edit-url">
+          <div className="profile-x-button" onClick={()=>setShow(!show)}>
+            <MdClose size="20px"/>
+          </div>
+          <p>Edit your profile picture URL:</p>
+          <input value={img} onChange={(e)=>setImg(e.target.value)}></input><button onClick={handleImg}>Submit</button>
+        </div>
+        : <></>}
+        <div onClick={()=>setShow(!show)} className="profile-edit-image-button">
+          <FaRegEdit size="35px"/>
+        </div>
         <div className="profile-picture">
           <img src={user?.img} alt="" />
         </div>

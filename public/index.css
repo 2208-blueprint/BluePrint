@@ -1267,6 +1267,24 @@ body {
   border-radius: 50%;
   margin: 2.5%;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown {
+  position: absolute;
+  z-index: 2;
+  color: #47B5FF;
+  margin-top: 85px;
+  margin-right: 90px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown-invisible {
+  opacity: 0;
+  visibility: hidden;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
   background-color: #09141a;
   display: flex;
@@ -1276,6 +1294,10 @@ body {
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
   font-size: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-rank-achievements {
+  display: flex;
+  align-items: center;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
   background-color: #09141a;
@@ -1298,17 +1320,21 @@ body {
   left: 30px;
   white-space: nowrap;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-points {
+  display: flex;
+  margin-left: 4px;
+  align-items: flex-start;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made {
   color: tan;
   padding: 2px 0px 2px 0px;
   size: 20px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1319,11 +1345,10 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1334,11 +1359,11 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1750,6 +1775,37 @@ iframe {
   height: 100%;
   margin-left: 50px;
   color: white;
+  position: relative;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  background-color: #0F4C75;
+  color: white;
+  z-index: 99;
+  padding: 20px;
+  transition: ease 0.25s;
+  animation: fadein 0.3s;
+  border-radius: 0.5rem;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url .profile-x-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url button {
+  border: none;
+  background-color: #47B5FF;
+  color: white;
+  padding: 4px;
+}
+.profile-wrapper .profile-sidebar .profile-edit-image-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 .profile-wrapper .profile-sidebar .profile-picture {
   border: 2px solid white;
