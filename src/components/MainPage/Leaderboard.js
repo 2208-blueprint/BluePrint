@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Leaderboard() {
   const [topComponents, setTopComponents] = useState([]);
   const [topUsers, setTopUsers] = useState([]);
+  const [displayUser, setDisplayUser] = useState(true);
   useEffect(() => {
     const getTopComponents = async () => {
       const { data } = await axios.get("api/admin/top-components");
@@ -69,7 +70,7 @@ function Leaderboard() {
               id={user.id}
               order={i}
               username={`${
-                user.username.length >= 12
+                user.username.length > 12
                   ? user.username.slice(0, 12) + "..."
                   : user.username
               }`}
@@ -87,7 +88,7 @@ function Leaderboard() {
               id={component.id}
               order={i}
               name={`${
-                component.name.length >= 12
+                component.name.length > 12
                   ? component.name.slice(0, 12) + "..."
                   : component.name
               }`}
@@ -97,6 +98,65 @@ function Leaderboard() {
             />
           ))}
         </div>
+      </div>
+      {displayUser ? (
+        <div className="leaderboard-mobile-titleButton-main">
+          {" "}
+          <div className="leaderboard-mobile-title">Top Users </div>{" "}
+          <button
+            className="leaderboard-state-switch"
+            onClick={() => {
+              setDisplayUser(!displayUser);
+            }}
+          >
+            Toggle View
+          </button>
+        </div>
+      ) : (
+        <div className="leaderboard-mobile-titleButton-main">
+          <div className="leaderboard-mobile-title">Top Components</div>{" "}
+          <button
+            className="leaderboard-state-switch"
+            onClick={() => {
+              setDisplayUser(!displayUser);
+            }}
+          >
+            Toggle View
+          </button>
+        </div>
+      )}
+      <div className="leaderboard-mobile">
+        {displayUser
+          ? topUsers.map((user, i) => (
+              <LeaderboardRow
+                key={user.id}
+                id={user.id}
+                order={i}
+                username={`${
+                  user.username.length > 12
+                    ? user.username.slice(0, 12) + "..."
+                    : user.username
+                }`}
+                componentCount={user.componentCount}
+                followerCount={user.followerCount}
+                points={user.points}
+              />
+            ))
+          : topComponents.map((component, i) => (
+              <LeaderboardRowComponent
+                key={component.id}
+                id={component.id}
+                order={i}
+                name={`${
+                  component.name.length > 12
+                    ? component.name.slice(0, 12) + "..."
+                    : component.name
+                }`}
+                favorites={component.favorites}
+                saves={component.saves}
+                points={component.points}
+              />
+            ))}
       </div>
     </>
   );
