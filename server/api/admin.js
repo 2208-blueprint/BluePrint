@@ -47,6 +47,9 @@ router.get("/top-components", async (req, res, next) => {
         attributes: ["username"],
       },
     });
+    // console.log(
+    //   topComponents[0].users[0]["user_component"].dataValues.isAuthor
+    // );
 
     res.send(topComponents);
   } catch (ex) {

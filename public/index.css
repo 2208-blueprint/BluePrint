@@ -1506,6 +1506,11 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.component-card-main iframe {
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
+  border-radius: 10px;
+}
 .component-card-cover {
   position: absolute;
   height: 100.1%;
@@ -1535,11 +1540,6 @@ body {
   -o-transform-origin: 0 0;
   -webkit-transform: scale(0.65);
   display: flex;
-}
-iframe {
-  background-color: #ffffff;
-  box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
-  border-radius: 10px;
 }
 .component-card-info {
   font-weight: 600;
@@ -1723,23 +1723,6 @@ iframe {
   width: 100vw;
   background-color: #09141a;
 }
-.profile-wrapper .profile-picture-crown {
-  position: absolute;
-  z-index: 999;
-  color: #47B5FF;
-  margin-top: 200px;
-  margin-left: 160px;
-  background-color: #09141a;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.profile-wrapper .profile-picture-crown-invis {
-  opacity: 0;
-}
 .profile-wrapper .profile-sidebar {
   display: flex;
   flex-direction: column;
@@ -1757,11 +1740,28 @@ iframe {
   min-width: 220px;
   margin: 30px 0 30px 0;
   overflow: hidden;
+  position: relative;
 }
 .profile-wrapper .profile-sidebar .profile-picture img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+.profile-wrapper .profile-sidebar .profile-picture-crown {
+  position: absolute;
+  z-index: 2;
+  color: #47B5FF;
+  left: 100px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-wrapper .profile-sidebar .profile-picture-crown-invis {
+  opacity: 0;
 }
 .profile-wrapper .profile-sidebar .profile-category-link-container {
   display: flex;
@@ -2371,6 +2371,7 @@ iframe {
   margin-left: 60px;
   font-family: "Inter", "sans-serif";
   overflow: auto;
+  overflow-x: hidden;
 }
 .side-bar-container-searchbar-container {
   margin-top: 30px;
@@ -2378,6 +2379,7 @@ iframe {
   padding: 0;
   display: flex;
   align-items: flex-end;
+  overflow-x: hidden;
 }
 .side-bar-container-searchbar {
   font-family: "Inter", "sans-serif";

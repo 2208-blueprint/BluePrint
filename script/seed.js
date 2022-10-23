@@ -23,32 +23,32 @@ const UserComponent = require("../server/db/UserComponent");
 async function seed() {
   await db.sync({ force: true });
 
-  // const thomas = await User.create({
-  //   username: "tombak",
-  //   password: "test",
-  //   firstName: "Thomas",
-  //   lastName: "Bak",
-  //   country: "USA",
-  //   email: "email3@gmail.com",
-  // });
+  const thomas = await User.create({
+    username: "tombak",
+    password: "password",
+    firstName: "Thomas",
+    lastName: "Bak",
+    country: "USA",
+    email: "email3@gmail.com",
+  });
 
-  // const ben = await User.create({
-  //   username: "benji",
-  //   password: "test",
-  //   firstName: "Benjamin",
-  //   lastName: "Lee",
-  //   country: "USA",
-  //   email: "email2@gmail.com",
-  // });
-  // const cathal = await User.create({
-  //   username: "cathal1990",
-  //   password: "test",
-  //   firstName: "Cathal",
-  //   lastName: "O Cuinneagain",
-  //   email: "email1@gmail.com",
-  //   country: "Ireland",
-  //   img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
-  // });
+  const ben = await User.create({
+    username: "benji",
+    password: "password",
+    firstName: "Benjamin",
+    lastName: "Lee",
+    country: "USA",
+    email: "email2@gmail.com",
+  });
+  const cathal = await User.create({
+    username: "cathal1990",
+    password: "password",
+    firstName: "Cathal",
+    lastName: "O Cuinneagain",
+    email: "email1@gmail.com",
+    country: "Ireland",
+    img: "https://i2-prod.dailystar.co.uk/tech/gaming/article21695234.ece/ALTERNATES/s615/0_CrashBandicoot.jpg",
+  });
   // const alec = await User.create({
   //   username: "butters",
   //   password: "test",
