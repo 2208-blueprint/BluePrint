@@ -8,7 +8,7 @@ import axios from "axios";
 import { BsPeople, BsSearch, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { GiGearHammer } from "react-icons/gi";
-import { FaCoins, FaHammer } from "react-icons/fa";
+import { FaCoins, FaHammer, FaCrown } from "react-icons/fa";
 
 //This is the full "profile page" of a user. The logged-in user can visit this page to see components made by this
 //user, as well as follow the user to see more content from them.
@@ -40,8 +40,6 @@ function UserPage() {
                 const { data } = await Axios.get(`/api/users/${curUserNum}`);
                 setCurUser(data)
 
-                console.log('First data: ',data)
-
                 if (data.highestRank >= 1000) {
                     setRank("Chief");
                     setRankColor("#FDFDBE");
@@ -59,10 +57,10 @@ function UserPage() {
                     setRankColor("#CD7F32");
                   }
             
-                console.log('Data: ', data)
                 setPoints(data.currentPoints)
                 setComponentsArray(data.components)
                 setFiltered(data.components)
+                
                 }
             }
             catch(e) {
@@ -73,17 +71,16 @@ function UserPage() {
         
     },[])
 
-    React.useEffect(() => {
-        async function getComponentSavesAndFavs() {
-            try {
+    // React.useEffect(() => {
+    //     async function getComponentSavesAndFavs() {
+    //         try {
 
-            console.log('ComponentsArray: ',componentsArray)
-            } catch(e) {
-                console.error(e)
-            }
-        }
-        getComponentSavesAndFavs();
-    }, [componentsArray])
+    //         } catch(e) {
+    //             console.error(e)
+    //         }
+    //     }
+    //     getComponentSavesAndFavs();
+    // }, [componentsArray])
 
     React.useEffect(() => {
         async function getUserBlueprintPoints() {
@@ -96,48 +93,12 @@ function UserPage() {
         }
         getUserBlueprintPoints();
     }, [])
-
-    // React.useEffect(() => {
-    //     async function getComponentSavesAndFavs() {
-    //         try {
-
-    //         if (curUser) {
-            
-    //         const {data}  = await axios.get("/api/components")
-    //         console.log('Get Components Data: ', data);
-    //         console.log('First Component: ', data[0].users[0].username)
-    //         console.log('curUser.username: ', curUser)
-    //           const userComponents = data.filter(component => 
-    //             (component.users[0].username) === curUser?.username);
-    //             console.log('get Component Saves and Favs: ',userComponents)
-    //           }
-    //         } catch(e) {
-    //             console.error(e)
-    //         }
-            
-    //           parsedData.push({
-    //             id: user.id,
-    //             username: user.username,
-    //             componentCount,
-    //             followerCount,
-    //             points: user.currentPoints,
-    //           });
-            
-    //         setTopUsers(parsedData);
-    //       };
-    //     getComponentSavesAndFavs()
-    // },[])
-
-    console.log('Cur user: ', curUser)
-    
-    
   
     function handleMessageMeButton(evt){
         evt.preventDefault()
     }
 
     const handleSearch = () => {
-        console.log('Search bar input: ', searchBarInput)
         if (searchBarInput === "") {
             setFiltered(componentsArray)
           return;
@@ -146,11 +107,7 @@ function UserPage() {
             return component.name.includes(searchBarInput)
         })
         setFiltered(filterArray)
-        // let keywords = searchBarInput.split(" ").join("+");
-        // setSearchBarInput("");
-        // navigate(`/components/search/${keywords}`);
       };
-      console.log('filtered: ', filtered)
     
       React.useEffect (() => {
         const handleSelectFilter = () => {
@@ -162,11 +119,14 @@ function UserPage() {
                 return component.type.includes(type)
             })
             setFiltered(filterArray)
+            console.log('curUser: ', curUser)
         }
         handleSelectFilter();
+        
 
       },[type])
    
+      
 
     return(
         <>
@@ -174,33 +134,47 @@ function UserPage() {
             <div className="single-user-page-title-container">
                 <div className="single-user-page-user-pic">
                     <img className="single-user-page-user-img" src={curUser?.img} alt="user_pic.png"/>
-                    {/* <button className="single-user-page-message-me-button">
-                        Message me!
-                    </button> */}
-                 
                 </div>
+                    <div 
+                        className={
+                            curUser?.highestRank && curUser?.wasFirst
+                            ? "single-user-page-crown" 
+                            : "single-user-page-crown-invisible"
+                        }
+                    >
+                        <FaCrown size="25px" />   
+                    </div>   
                 <div className="single-user-page-user-name-rank-container">
                     <div className="single-user-page-user-name">
                         {curUser?.username}
                     </div>
                     <div className="single-user-page-rank-achievements">
+                        <GiGearHammer style={{
+                            marginRight:"4px",
+                        }}
+                        size="20px"
+                        color={rankColor}
+                        />
                         {rank}  
                 </div>
             </div>
                 <div className="single-user-page-user-stats-container">
                     <div className="single-user-page-components-made-wrapper">
-                        <FaHammer className="single-user-page-components-made"/> {curUser?.components?.length}
+                        <FaHammer className="single-user-page-components-made"/>
+                        <span className="single-user-page-points">{curUser?.components?.length}</span>
                         <span className="single-user-page-tooltip"> Components made </span>
                     </div>
                     <div className="single-user-page-followers-wrapper">
-                        <BsPeople className="single-user-page-followers"/> {curUser?.followers?.length}
+                        <BsPeople className="single-user-page-followers"/>
+                        <span className="single-user-page-points">{curUser?.followers?.length}</span>
                         <span className="single-user-page-tooltip"> Followers </span>
                     </div>
                     {/* <span>Total Favorites:</span>
                     <span>Total Saves:</span> */}
                     <div className="single-user-page-bluepoints-wrapper">
-                        <FaCoins className="single-user-page-bluepoints"/> {points}
-                        <span className="single-user-page-tooltip"> BluePrint Points </span>
+                        <FaCoins className="single-user-page-bluepoints"/> 
+                        <span className="single-user-page-points">{points}</span>
+                        <div className="single-user-page-tooltip"> BluePrint Points </div>
                     </div>
                     
                 </div>
@@ -242,11 +216,15 @@ function UserPage() {
                 </div>
             </div>
             <div className="single-user-page-component-list-container">
-                {filtered?.map((component,i) => (
-                    <div className="single-user-page-single-component">
-                        <ComponentCard componentId={component.id} key={i} />
-                    </div>
-                    )   
+                {filtered?.map((component,i) => {
+                    if (component.user_component.isAuthor) {
+                        return(
+                        <div className="single-user-page-single-component">
+                            <ComponentCard componentId={component.id} key={i} />
+                        </div>
+                        )
+                    } 
+                }  
                 )}
             </div>           
         </div>

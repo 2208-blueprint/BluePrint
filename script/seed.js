@@ -1611,7 +1611,7 @@ async function seed() {
         justify-content: center;
         min-height: 100vh;
         font-family: 'Cyber', sans-serif;
-        background: linear-gradient(90deg, #f5ed00 70%, #e6de00 70%), #fff700;
+        background-color: #F5ED00;
       }
 
       body .cybr-btn + .cybr-btn {

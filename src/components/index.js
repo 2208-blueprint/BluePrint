@@ -35,3 +35,4 @@ export { default as Message } from "./firebase/Message";
 export { default as Messages } from "./firebase/Messages";
 export { default as ChatInput } from "./firebase/ChatInput";
 export { default as AchievementMessage } from "./achievements/AchievementMessage";
+export { default as EditComponent } from './EditComponent/EditComponent'

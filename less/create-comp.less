@@ -51,6 +51,10 @@ a.createcomp-back {
   height: 40vh;
   margin: 20px;
   background-color: white;
+  resize: both;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding:0;
 
   iframe {
     border: solid @tertiary-color 2px;
@@ -153,7 +157,7 @@ a.createcomp-back {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: 25px;
   border-radius: 0.25rem;
@@ -196,6 +200,7 @@ a.createcomp-back {
     border: none;
     cursor: pointer;
     transition: 0.25s ease;
+    align-self: center;
   }
 
   button:hover {

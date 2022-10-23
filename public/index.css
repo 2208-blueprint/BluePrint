@@ -171,6 +171,10 @@ a.singlecomp-back div span {
   height: 40vh;
   margin: 20px;
   background-color: white;
+  resize: both;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
 }
 #singlecomp-iframe iframe {
   border: solid #47B5FF 2px;
@@ -528,6 +532,7 @@ a.singlecomp-back div span {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(150deg, #09141a 0%, #011018 100%);
+  font-family: "Inter", sans-serif;
 }
 .signup-main-container .signup-wrapper {
   display: flex;
@@ -713,6 +718,10 @@ a.createcomp-back div span {
   height: 40vh;
   margin: 20px;
   background-color: white;
+  resize: both;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
 }
 #createcomp-iframe iframe {
   border: solid #47B5FF 2px;
@@ -804,7 +813,7 @@ a.createcomp-back div span {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: 25px;
   border-radius: 0.25rem;
@@ -846,6 +855,7 @@ a.createcomp-back div span {
   border: none;
   cursor: pointer;
   transition: 0.25s ease;
+  align-self: center;
 }
 #createcomp-submission button:hover {
   background-color: #1a6da4;
@@ -902,7 +912,7 @@ body {
   background-color: #09141a;
   border: 3px solid #47B5FF;
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   opacity: 0.4;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -1265,6 +1275,24 @@ body {
   border-radius: 50%;
   margin: 2.5%;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown {
+  position: absolute;
+  z-index: 2;
+  color: #47B5FF;
+  margin-top: 85px;
+  margin-right: 90px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-crown-invisible {
+  opacity: 0;
+  visibility: hidden;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container {
   background-color: #09141a;
   display: flex;
@@ -1274,6 +1302,10 @@ body {
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-user-name {
   font-size: 30px;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-name-rank-container .single-user-page-rank-achievements {
+  display: flex;
+  align-items: center;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container {
   background-color: #09141a;
@@ -1296,17 +1328,21 @@ body {
   left: 30px;
   white-space: nowrap;
 }
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-points {
+  display: flex;
+  margin-left: 4px;
+  align-items: flex-start;
+}
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made {
   color: tan;
   padding: 2px 0px 2px 0px;
   size: 20px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-components-made-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1317,11 +1353,10 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper {
-  display: inline-flex;
+  display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-followers-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1332,11 +1367,11 @@ body {
   padding: 2px 0px 2px 0px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   position: relative;
   align-items: center;
-  justify-content: space-between;
-  width: 30px;
+  width: 100%;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-stats-container .single-user-page-bluepoints-wrapper:hover .single-user-page-tooltip {
   visibility: visible;
@@ -1550,7 +1585,7 @@ body {
   opacity: 1;
 }
 .component-card-icons {
-  z-index: 100;
+  z-index: 50;
   justify-self: center;
   display: flex;
   transition: all 0.3s ease-in-out;
@@ -1723,6 +1758,23 @@ body {
   width: 100vw;
   background-color: #09141a;
 }
+.profile-wrapper .profile-picture-crown {
+  position: absolute;
+  z-index: 2;
+  color: #47B5FF;
+  margin-top: 200px;
+  margin-left: 160px;
+  background-color: #09141a;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-wrapper .profile-picture-crown-invis {
+  opacity: 0;
+}
 .profile-wrapper .profile-sidebar {
   display: flex;
   flex-direction: column;
@@ -1731,6 +1783,37 @@ body {
   height: 100%;
   margin-left: 50px;
   color: white;
+  position: relative;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  background-color: #0F4C75;
+  color: white;
+  z-index: 99;
+  padding: 20px;
+  transition: ease 0.25s;
+  animation: fadein 0.3s;
+  border-radius: 0.5rem;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url .profile-x-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.profile-wrapper .profile-sidebar .profile-edit-url button {
+  border: none;
+  background-color: #47B5FF;
+  color: white;
+  padding: 4px;
+}
+.profile-wrapper .profile-sidebar .profile-edit-image-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 .profile-wrapper .profile-sidebar .profile-picture {
   border: 2px solid white;
@@ -2300,6 +2383,116 @@ body {
     gap: 30px;
   }
 }
+.inbox-chat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.inbox-chat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.inbox-chat-icon:hover {
+  color: #1a83c8;
+  cursor: pointer;
+}
+.chatbox-container-backdrop {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(51, 51, 51, 0.1);
+  backdrop-filter: blur(4px);
+  bottom: 10px;
+  z-index: 100;
+}
+#create-component-button {
+  width: 180px;
+  height: 20px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+#create-component-button:before {
+  content: "";
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+#create-component-button:active {
+  color: #000;
+}
+#create-component-button:active:after {
+  background: transparent;
+}
+#create-component-button:hover:before {
+  opacity: 1;
+}
+#create-component-button:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+.notification-icon {
+  height: 20px;
+  width: 20px;
+  margin: 2px 0 0 35px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  position: absolute;
+  align-self: flex-start;
+  justify-self: flex-end;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-icon .notification-number {
+  font-family: "Inter", sans-serif;
+  padding: 0 0 2px 0;
+}
 .not-found-bg-image {
   position: absolute;
   width: 100vw;
@@ -2729,12 +2922,22 @@ body {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
   flex: 1;
   border-right: 1px solid white;
+  background: rgba(21, 21, 21, 0.65);
+  box-shadow: 0 8px 0 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
+  height: 100%;
+  overflow: scroll;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #414141;
+  background-color: #0F4C75;
   height: 50px;
   padding: 10px;
 }
@@ -2761,7 +2964,7 @@ body {
   cursor: pointer;
   outline: none;
 }
-.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search {
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform {
   border-bottom: 1px solid gray;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input {
@@ -2770,6 +2973,8 @@ body {
   color: white;
   height: 40px;
   outline: none;
+  padding-left: 10px;
+  width: 100%;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input::placeholder {
   color: lightgray;
@@ -2804,8 +3009,8 @@ body {
   flex: 2;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
-  height: 50px;
-  background-color: gray;
+  height: 52px;
+  background-color: #0F4C75;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2824,13 +3029,13 @@ body {
   gap: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons svg {
-  height: 24px;
+  height: 35px;
   cursor: pointer;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages {
   background-color: #cee3eb;
   color: #09141a;
-  padding: 10px;
+  padding: 10px 10px 10px 10px;
   height: calc(100% - 160px);
   width: 100%;
   overflow: scroll;
@@ -2847,6 +3052,7 @@ body {
   align-items: center;
   color: gray;
   font-weight: 300;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message .firebase-message-info img {
   width: 40px;
@@ -2866,7 +3072,9 @@ body {
   border-radius: 0px 10px 10px 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message .firebase-message-content img {
-  width: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner {
   flex-direction: row-reverse;
@@ -2917,9 +3125,19 @@ body {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg {
   color: #09141a;
+  vertical-align: middle;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input svg:hover {
   background-color: lightgray;
+}
+#cancel-chat-button {
+  color: #ca6072;
+}
+.filtered-users {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .achievement-main-container {
   width: 100%;

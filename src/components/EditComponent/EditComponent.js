@@ -10,11 +10,11 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import Less from "less";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function CreateComponent() {
+function EditComponent() {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
@@ -25,13 +25,15 @@ function CreateComponent() {
   const [color, setColor] = useState('')
 
   const navigate = useNavigate()
+  const params = useParams()
 
   const toastPopup = (msg) => {
     toast.dark(msg);
   };
 
   // form section
-  const [form, setForm] = useState(['html', 'css'])
+  const [form, setForm] = useState('html')
+  const [form2, setForm2] = useState('css')
   const [name, setName] = useState('')
   const [type, setType] = useState('animation')
   const [desc, setDesc] = useState('')
@@ -52,9 +54,9 @@ function CreateComponent() {
 
   function onChangeLess(newValue) {
     setLess(newValue)
-    Less.render(newValue).then(function(output) {
-      setCSS(output.css)
-    })
+    // Less.render(newValue).then(function(output) {
+    //   setCSS(output.css)
+    // })
   }
 
   function onChangeSass(newValue) {
@@ -83,22 +85,22 @@ function CreateComponent() {
   async function submitComponent() {
     let markup
     let stylesheet
-    if (form[0] === 'html') {
+    if (form === 'html') {
         markup = html
     } else {
         markup = js
     }
-    if (form[1] === 'css') {
+    if (form2 === 'css') {
         stylesheet = css
     } else {
         stylesheet = less
     }
-    const {data} = await axios.post('/api/components/create', {
+    const {data} = await axios.put(`/api/components/${params.id}`, {
         name: name,
         description: desc,
         type: type,
-        framework: form[0],
-        stylingFramework: form[1],
+        framework: form,
+        stylingFramework: form2,
         markup: markup,
         stylesheet: stylesheet,
         tags: tags,
@@ -108,7 +110,7 @@ function CreateComponent() {
         authorization: window.localStorage.getItem('token')
       }
     })
-    toastPopup('Component created!')
+    toastPopup('Component Modifed!')
     navigate(`/components/${data.id}`)
   }
 
@@ -128,6 +130,13 @@ function CreateComponent() {
     }))
   }
 
+    // compile the less into css if less changes
+    React.useEffect(()=> {
+      Less.render(less).then(function(output) {
+        setCSS(output.css)
+      })
+    }, [less])
+
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -141,11 +150,65 @@ function CreateComponent() {
       `);
   }, [html, css, js]);
 
-  console.log(tags)
+  React.useEffect(() => {
+    window.scrollTo(0,0)
+    async function getComp() {
+      // get the component, with the code
+      const {data} = await axios.get(`/api/components/${params.id}`)
+      // if the user is not logged in, kick them out
+      let profile
+      if (window.localStorage.getItem('token')) {
+         profile = await axios.get('/api/users/profile', {
+          headers: {
+            authorization: window.localStorage.getItem('token')
+          }
+        })
+      } else {
+        navigate(`/components/${params.id}`)
+      }
+      // if the logged in user is not the owner of the component, send them
+      // to the base component page.
+      let pass = false
+      for (let i = 0; i < data.users.length; i++) {
+        if (data.users[i].user_component.isAuthor) {
+          pass = true
+        }
+      }
+      if (!pass) {
+        navigate(`/components/${params.id}`)
+      }
+      // Now actually set the data
+      if (data.framework === 'html') {
+        setForm('html')
+        setHTML(data.markup)
+        setJS(data.js)
+        setView('html')
+      } else {
+        setForm('react')
+        setJS(data.markup)
+        setView('js')
+      }
+      if (data.stylingFramework === 'css') {
+        setForm2('css')
+        setCSS(data.stylesheet)
+      } else {
+        setForm2('less')
+        setLess(data.stylesheet)
+      }
+      setName(data.name)
+      setType(data.type)
+      setTags(data.tags.split(';'))
+      setDesc(data.description)
+    }
+    getComp()
+    
+  }, []);
+
+  console.log(form)
 
   return (
     <div id="createcomp-root">
-      <a href="/" className="createcomp-back">
+      <a href={'/components' + `/${params.id}`} className="createcomp-back">
         <div className="fa fa-chevron-left"><span>&nbsp;Back</span></div>
       </a>
       <div id="createcomp-iframe">
@@ -161,7 +224,7 @@ function CreateComponent() {
       <div id="createcomp-buttons-box">
         <button
           onClick={() => setView("html")}
-          className={(view === "html" ? " createcomp-pressed" : "") + (form[0] === 'html' ? '': ' createcomp-hidden')}
+          className={(view === "html" ? " createcomp-pressed" : "") + (form === 'html' ? '': ' createcomp-hidden')}
         >
           HTML
         </button>
@@ -173,19 +236,19 @@ function CreateComponent() {
         </button>
         <button
           onClick={() => setView("css")}
-          className={(view === "css" ? " createcomp-pressed" : "") + (form[1] === 'css' ? '':' createcomp-hidden')}
+          className={(view === "css" ? " createcomp-pressed" : "") + (form2 === 'css' ? '':' createcomp-hidden')}
         >
           CSS
         </button>
         <button
           onClick={() => setView("less")}
-          className={(view === "less" ? " createcomp-pressed" : "") + (form[1] === 'less' ? '':' createcomp-hidden')}
+          className={(view === "less" ? " createcomp-pressed" : "") + (form2 === 'less' ? '':' createcomp-hidden')}
         >
           Less
         </button>
         <button
           onClick={() => setView("sass")}
-          className={(view === "sass" ? " createcomp-pressed" : "") + (form[1] === 'sass' ? '':' createcomp-hidden')}
+          className={(view === "sass" ? " createcomp-pressed" : "") + (form2 === 'sass' ? '':' createcomp-hidden')}
         >
           Sass
         </button>
@@ -286,45 +349,30 @@ function CreateComponent() {
           />
         </div>
         <div id ="createcomp-submission">
-            <h1>Submit Your Creation!</h1>
+            <h1>Edit Your Component!</h1>
             <div>Markup:&nbsp;&nbsp;
-            <select onChange={(event)=>{
-              setForm([event.target.value, form[1]])
+            <select value={form} onChange={(event)=>{
+              setForm(event.target.value)
               setView(event.target.value === 'html' ? 'html' : 'js')
-              if (event.target.value === 'react') {
-                setJS(
-              `// Additional components can be written above App
-const App = () => {
-  return (
-    <>
-    <div>Your Component Here</div>
-    </>
-  )
-}
-
-ReactDOM.render(<App/>, document.getElementById('root'))`)
-              } else {
-                setJS('')
-              }
               }}>
                 <option value="html">HTML</option>
                 <option value="react">React</option>
             </select>
             </div>
             <div>Stylesheet:&nbsp;&nbsp;
-            <select onChange={(event)=>{
-              setForm([form[0],event.target.value])
-              setView(form[0] === 'html' ? 'html' : 'js')
+            <select value={form2} onChange={(event)=>{
+              setForm2(event.target.value)
+              setView(form === 'html' ? 'html' : 'js')
               }}>
                 <option value="css">CSS</option>
                 <option value="less">Less</option>
             </select>
             </div>
             <div>Name:&nbsp;&nbsp;
-                <input onChange={(event)=>setName(event.target.value)}></input>
+                <input value={name} onChange={(event)=>setName(event.target.value)}></input>
             </div>
             <div>Type:&nbsp;&nbsp;
-                <select onChange={(event)=>setType(event.target.value)}>
+                <select value={type} onChange={(event)=>setType(event.target.value)}>
                   <option value="animation">animation</option>
                   <option value="button">button</option>
                   <option value="drop-down">drop-down</option>
@@ -341,7 +389,7 @@ ReactDOM.render(<App/>, document.getElementById('root'))`)
             </div>
             <h2>Description:</h2>
             <div>
-                <textarea onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
+                <textarea value={desc} onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
             </div>
             <div>Tags:&nbsp;&nbsp;
                 <input placeholder="one word tag" value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
@@ -353,7 +401,7 @@ ReactDOM.render(<App/>, document.getElementById('root'))`)
                 </div>
               )}
             </div>
-            <button onClick={submitComponent}>Submit</button>
+            <button onClick={submitComponent}>Edit</button>
         </div>
         <div id="createcomp-color-picker">
           <h1>Color Selector Tool</h1>
@@ -365,4 +413,4 @@ ReactDOM.render(<App/>, document.getElementById('root'))`)
   );
 }
 
-export default CreateComponent;
+export default EditComponent;

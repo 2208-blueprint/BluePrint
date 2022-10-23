@@ -17,9 +17,11 @@ function ChatInput() {
 
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  const [showEmojis, setShowEmojis] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+console.log(data);
 
   const handleSend = async () => {
 
@@ -41,6 +43,7 @@ function ChatInput() {
                 senderId: currentUser.uid,
                 date: Timestamp.now(),
                 img: downloadURL,
+                receiver: data.user.displayName,
               }),
             });
           });
@@ -53,6 +56,8 @@ function ChatInput() {
           text,
           senderId: currentUser.uid,
           date: Timestamp.now(),
+          isRead: false,
+          receiver: data.user.displayName,
         }),
       });
     }

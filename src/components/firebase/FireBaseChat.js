@@ -8,7 +8,7 @@ import { ChatSideBar, ChatNavbar, Chat } from '../index'
 import Axios from 'axios'
 
 
-function fireBaseChat() {
+function fireBaseChat({ chatVisible, setChatVisible }) {
 
     const [user, setUser] = React.useState()
     const [err, setErr] = React.useState(false)
@@ -25,7 +25,6 @@ function fireBaseChat() {
                             authorization: token,
                         }
                     })
-                    console.log(data);
                     setUser(data)
                 }
                 else {
@@ -46,7 +45,7 @@ function fireBaseChat() {
     <div className="firebase-chat-wrapper">
         <div className="firebase-chat-container">
             <ChatSideBar />
-            <Chat />
+            <Chat chatVisible={chatVisible} setChatVisible={setChatVisible}/>
         </div>
     </div>
   )

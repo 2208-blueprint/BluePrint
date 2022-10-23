@@ -12,44 +12,55 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "./AuthContext";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function ChatSearch() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const [err, setErr] = useState(false);
+  const [allUsers, setAllUsers] = useState([]);
+  const [allUserChats, setAllUserChats] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
 
-  const toastError = (err) => toast.error(err);
+  React.useEffect(() => {
+    async function getAllUsers() {
+      const allUsersFromFirebase = query(
+        collection(db, "users"),
+      );
+      const allChats = collection(db, "chats")
+      const chatsQuery = await getDocs(allChats)
+      const filteredChats = chatsQuery.docs.filter(chat => chat.id.includes(currentUser.uid))
 
-  const handleSearch = async () => {
+      setAllUserChats(filteredChats)
 
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
+      // const allChatsSnapshot = await getDocs(allChats);
+      // setAllChats(allChatsSnapshot);
 
-    try {
 
-      const querySnapshot = await getDocs(q);
+      const allUsersSnapshot = await getDocs(allUsersFromFirebase);
+      const allUsersArray = [];
+      allUsersSnapshot.forEach((user) => {
+        allUsersArray.push(user.data())
+      })
+      setAllUsers(allUsersArray)
 
-      if (querySnapshot.empty) { return toastError('User not found!') }
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-
-    } catch (err) {
-      console.log(err);
     }
-  };
+    getAllUsers();
+  }, [])
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
+  const filteredUsersData = allUsers?.filter((user) => {
+    if (user.displayName.toLowerCase().includes(username.toLowerCase())) {
+      for (let i = 0; i < allUserChats.length; i++) {
+        if (allUserChats[i].id.includes(user.uid)) {
+          return false
+        }
+      }
+      return true
+    } else {
+      return false
+    }
+  })
 
-  const handleSelect = async () => {
+  const handleSelect = async (user) => {
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
       currentUser.uid > user.uid
@@ -94,20 +105,28 @@ function ChatSearch() {
             <input
             type="text"
             placeholder=' Search users...'
-            onKeyDown={handleKey}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             value={username}
             />
         </div>
-        {err && <span>User not found!</span>}
-        {user && (
-          <div className="firebase-userchat" onClick={handleSelect}>
-            <img src={currentUser.photoURL} alt="" />
-            <div className="firebase-user-chat-info">
+        <div className="filtered-users">
+        {username && (
+          filteredUsersData.map((user, i) => {
+            return (
+              <div className="firebase-userchat" onClick={() => {
+                handleSelect(user)
+              }}>
+                <img src={user.photoURL} alt="" />
+                <div className="firebase-user-chat-info">
                 <span>{user.displayName}</span>
-            </div>
-          </div>
+                </div>
+              </div>
+            )
+          })
           )}
+        </div>
     </div>
   )
 }

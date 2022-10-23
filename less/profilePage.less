@@ -9,6 +9,24 @@
   height: 100vh;
   width: 100vw;
   background-color: @background-color;
+
+  .profile-picture-crown {
+    position: absolute;
+    z-index: 2;
+    color: @tertiary-color;
+    margin-top: 200px;
+    margin-left: 160px;
+    background-color: rgb(9, 20, 26);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile-picture-crown-invis {
+    opacity: 0;
+  }
   .profile-sidebar {
     display: flex;
     flex-direction: column;
@@ -17,6 +35,41 @@
     height: 100%;
     margin-left: 50px;
     color: white;
+    position: relative;
+
+    .profile-edit-url {
+      position: absolute;
+      top: 100px;
+      right: 0;
+      background-color: @secondary-color;
+      color: white;
+      z-index: 99;
+      padding: 20px;
+      transition: ease 0.25s;
+      animation: fadein 0.3s;
+      border-radius: 0.5rem;
+
+      .profile-x-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+      }
+
+      button {
+        border: none;
+        background-color: @tertiary-color;
+        color: white;
+        padding: 4px;
+      }
+    }
+
+    .profile-edit-image-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
 
     .profile-picture {
       border: 2px solid white;

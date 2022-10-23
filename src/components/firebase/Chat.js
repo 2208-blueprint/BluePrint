@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { ChatContext } from "./ChatContext";
 import { Messages, ChatInput } from '../'
 import { HiOutlineUserAdd, HiDotsHorizontal } from "react-icons/hi";
+import { RiCloseCircleFill } from 'react-icons/ri'
 
-function Chat() {
+function Chat({chatVisible, setChatVisible}) {
   const { data } = useContext(ChatContext);
 
   return (
@@ -13,7 +14,10 @@ function Chat() {
             <span>{data.user?.displayName}</span>
             <div className="firebase-chat-icons">
                 <HiOutlineUserAdd />
-                <HiDotsHorizontal />
+                <RiCloseCircleFill size="40px" id="cancel-chat-button" onClick={() => {
+                  (document.body.style.overflow = "visible")
+                  setChatVisible(!chatVisible)}
+                }/>
             </div>
         </div>
         <Messages />
