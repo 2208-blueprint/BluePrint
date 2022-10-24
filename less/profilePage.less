@@ -79,12 +79,32 @@
       min-width: 220px;
       margin: 30px 0 30px 0;
       overflow: hidden;
+      position: relative;
 
       img {
         height: 100%;
         width: 100%;
         object-fit: cover;
       }
+    }
+    .profile-picture-crown {
+      position: absolute;
+      z-index: 2;
+      color: @tertiary-color;
+      // margin-top: 200px;
+      // margin-left: 160px;
+      // top: 100px;
+      left: 100px;
+      background-color: rgb(9, 20, 26);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-picture-crown-invis {
+      opacity: 0;
     }
 
     .profile-category-link-container {
@@ -289,7 +309,6 @@
         margin: 10px 10px 25px 10px;
       }
 
-
       .profile-user-email {
         margin: 0 0 10px 10px;
 
@@ -297,7 +316,6 @@
           vertical-align: middle;
           margin: 0 10px 0 0;
         }
-
       }
       .profile-user-member-since {
         margin: 0 0 10px 10px;
@@ -306,7 +324,6 @@
           vertical-align: middle;
           margin: 0 10px 0 0;
         }
-
       }
       .profile-user-name {
         margin: 0 0 10px 10px;
@@ -315,7 +332,6 @@
           vertical-align: middle;
           margin: 0 10px 0 0;
         }
-
       }
       .profile-country-span {
         margin: 0 0 10px 10px;
@@ -324,7 +340,6 @@
           vertical-align: middle;
           margin: 0 10px 0 0;
         }
-
       }
 
       .profile-new-component-button-container {
@@ -339,7 +354,6 @@
         width: 50%;
         height: 100%;
         // border-right: 1px solid @background-color;
-
       }
       .profile-user-info-right {
         display: flex;
@@ -449,78 +463,110 @@
         }
       }
     }
-      .profile-user-extras-right {
-        color: @secondary-color;
+    .profile-user-extras-right {
+      color: @secondary-color;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      flex: 1;
+      border-radius: 5px;
+      margin: 20px 20px 0 0;
+      background: rgb(191, 213, 221);
+      background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(227, 246, 255, 1) 100%
+      );
+      box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+      -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+      -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+
+      .profile-user-saved-components {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100%;
         width: 100%;
-        flex: 1;
-        border-radius: 5px;
-        margin: 20px 20px 0 0;
-        background: rgb(191, 213, 221);
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(227, 246, 255, 1) 100%
-        );
-        box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
-        -webkit-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
-        -moz-box-shadow: 8px 10px 2px -4px rgba(0, 0, 0, 0.78);
+        height: 100%;
 
-        .profile-user-saved-components {
+        .profile-user-single-saved {
           display: flex;
-          flex-direction: column;
           align-items: center;
-          width: 100%;
-          height: 100%;
+          width: 90%;
+          height: 60px;
+          border: 1px solid @secondary-color;
+          border-radius: 5px;
+          margin: 0 0 10px 0;
+          background-color: rgba(15, 76, 117, 0.3);
+          cursor: pointer;
 
-          .profile-user-single-saved {
+          .single-user-saved-frameworks {
             display: flex;
-            align-items: center;
-            width: 90%;
-            height: 60px;
-            border: 1px solid @secondary-color;
-            border-radius: 5px;
-            margin: 0 0 10px 0;
-            background-color: rgba(15, 76, 117, 0.3);
-            cursor: pointer;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            margin: 0 10px 0 0;
 
-            .single-user-saved-frameworks {
-              display: flex;
-              flex-direction: column;
-              align-items: flex-end;
-              width: 100%;
-              margin: 0 10px 0 0;
-
-              .single-user-saved-framework {
-                // border: 1px solid @background-color;
-                border-radius: 5px;
-                background-color: @secondary-color;
-                color: white;
-                padding: 1px 5px 1px 5px;
-                margin: 2px;
-              }
-            }
-
-            p {
-              width: 100%;
-              font-size: 17px;
-            }
-
-            .user-saved-image {
-              img {
-                // width: 50px;
-                height: 35px;
-                margin: 0 10px 0 10px;
-              }
+            .single-user-saved-framework {
+              // border: 1px solid @background-color;
+              border-radius: 5px;
+              background-color: @secondary-color;
+              color: white;
+              padding: 1px 5px 1px 5px;
+              margin: 2px;
             }
           }
-          .profile-user-single-saved:hover {
-            background-color: rgba(15, 76, 117, 0.5);
+
+          p {
+            width: 100%;
+            font-size: 17px;
+          }
+
+          .user-saved-image {
+            img {
+              // width: 50px;
+              height: 35px;
+              margin: 0 10px 0 10px;
+            }
           }
         }
+        .profile-user-single-saved:hover {
+          background-color: rgba(15, 76, 117, 0.5);
+        }
       }
+    }
   }
+}
+
+.profile-achievement-dropDown {
+  margin-top: 20px;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 345px;
+}
+.profile-achievement-list-collapse {
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  gap: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-self: center;
+}
+.profile-achievement-list-item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.achievementToggle {
+  width: 345px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.achievement-toggle-container {
+  display: flex;
+  flex-direction: column;
 }

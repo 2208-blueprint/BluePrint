@@ -21,6 +21,7 @@ function ChatInput() {
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+console.log(data);
 
   const handleSend = async () => {
 
@@ -42,6 +43,7 @@ function ChatInput() {
                 senderId: currentUser.uid,
                 date: Timestamp.now(),
                 img: downloadURL,
+                receiver: data.user.displayName,
               }),
             });
           });
@@ -55,6 +57,7 @@ function ChatInput() {
           senderId: currentUser.uid,
           date: Timestamp.now(),
           isRead: false,
+          receiver: data.user.displayName,
         }),
       });
     }

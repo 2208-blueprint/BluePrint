@@ -15,8 +15,8 @@ import { AuthContext } from "./AuthContext";
 
 function ChatSearch() {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
+  const [allUserChats, setAllUserChats] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -25,6 +25,16 @@ function ChatSearch() {
       const allUsersFromFirebase = query(
         collection(db, "users"),
       );
+      const allChats = collection(db, "chats")
+      const chatsQuery = await getDocs(allChats)
+      const filteredChats = chatsQuery.docs.filter(chat => chat.id.includes(currentUser.uid))
+
+      setAllUserChats(filteredChats)
+
+      // const allChatsSnapshot = await getDocs(allChats);
+      // setAllChats(allChatsSnapshot);
+
+
       const allUsersSnapshot = await getDocs(allUsersFromFirebase);
       const allUsersArray = [];
       allUsersSnapshot.forEach((user) => {
@@ -38,13 +48,18 @@ function ChatSearch() {
 
   const filteredUsersData = allUsers?.filter((user) => {
     if (user.displayName.toLowerCase().includes(username.toLowerCase())) {
-        return true
+      for (let i = 0; i < allUserChats.length; i++) {
+        if (allUserChats[i].id.includes(user.uid)) {
+          return false
+        }
+      }
+      return true
     } else {
-        return false
+      return false
     }
   })
 
-  const handleSelect = async () => {
+  const handleSelect = async (user) => {
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
       currentUser.uid > user.uid
@@ -79,7 +94,6 @@ function ChatSearch() {
       }
     } catch (err) { console.log(err) }
 
-    setUser(null);
     setUsername("")
   };
 
@@ -99,7 +113,9 @@ function ChatSearch() {
         {username && (
           filteredUsersData.map((user, i) => {
             return (
-              <div key={user.uid} className="firebase-userchat" onClick={handleSelect}>
+              <div className="firebase-userchat" onClick={() => {
+                handleSelect(user)
+              }}>
                 <img src={user.photoURL} alt="" />
                 <div className="firebase-user-chat-info">
                 <span>{user.displayName}</span>

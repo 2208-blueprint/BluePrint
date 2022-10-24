@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   CreateComponent,
@@ -23,12 +23,29 @@ import { ToastContainer, toast } from "react-toastify";
 import { Slide, Zoom, Flip, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "./components/firebase/AuthContext";
-import { EditComponent } from './components'
+import { EditComponent } from "./components";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const { currentUser } = useContext(AuthContext);
-
+  const [showScroll, setShowScroll] = React.useState(false);
+  const [width, setWidth] = React.useState(0);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleScollVisible = () => {
+      window.scrollY > 400 ? setShowScroll(true) : setShowScroll(false);
+    };
+    const handleResize = () => {
+      if (width < 1300 && window.innerWidth > 1300) setWidth(window.innerWidth);
+      if (width > 1300 && window.innerWidth < 1300) setWidth(window.innerWidth);
+    };
+    window.addEventListener("scroll", handleScollVisible);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScollVisible);
+      window.removeEventListener("resize", handleResize);
+    };
+  });
   return (
     <>
       <ToastContainer
@@ -40,7 +57,10 @@ function App() {
       {/* <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> */}
       <Navigation setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       <Routes>
-        <Route path="/" element={<MainPage />}></Route>
+        <Route
+          path="/"
+          element={<MainPage showScroll={showScroll} width={width} />}
+        ></Route>
         <Route path="/users" element={<AllUsersPage />}></Route>
         <Route path="/users/search" element={<SearchUsers />}></Route>
         <Route path="/users/:id" element={<UserPage />}></Route>
@@ -48,11 +68,11 @@ function App() {
         <Route path="/components/:id/edit" element={<EditComponent />}></Route>
         <Route
           path="/components/search/:keywords"
-          element={<SearchComponent />}
+          element={<SearchComponent showScroll={showScroll} width={width} />}
         ></Route>
         <Route
           path="/components/category/:type"
-          element={<CategoryComponent />}
+          element={<CategoryComponent showScroll={showScroll} width={width} />}
         ></Route>
 
         <Route path="/profile/create" element={<CreateComponent />}></Route>

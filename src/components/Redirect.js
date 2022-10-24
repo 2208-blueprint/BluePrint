@@ -18,52 +18,64 @@ function Redirect() {
 
         async function test() {
           const defaultProfilePicture = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+          let socialProfilePhoto = '';
+          let socialDisplayName = '';
 
           try{
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
+console.log(data);
 
             const usersRef = collection(db, 'users')
             let socialLoginEmail = '';
 
             if (data.user.provider !== 'twitch') {
               socialLoginEmail = data.user.emails[0].value;
+              socialProfilePhoto = data.user.photos[0].value;
+              socialDisplayName = data.user.displayName;
             }
             else {
               socialLoginEmail = data.user.email;
+              socialProfilePhoto = data.user.profile_image_url;
+              socialDisplayName = data.user.display_name;
             }
 
             const q = query(usersRef, where("email", "==", socialLoginEmail))
             const querySnapshot = await getDocs(q);
-console.log(querySnapshot);
-
 
             if (querySnapshot.empty) {
               const res = await createUserWithEmailAndPassword(auth, socialLoginEmail, data.password);
               console.log(res);
 
-              res.displayName = data.user.displayName;
-              res.photoURL = data.user.photos[0].value;
+              res.displayName = socialDisplayName;
+
+              if (data.user.provider !== 'twitch') {
+                res.photoURL = socialProfilePhoto;
+              }
+              else {
+                res.photoURL = socialProfilePhoto;
+              }
+
               const date = new Date().getTime();
-              const storageRef = ref(storage, `${data.user.displayName + date}`);
+              const storageRef = ref(storage, `${socialDisplayName + date}`);
               const metadata = {
                 contentType: 'image/png',
               };
 
-              await uploadBytesResumable(storageRef, data.user.photos[0].value, metadata).then(() => {
+              await uploadBytesResumable(storageRef, socialProfilePhoto, metadata).then(() => {
                 getDownloadURL(storageRef).then(async (downloadURL) => {
                   try {
                     //Update profile
                     await updateProfile(res.user, {
-                      displayName: data.user.displayName,
-                      photoURL: data.user.photos[0].value ? data.user.photos[0].value : defaultProfilePicture,
+                      displayName: socialDisplayName,
+                      photoURL: socialProfilePhoto ? socialProfilePhoto : defaultProfilePicture,
                     });
                     //create user on firestore
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
-                      displayName: data.user.displayName,
+                      displayName: socialDisplayName,
                       email: socialLoginEmail,
-                      photoURL: data.user.photos[0].value ? data.user.photos[0].value : defaultProfilePicture,
+                      photoURL: socialProfilePhoto ? socialProfilePhoto : defaultProfilePicture,
                     });
 
                     //create empty user chats on firestore
@@ -71,11 +83,8 @@ console.log(querySnapshot);
 
                     await signInWithEmailAndPassword(auth, socialLoginEmail, data.password)
 
-                    navigate("/");
                   } catch (err) {
                     console.log(err);
-                    setErr(true);
-                    setLoading(false);
                   }
                 });
               });
@@ -85,7 +94,6 @@ console.log(querySnapshot);
             }
 
             navigate('/')
-            window.location.reload(false)
             toastLogin('You are logged in!')
           }
           catch(e) {
