@@ -63,6 +63,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
     setShow(!show);
   };
 
+
   return (
     <>
       {chatVisible ? (

@@ -17,9 +17,6 @@ function Message({ message }) {
   const timeSent = replyDate.split(" ")[4].slice(0,5)
 
 
-
-
-
   return (
     <div
     re={ref}
