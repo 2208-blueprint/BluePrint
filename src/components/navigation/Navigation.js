@@ -15,6 +15,7 @@ import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import anime from "animejs/lib/anime.es.js";
 import { FireBaseChat } from "../index";
+import updateAchievements from "../achievements/achievementListener";
 
 function Navigation({ loggedIn, setLoggedIn }) {
   const [toggle, setToggle] = React.useState(true);
@@ -28,6 +29,9 @@ function Navigation({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
   const toastError = (err) => toast.error(err);
   const toastSuccess = (msg) => toast.success(msg);
+  React.useEffect(() => {
+    updateAchievements(user);
+  }, [user]);
 
   React.useEffect(() => {
     if (window.localStorage.getItem("token")) {
@@ -265,7 +269,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
                   to="/login"
                   id="create-component-button"
                 >
-                  CREATE COMPONENT
+                  CREATE
                 </Link>
                 <Sidebar />
               </>

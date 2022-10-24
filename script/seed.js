@@ -2625,13 +2625,11 @@ async function seed() {
   //     stylesheet: ``,
   //   });
 
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (i < 5) {
-  //     thomas.addComponent(arr[i], { through: { isAuthor: true } });
-  //   } else {
-  //     ben.addComponent(arr[i], { through: { isAuthor: true } });
-  //   }
-  // }
+  for (let i = 0; i < arr.length; i++) {
+    if (i < 5) {
+      await thomas.addComponent(arr[i], { through: { isAuthor: true } });
+    }
+  }
 
   console.log("🌱🌱  Seeding Successful  🌱🌱");
 }

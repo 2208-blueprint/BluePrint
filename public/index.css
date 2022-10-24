@@ -1550,7 +1550,7 @@ body {
   position: absolute;
   height: 100.1%;
   width: 100.1%;
-  z-index: 100;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1585,7 +1585,7 @@ body {
   opacity: 1;
 }
 .component-card-icons {
-  z-index: 50;
+  z-index: 10;
   justify-self: center;
   display: flex;
   transition: all 0.3s ease-in-out;
@@ -2925,6 +2925,35 @@ body {
   .mobile-sidebar-dot {
     display: block;
   }
+  .main-page-prev-button {
+    position: absolute;
+    left: 0;
+    margin-left: 10px;
+  }
+}
+.scrollButton {
+  position: fixed;
+  z-index: 20;
+  align-self: flex-end;
+  bottom: 100px;
+  margin-right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #09141a;
+  color: white;
+  border: 3px solid #47B5FF;
+  cursor: pointer;
+  border-radius: 20%;
+  font-size: 40px;
+  padding-top: 10px;
+  opacity: 0.4;
+  transition: all 0.2s ease-in-out;
+}
+.scrollButton:hover {
+  background-color: #47B5FF;
+  border: 3px solid #47B5FF;
+  color: #0F4C75;
+  opacity: 1;
 }
 @media all and (max-width: 600px) {
   .main-page-prev-button {

@@ -41,7 +41,6 @@ function Leaderboard() {
     const getTopUsers = async () => {
       const { data } = await axios.get("api/admin/top-users");
       const parsedData = [];
-      console.log(data[0]);
       for (let i = 0; i < data.length; i++) {
         const user = data[i];
         const followers = await axios.get(`api/users/${user.id}/followers`);

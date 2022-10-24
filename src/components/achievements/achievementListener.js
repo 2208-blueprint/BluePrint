@@ -3,10 +3,21 @@ import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Zoom } from "react-toastify";
-import { BsFillHouseFill } from "react-icons/bs";
+import {
+  BsFillHouseFill,
+  BsFillPersonFill,
+  BsFillPersonPlusFill,
+} from "react-icons/bs";
+import { BiCool } from "react-icons/bi";
 import { RiHeartsFill } from "react-icons/ri";
-import { FaCrown } from "react-icons/fa";
-import { GiCrownedHeart, GiHeartWings, GiHeartburn } from "react-icons/gi";
+import { FaCrown, FaSave } from "react-icons/fa";
+import {
+  GiCrownedHeart,
+  GiHeartWings,
+  GiHeartburn,
+  GiMedallist,
+} from "react-icons/gi";
+import { AiFillTrophy } from "react-icons/ai";
 import axios from "axios";
 
 //style achievement box
@@ -47,7 +58,16 @@ const twoForOne = <RiHeartsFill size="40px" />;
 const tenForOne = <GiCrownedHeart size="40px" />;
 const twentyFiveForOne = <GiHeartWings size="40px" />;
 const fiftyForOne = <GiHeartburn size="40px" />;
+const twoSaves = <FaSave color="#CD7F32" size="40px" />;
+const tenSaves = <FaSave color="#C0C0C0" size="40px" />;
+const twentyFiveSaves = <FaSave color="#FFD700" size="40px" />;
+const fiftySaves = <FaSave color="#b8fffb" size="40px" />;
+const twoFollows = <BsFillPersonFill size="40px" />;
+const tenFollows = <BsFillPersonPlusFill size="40px" />;
+const twentyFiveFollows = <GiMedallist size="40px" />;
+const fiftyFollows = <BiCool size="50px" />;
 const rankedFirst = <FaCrown size="40px" />;
+const topComponent = <AiFillTrophy size="40px" />;
 
 const updateAchievements = async (currentUser) => {
   //new user achievement
@@ -143,7 +163,7 @@ const updateAchievements = async (currentUser) => {
     setTimeout(() => {
       toast.dark(
         <AchievementMessage
-          achievementName="TwentyFive-for-One"
+          achievementName="Twenty-Five-for-One"
           achievementDesc="Get 25 favorites on one component."
           pointVal={200}
           achievementIcon={twentyFiveForOne}
@@ -159,7 +179,7 @@ const updateAchievements = async (currentUser) => {
     !currentUser.fiftyFavoriteDisplayed
   ) {
     const userPoints = currentUser.currentPoints;
-    const updatedPoints = userPoints + 500;
+    const updatedPoints = userPoints + 300;
     await axios.put("/api/admin/awardAchievement", {
       fiftyFavoriteDisplayed: true,
       currentPoints: updatedPoints,
@@ -171,9 +191,9 @@ const updateAchievements = async (currentUser) => {
     setTimeout(() => {
       toast.dark(
         <AchievementMessage
-          achievementName="TwentyFive-for-One"
-          achievementDesc="Get 25 favorites on one component."
-          pointVal={500}
+          achievementName="Fifty-for-One"
+          achievementDesc="Get 50 favorites on one component."
+          pointVal={300}
           achievementIcon={fiftyForOne}
         />,
         toastSettings("fiftyForOne")
@@ -181,10 +201,241 @@ const updateAchievements = async (currentUser) => {
     }, 1000);
     return;
   }
+  //get two saves on component
+  if (currentUser.twoSaveUnlocked && !currentUser.twoSaveDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 20;
+    await axios.put("/api/admin/awardAchievement", {
+      twoSaveDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Two Saves"
+          achievementDesc="Get 2 saves on one component."
+          pointVal={20}
+          achievementIcon={twoSaves}
+        />,
+        toastSettings("twoSaves")
+      );
+    }, 1000);
+    return;
+  }
+  //get ten saves on a component
+  if (currentUser.tenSaveUnlocked && !currentUser.tenSaveDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 50;
+    await axios.put("/api/admin/awardAchievement", {
+      tenSaveDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Ten Saves"
+          achievementDesc="Get 10 saves on one component."
+          pointVal={50}
+          achievementIcon={tenSaves}
+        />,
+        toastSettings("tenSaves")
+      );
+    }, 1000);
+    return;
+  }
+  //get 25 saves on a component
+  if (
+    currentUser.twentyFiveSaveUnlocked &&
+    !currentUser.twentyFiveSaveDisplayed
+  ) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 200;
+    await axios.put("/api/admin/awardAchievement", {
+      twentyFiveSaveDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Twenty-Five Saves"
+          achievementDesc="Get 25 saves on one component."
+          pointVal={200}
+          achievementIcon={twentyFiveSaves}
+        />,
+        toastSettings("twentyFiveSaves")
+      );
+    }, 1000);
+    return;
+  }
+  //get 50 saves on a component
+  if (currentUser.fiftySaveUnlocked && !currentUser.fiftySaveDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 200;
+    await axios.put("/api/admin/awardAchievement", {
+      fiftySaveDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Twenty-Five Saves"
+          achievementDesc="Get 25 saves on one component."
+          pointVal={200}
+          achievementIcon={fiftySaves}
+        />,
+        toastSettings("fiftySaves")
+      );
+    }, 1000);
+    return;
+  }
+  //get 2 followers
+  if (currentUser.twoFollowsUnlocked && !currentUser.twoFollowsDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 20;
+    await axios.put("/api/admin/awardAchievement", {
+      twoFollowsDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="From Humble Beginnings"
+          achievementDesc="Congratulations! You've had 2 users follow you."
+          pointVal={20}
+          achievementIcon={twoFollows}
+        />,
+        toastSettings("twoFollows")
+      );
+    }, 1000);
+    return;
+  }
+  //get 10 followers
+  if (currentUser.tenFollowsUnlocked && !currentUser.tenFollowsDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 50;
+    await axios.put("/api/admin/awardAchievement", {
+      tenFollowsDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Well On Your Way"
+          achievementDesc="10 users are looking forward to your next post!"
+          pointVal={50}
+          achievementIcon={tenFollows}
+        />,
+        toastSettings("tenFollows")
+      );
+    }, 1000);
+    return;
+  }
+  //get 25 followers
+  if (
+    currentUser.twentyFiveFollowsUnlocked &&
+    !currentUser.twentyFiveFollowsDisplayed
+  ) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 200;
+    await axios.put("/api/admin/awardAchievement", {
+      twentyFiveFollowsDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="Content Creator"
+          achievementDesc="'Don't forget to like, comment, and subscribe' (25 followers)"
+          pointVal={200}
+          achievementIcon={twentyFiveFollows}
+        />,
+        toastSettings("twentyFiveFollows")
+      );
+    }, 1000);
+    return;
+  }
+  //get 50 followers
+  if (currentUser.fiftyFollowsUnlocked && !currentUser.fiftyFollowsDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 300;
+    await axios.put("/api/admin/awardAchievement", {
+      fiftyFollowsDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="BluePoint Celebrity"
+          achievementDesc="50 users are furiously copy-pasting your code into their projects. We at BluePrint thank you for your charitable contributions!"
+          pointVal={300}
+          achievementIcon={fiftyFollows}
+        />,
+        toastSettings("fiftyFollows")
+      );
+    }, 1000);
+    return;
+  }
+  //had first component
+  if (currentUser.hadTopComponent && !currentUser.hadTopComponentDisplayed) {
+    const userPoints = currentUser.currentPoints;
+    const updatedPoints = userPoints + 100;
+    await axios.put("/api/admin/awardAchievement", {
+      hadTopComponentDisplayed: true,
+      currentPoints: updatedPoints,
+      highestRank:
+        updatedPoints > currentUser.highestRank
+          ? updatedPoints
+          : currentUser.highestRank,
+    });
+    setTimeout(() => {
+      toast.dark(
+        <AchievementMessage
+          achievementName="King of the Hill"
+          achievementDesc="Have your component rank first on the site!"
+          pointVal={100}
+          achievementIcon={topComponent}
+        />,
+        toastSettingsFirst("rankOneComponent")
+      );
+    }, 1000);
+    return;
+  }
   //check if user was first
   if (currentUser.wasFirst && !currentUser.wasFirstDisplayed) {
     const userPoints = currentUser.currentPoints;
-    const updatedPoints = userPoints + 500;
+    const updatedPoints = userPoints + 100;
     await axios.put("/api/admin/awardAchievement", {
       wasFirstDisplayed: true,
       currentPoints: updatedPoints,
@@ -198,7 +449,7 @@ const updateAchievements = async (currentUser) => {
         <AchievementMessage
           achievementName="Nice going, Chief."
           achievementDesc="Rank first on the site!"
-          pointVal={500}
+          pointVal={100}
           achievementIcon={rankedFirst}
         />,
         toastSettingsFirst("rankOne")

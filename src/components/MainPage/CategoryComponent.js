@@ -11,16 +11,23 @@ import { useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 
-function CategoryComponent() {
+function CategoryComponent({ showScroll, width }) {
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [title, setTitle] = React.useState(true);
   const [length, setLength] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [componentsPerPage, setComponentsPerPage] = React.useState(8);
-  const [test, setTest] = React.useState(true)
+  const [test, setTest] = React.useState(true);
   const { type } = useParams();
 
+  const handleScroll = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  React.useEffect(() => {
+    if (width > 1300) setComponentsPerPage(8);
+    else setComponentsPerPage(4);
+  }, [width]);
   React.useEffect(() => {
     setCurrentPage(1);
   }, [type]);
@@ -59,27 +66,27 @@ function CategoryComponent() {
   console.log(totalPages);
 
   function sortHandler(event) {
-    event.preventDefault()
-    let oldArray = components
+    event.preventDefault();
+    let oldArray = components;
     if (event.target.value === "popular") {
-      oldArray.sort((a,b)=>{
-        return b.currentPoints - a.currentPoints
-      })
-    } else if (event.target.value === 'newest') {
-      oldArray.sort((a,b) => {
-        let bTime = b.createdAt
-        let aTime = a.createdAt
-        return bTime.localeCompare(aTime)
-      })
+      oldArray.sort((a, b) => {
+        return b.currentPoints - a.currentPoints;
+      });
+    } else if (event.target.value === "newest") {
+      oldArray.sort((a, b) => {
+        let bTime = b.createdAt;
+        let aTime = a.createdAt;
+        return bTime.localeCompare(aTime);
+      });
     } else {
-      oldArray.sort((a,b) => {
-        let bTime = b.createdAt
-        let aTime = a.createdAt
-        return aTime.localeCompare(bTime)
-      })
+      oldArray.sort((a, b) => {
+        let bTime = b.createdAt;
+        let aTime = a.createdAt;
+        return aTime.localeCompare(bTime);
+      });
     }
-    setComponents(oldArray)
-    setTest(!test)
+    setComponents(oldArray);
+    setTest(!test);
   }
 
   return (
@@ -90,6 +97,11 @@ function CategoryComponent() {
           <Sidebar />
         </div>
         <div className="main-page-content-container">
+          {showScroll && (
+            <button className="scrollButton" onClick={handleScroll}>
+              &#8963;
+            </button>
+          )}
           <div className="search-result-search-term">
             {title === "misc" ||
             title === "mobile" ||
@@ -103,13 +115,13 @@ function CategoryComponent() {
               length === 1 ? "match" : "matches"
             }`}</div>
           </div>
-          <div className='mainPage-sort-container'>
+          <div className="mainPage-sort-container">
             <p>Sort By:</p>
             <select onChange={sortHandler}>
               <option value=""></option>
               <option value="popular">Most Popular</option>
               <option value="newest">Newest</option>
-              <option value='oldest'>Oldest</option>
+              <option value="oldest">Oldest</option>
             </select>
           </div>
           <div className="mainPage-button-container">
