@@ -37,6 +37,7 @@ router.get('/login/failed', (req, res) => {
 
 router.get('/login/success', async(req, res, next) => {
   const password = process.env.RPW;
+console.log(req.user);
 
   let email = '';
   let profilePicUrl = '';
