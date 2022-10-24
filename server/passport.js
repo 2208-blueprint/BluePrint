@@ -36,6 +36,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
@@ -50,6 +51,7 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       scope: ["user:email"],
       callbackURL: "/auth/github/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
@@ -64,6 +66,7 @@ passport.use(
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
       scope: ["user_read"],
       callbackURL: "/auth/twitch/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
