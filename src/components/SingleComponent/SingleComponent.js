@@ -20,7 +20,7 @@ import { BsPersonPlusFill, BsPersonCheckFill, BsPencilFill, BsTrashFill} from 'r
 import { GoPencil } from 'react-icons/go'
 import { IconContext } from "react-icons";
 
-function SingleComponent() {
+function SingleComponent({width}) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
@@ -407,7 +407,7 @@ function SingleComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="<!-- HTML goes here -->"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="700px"
           />
@@ -425,7 +425,7 @@ function SingleComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="/* CSS Goes Here */"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="700px"
           />
@@ -443,7 +443,7 @@ function SingleComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="// Javascript goes here"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="700px"
           />
@@ -460,7 +460,7 @@ function SingleComponent() {
             name="Less"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
             height="700px"
@@ -478,7 +478,7 @@ function SingleComponent() {
             name="Sass"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
             height="700px"

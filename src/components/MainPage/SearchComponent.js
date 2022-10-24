@@ -148,7 +148,7 @@ function SearchComponent({ showScroll, width }) {
               searchResult.length
             } ${searchResult.length === 1 ? "match" : "matches"}`}</div>
           </div>
-          <div className="mainPage-sort-container">
+          {searchResult.length === 0 ? <div></div> : <div className="mainPage-sort-container">
             <p>Sort By:</p>
             <select onChange={sortHandler}>
               <option value=""></option>
@@ -156,7 +156,7 @@ function SearchComponent({ showScroll, width }) {
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
             </select>
-          </div>
+          </div>}
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (
               <button onClick={previousPage} className="main-page-prev-button">

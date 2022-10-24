@@ -177,7 +177,6 @@ a.singlecomp-back div span {
   padding: 0;
 }
 #singlecomp-iframe iframe {
-  border: solid #47B5FF 2px;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -2277,8 +2276,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  right: 40px;
-  top: 94px;
+  right: 30px;
+  top: 92px;
   padding: 16px;
   color: white;
   background-color: #20212d;
