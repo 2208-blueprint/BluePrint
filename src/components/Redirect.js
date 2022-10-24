@@ -92,7 +92,7 @@ function Redirect() {
               await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
-            navigate('/', { replace: true })
+            window.location.replace('/')
             toastLogin('You are logged in!')
 
           }
