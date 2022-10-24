@@ -127,13 +127,13 @@ router.put("/follow/:userId", requireToken, async (req, res, next) => {
     if (followerCount.length >= 1) {
       await creator.update({ twoFollowsUnlocked: true });
     }
-    if (followerCount.length >= 1) {
+    if (followerCount.length >= 10) {
       await creator.update({ tenFollowsUnlocked: true });
     }
-    if (followerCount.length >= 1) {
+    if (followerCount.length >= 25) {
       await creator.update({ twentyFiveFollowsUnlocked: true });
     }
-    if (followerCount.length >= 1) {
+    if (followerCount.length >= 50) {
       await creator.update({ fiftyFollowsUnlocked: true });
     }
     res.send(creator);

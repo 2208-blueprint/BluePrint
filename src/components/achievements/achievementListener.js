@@ -53,21 +53,21 @@ const toastSettingsFirst = (id) => {
 };
 
 //icon passed to achievement component
-const newUser = <BsFillHouseFill size="40px" />;
-const twoForOne = <RiHeartsFill size="40px" />;
-const tenForOne = <GiCrownedHeart size="40px" />;
-const twentyFiveForOne = <GiHeartWings size="40px" />;
-const fiftyForOne = <GiHeartburn size="40px" />;
-const twoSaves = <FaSave color="#CD7F32" size="40px" />;
-const tenSaves = <FaSave color="#C0C0C0" size="40px" />;
-const twentyFiveSaves = <FaSave color="#FFD700" size="40px" />;
-const fiftySaves = <FaSave color="#b8fffb" size="40px" />;
-const twoFollows = <BsFillPersonFill size="40px" />;
-const tenFollows = <BsFillPersonPlusFill size="40px" />;
-const twentyFiveFollows = <GiMedallist size="40px" />;
-const fiftyFollows = <BiCool size="50px" />;
-const rankedFirst = <FaCrown size="40px" />;
-const topComponent = <AiFillTrophy size="40px" />;
+export const newUser = <BsFillHouseFill size="40px" />;
+export const twoForOne = <RiHeartsFill size="40px" />;
+export const tenForOne = <GiCrownedHeart size="40px" />;
+export const twentyFiveForOne = <GiHeartWings size="40px" />;
+export const fiftyForOne = <GiHeartburn size="40px" />;
+export const twoSaves = <FaSave color="#CD7F32" size="40px" />;
+export const tenSaves = <FaSave color="#C0C0C0" size="40px" />;
+export const twentyFiveSaves = <FaSave color="#FFD700" size="40px" />;
+export const fiftySaves = <FaSave color="#b8fffb" size="40px" />;
+export const twoFollows = <BsFillPersonFill size="40px" />;
+export const tenFollows = <BsFillPersonPlusFill size="40px" />;
+export const twentyFiveFollows = <GiMedallist size="40px" />;
+export const fiftyFollows = <BiCool size="80px" />;
+export const rankedFirst = <FaCrown size="40px" />;
+export const topComponent = <AiFillTrophy size="40px" />;
 
 const updateAchievements = async (currentUser) => {
   //new user achievement
