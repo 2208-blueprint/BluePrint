@@ -92,8 +92,11 @@ function Redirect() {
               await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
-            window.location.replace('/')
-            toastLogin('You are logged in!')
+            setTimeout(() => {
+              window.location.replace('/')
+              toastLogin('You are logged in!')
+            }, 3000)
+
 
           }
           catch(e) {
