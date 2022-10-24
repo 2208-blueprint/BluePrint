@@ -14,7 +14,6 @@ const cookieSession = require("cookie-session");
 app.use(express.static(path.join(__dirname, '..','/public')))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.enable("trust proxy");
 
 app.use(
     cookieSession({ name: "session", keys: ["blueprint"], maxAge: 24 * 60 * 60 * 100 })
