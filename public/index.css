@@ -3427,14 +3427,16 @@ body {
   font-style: italic;
 }
 .redirect-loading {
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - 100px);
+  width: 100vw;
   display: flex;
   justify-content: center;
   margin-top: 250px;
 }
 .redirect-loading h1 {
+  font-family: "Inter", sans-serif;
   font-size: 40px;
+  color: white;
 }
 /* width */
 ::-webkit-scrollbar {
