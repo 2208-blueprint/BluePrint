@@ -25,7 +25,7 @@ async function seed() {
 
   // const thomas = await User.create({
   //   username: "tombak",
-  //   password: "test",
+  //   password: "password",
   //   firstName: "Thomas",
   //   lastName: "Bak",
   //   country: "USA",
@@ -34,7 +34,7 @@ async function seed() {
 
   // const ben = await User.create({
   //   username: "benji",
-  //   password: "test",
+  //   password: "password",
   //   firstName: "Benjamin",
   //   lastName: "Lee",
   //   country: "USA",
@@ -42,7 +42,7 @@ async function seed() {
   // });
   // const cathal = await User.create({
   //   username: "cathal1990",
-  //   password: "test",
+  //   password: "password",
   //   firstName: "Cathal",
   //   lastName: "O Cuinneagain",
   //   email: "email1@gmail.com",
@@ -2627,9 +2627,7 @@ async function seed() {
 
   // for (let i = 0; i < arr.length; i++) {
   //   if (i < 5) {
-  //     thomas.addComponent(arr[i], { through: { isAuthor: true } });
-  //   } else {
-  //     ben.addComponent(arr[i], { through: { isAuthor: true } });
+  //     await thomas.addComponent(arr[i], { through: { isAuthor: true } });
   //   }
   // }
 

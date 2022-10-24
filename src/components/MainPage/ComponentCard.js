@@ -13,7 +13,6 @@ import { IconContext } from "react-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsHeartFill } from "react-icons/bs";
-import { motion } from "framer-motion";
 
 function ComponentCard({ componentId, loadRight, loadLeft }) {
   const [html, setHTML] = useState("");
@@ -181,23 +180,7 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
     });
   }, [less]);
   return (
-    <motion.div
-      className="component-card-outer"
-      // initial={{
-      //   scale:1.05,
-      //   opacity: 0,
-      //   x: loadRight ? 200 : loadLeft ? -200 : 0,
-      // }}
-      // animate={{
-      //   x: 0,
-      //   opacity: 1,
-      //   scale: 1,
-      // }}
-      // transition={{
-      //   type: "tween",
-      //   duration: 0.5,
-      // }}
-    >
+    <div className="component-card-outer">
       <Link
         to={`/components/${componentId}`}
         style={{ textDecoration: "none" }}
@@ -281,7 +264,7 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
         <div className="component-card-types">{markup}</div>
         <div className="component-card-types">{styling}</div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 export default ComponentCard;

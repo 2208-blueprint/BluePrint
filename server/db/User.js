@@ -69,6 +69,10 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  hadTopComponentDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
@@ -110,6 +114,70 @@ const User = db.define("user", {
     defaultValue: false,
   },
   fiftyFavoriteDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twoSaveUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twoSaveDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenSaveUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenSaveDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveSaveUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveSaveDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftySaveUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftySaveDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twoFollowsUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twoFollowsDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenFollowsUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  tenFollowsDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveFollowsUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  twentyFiveFollowsDisplayed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftyFollowsUnlocked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  fiftyFollowsDisplayed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
