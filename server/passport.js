@@ -35,7 +35,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: "https://fsa-blueprint.herokuapp.com/auth/google/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
@@ -49,7 +50,8 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       scope: ["user:email"],
-      callbackURL: "/auth/github/callback",
+      callbackURL: "https://fsa-blueprint.herokuapp.com/auth/github/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
@@ -63,7 +65,8 @@ passport.use(
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
       scope: ["user_read"],
-      callbackURL: "/auth/twitch/callback",
+      callbackURL: "https://fsa-blueprint.herokuapp.com/auth/twitch/callback",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
