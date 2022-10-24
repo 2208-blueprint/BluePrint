@@ -37,7 +37,6 @@ function LeaderboardRowComponent({
           >
             <FaHeart />
           </IconContext.Provider>
-
           <span className="tooltiptext">Total component favorites</span>
           {favorites}
         </div>

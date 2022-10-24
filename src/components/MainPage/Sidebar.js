@@ -54,72 +54,84 @@ function Sidebar() {
         >
           ANIMATION
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/button`)}
         >
           BUTTONS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/drop-down`)}
         >
           DROP-DOWNS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/footer`)}
         >
           FOOTERS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/form`)}
         >
           FORMS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/graphic`)}
         >
           GRAPHICS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/icon`)}
         >
           ICONS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/info-card`)}
         >
           INFO-CARDS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/mobile`)}
         >
           MOBILE-FRIENDLY
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/navbar`)}
         >
           NAVBARS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/slider`)}
         >
           SLIDERS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/misc`)}
         >
           MISC
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category-heading"
           id="side-bar-framework"
@@ -132,32 +144,37 @@ function Sidebar() {
         >
           REACT
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/${"html"}`)}
         >
           HTML
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/css`)}
         >
           CSS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
           onClick={() => navigate(`/components/category/less`)}
         >
           LESS
         </div>
+        <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category-heading"
           id="side-bar-resources"
         >
           RESOURCES
         </div>
-        <div className="side-bar-container-category">Useful API's</div>
-        <div className="side-bar-container-category">Useful Tools</div>
+        <div className="side-bar-container-category">APIs</div>
+        <div className="mobile-sidebar-dot">&bull;</div>
+        <div className="side-bar-container-category">TOOLS</div>
       </div>
     </div>
   );

@@ -122,6 +122,20 @@ router.put("/follow/:userId", requireToken, async (req, res, next) => {
         currentPoints: creatorPoints,
       });
     }
+    const followerCount = await creator.getFollowers();
+    console.log("list of people following", followerCount);
+    if (followerCount.length >= 1) {
+      await creator.update({ twoFollowsUnlocked: true });
+    }
+    if (followerCount.length >= 10) {
+      await creator.update({ tenFollowsUnlocked: true });
+    }
+    if (followerCount.length >= 25) {
+      await creator.update({ twentyFiveFollowsUnlocked: true });
+    }
+    if (followerCount.length >= 50) {
+      await creator.update({ fiftyFollowsUnlocked: true });
+    }
     res.send(creator);
   } catch (error) {
     next(error);
@@ -192,7 +206,15 @@ router.get("/:id", async (req, res, next) => {
           attributes: ["id", "username", "img"],
         },
       ],
-      attributes: ["username", "firstName", "lastName", "img", "currentPoints", "wasFirst", "highestRank"],
+      attributes: [
+        "username",
+        "firstName",
+        "lastName",
+        "img",
+        "currentPoints",
+        "wasFirst",
+        "highestRank",
+      ],
     });
     res.send(user);
   } catch (error) {

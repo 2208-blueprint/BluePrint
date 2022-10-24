@@ -47,7 +47,23 @@ router.get("/top-components", async (req, res, next) => {
         attributes: ["username"],
       },
     });
-
+    // console.log(
+    //   "akjdsfhahdfuhdaihfudi",
+    //   topComponents[0].users[0]["user_component"].dataValues.isAuthor
+    // );
+    // console.log(topComponents[0].users);
+    const topComponentUsers = topComponents[0].users;
+    for (let i = 0; i < topComponentUsers.length; i++) {
+      let current = topComponentUsers[i];
+      if (current["user_component"].dataValues.isAuthor) {
+        console.log("blooooooop", current);
+        const winner = await User.findOne({
+          where: { username: current.username },
+        });
+        await winner.update({ hadTopComponent: true });
+        break;
+      }
+    }
     res.send(topComponents);
   } catch (ex) {
     next(ex);

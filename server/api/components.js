@@ -138,10 +138,21 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
 
     await component.update({ currentPoints: points });
     await component.addUser(user, { through: { isFavorite: true } });
-    const favoritedUsers = await component.getUsers();
-    console.log("followingComp", favoritedUsers);
-    if (favoritedUsers.length - 1 === 2) {
+    const users = await component.getUsers();
+    const favoritedUsers = users.filter(
+      (user) => user["user_component"].isFavorite
+    );
+    if (favoritedUsers.length >= 2) {
       await componentAuthor.update({ twoFavoriteUnlocked: true });
+    }
+    if (favoritedUsers.length >= 10) {
+      await componentAuthor.update({ tenFavoriteUnlocked: true });
+    }
+    if (favoritedUsers.length >= 25) {
+      await componentAuthor.update({ twentyFiveFavoriteUnlocked: true });
+    }
+    if (favoritedUsers.length >= 50) {
+      await componentAuthor.update({ fiftyFavoriteUnlocked: true });
     }
     res.sendStatus(201);
   } catch (error) {
@@ -213,6 +224,20 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
     await component.update({ currentPoints: points });
     console.log(component.currentPoints);
     await component.addUser(user, { through: { isSaved: true } });
+    const users = await component.getUsers();
+    const savedUsers = users.filter((user) => user["user_component"].isSaved);
+    if (savedUsers.length >= 2) {
+      await componentAuthor.update({ twoSaveUnlocked: true });
+    }
+    if (savedUsers.length >= 10) {
+      await componentAuthor.update({ tenSaveUnlocked: true });
+    }
+    if (savedUsers.length >= 25) {
+      await componentAuthor.update({ twentyFiveSaveUnlocked: true });
+    }
+    if (savedUsers.length >= 50) {
+      await componentAuthor.update({ fiftySaveUnlocked: true });
+    }
     res.sendStatus(201);
   } catch (error) {
     next(error);
