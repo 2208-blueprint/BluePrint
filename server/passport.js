@@ -65,7 +65,7 @@ passport.use(
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
       scope: ["user_read"],
-      callbackURL: "/auth/twitch/callback",
+      callbackURL: "https://fsa-blueprint.herokuapp.com/auth/twitch/callback",
       proxy: true
     },
     function (accessToken, refreshToken, profile, done) {
