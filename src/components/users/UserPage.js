@@ -5,10 +5,11 @@ import Axios from "axios";
 import UserPageComponentCard from "./UserPageComponentCard";
 import ComponentCard from "../MainPage/ComponentCard";
 import axios from "axios";
-import { BsPeople, BsSearch, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
+import { BsPersonPlusFill, BsPersonCheckFill, BsPeople, BsSearch, BsBookmarkStar, BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { GiGearHammer } from "react-icons/gi";
 import { FaCoins, FaHammer, FaCrown } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 //This is the full "profile page" of a user. The logged-in user can visit this page to see components made by this
 //user, as well as follow the user to see more content from them.
@@ -26,6 +27,14 @@ function UserPage() {
     const [componentsArray, setComponentsArray] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [type, setType] = useState('');
+    const [followed, setFollowed] = useState(false);
+    const [isFollowing, setIsFollowing] = useState(false)
+    const [followingArray, setFollowingArray] = useState([])
+    // const [author, setAuthor] = useState({username: '', id:0})
+    const [hideFollow, setHideFollow] = useState(true)
+
+    const toastSuccess = (msg) => toast.dark(msg, { autoClose: 2000});
+    const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
     
     //Get current user number from URL path
     let curUserNum = window.location.pathname
@@ -56,7 +65,7 @@ function UserPage() {
                     setRank("Apprentice");
                     setRankColor("#CD7F32");
                   }
-            
+                setFollowingArray(data.followers)
                 setPoints(data.currentPoints)
                 setComponentsArray(data.components)
                 setFiltered(data.components)
@@ -82,17 +91,16 @@ function UserPage() {
     //     getComponentSavesAndFavs();
     // }, [componentsArray])
 
-    React.useEffect(() => {
-        async function getUserBlueprintPoints() {
-            try {
+    // React.useEffect(() => {
+    //     async function getUserBlueprintPoints() {
+    //         try {
 
-            // console.log('ComponentsArray: ',componentsArray)
-            } catch(e) {
-                console.error(e)
-            }
-        }
-        getUserBlueprintPoints();
-    }, [])
+    //         } catch(e) {
+    //             console.error(e)
+    //         }
+    //     }
+    //     getUserBlueprintPoints();
+    // }, [])
   
     function handleMessageMeButton(evt){
         evt.preventDefault()
@@ -123,30 +131,80 @@ function UserPage() {
         }
         handleSelectFilter();
         
-
       },[type])
    
+      //Check if the user is also the logged profile, or not even logged in
+      React.useEffect (() => {
+        try {
+            const  handleCheckAuthor = async() => {
+                const curAuthor = await axios.get('/api/profile', {
+                    headers: {
+                        authorization: window.localStorage.getItem('token')
+                    }
+                })
+                if (curUser.id ===curAuthor.data.id || curAuthor.data.id === undefined) {
+                    setHideFollow(true)
+                }
+                else {
+                    setHideFollow(false)
+                }
+            }
+            handleCheckAuthor();
+        } catch(err) {
+        }
+        
+      }, [curUser])
+     
+      React.useEffect (() => {
+        const handleCheckFollowing = async() => {
+            const curAuthor = await axios.get('/api/profile', {
+                headers: {
+                    authorization: window.localStorage.getItem('token')
+                }
+            })
+            let followArray = curUser.followers
+            for (let i = 0; i < followArray?.length; i++) {
+                let curFollower = followingArray[i]
+                if (curAuthor.data.id === curFollower.id) {
+                    setFollowed(true)
+                }
+            }
+        }
+        handleCheckFollowing();
+      }, [curUser])
+
+    async function followHandler(e) {
+    try {
+        e.preventDefault();
+        if (window.localStorage.getItem('token')) {
+        if (!followed) {
+            await axios.put(`/api/users/follow/${curUserNum}`,{},{
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+            });
+            toastPopup(`Now following ${curUser.username}`)
+        } else {
+            await axios.put(`/api/users/unfollow/${curUserNum}`,{},{
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+            });
+            toastPopup(`Unfollowed ${curUser.username}`)
+        }
+        setFollowed(!followed)
+        }
+    } catch (err) {
+        console.log(err)
+    }
+    }
       
 
     return(
         <>
         <div className="single-user-page-main-container">
             <div className="single-user-page-title-container">
-            <div className='singlecomp-title-author'>
-        <span>{title} by </span><span onClick={author.username ? ()=>navigate(`/users/${author.id}`) : ()=>navigate('/')} className="singlecomp-author"> {author.username ? author.username : 'BluePrint Community'}</span>
-        {(loggin && !amCreator && author.username) ? 
-         (followed ? <div onClick={followHandler} id ="singlecomp-follow">
-          <IconContext.Provider value={{size: "40px"}}>
-            <BsPersonCheckFill/>
-          </IconContext.Provider>
-          <span className="singlecomp-tooltip">Unfollow User</span>
-        </div> : <div onClick={followHandler} id="singlecomp-follow">
-          <IconContext.Provider value={{size: "40px"}}>
-            <BsPersonPlusFill/>
-          </IconContext.Provider>
-          <span className="singlecomp-tooltip">Follow User</span>
-        </div>) : <div></div>}
-      </div>
+                
                 <div className="single-user-page-user-pic">
                     <img className="single-user-page-user-img" src={curUser?.img} alt="user_pic.png"/>
                 </div>
@@ -172,6 +230,21 @@ function UserPage() {
                         />
                         {rank}  
                 </div>
+                    <div className="single-user-page-follow-container">
+                    {hideFollow ? null :
+                    (followed ? <div onClick={followHandler} id ="single-user-page-follow">
+                    <IconContext.Provider value={{size: "40px"}}>
+                        <BsPersonCheckFill/>
+                    </IconContext.Provider>
+                    <span className="single-user-page-follow-tooltip"></span>
+                    </div> : <div onClick={followHandler} id="single-user-page-follow">
+                    <IconContext.Provider value={{size: "40px"}}>
+                        <BsPersonPlusFill/>
+                    </IconContext.Provider>
+                    <span className="single-user-page-follow-tooltip"></span>
+                    </div>)}
+                    </div>
+
             </div>
                 <div className="single-user-page-user-stats-container">
                     <div className="single-user-page-components-made-wrapper">
