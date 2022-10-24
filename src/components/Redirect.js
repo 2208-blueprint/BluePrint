@@ -24,7 +24,6 @@ function Redirect() {
           try{
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
-console.log(data);
 
             const usersRef = collection(db, 'users')
             let socialLoginEmail = '';
@@ -106,7 +105,11 @@ console.log(data);
     }, [])
 
   return (
-    <></>
+    <>
+    <div className='redirect-loading'>
+      <h1>Please wait, loading profile...</h1>
+    </div>
+    </>
   )
 }
 

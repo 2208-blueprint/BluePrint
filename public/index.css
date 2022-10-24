@@ -3404,6 +3404,16 @@ body {
   color: #8ba9be;
   font-style: italic;
 }
+.redirect-loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+.redirect-loading h1 {
+  font-size: 40px;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
