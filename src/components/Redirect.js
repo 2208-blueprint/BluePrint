@@ -93,7 +93,7 @@ function Redirect() {
             }
 
             setTimeout(() => {
-              window.location.replace('/')
+              window.location.replace('https://fsa-blueprint.herokuapp.com')
               toastLogin('You are logged in!')
             }, 3000)
 
