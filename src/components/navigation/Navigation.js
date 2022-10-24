@@ -62,6 +62,8 @@ function Navigation({ loggedIn, setLoggedIn }) {
   const fallDownHandler = () => {
     setShow(!show);
   };
+  console.log(user);
+
 
   return (
     <>
