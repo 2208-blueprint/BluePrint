@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-import { useNavigate, redirect } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
@@ -92,8 +92,8 @@ function Redirect() {
               await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
-            redirect('/')
             toastLogin('You are logged in!')
+            return redirect('/')
           }
           catch(e) {
             toastError('You have already logged in with that email!')
