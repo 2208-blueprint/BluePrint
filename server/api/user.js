@@ -206,15 +206,7 @@ router.get("/:id", async (req, res, next) => {
           attributes: ["id", "username", "img"],
         },
       ],
-      attributes: [
-        "username",
-        "firstName",
-        "lastName",
-        "img",
-        "currentPoints",
-        "wasFirst",
-        "highestRank",
-      ],
+      attributes: ["id","username", "firstName", "lastName", "img", "currentPoints", "wasFirst", "highestRank"],
     });
     res.send(user);
   } catch (error) {
