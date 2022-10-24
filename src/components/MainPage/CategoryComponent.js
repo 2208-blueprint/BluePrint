@@ -115,7 +115,7 @@ function CategoryComponent({ showScroll, width }) {
               length === 1 ? "match" : "matches"
             }`}</div>
           </div>
-          <div className="mainPage-sort-container">
+          {components.length === 0 ? <div></div> : <div className="mainPage-sort-container">
             <p>Sort By:</p>
             <select onChange={sortHandler}>
               <option value=""></option>
@@ -123,7 +123,7 @@ function CategoryComponent({ showScroll, width }) {
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
             </select>
-          </div>
+          </div>}
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (
               <button onClick={previousPage} className="main-page-prev-button">

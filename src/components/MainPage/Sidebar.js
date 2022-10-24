@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import updateAchievements from "../achievements/achievementListener";
 
-function Sidebar() {
+function Sidebar(props) {
   const navigate = useNavigate();
   const [searchBarInput, setSearchBarInput] = useState("");
 
@@ -36,10 +36,14 @@ function Sidebar() {
           onKeyDown={(e) => {
             if (e.code === "Enter") {
               handleSearch();
+              props.setToggle(true)
             }
           }}
         />
-        <div className="side-bar-search-button" onClick={handleSearch}>
+        <div className="side-bar-search-button" onClick={()=>{
+          handleSearch()
+          props.setToggle(true)
+          }}>
           {" "}
           <IconContext.Provider value={{ size: "20px" }}>
             <BsSearch />
@@ -50,84 +54,144 @@ function Sidebar() {
         <div className="side-bar-container-category-heading">CATEGORIES</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/animation`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/animation`)
+          }}
         >
           ANIMATION
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/button`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/button`)
+          }}
         >
           BUTTONS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/drop-down`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/drop-down`)
+          }}
         >
           DROP-DOWNS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/footer`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/footer`)
+          }}
         >
           FOOTERS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/form`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/form`)
+          }}
         >
           FORMS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/graphic`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/graphic`)
+          }}
         >
           GRAPHICS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/icon`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/icon`)
+          }}
         >
           ICONS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/info-card`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/info-card`)
+          }}
         >
           INFO-CARDS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/mobile`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/mobile`)
+          }}
         >
           MOBILE-FRIENDLY
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/navbar`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/navbar`)
+          }}
         >
           NAVBARS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/slider`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/slider`)
+          }}
         >
           SLIDERS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/misc`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/misc`)
+          }}
         >
           MISC
         </div>
@@ -140,28 +204,48 @@ function Sidebar() {
         </div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/react`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/react`)
+          }}
         >
           REACT
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/${"html"}`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/${"html"}`)
+          }}
         >
           HTML
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/css`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/css`)
+          }}
         >
           CSS
         </div>
         <div className="mobile-sidebar-dot">&bull;</div>
         <div
           className="side-bar-container-category"
-          onClick={() => navigate(`/components/category/less`)}
+          onClick={() => {
+            if (props.setToggle) {
+              props.setToggle(true)
+            }
+            navigate(`/components/category/less`)
+          }}
         >
           LESS
         </div>
