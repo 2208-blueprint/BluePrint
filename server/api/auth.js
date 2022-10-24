@@ -41,16 +41,28 @@ console.log(req.user);
 
   let email = '';
   let profilePicUrl = '';
+  let socialUserName ='';
+  let socialFirstName = '';
+  let socialLastName = '';
 
   if (req.user.provider === 'google') {
+    socialUserName = req.user.displayName;
+    socialFirstName = req.user['_json'].given_name;
+    socialLastName = req.user['_json'].family_name;
     email = req.user['_json'].email;
     profilePicUrl = req.user.photos[0].value;
   }
   if (req.user.provider === 'github') {
+    socialUserName = req.user.displayName;
+    socialFirstName = req.user['_json'].given_name;
+    socialLastName = req.user['_json'].family_name;
     email = req.user.emails[0].value;
     profilePicUrl = req.user.profileUrl;
   }
   if (req.user.provider === 'twitch') {
+    socialUserName = req.user.display_name;
+    socialFirstName = req.user.display_name;
+    socialLastName = '';
     email = req.user.email;
     profilePicUrl = req.user.profile_image_url;
   }
@@ -63,9 +75,9 @@ console.log(req.user);
 
   if (!userCheck) {
     const newUser = await User.create({
-      username: req.user.displayName,
-      firstName: req.user['_json'].given_name,
-      lastName: req.user['_json'].family_name,
+      username: socialUserName,
+      firstName: socialFirstName,
+      lastName: socialLastName,
       password: password,
       email,
       img: profilePicUrl,
