@@ -94,7 +94,6 @@ console.log(data);
             }
 
             navigate('/')
-            window.location.reload(false)
             toastLogin('You are logged in!')
           }
           catch(e) {
