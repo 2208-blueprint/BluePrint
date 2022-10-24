@@ -92,8 +92,9 @@ function Redirect() {
               await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
+            navigate('/', { replace: true })
             toastLogin('You are logged in!')
-            return redirect('/')
+
           }
           catch(e) {
             toastError('You have already logged in with that email!')
