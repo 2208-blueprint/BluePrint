@@ -3199,6 +3199,7 @@ body {
     border-radius: 0;
     width: 100%;
     flex: 1;
+    max-width: 0;
   }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
@@ -3211,6 +3212,7 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     z-index: 1;
+    width: 100%;
   }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
