@@ -7,6 +7,7 @@ import {
   BsCardChecklist,
   BsPencilFill,
 } from "react-icons/bs";
+import { GoInbox } from "react-icons/go";
 import { FaMapMarkerAlt, FaRegEdit } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import { GiGearHammer } from "react-icons/gi";
@@ -15,10 +16,19 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AchievementListDisplay from "../achievements/AchievementListDisplay";
+import ComponentCardProfile from "./ComponentCardProfile";
 
-function ProfilePage() {
+import { IconContext } from "react-icons";
+import {
+  BsQuestionCircleFill,
+  BsArrowRightShort,
+  BsArrowLeftShort,
+} from "react-icons/bs";
+
+function ProfilePage({ showScroll, width }) {
   const [user, setUser] = React.useState();
   const [savedComponents, setSavedComponents] = React.useState([]);
+  const [ownedComponents, setOwnedComponents] = React.useState([]);
   const [followers, setFollowers] = React.useState([]);
   const [allFollowing, setAllFollowing] = React.useState([]);
   const [rank, setRank] = React.useState("");
@@ -26,6 +36,11 @@ function ProfilePage() {
   const [show, setShow] = React.useState(false);
   const [img, setImg] = React.useState("");
   const [achievementTotal, setAchievementTotal] = React.useState(0);
+  const [toggle, setToggle] = React.useState(false);
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [componentsPerPage, setComponentsPerPage] = React.useState(6);
+  const [sortedComponents, setSorted] = React.useState([]);
 
   const navigate = useNavigate();
   const toastPopup = (msg) => {
@@ -70,10 +85,13 @@ function ProfilePage() {
           const following = await Axios.get("api/users/following");
           setAllFollowing(following.data);
 
-          const savedComponents = data.components.filter(
-            (component) => component.user_component.isSaved
+          const savedComponents = data.components
+            .filter((component) => !component.user_component.isAuthor)
+            .filter((component) => component.user_component.isSaved);
+          const owned = data.components.filter(
+            (component) => component.user_component.isAuthor
           );
-
+          setOwnedComponents(owned);
           setSavedComponents(savedComponents);
           setImg(data.img);
         } else {
@@ -109,6 +127,28 @@ function ProfilePage() {
     window.location.reload(false);
   }
   useEffect(() => {
+    if (width > 1300) setComponentsPerPage(4);
+    if (width < 1300) setComponentsPerPage(2);
+  }, [width]);
+  const nextPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const previousPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleScroll = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
     let count = 0;
     if (user?.wasFirst) count++;
     if (user?.hadTopComponent) count++;
@@ -127,6 +167,15 @@ function ProfilePage() {
     if (user?.fiftyFollowsUnlocked) count++;
     setAchievementTotal(count);
   }, [user]);
+
+  const lastPostIndex = currentPage * componentsPerPage;
+  const firstPostIndex = lastPostIndex - componentsPerPage;
+  const currentComponents = savedComponents.slice(
+    firstPostIndex,
+    lastPostIndex
+  );
+  const totalPages = Math.ceil(savedComponents.length / componentsPerPage);
+  const totalOwnedPages = Math.ceil(ownedComponents.length / componentsPerPage);
 
   return (
     <div className="profile-wrapper">
@@ -152,7 +201,7 @@ function ProfilePage() {
         <div className="profile-picture">
           <img src={user?.img} alt="" />
         </div>
-        <div
+        {/* <div
           className={
             user?.highestRank && user?.wasFirst
               ? "profile-picture-crown"
@@ -160,10 +209,10 @@ function ProfilePage() {
           }
         >
           <FaCrown size="35px" />
-        </div>
+        </div> */}
         <div className="profile-category-link-container">
           <div className="profile-category-link">
-            <b>{user?.firstName}</b>
+            <div className="profile-category-link-name">{user?.firstName}</div>
             <div className="profile-rank-icon">
               <GiGearHammer
                 style={{
@@ -176,29 +225,47 @@ function ProfilePage() {
           </div>
           <div className="profile-category-link username">
             <small>
-              {user?.username} -- {rank} {`(peak: ${user?.highestRank} points)`}
+              {user?.username} <span className="rankDivide">|</span> {rank}{" "}
             </small>
           </div>
-          <div className="profile-category-link location">
-            <FaMapMarkerAlt />
-            <small>{user?.country}</small>
-          </div>
-          <div className="profile-category-link followers">
-            <small>
-              <BsPeople /> {followers ? followers.length : "0"} Followers
-            </small>
-          </div>
-          <div className="profile-category-link following">
-            <small>
-              <MdPeopleOutline /> {allFollowing ? allFollowing.length : "0"}{" "}
-              Following
-            </small>
-          </div>
-          <div className="profile-category-link favorited">
-            <small>
-              <BsBookmarkStar />{" "}
-              {savedComponents ? savedComponents.length : "0"} Favorited
-            </small>
+          <div className="profile-info-sandwich">
+            <div className="profile-info-sandwich-left">
+              <div className="profile-user-name">
+                <small>
+                  {" "}
+                  <span className="profile-icon-buffer">
+                    <BsPencilFill color={"#47B5FF"} />{" "}
+                  </span>
+                  {`${user?.firstName} ${user?.lastName}`}{" "}
+                </small>
+              </div>
+              <div>
+                <small>
+                  <span className="profile-icon-buffer">
+                    <MdOutlineMail color={"#47B5FF"} />
+                  </span>
+                  {user?.email}
+                </small>
+              </div>
+              <div>
+                <small>
+                  <span className="profile-icon-buffer">
+                    {" "}
+                    <BsCardChecklist color={"#47B5FF"} />
+                  </span>
+                  Joined: {user?.createdAt.slice(0, 10)}
+                </small>
+              </div>
+              <div className="profile-country-span">
+                <small>
+                  <span className="profile-icon-buffer">
+                    {" "}
+                    <FaMapMarkerAlt color={"#47B5FF"} />
+                  </span>
+                  {user?.country}
+                </small>
+              </div>
+            </div>
           </div>
           <hr></hr>
           <div className="profile-new-component-button-container">
@@ -206,121 +273,185 @@ function ProfilePage() {
               className="profile-new-component-button"
               onClick={() => navigate("/profile/create")}
             >
-              Create new component
+              Create New Component
             </button>
           </div>
         </div>
-        <AchievementListDisplay
-          achievementTotal={achievementTotal}
-          user={user}
-        />
       </div>
       <div className="profile-main-content-container">
         <div className="profile-user-extras-container">
-          <div className="profile-user-info-container">
-            <div className="profile-user-info-left">
-              <h1>My info</h1>
-              <div className="profile-user-name">
-                <BsPencilFill />
-                {`${user?.firstName} ${user?.lastName}`}{" "}
-              </div>
-              <div className="profile-user-email">
-                <MdOutlineMail />
-                {user?.email}
-              </div>
-              <div className="profile-user-member-since">
-                <BsCardChecklist />
-                <small>Joined: {user?.createdAt.slice(0, 10)}</small>
-              </div>
-              <div className="profile-country-span">
-                <FaMapMarkerAlt />
-                <small>{user?.country}</small>
-              </div>
-            </div>
-            <hr></hr>
-            <div className="profile-user-info-right">
-              <h1>Achievements</h1>
-              <div className="profile-achievements rank">Rank: {rank}</div>
-              <div className="profile-achievements points">
-                Points: {user?.highestRank}
-              </div>
-              <div className="profile-achievements badges">
-                Badges:{" "}
-                <GiGearHammer
-                  style={{
-                    marginLeft: "8px",
-                  }}
-                  size="20px"
-                  color={rankColor}
-                />
-              </div>
-            </div>
-          </div>
           <div className="profile-user-extras-left">
-            <h1>My uploads</h1>
-            <div className="profile-user-uploads">
-              {user?.components.length
-                ? user?.components.map((component, i) => {
-                    if (component.user_component.isAuthor) {
-                      return (
-                        <div
-                          key={i}
-                          className="profile-user-single-upload"
-                          onClick={() =>
-                            uploadNavigate(`/components/${component.id}`)
-                          }
-                        >
-                          <div className="user-upload-image">
-                            <img src={component.img} alt="" />
-                          </div>
-                          <p>{component.name}</p>
-                          <div className="single-user-upload-frameworks">
-                            <div className="single-user-upload-framework">
-                              {component.framework}
-                            </div>
-                            <div className="single-user-upload-framework">
-                              {component.stylingFramework}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    }
-                  })
-                : "You have not uploaded any components!"}
-            </div>
-          </div>
-        </div>
-        <div className="profile-user-extras-right">
-          <h1>My saved components</h1>
-          <div className="profile-user-saved-components">
-            {savedComponents?.length
-              ? savedComponents?.map((component, i) => {
-                  if (!component.user_component.isAuthor) {
-                    return (
+            <div className="profile-user-flex">
+              <div className="profile-user-extras-leftside">
+                <div className="profile-toggle-main-heading">
+                  {toggle ? (
+                    <>
+                      <h1 className="profile-toggle-header">My Uploads</h1>
                       <div
-                        key={"saved" + i}
-                        className="profile-user-single-saved"
-                        onClick={() =>
-                          uploadNavigate(`/components/${component.id}`)
-                        }
+                        className="profile-toggle-button"
+                        onClick={() => setToggle(!toggle)}
                       >
-                        <div className="user-saved-image">
-                          <img src={component.img} alt="" />
+                        Show Saved
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="profile-toggle-header">My Saved</h1>
+                      <div
+                        className="profile-toggle-button"
+                        onClick={() => setToggle(!toggle)}
+                      >
+                        Show Uploaded
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="profilePage-button-container">
+                  {toggle ||
+                  currentPage === 1 ||
+                  savedComponents.length === 0 ? null : (
+                    <button
+                      onClick={previousPage}
+                      className="prof-page-prev-button"
+                    >
+                      <IconContext.Provider
+                        value={{
+                          size: "40px",
+                          className: "main-page-pagination-arrow-right",
+                        }}
+                      >
+                        <BsArrowLeftShort />
+                      </IconContext.Provider>
+                    </button>
+                  )}
+
+                  {toggle ||
+                  currentPage === totalPages ||
+                  savedComponents.length === 0 ? null : (
+                    <button
+                      onClick={nextPage}
+                      className="prof-page-next-button"
+                    >
+                      <IconContext.Provider
+                        value={{
+                          size: "40px",
+                          className: "main-page-pagination-arrow-left",
+                        }}
+                      >
+                        <BsArrowRightShort />
+                      </IconContext.Provider>
+                    </button>
+                  )}
+                  <div className="profile-user-uploads">
+                    {toggle ? (
+                      ownedComponents.length ? (
+                        ownedComponents
+                          .slice(firstPostIndex, lastPostIndex)
+                          .map((component, i) => {
+                            return (
+                              <ComponentCardProfile
+                                component={component}
+                                key={component.id}
+                              />
+                            );
+                          })
+                      ) : (
+                        <div className="warning">
+                          <div className="prof-image-wrap">
+                            <GoInbox size="100px" />
+                          </div>
+                          <div className="prof-warning-display">
+                            Uploads will display here
+                          </div>
                         </div>
-                        <p>{component.name}</p>
-                        <div className="single-user-saved-frameworks">
-                          <div className="single-user-saved-framework">
-                            {component.framework}
-                          </div>
-                          <div className="single-user-saved-framework">
-                            {component.stylingFramework}
-                          </div>
+                      )
+                    ) : savedComponents?.length ? (
+                      currentComponents?.map((component, i) => {
+                        if (!component.user_component.isAuthor) {
+                          return (
+                            <ComponentCardProfile
+                              component={component}
+                              key={component.id}
+                            />
+                          );
+                        }
+                      })
+                    ) : (
+                      <div className="warning">
+                        <div className="prof-image-wrap">
+                          <GoInbox size="100px" />
+                        </div>{" "}
+                        <div className="prof-warning-display">
+                          Saves will display here
                         </div>
                       </div>
-                    );
-                  }
-                })
-              : "You have not saved any components!"}
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="profile-user-extras-rightside">
+                <h1 className="profile-toggle-header" id="user-engagement">
+                  User Engagement
+                </h1>
+                <div id="profile-achievement-display">
+                  <AchievementListDisplay
+                    achievementTotal={achievementTotal}
+                    user={user}
+                  />
+                  <div className="pointInfo">
+                    <div>
+                      <div>
+                        Current Rank: <span>{rank}</span>
+                      </div>
+                      <div>
+                        Current Points: <span>{user?.currentPoints}</span>
+                      </div>
+                      <div>
+                        Highest Points:<span> {user?.highestRank}</span>
+                      </div>
+                      <div>
+                        {rank === "Chief" ? null : "Points to Next Rank: "}{" "}
+                        <span>
+                          {rank === "Apprentice"
+                            ? 100 - user.currentPoints
+                            : rank === "Artisan"
+                            ? 200 - user.currentPoints
+                            : rank === "Architect"
+                            ? 500 - user.currentPoints
+                            : rank === "Engineer"
+                            ? 1000 - user.currentPoints
+                            : null}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="profile-info-sandwich-right">
+                      <div className="profile-category-link followers">
+                        <BsPeople size="20px" color="#34b233" /> Followers:{""}
+                        <span>{followers ? followers.length : "0"}</span>{" "}
+                      </div>
+                      <div className="profile-category-link following">
+                        <MdPeopleOutline
+                          size="20px"
+                          color={"rgb(235, 220, 158) "}
+                        />{" "}
+                        Following:{" "}
+                        <span> {allFollowing ? allFollowing.length : "0"}</span>
+                      </div>
+                      <div className="profile-category-link favorited">
+                        <BsBookmarkStar
+                          size="20px"
+                          color={"rgb(202, 96, 114) "}
+                        />{" "}
+                        Favorited :
+                        <span>
+                          {savedComponents ? savedComponents.length : "0"}
+                        </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
