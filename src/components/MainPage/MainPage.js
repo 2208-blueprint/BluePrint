@@ -29,10 +29,12 @@ function MainPage({ showScroll, width }) {
 
   const dispatch = useDispatch();
   dispatch(getSingleUser());
+
   React.useEffect(() => {
     if (width > 1300) setComponentsPerPage(8);
     else setComponentsPerPage(4);
   }, [width]);
+
   React.useEffect(() => {
     async function getComponents() {
       const { data } = await axios.get("/api/components");
@@ -41,6 +43,7 @@ function MainPage({ showScroll, width }) {
       setSorted(data);
     }
     getComponents();
+    dispatch(getSingleUser());
   }, []);
 
   const nextPage = (event) => {

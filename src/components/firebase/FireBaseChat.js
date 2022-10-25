@@ -1,45 +1,8 @@
 import React from 'react'
-import {initializeApp} from 'firebase/app';
-import {getMessaging, getToken, onMessage} from 'firebase/messaging';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
-import { app } from '../../firebase'
-import { ChatSideBar, ChatNavbar, Chat } from '../index'
-import Axios from 'axios'
-
+import { ChatSideBar, Chat } from '../index'
 
 function fireBaseChat({ chatVisible, setChatVisible }) {
 
-    const [user, setUser] = React.useState()
-    const [err, setErr] = React.useState(false)
-    const [loading, setLoading] = React.useState(false);
-
-
-    React.useEffect(() => {
-        async function getUser() {
-            try {
-                const token = window.localStorage.getItem('token');
-                if (token) {
-                    const {data} = await Axios.get('api/profile', {
-                        headers: {
-                            authorization: token,
-                        }
-                    })
-                    setUser(data)
-                }
-                else {
-                    navigate('/login')
-                    toastPopup('🖥️ Login to view your profile')
-                }
-            }
-            catch(err) {
-                setErr(true)
-                console.log(err);
-            }
-        }
-        getUser()
-
-    }, [])
 
   return (
     <div className="firebase-chat-wrapper">

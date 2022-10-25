@@ -18,8 +18,14 @@
         height: 80%;
         overflow: hidden;
 
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
         .firebase-chat-sidebar {
             flex: 1;
+            max-width: 350px;
             border-right: 1px solid white;
             background: rgba( 21, 21, 21, 0.65 );
             box-shadow: 0 8px 0 0 rgba( 31, 38, 135, 0.37 );
@@ -28,9 +34,27 @@
             border-radius: 10px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
 
+            @media only screen and (max-width: 700px) {
+                border: none;
+                box-shadow: 0;
+                border-radius: 0;
+                width: 100%;
+                flex: 1;
+                max-width: 0;
+            }
+
             .firebase-chats {
                 height: 100%;
+                width: 100%;
                 overflow: scroll;
+
+
+                @media only screen and (max-width: 700px) {
+                    overflow-x: hidden;
+                    overflow-y: hidden;
+                    z-index: 1;
+                    width: 100%;
+                }
             }
 
             .firebase-navbar {
@@ -41,8 +65,17 @@
                 height: 50px;
                 padding: 10px;
 
+                @media only screen and (max-width: 700px) {
+                    width: 100%;
+                    height: 20px;
+                }
+
                 .firebase-logo {
                     font-weight: bold;
+
+                    @media only screen and (max-width: 700px) {
+                        font-size: 12px;
+                    }
                 }
                 .firebase-user {
                     display: flex;
@@ -50,12 +83,22 @@
                     gap: 10px;
                     font-size: 20px;
 
+                    @media only screen and (max-width: 700px) {
+                        margin-right: 15px;
+                        font-size: 12px;
+                    }
+
                     img {
                         background-color: white;
                         height: 40px;
                         width: 40px;
                         border-radius: 50%;
                         object-fit: cover;
+
+                        @media only screen and (max-width: 700px) {
+                            height: 30px;
+                            width: 30px;
+                        }
                     }
 
                     button {
@@ -82,6 +125,10 @@
                         padding-left: 10px;
                         width: 100%;
 
+                        @media only screen and (max-width: 700px) {
+                            height: 30px;
+                        }
+
                         &::placeholder {
                             color: lightgray;
                             padding-left: 5px;
@@ -98,6 +145,7 @@
                 color: white;
                 cursor: pointer;
 
+
                 &:hover {
                     background-color: @secondary-color;
                 }
@@ -107,16 +155,31 @@
                     height: 50px;
                     border-radius: 50%;
                     object-fit: cover;
+
+                    @media only screen and (max-width: 700px) {
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
 
                 .firebase-user-chat-info {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
                     span {
                         font-size: 18px;
                         font-weight: 500;
+
+                        @media only screen and (max-width: 700px) {
+                            font-size: 14px;
+                            font-weight: 500;
+                        }
                     }
                     p {
                         font-size: 14px;
                         color: lightgray;
+                        margin-left: 5px;
                     }
                 }
             }
@@ -124,8 +187,13 @@
         .firebase-chat {
             flex: 2;
 
+            @media only screen and (max-width: 700px) {
+                z-index: 2;
+            }
+
             .firebase-chat-info {
                 height: 52px;
+                width: 100%;
                 background-color: @secondary-color;
                 display: flex;
                 justify-content: space-between;
@@ -133,6 +201,16 @@
                 padding: 10px;
                 color: white;
                 font-size: 20px;
+
+                @media only screen and (max-width: 700px) {
+                    height: 25px;
+                }
+            }
+
+            span {
+                @media only screen and (max-width: 700px) {
+                    font-size: 13px;
+                }
             }
 
             img {
@@ -140,11 +218,17 @@
                 width: 40px;
                 height: 40px;
                 object-fit: cover;
+
+                @media only screen and (max-width: 700px) {
+                    width: 30px;
+                    height: 30px;
+                }
             }
 
             .firebase-chat-icons {
                 display: flex;
                 gap: 10px;
+                margin-right: 10px;
 
                 svg {
                     height: 35px;
@@ -205,13 +289,15 @@
 
                         .firebase-message-content {
                             align-items: flex-end;
+                            word-break: break-all;
+
                         }
 
                         p {
+                            overflow-wrap: break-word;
                             background-color: rgb(118, 190, 250);
                             color: white;
                             border-radius: 10px 0px 10px 10px ;
-                            max-width: max-content;
                         }
                     }
                 }
@@ -220,6 +306,7 @@
             .firebase-chat-input {
                 background-color: white;
                 height: 50px;
+                width: 100%;
                 padding: 10px;
                 display: flex;
                 align-items: center;
@@ -241,6 +328,7 @@
                     display: flex;
                     align-items: center;
                     gap: 10px;
+                    margin-right: 10px;
 
                     img {
                         height: 24px;

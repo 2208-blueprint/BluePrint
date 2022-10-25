@@ -21,7 +21,6 @@ function ChatInput() {
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-console.log(data);
 
   const handleSend = async () => {
 
@@ -81,8 +80,6 @@ console.log(data);
   };
 
   const handleKey = (e) => {
-    console.log(e);
-
     e.code === "Enter" && handleSend();
   };
 

@@ -27,6 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 
     h2 {
         font-size: 1.5rem;
@@ -63,4 +64,52 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+    .footer-contact {
+        color: white;
+        transition: ease 0.25s;
+        cursor: pointer
+    }
+
+    .footer-contact:hover {
+        color: @tertiary-color;
+    }
+}
+
+.footer-contact-pop {
+    background-color: rgb(32, 33, 45);
+    color: white;
+    position: absolute;
+    z-index: 99;
+    bottom: 60px;
+    animation: fadein 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    padding-top: 30px;
+
+    .footer-contact-individual {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .footer-contact-x {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .footer-contact-x:hover {
+        color: @tertiary-color;
+    }
 }

@@ -15,7 +15,6 @@ import { AuthContext } from "./AuthContext";
 
 function ChatSearch() {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const [allUserChats, setAllUserChats] = useState([]);
 
@@ -95,7 +94,6 @@ function ChatSearch() {
       }
     } catch (err) { console.log(err) }
 
-    setUser(null);
     setUsername("")
   };
 

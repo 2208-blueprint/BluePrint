@@ -69,12 +69,12 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Button 3",
+      name: "Green Simple Button",
       type: "button",
       framework: "html",
       stylingFramework: "css",
       markup: `<!-- HTML !-->
-    <button class="button-3" role="button">Button 3</button>`,
+    <button class="button-3" role="button">Green Button</button>`,
       stylesheet: `/* CSS */
       body {
         width: 100vw;
@@ -138,12 +138,12 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Button 19",
+      name: "Blue Simple Button",
       type: "button",
       framework: "html",
       stylingFramework: "css",
       markup: `<!-- HTML !-->
-    <button class="button-19" role="button">Button 19</button>`,
+    <button class="button-19" role="button">Blue Button</button>`,
       stylesheet: `/* CSS */
       body {
         width: 100vw;
@@ -216,12 +216,12 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Button 56",
+      name: "Button Animated",
       type: "button",
       framework: "html",
       stylingFramework: "css",
       markup: `<!-- HTML !-->
-    <button class="button-56" role="button">Button 56</button>`,
+    <button class="button-56" role="button">Button</button>`,
       stylesheet: `/* CSS */
       body {
         width: 100vw;
@@ -292,13 +292,13 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Button 53",
+      name: "Doddle Button",
       type: "button",
       tags: ["blue", "simple"],
       framework: "html",
       stylingFramework: "css",
       markup: `<!-- HTML !-->
-    <button class="button-53" role="button">Button 53</button>`,
+    <button class="button-53" role="button">Doodle Button</button>`,
       stylesheet: `/* CSS */
       body {
         width: 100vw;
@@ -363,7 +363,7 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Navbar 1",
+      name: "Simple Navbar",
       type: "navbar",
       tags: ["animated", "slick"],
       framework: "html",
@@ -462,7 +462,7 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Mobile Nav 1",
+      name: "Mobile Nav Clickable",
       type: "navbar",
       framework: "html",
       stylingFramework: "css",
@@ -1001,7 +1001,7 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Form 1",
+      name: "Dark Mode Form",
       type: "form",
       framework: "html",
       stylingFramework: "css",
@@ -1154,7 +1154,7 @@ async function seed() {
 
   arr.push(
     await Component.create({
-      name: "Login 1",
+      name: "Login Form",
       type: "form",
       framework: "html",
       stylingFramework: "css",
@@ -2615,21 +2615,2141 @@ async function seed() {
     }`,
   });
 
-  //   await Component.create({
-  //     name: ``,
-  //     type: ``,
-  //     framework: ``,
-  //     stylingFramework: ``,
-  //     src: ``,
-  //     markup: ``,
-  //     stylesheet: ``,
-  //   });
+    // await Component.create({
+    //   name: ``,
+    //   type: ``,
+    //   framework: ``,
+    //   stylingFramework: ``,
+    //   src: ``,
+    //   markup: ``,
+    //   stylesheet: ``,
+    // });
 
   for (let i = 0; i < arr.length; i++) {
     if (i < 5) {
       await thomas.addComponent(arr[i], { through: { isAuthor: true } });
     }
   }
+
+  await Component.create({
+    name: `Spinning Atom`,
+    type: `animation`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/pedroo_andre/details/oNdKvGd`,
+    markup: `<div class="atom">
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+    <div class="line line-3"></div>
+  </div>`,
+    stylesheet: `* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 110vh;
+      background: radial-gradient(#113, #000);
+    }
+    
+    .atom {
+      position: relative;
+      display: flex;
+      width: 300px;
+      height: 300px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .atom::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: transparent;
+      box-shadow: inset 0 0 10px #fff;
+      border-radius: 50%;
+    }
+    
+    .line {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0.7;
+    }
+    
+    .line-1 {
+      --color: #40ff9c;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border-bottom: 10px solid var(--color);
+      border-top: 10px solid var(--color);
+      animation: line1 2s linear infinite;
+      filter:drop-shadow( 0 0 10px var(--color));
+    }
+    
+    @keyframes line1 {
+      0% {
+        transform: rotateY(70deg) rotateZ(0deg);
+      }
+      100% {
+        transform: rotateY(70deg) rotateZ(360deg);
+      }
+    }
+    
+    .line-2 {
+      --color: #0ff;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border-right: 10px solid var(--color);
+      border-left: 10px solid var(--color);
+      animation: line2 3s linear infinite;
+      filter:drop-shadow( 0 0 10px var(--color));
+    }
+    
+    @keyframes line2 {
+      0% {
+        transform: rotateX(80deg) rotateY(25deg) rotateZ(0deg);
+      }
+      100% {
+        transform: rotateX(80deg) rotateY(25deg) rotateZ(360deg);
+      }
+    }
+    
+    .line-3 {
+      --color: #c096ff;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border-right: 10px solid var(--color);
+      border-left: 10px solid var(--color);
+      animation: line3 3s linear infinite;
+      filter:drop-shadow( 0 0 10px var(--color));
+    }
+    
+    @keyframes line3 {
+      0% {
+        transform: rotateX(-80deg) rotateY(25deg) rotateZ(0deg);
+      }
+      100% {
+        transform: rotateX(-80deg) rotateY(25deg) rotateZ(360deg);
+      }
+    }`,
+  });
+
+  await Component.create({
+    name: `Gradient Text Animation`,
+    type: `animation`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/chriiss/details/VwxBbVg`,
+    markup: `<div class="container-text">
+    <h1>Hello World</h1>
+  </div>`,
+    stylesheet: `@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    .container-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+    }
+    
+    h1 {
+      text-transform: uppercase;
+      background-image: linear-gradient(to right top, #ffff34, #ffc812, #ff8f2f, #ff554d, #eb1267);
+       background-size: 50% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Poppins', sans-serif;
+      font-size: 8vw;
+      animation: gradientAnim 7.5s ease  alternate infinite;
+    }
+    
+    
+    @keyframes gradientAnim {
+      to {
+        background-position: 100% top;
+      }
+    }`,
+  });
+
+  await Component.create({
+    name: `Simple Dropdown`,
+    type: `drop-down`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/sanketbodke/pen/poLmXNy`,
+    markup: `    <div class="container">
+    <select name="menu" id="meun-items">
+      <option disabled selected>Select Cource</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="js">JAVASCRIPT</option>
+      <option value="c">C LANGUAGE</option>
+    </select>
+  </div>`,
+    stylesheet: `@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    body{
+        background-color: #D9AFD9;
+        background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    }
+    
+    .container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    
+    p{
+        color: #fff;
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        text-align: center
+    }
+    
+    select{
+        width: 350px;
+        outline: none;
+        border: 1px solid #fff;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+        cursor: pointer;
+    }
+    
+    select:focus,
+    select:hover{
+        outline: none;
+        border: 1px solid rgba(0, 0, 0, 0.329);
+    }
+    `,
+  });
+
+  await Component.create({
+    name: `Colorful Dropdowns`,
+    type: `drop-down`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/animationbro/pen/VwQONxV`,
+    markup: `
+    <ul class="main__menu">
+      <li class="list-item">
+        <a href="#" class="home item--js">
+          <span>Home</span>
+          <i class="ion ion-ios-home-outline"></i>
+        </a>
+      </li>
+      <li class="list-item">
+        <a href="#" class="about item--js">
+          <span>About</span>
+          <i class="ion ion-ios-contact-outline"></i>
+        </a>
+      </li>
+      <li class="list-item">
+        <a href="#" class="widget item--js">
+          <span>Widgets</span>
+          <i class="ion ion-ios-partly-sunny-outline"></i>
+        </a>
+        <ul class="drop-menu menu-4">
+          <li class="drop-item"><a href="#" class="item--1">Big Widget</a></li>
+          <li class="drop-item"><a href="#" class="item--2">Bigger Widget</a></li>
+          <li class="drop-item"><a href="#" class="item--3">Huge Widget</a></li>
+        </ul>
+      </li>
+      <li class="list-item">
+        <a href="#" class="kabobs item--js">
+          <span>KaBoBs</span>
+          <img src="https://res.cloudinary.com/elafreet/image/upload/v1530189897/cooking1.svg" alt="">
+        </a>
+        <ul class="drop-menu menu-2">
+          <li class="drop-item"><a href="#" class="item--1">Shish Kabobs</a></li>
+          <li class="drop-item"><a href="#" class="item--2">BBQ Kabobs</a></li>
+          <li class="drop-item"><a href="#" class="item--3">Summer Kabobs</a></li>
+        </ul>
+      </li>
+      <li class="list-item">
+        <a href="#" class="contact item--js">
+          <span>Contact</span>
+          <i class="ion ion-ios-mail-open-outline"></i>
+        </a>
+      </li>
+    </ul>`,
+    stylesheet: `/*Colors*/
+    /*Font*/
+    /* Reset*/
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(90deg, #3f4593, #5960bd);
+      margin: 0;
+    }
+    
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Start Style*/
+    .main__menu {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    @media (max-width: 900px) {
+      .main__menu {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+    }
+    .main__menu .list-item:hover .drop-menu li {
+      display: block;
+    }
+    .main__menu .list-item:hover .menu-1 {
+      perspective: 1000px;
+    }
+    .main__menu .list-item:hover .menu-1 .drop-item {
+      opacity: 0;
+    }
+    .main__menu .list-item:hover .menu-1 .drop-item:nth-child(1) {
+      animation-name: leftToRight;
+      animation-duration: 400ms;
+      animation-delay: -150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-1 .drop-item:nth-child(2) {
+      animation-name: leftToRight;
+      animation-duration: 400ms;
+      animation-delay: 0ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-1 .drop-item:nth-child(3) {
+      animation-name: leftToRight;
+      animation-duration: 400ms;
+      animation-delay: 150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-1 .drop-item:nth-child(4) {
+      animation-name: leftToRight;
+      animation-duration: 400ms;
+      animation-delay: 300ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-2 {
+      perspective: 1000px;
+    }
+    .main__menu .list-item:hover .menu-2 .drop-item {
+      opacity: 0;
+      transform-origin: top center;
+    }
+    .main__menu .list-item:hover .menu-2 .drop-item:nth-child(1) {
+      animation-name: topToBottom;
+      animation-duration: 400ms;
+      animation-delay: -150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-2 .drop-item:nth-child(2) {
+      animation-name: topToBottom;
+      animation-duration: 400ms;
+      animation-delay: 0ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-2 .drop-item:nth-child(3) {
+      animation-name: topToBottom;
+      animation-duration: 400ms;
+      animation-delay: 150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-2 .drop-item:nth-child(4) {
+      animation-name: topToBottom;
+      animation-duration: 400ms;
+      animation-delay: 300ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-3 {
+      perspective: 1000px;
+    }
+    .main__menu .list-item:hover .menu-3 .drop-item {
+      opacity: 0;
+    }
+    .main__menu .list-item:hover .menu-3 .drop-item:nth-child(1) {
+      animation-name: itemBounce;
+      animation-duration: 400ms;
+      animation-delay: -150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-3 .drop-item:nth-child(2) {
+      animation-name: itemBounce;
+      animation-duration: 400ms;
+      animation-delay: 0ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-3 .drop-item:nth-child(3) {
+      animation-name: itemBounce;
+      animation-duration: 400ms;
+      animation-delay: 150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-3 .drop-item:nth-child(4) {
+      animation-name: itemBounce;
+      animation-duration: 400ms;
+      animation-delay: 300ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-4 {
+      perspective: 1000px;
+    }
+    .main__menu .list-item:hover .menu-4 .drop-item {
+      opacity: 0;
+      transform-origin: top right;
+    }
+    .main__menu .list-item:hover .menu-4 .drop-item:nth-child(1) {
+      animation-name: bottomToTop;
+      animation-duration: 400ms;
+      animation-delay: -150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-4 .drop-item:nth-child(2) {
+      animation-name: bottomToTop;
+      animation-duration: 400ms;
+      animation-delay: 0ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-4 .drop-item:nth-child(3) {
+      animation-name: bottomToTop;
+      animation-duration: 400ms;
+      animation-delay: 150ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .menu-4 .drop-item:nth-child(4) {
+      animation-name: bottomToTop;
+      animation-duration: 400ms;
+      animation-delay: 300ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .main__menu .list-item:hover .home {
+      border-top: 6px solid #33658a;
+    }
+    .main__menu .list-item:hover .about {
+      border-top: 6px solid #9966cc;
+    }
+    .main__menu .list-item:hover .widget {
+      border-top: 6px solid #ff3333;
+    }
+    .main__menu .list-item:hover .kabobs {
+      border-top: 6px solid #ffcc33;
+    }
+    .main__menu .list-item:hover .contact {
+      border-top: 6px solid #55dde0;
+    }
+    .main__menu .list-item a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 200px;
+      color: #fff;
+      cursor: unset;
+    }
+    .main__menu .list-item a:hover {
+      cursor: pointer;
+    }
+    .main__menu .list-item a span {
+      font: 600 25px "Roboto", sans-serif;
+      order: 2;
+    }
+    .main__menu .list-item a img {
+      width: 100px;
+    }
+    .main__menu .list-item a.home {
+      background: #ff3333;
+    }
+    .main__menu .list-item a.about {
+      background: #ffcc33;
+    }
+    .main__menu .list-item a.widget {
+      background: #55dde0;
+    }
+    .main__menu .list-item a.kabobs {
+      background: #9966cc;
+    }
+    .main__menu .list-item a.contact {
+      background: #33658a;
+    }
+    .main__menu .list-item a i {
+      color: #fff;
+      font-size: 100px;
+    }
+    .main__menu .list-item .drop-menu .drop-item {
+      display: none;
+    }
+    .main__menu .list-item .drop-menu .drop-item a {
+      height: 80px;
+      font: 300 22px "Roboto", sans-serif;
+    }
+    .main__menu .list-item .drop-menu .drop-item a.item--1 {
+      background: #ffcc33;
+    }
+    .main__menu .list-item .drop-menu .drop-item a.item--2 {
+      background: #33658a;
+    }
+    .main__menu .list-item .drop-menu .drop-item a.item--3 {
+      background: #ff3333;
+    }
+    
+    @keyframes leftToRight {
+      0% {
+        opacity: 0;
+        transform: rotateY(-90deg) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateY(0deg) translateY(0px);
+      }
+    }
+    @keyframes topToBottom {
+      0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+      }
+    }
+    @keyframes itemBounce {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-60px);
+      }
+      80% {
+        transform: scale(1.2) translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+      }
+    }
+    @keyframes bottomToTop {
+      0% {
+        opacity: 0;
+        transform: rotate(-30deg);
+      }
+      100% {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+    }`,
+  });
+
+  await Component.create({
+    name: `Mobile Friendly Footer`,
+    type: `mobile`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/SSSlick/pen/oNdvEZv`,
+    markup: `<div class="dummy_page">
+    Mobile responsive footer
+  </div>
+  <!-- FOOTER START -->
+  <div class="footer">
+    <div class="contain">
+    <div class="col">
+      <h1>Company</h1>
+      <ul>
+        <li>About</li>
+        <li>Mission</li>
+        <li>Services</li>
+        <li>Social</li>
+        <li>Get in touch</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h1>Products</h1>
+      <ul>
+        <li>About</li>
+        <li>Mission</li>
+        <li>Services</li>
+        <li>Social</li>
+        <li>Get in touch</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h1>Accounts</h1>
+      <ul>
+        <li>About</li>
+        <li>Mission</li>
+        <li>Services</li>
+        <li>Social</li>
+        <li>Get in touch</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h1>Resources</h1>
+      <ul>
+        <li>Webmail</li>
+        <li>Redeem code</li>
+        <li>WHOIS lookup</li>
+        <li>Site map</li>
+        <li>Web templates</li>
+        <li>Email templates</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h1>Support</h1>
+      <ul>
+        <li>Contact us</li>
+        <li>Web chat</li>
+        <li>Open ticket</li>
+      </ul>
+    </div>
+    <div class="col social">
+      <h1>Social</h1>
+      <ul>
+        <li><img src="https://svgshare.com/i/5fq.svg" width="32" style="width: 32px;"></li>
+        <li><img src="https://svgshare.com/i/5eA.svg" width="32" style="width: 32px;"></li>
+        <li><img src="https://svgshare.com/i/5f_.svg" width="32" style="width: 32px;"></li>
+      </ul>
+    </div>
+  <div class="clearfix"></div>
+  </div>
+  </div>`,
+    stylesheet: `/* REMOVE THIS, USE YOUR OWN  */
+    html,body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, Sans-serif;
+      background-color: #070617;
+    }
+    .dummy_page {
+      height: 200px;
+      width: 100%;
+      background-color: #f0f0f0;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 60px 0px;
+    }
+    /* STYLES SPECIFIC TO FOOTER  */
+    .footer {
+      width: 100%;
+      position: relative;
+      height: auto;
+      background-color: #070617;
+    }
+    .footer .col {
+      width: 190px;
+      height: auto;
+      float: left;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      padding: 0px 20px 20px 20px;
+    }
+    .footer .col h1 {
+      margin: 0;
+      margin-left: 40%;
+      padding: 0;
+      font-family: inherit;
+      font-size: 12px;
+      line-height: 17px;
+      padding: 20px 0px 5px 0px;
+      color: rgba(255,255,255,0.2);
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.250em;
+    }
+    .footer .col ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer .col ul li {
+      color: #999999;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: bold;
+      padding: 5px 0px 5px 0px;
+      cursor: pointer;
+      transition: .2s;
+      -webkit-transition: .2s;
+      -moz-transition: .2s;
+    }
+    .social ul li {
+      display: inline-block;
+      padding-right: 5px !important;
+    }
+    
+    .footer .col ul li:hover {
+      color: #ffffff;
+      transition: .1s;
+      -webkit-transition: .1s;
+      -moz-transition: .1s;
+    }
+    .clearfix {
+      clear: both;
+    }
+    @media only screen and (min-width: 1280px) {
+      .contain {
+        width: 1200px;
+        margin: 0 auto;
+      }
+    }
+    @media only screen and (max-width: 1139px) {
+      .contain .social {
+        width: 1000px;
+        display: block;
+      }
+      .social h1 {
+        margin: 0px;
+      }
+    }
+    @media only screen and (max-width: 950px) {
+      .footer .col {
+        width: 33%;
+      }
+      .footer .col h1 {
+        font-size: 14px;
+      }
+      .footer .col ul li {
+        font-size: 13px;
+      }
+    }
+    @media only screen and (max-width: 500px) {
+        .footer .col {
+          width: 50%;
+        }
+        .footer .col h1 {
+          font-size: 14px;
+        }
+        .footer .col ul li {
+          font-size: 13px;
+        }
+    }
+    @media only screen and (max-width: 340px) {
+      .footer .col {
+        width: 100%;
+      }
+    }`,
+  });
+
+  await Component.create({
+    name: `Shopping Footer`,
+    type: `footer`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/animationbro/pen/OJQEVEj`,
+    markup: `  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col">
+          <h4>company</h4>
+          <ul>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">our services</a></li>
+            <li><a href="#">privacy policy</a></li>
+            <li><a href="#">affiliate program</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>get help</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">shipping</a></li>
+            <li><a href="#">returns</a></li>
+            <li><a href="#">order status</a></li>
+            <li><a href="#">payment options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>online shop</h4>
+          <ul>
+            <li><a href="#">watch</a></li>
+            <li><a href="#">bag</a></li>
+            <li><a href="#">shoes</a></li>
+            <li><a href="#">dress</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>follow us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+ </footer>
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">`,
+    stylesheet: `@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body{
+      line-height: 1.5;
+      font-family: 'Poppins', sans-serif;
+    }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+    }
+    .container{
+      max-width: 1170px;
+      margin:auto;
+    }
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    ul{
+      list-style: none;
+    }
+    .footer{
+      background-color: #24262b;
+        padding: 70px 0;
+    }
+    .footer-col{
+       width: 25%;
+       padding: 0 15px;
+    }
+    .footer-col h4{
+      font-size: 18px;
+      color: #ffffff;
+      text-transform: capitalize;
+      margin-bottom: 35px;
+      font-weight: 500;
+      position: relative;
+    }
+    .footer-col h4::before{
+      content: '';
+      position: absolute;
+      left:0;
+      bottom: -10px;
+      background-color: #e91e63;
+      height: 2px;
+      box-sizing: border-box;
+      width: 50px;
+    }
+    .footer-col ul li:not(:last-child){
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a{
+      font-size: 16px;
+      text-transform: capitalize;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 300;
+      color: #bbbbbb;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    .footer-col ul li a:hover{
+      color: #ffffff;
+      padding-left: 8px;
+    }
+    .footer-col .social-links a{
+      display: inline-block;
+      height: 40px;
+      width: 40px;
+      background-color: rgba(255,255,255,0.2);
+      margin:0 10px 10px 0;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 50%;
+      color: #ffffff;
+      transition: all 0.5s ease;
+    }
+    .footer-col .social-links a:hover{
+      color: #24262b;
+      background-color: #ffffff;
+    }
+    
+    /*responsive*/
+    @media(max-width: 767px){
+      .footer-col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+    }
+    @media(max-width: 574px){
+      .footer-col{
+        width: 100%;
+    }
+    }`,
+  });
+
+  await Component.create({
+    name: `Hamburger Menu`,
+    type: `mobile`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/widyatmoko/pen/vYGwrPb`,
+    markup: `<div id="menu">
+    <div id="pencet">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>`,
+    stylesheet: `*{
+      padding:0;
+      margin:0;
+    }
+    
+    body{
+      background-color:tan;
+    }
+    
+    #pencet{
+      display:flex;
+      align-items:center;
+      margin-top:50vh;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    
+    #pencet span{
+      background-color:ghostwhite;
+      width:2em;
+      height:.2em;
+      margin:0.26em 0;
+      display:block;
+      transition: all .4s ease;
+      transform-origin:0 0;
+    }
+    
+    .Diam span:nth-child(1) {
+      transform: rotate(45deg) translate(1px, -1px);
+    }
+    
+    .Diam span:nth-child(2) {
+      Transform: scaleX(0);
+    }
+    
+    .Diam span:nth-child(3) {
+      transform: rotate(-45deg) translate(1px, 0);
+    }`,
+    js: `const clickx= document.getElementById('pencet');
+
+    clickx.addEventListener('click', function(){
+      clickx.classList.toggle('Diam');
+    });`
+  });
+
+  await Component.create({
+    name: `Exploding Circles`,
+    type: `graphic`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/ZevanRosser/details/MWORXqw`,
+    js: `const { 
+      random, min, sqrt, cos, sin, PI 
+    } = Math
+    
+    let TWO_PI = PI * 2
+    let minSize
+    
+    document.body.style.margin = 0
+    document.body.style.background = 'black'
+    const canvas = document.body.appendChild(
+      document.createElement('canvas')
+    )
+    const c = canvas.getContext('2d')
+    
+    addEventListener('resize', resize)
+    resize()
+    
+    function resize() {
+      canvas.width = innerWidth
+      canvas.height = innerHeight
+      minSize = min(innerWidth, innerHeight)
+      clear()
+    }
+    
+    function clear() {
+      c.fillStyle = 'rgba(0, 0, 0, .15)'
+      c.fillRect(0, 0, innerWidth, innerHeight)
+    }
+    
+    let dots = []
+    function dot({x, y, vx, vy, rad, grav = .15}) {
+      let sx = x
+      let sy = y
+      let svx = vx
+      let svy = vy
+      let intersected
+      let partsNum = 20
+      let parts = []
+      let delay = random() * 5
+      let time = 0
+    
+      dots.push(() => y > innerHeight)
+    
+      return {
+        step() {
+          time++
+          if (time < delay) return
+          if (intersected) {
+            for (let i = 0; i < partsNum; i++) {
+              parts[i].step()
+            }
+            return
+          }
+          x += vx
+          y += vy
+          vy += grav;
+          c.beginPath()
+          c.arc(x, y, rad(), 0, 7)
+          c.fill()
+        },
+        reset() {
+          x = sx;
+          y = sy;
+          vx = svx;
+          vy = svy;
+          intersected = false
+        },
+        hit() {
+          if (!intersected) {
+            partsNum = rad() / 3
+            for (let i = 0; i < partsNum; i++) {
+              let t = random() * TWO_PI
+              let r = 5 + random() * 5
+              let size = random() * 10
+    
+              parts.push(
+                dot({
+                  x, y,
+                  vx: r * cos(t),
+                  vy: r * sin(t),
+                  rad: () => size
+                })
+              )
+            }
+          }
+          intersected = true
+        },
+        get x() {
+          return x
+        },
+        get y() {
+          return y
+        }
+      }
+    }
+    
+    const bigRad = () => minSize * .14;
+    
+    let leftDot
+    let rightDot
+    
+    function start() {
+      rightDot = dot({
+        x: innerWidth, 
+        y: innerHeight / 2, 
+        vx: -innerWidth * .005, 
+        vy: -6, rad: bigRad
+      })
+    
+      leftDot = dot({
+        x: 0, 
+        y: innerHeight / 2, 
+        vx: innerWidth * .005, 
+        vy: -6, rad: bigRad
+      })
+    }
+    start()
+    
+    function collide(a, b) {
+      const dx = a.x - b.x
+      const dy = a.y - b.y
+      const dist = sqrt(dx**2 + dy**2)
+      return dist <= bigRad() * 1.8
+    }
+    
+    function loop() {
+      let inc = 2
+    
+      clear()
+      c.fillStyle = 'white'
+      if (collide(leftDot, rightDot)) {
+        leftDot.hit()
+        rightDot.hit()
+      }
+    
+      leftDot.step()
+      rightDot.step()
+    
+      dots.forEach(done => {
+        if (done()) inc++;
+      }) 
+    
+      if (dots.length > 2 && inc == dots.length)  {
+        dots = []
+        start()
+      }
+    
+      requestAnimationFrame(loop)
+    }
+    loop()`,
+    markup: ` `,
+    stylesheet: ` `,
+  });
+
+  await Component.create({
+    name: `Coffee Cup`,
+    type: `graphic`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/loetcodes/pen/ZEQrQog`,
+    markup: `<body class="main">
+    <div class="section">
+      <div class="saucer"></div>
+      <div class="cup">
+        <div class="cup-center">
+          <div class="coffee"></div>    
+          <div class="froth"></div>
+          <div class="coffee-dark-top"></div> 
+          <div class="hot-steam steam-move"></div>
+        </div>
+        <div class="cup-handle"></div>
+      </div>
+      <div class="teaspoon">
+        <div class="spoon-center"></div>
+        <div class="spoon-handle"></div>
+      </div>
+    </div>
+  </body>`,
+    stylesheet: `@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+    .main {
+      background-color: #dc9a00;
+      display: grid;
+      grid-template: 70% 30% / 100%;
+      justify-items: center;
+      margin: 5px;
+    }
+    
+    .section {
+      max-height: 700px;
+      max-width: 700px;
+      min-width: 0px;
+      min-height: 0px;
+      width: 50vmin;
+      height: 50vmin;
+      overflow: hidden;
+    }
+    
+    .saucer {
+      width: 80%;
+      height: 80%;
+      position: relative;
+      top: 10%;
+      left: 10%;
+      border-radius: 50%;
+      background-color: #f1f1f1;
+      background: radial-gradient(circle, #f1f1f1 0%, #e8e8e8 39%, #b1b1b1 42%, #e8e8e8 44%, #d2d2d2 68%, #eaeaea 70%, #dadada 100%);
+    }
+    
+    .cup {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      top: -54%;
+      left: 25%;
+      z-index: 1;
+    }
+    
+    .cup-center {
+      width: 48%;
+      height: 48%;
+      border-radius: 50%;
+      border: 1px solid #fdfdfd;
+      background:radial-gradient(circle,rgba(241,241,241,1) 0%, rgb(232, 232, 232) 44%, rgb(199, 199, 199) 54%, rgb(189, 189, 189) 62%, rgb(199, 199, 199) 62%, rgb(232, 232, 232) 65%,rgb(241, 241, 241) 100%);
+      filter: drop-shadow(17px 10px 11px #979797);
+    }
+    
+    .cup-handle {
+      width: 12%;
+      height: 6%;
+      position: relative;
+      top: -6%;
+      left: 39%;
+      transform: rotate(45deg);
+      background-color: #e9e9e9;
+      border: 2px solid #e9e9e9;
+      border-radius: 0% 20% 20% 0%;
+      border-left-color: #cacaca;
+      border-right-width: 5px;
+      filter: drop-shadow(24px 14px 15px #979797);
+    }
+    
+    .coffee {
+      width: 86%;
+      height: 86%;
+      position: relative;
+      top: 7%;
+      left: 7%;
+      border-radius: 50%;
+      border: 1px solid #a5a5a5;
+      background: radial-gradient(circle,rgb(45, 27, 0) 0%, rgb(53, 31, 1) 44%, rgb(54, 32, 0) 54%, rgb(60, 35, 0) 62%, rgb(154, 129, 103) 62%, rgba(158, 95, 29, 0.38) 65%,rgba(95, 65, 53, 0.33) 100%);
+    }
+    
+    .froth {
+      width: 76%;
+      height: 76%;
+      position: relative;
+      top: -74.2%;
+      left: 12%;
+      border-radius: 50%;
+      border: 1px solid #a28143d9;
+      background: radial-gradient(circle,rgb(125, 88, 32) 0%, rgb(130, 92, 34) 44%, rgb(128, 91, 33) 62%, rgb(187, 140, 70) 100%);
+      background-color: #9e7b3a;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 90 90'%3E%3Ccircle fill-opacity='0.94' fill='%23362000' cx='45' cy='45' r='5'/%3E%3Cg fill='%23362000' fill-opacity='0.94'%3E%3Ccircle cx='0' cy='90' r='12'/%3E%3Ccircle cx='90' cy='90' r='12'/%3E%3Ccircle cx='90' cy='0' r='12'/%3E%3Ccircle cx='0' cy='0' r='12'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .coffee-dark-top {
+      width: 76%;
+      height: 76%;
+      position: relative;
+      bottom: 150%;
+      left: 12%;
+      border-radius: 50%;
+      background: radial-gradient(circle,rgb(47, 29, 3) 0%,rgb(47, 29, 3) 42%, rgb(46, 28, 3) 49%, rgb(51, 34, 9) 59%, rgb(39, 23, 2) 65%, rgb(25, 15, 1) 68%,rgb(51, 30, 0) 100%);
+      clip-path: polygon(11% 29%, 14% 27%,18% 22%, 21% 18%, 24% 16%, 33% 12%, 37% 9%, 41% 7%, 43% 6%, 49% 5%, 53% 5%, 56% 6%, 62% 8%, 66% 9%, 70% 12%, 72% 14%, 74% 17%, 75% 22%, 76% 23%, 77% 24%, 80% 25%, 82% 27%, 86% 32%, 87% 36%, 88% 40%, 90% 42%, 92% 43%, 93% 52%, 93% 56%, 94% 61%, 93% 65%, 92% 68%, 89% 70%, 87% 74%, 73% 86%, 67% 89%, 62% 92%, 57% 94%, 53% 94%, 52% 94%, 48% 91%, 45% 90%, 39% 87%, 29% 84%, 21% 79%, 19% 76%, 12% 70%, 8% 68%, 5% 67%, 1% 56%, 1% 46%, 4% 36%);
+      box-shadow:inset 8px 10px 17px 5px #020100;
+    }
+    
+    .hot-steam {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      bottom: 240%;
+      left: 23%;
+      background: linear-gradient(70deg,rgba(187, 164, 129, 0.29) 0%, rgba(111, 97, 84, 0.42) 44%, rgba(169, 157, 134, 0.25) 54%, rgba(173, 166, 150, 0.46) 65%, rgba(226, 220, 220, 0.19) 74%,rgba(220, 220, 220, 0.23) 100%);
+      clip-path:polygon(12% 17%, 14% 16%, 16% 15%, 20% 14%, 26% 13%, 29% 13%, 34% 14%, 36% 14%, 39% 14%, 41% 14%, 43% 15%, 45% 16%, 49% 17%, 56% 18%, 60% 20%, 65% 21%, 68% 23%, 78% 25%, 80% 27%, 83% 30%, 88% 38%, 92% 41%, 94% 44%, 94% 46%, 92% 50%, 92% 52%, 92% 56%, 89% 59%, 87% 60%, 85% 60%, 83% 59%, 81% 58%, 79% 58%, 78% 59%, 77% 62%, 77% 66%, 76% 69%, 74% 74%, 73% 75%, 72% 76%, 69% 77%, 68% 79%, 66% 82%, 64% 83%, 60% 84%, 58% 84%, 56% 84%, 52% 85%, 50% 86%, 47% 87%, 44% 88%, 40% 89%, 37% 90%, 35% 90%, 29% 90%, 28% 90%, 20% 89%, 17% 88%, 10% 84%, 4% 79%, 2% 75%, 3% 71%, 3% 63%, 5% 59%, 5% 50%, 2% 45%, 1% 41%, 2% 34%, 5% 27%, 8% 24%, 9% 22%, 10% 19%);
+    }
+    
+    .steam-move {
+      animation-name: steam-fade;
+      animation-duration: 10s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: 20;
+      animation-direction: alternate;
+    }
+    
+    .teaspoon {
+      width: 40%;
+      height: 100%;
+      position: relative;
+      left: 43%;
+      bottom: 224%;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: rotate(235deg);
+    }
+    
+    .spoon-center {
+      width: 25%;
+      height: 15%;
+      border-radius: 50%;
+      border: 4px solid #6c6c6c;
+      background-color: #626262;
+      background: radial-gradient(ellipse at top, #7d7d7d , #100f0f70),radial-gradient(ellipse at bottom, #000000, #cacaca);
+      filter: drop-shadow(0px 0px 1px #000);
+      box-shadow: -5px 7px 12px -5px #545454;
+    }
+    
+    .spoon-handle {
+      width: 15%;
+      height: 36%;
+      position: relative;
+      top: -0.95%;
+      background-color: #626262;
+      background: linear-gradient(90deg, #444444 10%, #525252 20%, #5f5f5f 35%, #6b6a6a 50%, #5f5f5f 65%, #5d5d5d 80%, #525252 100%);
+      clip-path: polygon(60% 2.5%, 70% 2.2%, 75% 2.0%, 85% 1.3%, 90% 1%, 75% 10%, 70% 15%, 70% 30%, 75% 40%, 80% 50%, 85% 60%, 90% 70%, 90% 85%, 85% 90%, 76% 95%, 70% 97%, 60% 99%, 52% 100%, 51% 100%, 49% 100%, 48% 100%, 40% 99%, 30% 97%, 24% 95%, 15% 90%, 10% 85%, 10% 70%, 15% 60%, 20% 50%, 25% 40%, 30% 30%, 30% 15%, 25% 10%, 10% 1%, 15% 1.3%, 25% 2.0%, 30% 2.2%, 40% 2.5%);
+      box-shadow: -5px 7px 12px -5px #545454;
+    }
+    
+    .text {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 17vmin;
+      word-break: break-word;
+      font-family: "Anton", sans-serif;
+      text-shadow: 12px -2px 6px #2e1c034d;
+    }
+    
+    @keyframes steam-fade {
+      50% {
+        left: 23%;
+        clip-path: polygon(12% 17%, 14% 16%, 16% 15%, 20% 14%, 27% 15%, 29% 17%, 32% 19%, 36% 19%, 39% 20%, 41% 21%, 43% 22%, 45% 22%, 49% 21%, 56% 16%, 58% 15%, 60% 14%, 66% 14%, 72% 12%, 78% 6%, 82% 4%, 89% 4%, 95% 3%, 96% 3%, 97% 8%, 99% 15%, 100% 20%, 100% 26%, 97% 34%, 96% 44%, 95% 46%, 94% 48%, 92% 50%, 87% 51%, 86% 51%, 84% 51%, 83% 51%, 82% 51%, 80% 52%, 79% 57%, 77% 59%, 75% 60%, 74% 61%, 72% 64%, 71% 65%, 70% 70%, 69% 73%, 67% 75%, 65% 77%, 56% 83%, 54% 84%, 51% 85%, 48% 86%, 40% 87%, 36% 88%, 32% 88%, 25% 88%, 20% 87%, 17% 84%, 15% 79%, 13% 75%, 12% 72%, 12% 64%, 16% 59%, 18% 56%, 22% 54%, 23% 53%, 25% 49%, 25% 44%, 24% 39%, 20% 33%, 12% 26%, 9% 20%);
+      }
+    }
+    
+    @media (min-width:1400px) and (min-height:600px) {
+      .main {
+          grid-template: 100% / 50% 50%;
+          margin: 4%;
+      }
+    
+      .text {
+          margin-left: 5%;
+          font-size: 24vmin;
+      }
+    }`,
+  });
+
+  await Component.create({
+    name: `Social Media Icons`,
+    type: `icon`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/Mahe76/pen/dyemrJN`,
+    markup: `<div class="social-icons-btn">
+    <a class="icons twitter"  href="">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </a>
+    <a class="icons facebook"  href="">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </a>
+    <a class="icons instagram"  href="">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+    <a class="icons linkedin"  href="">
+      <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>`,
+    stylesheet: `body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .social-icons-btn {
+      display: flex;
+    }
+    .icons {
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: #111;
+      margin: 0.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      box-shadow: 
+        0 2px 2px #d1d1d1;
+      color: #fff;
+      cursor: pointer;
+      transition:
+        all 0.15s ease;
+    }
+    .twitter:hover {
+      background: #00ECEE;
+    }
+    .facebook:hover {
+      background: #4267B2;
+    }
+    .instagram:hover {
+      background-image: 
+        linear-gradient(
+        #8a3ab9,
+        #e95950, 
+        #bc2a8d, 
+        #fccc63
+        );
+    }
+    .linkedin:hover {
+      background: #0A66C2;
+    }`,
+  });
+
+  await Component.create({
+    name: `Card Animation w/Name`,
+    type: `info-card`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/Nene_/pen/LYrYEjP`,
+    markup: `<div class="container">
+    <div class="box">
+      <div class="text"><span>Your name<span></div>
+    </div>
+  
+  </div>`,
+    stylesheet: `@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+    *
+    {
+      padding:0;
+      margin:0;
+      box-sizing:border-box;
+    }
+    .container
+    {
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family: Montserrat, sans-serif;
+    }
+    .box
+    {
+      width:16rem;
+      height:16rem;
+      transition:all 0.5s cubic-bezier(.55,0,.1,1);
+      background:url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjY2NDkyNTc&ixlib=rb-4.0.3&q=80");
+      background-size: 120%;
+      border-radius: 10%;
+      box-shadow: 0px .5rem 1rem rgba(0,0,0,.75);
+    }
+    .box:hover
+    {
+      box-shadow: 0px .5rem 2rem rgba(0,0,0,.75);
+      background-position: 0% 40%;
+    }
+    .box .text 
+    {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:absolute;
+      left: 50%;
+      top: 50%;
+      margin-top:-4rem;
+      margin-left:4rem;
+      width:calc(16rem/2);
+      height:calc(16rem/2);
+      border-radius:10%;
+      color:#fff;
+      background-color:rgba(0, 0, 0, 0.8);
+        transform: rotate(-180deg) translate(-8) rotate(180deg);
+          box-shadow: 0px .5rem 1rem rgba(0,0,0,.5);
+        transition: all 0.5s cubic-bezier(.55,0,.1,1);;
+    }
+    .text span 
+    {
+      font-size:20px;
+    }
+    .box:hover .text
+    {
+      transform: rotate(-45deg) translate(0) rotate(-315deg);
+      background: rgba(0,0,0,.5);
+      width: 16rem;
+      height:16rem;
+      letter-spacing:0.7rem;
+            margin-top: -8rem;
+          margin-left: -8rem;
+       transition:
+             all 0.5s cubic-bezier(.55,0,.1,1),
+            letter-spacing 1.5s ease-out;
+      
+    }`,
+  });
+
+  await Component.create({
+    name: `Card Hover Effect`,
+    type: `info-card`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/melikeoztekin/pen/gOzqvGm`,
+    markup: `<div class="card">
+    <ul>
+      <li>
+        <i class="fa-solid fa-mug-hot"></i>
+      </li>
+      <li>
+        <i class="fa-solid fa-film"></i>
+      </li>
+      <li>
+        <i class="fa-solid fa-store-alt"></i>
+      </li>
+      <li>
+        <i class="fa-solid fa-map"></i>
+      </li>
+    </ul>
+    <img
+      src="https://images.unsplash.com/photo-1518057111178-44a106bad636?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb"
+      alt=""
+    />
+    <div class="content">
+      <h2>Coffee</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus
+        labore laborum necessitatibus quis, earum, repellat facilis adipisci,
+        dolores corporis ipsam ratione eaque vitae quia sunt nemo et
+        repudiandae porro incidunt.
+        <button>See more...</button>
+      </p>
+    </div>
+  </div>`,
+    stylesheet: `body{
+      background-color:#D9CBBF ;
+  }
+  .card{
+      margin: 50px auto;
+      width: 300px;
+      height: 400px;
+      border-radius: 30px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      transition: all .25s ease;
+  }
+  .card .content p{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      font-size: 1rem;
+      opacity: 0;
+      margin-bottom: -160px;
+      transition: all .25s ease;
+  }
+  .card .content p button{
+      padding: 8px  18px;
+      border-radius: 10px;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: .8rem;
+      margin-top: 10px;
+      margin-left: auto;
+      cursor: pointer;
+      transition: all .25s ease;
+  }
+  .card:hover .content p{
+      margin-bottom: 0;
+      opacity: 1;
+  }
+  .card:hover img{
+      transform: scale(1.50);
+  }
+  .card:hover ul{
+      transform: translate(0);
+      opacity: 1;
+  }
+  .card:after{
+      width: 100%;
+      content: "";
+      left: 0;
+      bottom: 0;
+      height: 150px;
+      position: absolute;
+      background: linear-gradient(180deg, rgba(0,0,0,0)0%,rgba(0,0,0,1)100%);
+      z-index: 20;
+      transition: all .25s ease;
+  }
+  .card img{
+      height: 112%;
+      z-index: 10;
+      transition: all .25s ease;
+  }
+  .card .content{
+      z-index: 30;
+      position: absolute;
+      bottom: 0;
+      color: #fff;
+      padding: 20px;
+      padding-bottom: 20px;
+  }
+  .card .content p button:hover{
+      background: #fff;
+      color: #000;
+  }
+  ul{
+      position: absolute;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 40;
+      border-radius: 15px;
+      padding-left: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      top: 0;
+      opacity: 0;
+      transform: translate(100%);
+      transition: all .25s ease;
+  }
+  ul li{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      width: 35px;
+      height: 35px;
+      background: #fff;
+      opacity: .7;
+      list-style: none;
+      transition: all .25s ease;
+  }
+  ul li:last-child{
+      border-radius: 0 0 10px 10px;
+  }
+  ul li:first-child{
+      border-radius: 10px 10px 0 0;
+  }
+  ul li:hover{
+      opacity: 1;
+      transform: translate(-7px, -4px);
+      border-radius: 6px;
+  }
+  ul li i{
+      font-size: 1rem;
+      color: #000;
+  }`,
+  });
+
+  await Component.create({
+    name: `Brightness Slider`,
+    type: `slider`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/ehsanshahbazii/pen/qBYQKdO`,
+    markup: `  <div class="container">
+    <div class="brightness-box">
+        <i class="far fa-sun"></i>
+        <input type="range" id="range" min="10" max="100" value="100">
+        <i class="fas fa-sun"></i>
+    </div>
+</div>`,
+    stylesheet: `* {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+  }
+  
+  .container {
+     background:url("https://img.freepik.com/free-photo/beautiful-shot-tall-city-buildings-cloudy-sky-night_181624-46658.jpg?w=1380&t=st=1665430586~exp=1665431186~hmac=9aed47a4d8c34770a0e3077c5ba4e92d79dda7779f5e5b4822bd3f82ad62a24e") no-repeat center;
+     background-size:cover;
+     
+     min-height:100vh;
+     
+     display:flex;
+     align-items:center;
+     justify-content:center;
+  }
+  
+  .brightness-box {
+     width:400px;
+     height:60px;
+     
+     background:#f9f9f9;
+     
+     border-radius:8px;
+     
+     padding:0 20px;
+  
+     display:flex;
+     align-items:center;
+     justify-content:space-between;
+  }
+  
+  .brightness-box i {
+     margin:0 10px;
+  }
+  
+  #range {
+     width:100%;
+     height:3px;
+     
+     /*tira a barra do input range*/
+     -webkit-appearance:none;
+     
+     background:#0a85ff;
+     
+     outline:none;
+  }
+  
+  #range::-webkit-slider-thumb {
+     -webkit-appearance:none;
+     
+     background:#333;
+     
+     width:22px;
+     height:22px;
+     
+     border-radius:50%;
+     
+     cursor:pointer;
+  }`,
+    js: `const rangeInput = document.querySelector('input')
+    const container = document.querySelector('.container')
+    
+    
+    rangeInput.addEventListener('change', function (event) {
+        container.style.filter = 'brightness(' + event.target.value + '%)'
+    })`
+  });
+
+  await Component.create({
+    name: `Sample Colored Sliders`,
+    type: `slider`,
+    framework: `html`,
+    stylingFramework: `css`,
+    src: `https://codepen.io/JordanMRutherford/pen/RwywxOm`,
+    markup: `<h1>Simple Toggle Sliders</h1>
+    <p class="desc">A sample of sliders built from checkboxes...</p>
+    
+    <p>Standard</p>
+      <div class="wrapper row-1">
+    
+          <label class="switch switch-1-1" for="switch-1-1">
+            <input type="checkbox" name="switch-1-1" id="switch-1-1">
+            <span class="slider round slider-1-1"></span>
+          </label>
+    
+          <label class="switch switch-1-2" for="switch-1-2">
+            <input type="checkbox" name="switch-1-2" id="switch-1-2">
+            <span class="slider round slider-1-2"></span>
+          </label>
+    
+          <label class="switch switch-1-3" for="switch-1-3">
+            <input type="checkbox" name="switch-1-3" id="switch-1-3">
+            <span class="slider round slider-1-3"></span>
+          </label>
+    
+          <label class="switch switch-1-4" for="switch-1-4">
+            <input type="checkbox" name="switch-1-4" id="switch-1-4">
+            <span class="slider round slider-1-4"></span>
+          </label>
+    
+          <label class="switch switch-1-5" for="switch-1-5">
+            <input type="checkbox" name="switch-1-5" id="switch-1-5">
+            <span class="slider round slider-1-5"></span>
+          </label>
+    
+      </div>
+    
+      <p>Outer Glow</p>
+      <div class="wrapper row-2">
+    
+        <label class="switch switch-2-1" for="switch-2-1">
+          <input type="checkbox" name="switch-2-1" id="switch-2-1">
+          <span class="slider round slider-2-1"></span>
+        </label>
+    
+        <label class="switch switch-2-2" for="switch-2-2">
+          <input type="checkbox" name="switch-2-2" id="switch-2-2">
+          <span class="slider round slider-2-2"></span>
+        </label>
+    
+        <label class="switch switch-2-3" for="switch-2-3">
+          <input type="checkbox" name="switch-2-3" id="switch-2-3">
+          <span class="slider round slider-2-3"></span>
+        </label>
+    
+        <label class="switch switch-2-4" for="switch-2-4">
+          <input type="checkbox" name="switch-2-4" id="switch-2-4">
+          <span class="slider round slider-2-4"></span>
+        </label>
+    
+        <label class="switch switch-2-5" for="switch-2-5">
+          <input type="checkbox" name="switch-2-5" id="switch-2-5">
+          <span class="slider round slider-2-5"></span>
+        </label>
+    
+      </div>
+    
+      <p>Inverted</p>
+      <div class="wrapper row-3">
+    
+        <label class="switch switch-3-1" for="switch-3-1">
+          <input type="checkbox" name="switch-3-1" id="switch-3-1">
+          <span class="slider round slider-3-1"></span>
+        </label>
+    
+        <label class="switch switch-3-2" for="switch-3-2">
+          <input type="checkbox" name="switch-3-2" id="switch-3-2">
+          <span class="slider round slider-3-2"></span>
+        </label>
+    
+        <label class="switch switch-3-3" for="switch-3-3">
+          <input type="checkbox" name="switch-3-3" id="switch-3-3">
+          <span class="slider round slider-3-3"></span>
+        </label>
+    
+        <label class="switch switch-3-4" for="switch-3-4">
+          <input type="checkbox" name="switch-3-4" id="switch-3-4">
+          <span class="slider round slider-3-4"></span>
+        </label>
+    
+        <label class="switch switch-3-5" for="switch-3-5">
+          <input type="checkbox" name="switch-3-5" id="switch-3-5">
+          <span class="slider round slider-3-5"></span>
+        </label>
+    
+      </div>
+    
+      <p>Outline</p>
+      <div class="wrapper row-4">
+    
+        <label class="switch switch-4-1" for="switch-4-1">
+          <input type="checkbox" name="switch-4-1" id="switch-4-1">
+          <span class="slider round slider-4-1"></span>
+        </label>
+    
+        <label class="switch switch-4-2" for="switch-4-2">
+          <input type="checkbox" name="switch-4-2" id="switch-4-2">
+          <span class="slider round slider-4-2"></span>
+        </label>
+    
+        <label class="switch switch-4-3" for="switch-4-3">
+          <input type="checkbox" name="switch-4-3" id="switch-4-3">
+          <span class="slider round slider-4-3"></span>
+        </label>
+    
+        <label class="switch switch-4-4" for="switch-4-4">
+          <input type="checkbox" name="switch-4-4" id="switch-4-4">
+          <span class="slider round slider-4-4"></span>
+        </label>
+    
+        <label class="switch switch-4-5" for="switch-4-5">
+          <input type="checkbox" name="switch-4-5" id="switch-4-5">
+          <span class="slider round slider-4-5"></span>
+        </label>
+    
+      </div>`,
+    stylesheet: `:root {
+      --text: #FFFFFF;
+      --slider: #E0E0E0; 
+      --text-dark: #0A0C08;
+      --background: #3E3C3C;
+      --glow: #ffffff80;
+      --shadow: #0000001a;
+    
+      --col-1-up: #FFD35C;
+      --col-1: #FFBE0B;
+      --col-1-down: #B88700;
+      --col-2-up: #FC7536;
+      --col-2: #FB5607;
+      --col-2-down: #A13502;
+      --col-3-up: #FF338B;
+      --col-3: #FF006E;
+      --col-3-down: #A30047;
+      --col-4-up: #AE7CF3;
+      --col-4: #8338EC;
+      --col-4-down: #4F0FA9;
+      --col-5-up: #70A7FF;
+      --col-5: #3A86FF;
+      --col-5-down: #0056E0;
+    }
+    
+    body {
+      background: var(--background);
+    }
+    
+    h1 {
+      position: relative;
+      font-size: 3rem;
+      font-family: 'Helvetica',sans-serif;
+      color: var(--text);
+      text-align: center;
+    }
+    
+    p {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-weight: lighter;
+      font-size: 1rem;
+      color: var(--text);
+      text-align: center;
+    }
+    
+    
+    .desc {
+      margin-bottom: 2rem;
+    }
+    
+    .wrapper {
+      width: 90%;
+      margin: 1rem auto;
+      text-align: center;
+    }
+    
+    .switch  {
+      position: relative;
+      display: inline-block;
+      width: 5rem;
+      height: 2.5rem;
+      margin: 0 2rem 0 2rem;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer; 
+      background-color: var(--slider);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 1.5rem;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: '';
+      background-color: var(--text);
+      height: 2rem;
+      width: 2rem;
+      left: .25rem;
+      bottom: .25rem;
+      border-radius: 50%;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(2.5rem);
+      -ms-transform: translateX(2.5rem);
+      transform: translateX(2.5rem);
+    }
+    
+    /* ------ Row 1 ------ */
+    
+    input:checked + .slider-1-1 {
+      background-color: var(--col-1);
+    }
+    
+    input:checked + .slider-1-2 {
+      background-color: var(--col-2);
+    }
+    
+    input:checked + .slider-1-3 {
+      background-color: var(--col-3);
+    }
+    
+    input:checked + .slider-1-4 {
+      background-color: var(--col-4);
+    }
+    
+    input:checked + .slider-1-5 {
+      background-color: var(--col-5);
+    }
+    
+    /* ------ Row 2 ------ */
+    
+    input:checked + .slider-2-1{
+      background: var(--col-1); 
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-1-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    
+    input:checked + .slider-2-2 {
+      background-color: var(--col-2);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-2-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    
+    input:checked + .slider-2-3 {
+      background-color: var(--col-3);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-3-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    
+    input:checked + .slider-2-4 {
+      background-color: var(--col-4);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-4-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    
+    input:checked + .slider-2-5 {
+      background-color: var(--col-5);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-5-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    
+    /* ------ Row 3 ------ */
+    
+    input:checked + .slider-3-1 {
+      background-color: var(--col-1);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-1-down),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-3-1:before {
+      background: var(--col-1-down);
+    }
+    
+    input:checked + .slider-3-2 {
+      background-color: var(--col-2);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-2-down),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-3-2:before {
+      background: var(--col-2-down);
+    }
+    
+    input:checked + .slider-3-3 {
+      background-color: var(--col-3);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-3-down),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-3-3:before {
+      background: var(--col-3-down);
+    }
+    
+    input:checked + .slider-3-4 {
+      background-color: var(--col-4);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-4-down),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-3-4:before {
+      background: var(--col-4-down);
+    }
+    
+    input:checked + .slider-3-5 {
+      background-color: var(--col-5);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-5-down),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-3-5:before {
+      background: var(--col-5-down);
+    }
+    
+    /* ------ Row 4 ------ */
+    
+    input:checked + .slider-4-1 {
+      background: var(--background);
+      outline: solid 0.05rem var(--col-1);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-1-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-4-1:before {
+      background: var(--col-1);
+    }
+    
+    input:checked + .slider-4-2 {
+      background: var(--background);
+      outline: solid 0.05rem var(--col-2);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-2-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-4-2:before {
+      background: var(--col-2);
+    }
+    
+    input:checked + .slider-4-3 {
+      background: var(--background);
+      outline: solid 0.05rem var(--col-3);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-3-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-4-3:before {
+      background: var(--col-3);
+    }
+    
+    input:checked + .slider-4-4 {
+      background: var(--background);
+      outline: solid 0.05rem var(--col-4);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-4-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-4-4:before {
+      background: var(--col-4);
+    }
+    
+    input:checked + .slider-4-5 {
+      background: var(--background);
+      outline: solid 0.05rem var(--col-5);
+      box-shadow:
+      .01rem -.01rem 0.5rem 0 var(--col-5-up),
+      0.5rem 0.5rem 1.25rem 0 var(--shadow),
+      0.25rem 0.25rem 0.5rem 0 var(--shadow);
+    }
+    input:checked + .slider-4-5:before {
+      background: var(--col-5);
+    }`,
+  });
+
 
   console.log("🌱🌱  Seeding Successful  🌱🌱");
 }

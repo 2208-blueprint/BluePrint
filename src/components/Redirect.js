@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
@@ -18,6 +18,8 @@ function Redirect() {
 
         async function test() {
           const defaultProfilePicture = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+          let socialProfilePhoto = '';
+          let socialDisplayName = '';
 
           try{
             const {data} = await Axios.get('/api/auth/login/success')
@@ -28,42 +30,51 @@ function Redirect() {
 
             if (data.user.provider !== 'twitch') {
               socialLoginEmail = data.user.emails[0].value;
+              socialProfilePhoto = data.user.photos[0].value;
+              socialDisplayName = data.user.displayName;
             }
             else {
               socialLoginEmail = data.user.email;
+              socialProfilePhoto = data.user.profile_image_url;
+              socialDisplayName = data.user.display_name;
             }
 
             const q = query(usersRef, where("email", "==", socialLoginEmail))
             const querySnapshot = await getDocs(q);
-console.log(querySnapshot);
-
 
             if (querySnapshot.empty) {
               const res = await createUserWithEmailAndPassword(auth, socialLoginEmail, data.password);
               console.log(res);
 
-              res.displayName = data.user.displayName;
-              res.photoURL = data.user.photos[0].value;
+              res.displayName = socialDisplayName;
+
+              if (data.user.provider !== 'twitch') {
+                res.photoURL = socialProfilePhoto;
+              }
+              else {
+                res.photoURL = socialProfilePhoto;
+              }
+
               const date = new Date().getTime();
-              const storageRef = ref(storage, `${data.user.displayName + date}`);
+              const storageRef = ref(storage, `${socialDisplayName + date}`);
               const metadata = {
                 contentType: 'image/png',
               };
 
-              await uploadBytesResumable(storageRef, data.user.photos[0].value, metadata).then(() => {
+              await uploadBytesResumable(storageRef, socialProfilePhoto, metadata).then(() => {
                 getDownloadURL(storageRef).then(async (downloadURL) => {
                   try {
                     //Update profile
                     await updateProfile(res.user, {
-                      displayName: data.user.displayName,
-                      photoURL: data.user.photos[0].value ? data.user.photos[0].value : defaultProfilePicture,
+                      displayName: socialDisplayName,
+                      photoURL: socialProfilePhoto ? socialProfilePhoto : defaultProfilePicture,
                     });
                     //create user on firestore
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
-                      displayName: data.user.displayName,
+                      displayName: socialDisplayName,
                       email: socialLoginEmail,
-                      photoURL: data.user.photos[0].value ? data.user.photos[0].value : defaultProfilePicture,
+                      photoURL: socialProfilePhoto ? socialProfilePhoto : defaultProfilePicture,
                     });
 
                     //create empty user chats on firestore
@@ -71,11 +82,8 @@ console.log(querySnapshot);
 
                     await signInWithEmailAndPassword(auth, socialLoginEmail, data.password)
 
-                    navigate("/");
                   } catch (err) {
                     console.log(err);
-                    setErr(true);
-                    setLoading(false);
                   }
                 });
               });
@@ -84,9 +92,12 @@ console.log(querySnapshot);
               await signInWithEmailAndPassword(auth, socialLoginEmail, data.password);
             }
 
-            navigate('/')
-            window.location.reload(false)
-            toastLogin('You are logged in!')
+            setTimeout(() => {
+              window.location.replace('https://fsa-blueprint.herokuapp.com')
+              toastLogin('You are logged in!')
+            }, 3000)
+
+
           }
           catch(e) {
             toastError('You have already logged in with that email!')
@@ -98,7 +109,11 @@ console.log(querySnapshot);
     }, [])
 
   return (
-    <></>
+    <>
+    <div className='redirect-loading'>
+      <h1>Please wait, loading profile...</h1>
+    </div>
+    </>
   )
 }
 

@@ -177,7 +177,6 @@ a.singlecomp-back div span {
   padding: 0;
 }
 #singlecomp-iframe iframe {
-  border: solid #47B5FF 2px;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -1194,6 +1193,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .footer-column h2 {
   font-size: 1.5rem;
@@ -1223,6 +1223,48 @@ body {
   gap: 20px;
   justify-content: center;
   align-items: center;
+}
+.footer-icon-row .footer-contact {
+  color: white;
+  transition: ease 0.25s;
+  cursor: pointer;
+}
+.footer-icon-row .footer-contact:hover {
+  color: #47B5FF;
+}
+.footer-contact-pop {
+  background-color: #20212d;
+  color: white;
+  position: absolute;
+  z-index: 99;
+  bottom: 60px;
+  animation: fadein 0.25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  padding-top: 30px;
+}
+.footer-contact-pop .footer-contact-individual {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.footer-contact-pop a {
+  cursor: pointer;
+}
+.footer-contact-pop .footer-contact-x {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  cursor: pointer;
+}
+.footer-contact-pop .footer-contact-x:hover {
+  color: #47B5FF;
 }
 .all-users-title {
   display: flex;
@@ -1274,6 +1316,28 @@ body {
   margin: 20px;
   border-radius: 50%;
   margin: 2.5%;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic .single-user-page-follow-container .single-user-page-follow {
+  cursor: pointer;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+}
+.single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic .single-user-page-follow-container .single-user-page-follow-tooltip {
+  visibility: hidden;
+  height: 100px;
+  width: 100px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  z-index: 999;
+  transition-duration: 0.4s;
+  transition-delay: 0.4s;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-crown {
   position: absolute;
@@ -2494,8 +2558,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  right: 40px;
-  top: 94px;
+  right: 30px;
+  top: 92px;
   padding: 16px;
   color: white;
   background-color: #20212d;
@@ -3350,8 +3414,15 @@ body {
   height: 80%;
   overflow: hidden;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
   flex: 1;
+  max-width: 350px;
   border-right: 1px solid white;
   background: rgba(21, 21, 21, 0.65);
   box-shadow: 0 8px 0 0 rgba(31, 38, 135, 0.37);
@@ -3360,9 +3431,28 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
+    border: none;
+    box-shadow: 0;
+    border-radius: 0;
+    width: 100%;
+    flex: 1;
+    max-width: 0;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
   height: 100%;
+  width: 100%;
   overflow: scroll;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+    width: 100%;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
   display: flex;
@@ -3372,8 +3462,19 @@ body {
   height: 50px;
   padding: 10px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
+    width: 100%;
+    height: 20px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-logo {
   font-weight: bold;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-logo {
+    font-size: 12px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user {
   display: flex;
@@ -3381,12 +3482,24 @@ body {
   gap: 10px;
   font-size: 20px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user {
+    margin-right: 15px;
+    font-size: 12px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user img {
   background-color: white;
   height: 40px;
   width: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user img {
+    height: 30px;
+    width: 30px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user button {
   background-color: #47B5FF;
@@ -3406,6 +3519,11 @@ body {
   outline: none;
   padding-left: 10px;
   width: 100%;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input {
+    height: 30px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input::placeholder {
   color: lightgray;
@@ -3428,19 +3546,44 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat img {
+    width: 25px;
+    height: 25px;
+  }
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info span {
   font-size: 18px;
   font-weight: 500;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info p {
   font-size: 14px;
   color: lightgray;
+  margin-left: 5px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat {
   flex: 2;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat {
+    z-index: 2;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
   height: 52px;
+  width: 100%;
   background-color: #0F4C75;
   display: flex;
   justify-content: space-between;
@@ -3449,15 +3592,32 @@ body {
   color: white;
   font-size: 20px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
+    height: 25px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat span {
+    font-size: 13px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
   object-fit: cover;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat img {
+    width: 30px;
+    height: 30px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons {
   display: flex;
   gap: 10px;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons svg {
   height: 35px;
@@ -3513,16 +3673,18 @@ body {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner .firebase-message-content {
   align-items: flex-end;
+  word-break: break-all;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner p {
+  overflow-wrap: break-word;
   background-color: #76befa;
   color: white;
   border-radius: 10px 0px 10px 10px ;
-  max-width: max-content;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input {
   background-color: white;
   height: 50px;
+  width: 100%;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -3542,6 +3704,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input .firebase-send img {
   height: 24px;
@@ -3718,6 +3881,18 @@ body {
 .warning {
   color: white;
   z-index: 100;
+}
+.redirect-loading {
+  height: calc(100vh - 100px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+.redirect-loading h1 {
+  font-family: "Inter", sans-serif;
+  font-size: 40px;
+  color: white;
 }
 /* width */
 ::-webkit-scrollbar {
