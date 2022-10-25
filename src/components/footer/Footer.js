@@ -2,8 +2,10 @@ import React from 'react'
 import { BsGithub } from "react-icons/bs";
 import { AiOutlineYoutube} from 'react-icons/ai'
 import { IconContext } from "react-icons";
+import ContactUs from './ContactUs';
 
 const Footer = () => {
+    const [show, setShow] = React.useState(false)
     return (
         <div id="footer-root-container">
             <div className="footer-group-1">
@@ -11,12 +13,13 @@ const Footer = () => {
                     <h2>BluePrint</h2>
                     <p>Copyright © BluePrint 2022</p>
                     <div className="footer-icon-row">
+                        {show ? <ContactUs setShow={setShow}/> : <></>}
                         <div className='footer-icon'>
                             <IconContext.Provider value={{size: '40px'}}>
                                 <BsGithub/>
                             </IconContext.Provider>
                         </div>
-                        <a href="/">Contact Us</a>
+                        <div onClick={()=>setShow(!show)} className="footer-contact">Contact Us</div>
                         <div className='footer-icon'>
                             <IconContext.Provider value={{size: '40px'}}>
                                 <AiOutlineYoutube/>
