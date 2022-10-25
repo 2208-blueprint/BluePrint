@@ -7,6 +7,7 @@ import {
   BsCardChecklist,
   BsPencilFill,
 } from "react-icons/bs";
+import { GoInbox } from "react-icons/go";
 import { FaMapMarkerAlt, FaRegEdit } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import { GiGearHammer } from "react-icons/gi";
@@ -17,9 +18,17 @@ import "react-toastify/dist/ReactToastify.css";
 import AchievementListDisplay from "../achievements/AchievementListDisplay";
 import ComponentCardProfile from "./ComponentCardProfile";
 
-function ProfilePage() {
+import { IconContext } from "react-icons";
+import {
+  BsQuestionCircleFill,
+  BsArrowRightShort,
+  BsArrowLeftShort,
+} from "react-icons/bs";
+
+function ProfilePage({ showScroll, width }) {
   const [user, setUser] = React.useState();
   const [savedComponents, setSavedComponents] = React.useState([]);
+  const [ownedComponents, setOwnedComponents] = React.useState([]);
   const [followers, setFollowers] = React.useState([]);
   const [allFollowing, setAllFollowing] = React.useState([]);
   const [rank, setRank] = React.useState("");
@@ -28,6 +37,10 @@ function ProfilePage() {
   const [img, setImg] = React.useState("");
   const [achievementTotal, setAchievementTotal] = React.useState(0);
   const [toggle, setToggle] = React.useState(false);
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [componentsPerPage, setComponentsPerPage] = React.useState(6);
+  const [sortedComponents, setSorted] = React.useState([]);
 
   const navigate = useNavigate();
   const toastPopup = (msg) => {
@@ -72,10 +85,13 @@ function ProfilePage() {
           const following = await Axios.get("api/users/following");
           setAllFollowing(following.data);
 
-          const savedComponents = data.components.filter(
-            (component) => component.user_component.isSaved
+          const savedComponents = data.components
+            .filter((component) => !component.user_component.isAuthor)
+            .filter((component) => component.user_component.isSaved);
+          const owned = data.components.filter(
+            (component) => component.user_component.isAuthor
           );
-
+          setOwnedComponents(owned);
           setSavedComponents(savedComponents);
           setImg(data.img);
         } else {
@@ -111,6 +127,28 @@ function ProfilePage() {
     window.location.reload(false);
   }
   useEffect(() => {
+    if (width > 1300) setComponentsPerPage(4);
+    if (width < 1300) setComponentsPerPage(2);
+  }, [width]);
+  const nextPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const previousPage = (event) => {
+    event.preventDefault();
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleScroll = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
     let count = 0;
     if (user?.wasFirst) count++;
     if (user?.hadTopComponent) count++;
@@ -129,6 +167,15 @@ function ProfilePage() {
     if (user?.fiftyFollowsUnlocked) count++;
     setAchievementTotal(count);
   }, [user]);
+
+  const lastPostIndex = currentPage * componentsPerPage;
+  const firstPostIndex = lastPostIndex - componentsPerPage;
+  const currentComponents = savedComponents.slice(
+    firstPostIndex,
+    lastPostIndex
+  );
+  const totalPages = Math.ceil(savedComponents.length / componentsPerPage);
+  const totalOwnedPages = Math.ceil(ownedComponents.length / componentsPerPage);
 
   return (
     <div className="profile-wrapper">
@@ -259,28 +306,83 @@ function ProfilePage() {
                     </>
                   )}
                 </div>
-                <div className="profile-user-uploads">
-                  {toggle ? (
-                    user?.components.length ? (
-                      user?.components.map((component, i) => {
-                        if (component.user_component.isAuthor) {
-                          return <ComponentCardProfile component={component} />;
+                <div className="profilePage-button-container">
+                  {toggle || currentPage === 1 ? null : (
+                    <button
+                      onClick={previousPage}
+                      className="prof-page-prev-button"
+                    >
+                      <IconContext.Provider
+                        value={{
+                          size: "40px",
+                          className: "main-page-pagination-arrow-right",
+                        }}
+                      >
+                        <BsArrowLeftShort />
+                      </IconContext.Provider>
+                    </button>
+                  )}
+
+                  {toggle || currentPage === totalPages ? null : (
+                    <button
+                      onClick={nextPage}
+                      className="prof-page-next-button"
+                    >
+                      <IconContext.Provider
+                        value={{
+                          size: "40px",
+                          className: "main-page-pagination-arrow-left",
+                        }}
+                      >
+                        <BsArrowRightShort />
+                      </IconContext.Provider>
+                    </button>
+                  )}
+                  <div className="profile-user-uploads">
+                    {toggle ? (
+                      ownedComponents.length ? (
+                        ownedComponents
+                          .slice(firstPostIndex, lastPostIndex)
+                          .map((component, i) => {
+                            return (
+                              <ComponentCardProfile
+                                component={component}
+                                key={component.id}
+                              />
+                            );
+                          })
+                      ) : (
+                        <div className="warning">
+                          <div className="prof-image-wrap">
+                            <GoInbox size="100px" />
+                          </div>
+                          <div className="prof-warning-display">
+                            Uploads will display here
+                          </div>
+                        </div>
+                      )
+                    ) : savedComponents?.length ? (
+                      currentComponents?.map((component, i) => {
+                        if (!component.user_component.isAuthor) {
+                          return (
+                            <ComponentCardProfile
+                              component={component}
+                              key={component.id}
+                            />
+                          );
                         }
                       })
                     ) : (
                       <div className="warning">
-                        "You have not uploaded any components!"
+                        <div className="prof-image-wrap">
+                          <GoInbox size="100px" />
+                        </div>{" "}
+                        <div className="prof-warning-display">
+                          Saved components will display here
+                        </div>
                       </div>
-                    )
-                  ) : savedComponents?.length ? (
-                    savedComponents?.map((component, i) => {
-                      if (!component.user_component.isAuthor) {
-                        return <ComponentCardProfile component={component} />;
-                      }
-                    })
-                  ) : (
-                    <div>"You have not saved any components!"</div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="profile-user-extras-rightside">

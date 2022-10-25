@@ -2225,6 +2225,7 @@ body {
   display: flex;
   align-self: flex-start;
   margin-left: 10px;
+  margin-bottom: 30px;
   color: #47B5FF;
 }
 .profile-toggle-button {
@@ -2282,7 +2283,88 @@ body {
   align-self: center;
   margin-top: 80px;
 }
+.profilePage-button-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 650px;
+  top: 0;
+}
+.prof-page-prev-button {
+  width: 55px;
+  height: 65px;
+  display: flex;
+  left: -20px;
+  top: 60px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 50;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.prof-page-prev-button:hover {
+  opacity: 1;
+  background-color: #47B5FF;
+  transform: scale(1.1);
+}
+.prof-page-prev-button:hover .main-page-pagination-arrow-right {
+  color: #09141a;
+}
+.prof-page-next-button {
+  width: 55px;
+  height: 65px;
+  top: 60px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  background-color: #09141a;
+  border: 3px solid #47B5FF;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.prof-page-next-button:hover {
+  opacity: 1;
+  background-color: #47B5FF;
+  transform: scale(1.1);
+}
+.prof-page-next-button:hover .main-page-pagination-arrow-left {
+  color: #09141a;
+}
+.warning {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.prof-image-wrap {
+  color: #47B5FF;
+  width: 250px;
+  margin-top: 50px;
+}
+.prof-warning-display {
+  margin-top: 50px;
+  width: 300px;
+  justify-self: center;
+}
 @media all and (max-width: 1377px) {
+  #user-engagement {
+    margin-top: 30px;
+  }
+  .profile-toggle-main-heading {
+    align-self: center;
+  }
   .profile-user-flex {
     flex-direction: column;
   }
@@ -2309,8 +2391,14 @@ body {
   }
 }
 @media all and (max-width: 700px) {
+  .prof-page-next-button {
+    right: -30px;
+  }
+  .prof-page-prev-button {
+    left: -50px;
+  }
   .profile-toggle-main-heading {
-    align-self: center;
+    margin-bottom: 0;
   }
   .profile-achievement-list-collapse {
     height: 300px;

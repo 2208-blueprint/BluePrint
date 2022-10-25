@@ -46,8 +46,6 @@ function MainPage({ showScroll, width }) {
   const nextPage = (event) => {
     event.preventDefault();
     if (currentPage !== totalPages) {
-      // setLoadRight(true);
-      // setLoadLeft(false);
       setCurrentPage(currentPage + 1);
     }
   };
@@ -55,8 +53,6 @@ function MainPage({ showScroll, width }) {
   const previousPage = (event) => {
     event.preventDefault();
     if (currentPage !== 1) {
-      // setLoadLeft(true);
-      // setLoadRight(false);
       setCurrentPage(currentPage - 1);
     }
   };

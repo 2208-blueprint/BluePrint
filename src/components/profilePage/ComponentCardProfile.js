@@ -12,6 +12,30 @@ function ComponentCardProfile({ component }) {
   const [srcDoc, setSrcDoc] = useState("");
   const [title, setTitle] = useState("title of component");
 
+  // load in the apropriate component
+  React.useEffect(() => {
+    console.log(component);
+    if (component.framework === "html") {
+      setHTML(component.markup);
+    } else {
+      setJS(component.markup);
+    }
+    if (component.stylingFramework === "css") {
+      setCSS(component.stylesheet);
+    } else {
+      setLess(component.stylesheet);
+    }
+    setTitle(component.name);
+  }, []);
+
+  // compile the less into css if less changes
+  React.useEffect(() => {
+    Less.render(less).then(function (output) {
+      setCSS(output.css);
+    });
+  }, [less]);
+  console.log("state", css);
+
   React.useEffect(() => {
     setSrcDoc(`
             <html>
@@ -24,31 +48,6 @@ function ComponentCardProfile({ component }) {
             </html>
           `);
   }, [html, css, js]);
-
-  // load in the apropriate component
-  React.useEffect(() => {
-    async function getComp() {
-      if (component?.framework === "html") {
-        setHTML(component?.markup);
-      } else {
-        setJS(component?.markup);
-      }
-      if (component?.stylingFramework === "css") {
-        setCSS(component?.stylesheet);
-      } else {
-        setLess(component?.stylesheet);
-      }
-      setTitle(component?.name);
-    }
-    getComp();
-  }, []);
-
-  // compile the less into css if less changes
-  React.useEffect(() => {
-    Less.render(less).then(function (output) {
-      setCSS(output.css);
-    });
-  }, [less]);
   return (
     <Link to={`/components/${component.id}`} style={{ textDecoration: "none" }}>
       <div className="profile-component-card-main">

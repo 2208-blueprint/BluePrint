@@ -80,7 +80,7 @@ function App() {
           path="/login"
           element={<LoginPage setLoggedIn={setLoggedIn} />}
         ></Route>
-        <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route path="/profile" element={<ProfilePage width={width} />}></Route>
         <Route path="/chat" element={<FireBaseChat />}></Route>
         <Route path="/redirect" element={<Redirect />}></Route>
         <Route path="/:badpath" element={<NotFoundPage />}></Route>
