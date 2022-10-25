@@ -307,7 +307,9 @@ function ProfilePage({ showScroll, width }) {
                   )}
                 </div>
                 <div className="profilePage-button-container">
-                  {toggle || currentPage === 1 ? null : (
+                  {toggle ||
+                  currentPage === 1 ||
+                  savedComponents.length === 0 ? null : (
                     <button
                       onClick={previousPage}
                       className="prof-page-prev-button"
@@ -323,7 +325,9 @@ function ProfilePage({ showScroll, width }) {
                     </button>
                   )}
 
-                  {toggle || currentPage === totalPages ? null : (
+                  {toggle ||
+                  currentPage === totalPages ||
+                  savedComponents.length === 0 ? null : (
                     <button
                       onClick={nextPage}
                       className="prof-page-next-button"
@@ -378,7 +382,7 @@ function ProfilePage({ showScroll, width }) {
                           <GoInbox size="100px" />
                         </div>{" "}
                         <div className="prof-warning-display">
-                          Saved components will display here
+                          Saves will display here
                         </div>
                       </div>
                     )}

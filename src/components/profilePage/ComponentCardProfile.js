@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 function ComponentCardProfile({ component }) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
-  const [less, setLess] = useState("");
   const [js, setJS] = useState("");
   const [srcDoc, setSrcDoc] = useState("");
   const [title, setTitle] = useState("title of component");
@@ -23,18 +22,12 @@ function ComponentCardProfile({ component }) {
     if (component.stylingFramework === "css") {
       setCSS(component.stylesheet);
     } else {
-      setLess(component.stylesheet);
+      Less.render(component.stylesheet).then(function (output) {
+        setCSS(output.css);
+      });
     }
     setTitle(component.name);
   }, []);
-
-  // compile the less into css if less changes
-  React.useEffect(() => {
-    Less.render(less).then(function (output) {
-      setCSS(output.css);
-    });
-  }, [less]);
-  console.log("state", css);
 
   React.useEffect(() => {
     setSrcDoc(`

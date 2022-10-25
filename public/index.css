@@ -2055,7 +2055,7 @@ body {
   flex: 1;
   height: 100%;
   width: 100%;
-  margin: 20px 0 0 30px;
+  margin: 20px 0 0 0;
 }
 .profile-wrapper .profile-main-content-container .profile-user-extras-container .profile-user-extras-left {
   color: #0F4C75;
@@ -2347,6 +2347,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid #47B5FF;
+  padding: 5px;
+  padding-bottom: 30px;
 }
 .prof-image-wrap {
   color: #47B5FF;
@@ -2360,7 +2363,8 @@ body {
 }
 @media all and (max-width: 1377px) {
   #user-engagement {
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: -10px;
   }
   .profile-toggle-main-heading {
     align-self: center;
@@ -2371,12 +2375,19 @@ body {
   .profile-user-extras-left {
     margin: 0;
     padding: 0;
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
   }
   .profile-sidebar {
     margin: 0;
   }
   .profile-user-extras-container {
     margin: 0;
+  }
+  .profile-user-uploads {
+    align-self: center;
   }
 }
 @media all and (max-width: 1000px) {
@@ -2389,8 +2400,14 @@ body {
     align-items: center;
     width: 100%;
   }
+  .profile-user-extras-left {
+    align-items: normal;
+  }
 }
 @media all and (max-width: 700px) {
+  .achievement-toggle-container {
+    margin-left: 10px;
+  }
   .prof-page-next-button {
     right: -30px;
   }
@@ -2405,6 +2422,7 @@ body {
   }
   .profile-user-uploads {
     justify-content: center;
+    align-self: center;
   }
   #profile-achievement-display {
     flex-direction: column;
