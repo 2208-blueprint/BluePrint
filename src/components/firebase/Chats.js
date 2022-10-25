@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot} from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { ChatContext } from "./ChatContext";
@@ -24,7 +24,8 @@ function Chats() {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
-  const handleSelect = (u) => {
+
+  const handleSelect = async(u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
@@ -35,7 +36,7 @@ function Chats() {
         <div
         className="firebase-userchat"
         key={chat[0]}
-        onClick={() => handleSelect(chat[1].userInfo)}
+        onClick={() => { handleSelect(chat[1].userInfo) }}
         >
             <img src={chat[1].userInfo.photoURL} alt=""/>
             <div className="firebase-user-chat-info">
