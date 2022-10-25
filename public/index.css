@@ -3183,6 +3183,7 @@ body {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
   flex: 1;
+  max-width: 350px;
   border-right: 1px solid white;
   background: rgba(21, 21, 21, 0.65);
   box-shadow: 0 8px 0 0 rgba(31, 38, 135, 0.37);
@@ -3312,7 +3313,9 @@ body {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info span {
   font-size: 18px;
@@ -3327,6 +3330,7 @@ body {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info p {
   font-size: 14px;
   color: lightgray;
+  margin-left: 5px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat {
   flex: 2;
@@ -3428,12 +3432,13 @@ body {
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner .firebase-message-content {
   align-items: flex-end;
+  word-break: break-all;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-messages .firebase-chat-message.owner p {
+  overflow-wrap: break-word;
   background-color: #76befa;
   color: white;
   border-radius: 10px 0px 10px 10px ;
-  max-width: max-content;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input {
   background-color: white;
