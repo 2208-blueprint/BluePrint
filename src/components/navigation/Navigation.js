@@ -183,7 +183,10 @@ function Navigation({ loggedIn, setLoggedIn }) {
 
           <div
             className="navigation-drop-down"
-            onClick={() => setToggle(!toggle)}
+            onClick={() => {
+              setToggle(!toggle)
+              setShow(false)
+            }}
           >
             <IconContext.Provider value={{ size: "40px" }}>
               <FaBars />
@@ -242,7 +245,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
                 >
                   CREATE
                 </Link>
-                <Sidebar />
+                <Sidebar setToggle={setToggle} />
               </>
             ) : (
               <>
@@ -272,7 +275,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
                 >
                   CREATE
                 </Link>
-                <Sidebar />
+                <Sidebar setToggle={setToggle}/>
               </>
             )}
           </div>

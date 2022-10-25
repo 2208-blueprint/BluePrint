@@ -14,7 +14,7 @@ import {useNavigate} from 'react-router-dom'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function CreateComponent() {
+function CreateComponent({width}) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
@@ -208,9 +208,9 @@ function CreateComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="<!-- HTML goes here -->"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
-            height="800px"
+            height="900px"
           />
         </div>
         <div
@@ -226,9 +226,9 @@ function CreateComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="/* CSS Goes Here */"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div
@@ -244,7 +244,7 @@ function CreateComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="// Javascript goes here"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="800px"
           />
@@ -261,7 +261,7 @@ function CreateComponent() {
             name="Less"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
             height="800px"
@@ -279,7 +279,7 @@ function CreateComponent() {
             name="Sass"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
             height="800px"

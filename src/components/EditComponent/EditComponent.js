@@ -14,7 +14,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function EditComponent() {
+function EditComponent({width}) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
@@ -271,7 +271,7 @@ function EditComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="<!-- HTML goes here -->"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="800px"
           />
@@ -289,9 +289,9 @@ function EditComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="/* CSS Goes Here */"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
-            height="700px"
+            height="800px"
           />
         </div>
         <div
@@ -307,7 +307,7 @@ function EditComponent() {
             editorProps={{ $blockScrolling: true }}
             placeholder="// Javascript goes here"
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             wrapEnabled={true}
             height="800px"
           />
@@ -324,7 +324,7 @@ function EditComponent() {
             name="Less"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Less Goes Here */"
             wrapEnabled={true}
             height="800px"
@@ -342,7 +342,7 @@ function EditComponent() {
             name="Sass"
             editorProps={{ $blockScrolling: true }}
             width="100%"
-            fontSize="1.5rem"
+            fontSize={width > 1300 ? '1.5rem' : '1rem'}
             placeholder="/* Sass Goes Here */"
             wrapEnabled={true}
             height="800px"
