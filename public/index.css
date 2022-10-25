@@ -3175,6 +3175,12 @@ body {
   height: 80%;
   overflow: hidden;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
   flex: 1;
   border-right: 1px solid white;
@@ -3185,9 +3191,26 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar {
+    border: none;
+    box-shadow: 0;
+    border-radius: 0;
+    width: 100%;
+    flex: 1;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
   height: 100%;
+  width: 100%;
   overflow: scroll;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-chats {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
   display: flex;
@@ -3197,8 +3220,19 @@ body {
   height: 50px;
   padding: 10px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar {
+    width: 100%;
+    height: 20px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-logo {
   font-weight: bold;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-logo {
+    font-size: 12px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user {
   display: flex;
@@ -3206,12 +3240,24 @@ body {
   gap: 10px;
   font-size: 20px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user {
+    margin-right: 15px;
+    font-size: 12px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user img {
   background-color: white;
   height: 40px;
   width: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user img {
+    height: 30px;
+    width: 30px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-navbar .firebase-user button {
   background-color: #47B5FF;
@@ -3231,6 +3277,11 @@ body {
   outline: none;
   padding-left: 10px;
   width: 100%;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input {
+    height: 30px;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-search .firebase-searchform input::placeholder {
   color: lightgray;
@@ -3253,9 +3304,25 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat img {
+    width: 25px;
+    height: 25px;
+  }
+}
+.firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info {
+  display: flex;
+  align-items: center;
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info span {
   font-size: 18px;
   font-weight: 500;
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info span {
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat-sidebar .firebase-userchat .firebase-user-chat-info p {
   font-size: 14px;
@@ -3264,8 +3331,14 @@ body {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat {
   flex: 2;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat {
+    z-index: 2;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
   height: 52px;
+  width: 100%;
   background-color: #0F4C75;
   display: flex;
   justify-content: space-between;
@@ -3274,15 +3347,32 @@ body {
   color: white;
   font-size: 20px;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-info {
+    height: 25px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat span {
+    font-size: 13px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
   object-fit: cover;
 }
+@media only screen and (max-width: 700px) {
+  .firebase-chat-wrapper .firebase-chat-container .firebase-chat img {
+    width: 30px;
+    height: 30px;
+  }
+}
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons {
   display: flex;
   gap: 10px;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-icons svg {
   height: 35px;
@@ -3348,6 +3438,7 @@ body {
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input {
   background-color: white;
   height: 50px;
+  width: 100%;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -3367,6 +3458,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-right: 10px;
 }
 .firebase-chat-wrapper .firebase-chat-container .firebase-chat .firebase-chat-input .firebase-send img {
   height: 24px;
