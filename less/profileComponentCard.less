@@ -1,0 +1,79 @@
+@import "variables";
+
+.profile-component-card-main {
+  box-sizing: border-box;
+  width: 300px;
+  height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: -15px;
+
+  iframe {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 3px 10px rgba(0, 0, 5, 0.72);
+    border-radius: 5px;
+  }
+}
+.profile-component-card-cover {
+  position: absolute;
+  height: 100.1%;
+  width: 100.1%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(5, 3, 10);
+  opacity: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+  .profile-component-card-info {
+    opacity: 1;
+  }
+}
+.profile-component-card-cover:hover {
+  opacity: 0.9;
+}
+.profile-component-card-thumbnail {
+  -ms-zoom: 0.65;
+  -moz-transform: scale(0.65);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.65);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.65);
+  display: flex;
+}
+.profile-component-card-info {
+  font-weight: 600;
+  font-size: 34px;
+  padding: 5px;
+  color: @tertiary-color;
+  max-width: 340px;
+  opacity: 1;
+}
+.profile-component-card-type-container {
+  display: flex;
+}
+.profile-component-card-types {
+  min-width: 60px;
+  background-color: rgb(5, 4, 11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  font-size: 18;
+  font-family: "Inter", sans-serif;
+  color: rgb(194, 194, 194);
+  pointer-events: none;
+}
+.warning {
+  color: white;
+  z-index: 100;
+}
