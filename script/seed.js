@@ -2565,22 +2565,6 @@ async function seed() {
     }`,
   });
 
-  // await Component.create({
-  //   name: ``,
-  //   type: ``,
-  //   framework: ``,
-  //   stylingFramework: ``,
-  //   src: ``,
-  //   markup: ``,
-  //   stylesheet: ``,
-  // });
-
-  for (let i = 0; i < arr.length; i++) {
-    if (i < 5) {
-      await thomas.addComponent(arr[i], { through: { isAuthor: true } });
-    }
-  }
-
   await Component.create({
     name: `Spinning Atom`,
     type: `animation`,
