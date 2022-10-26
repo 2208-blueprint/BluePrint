@@ -16,6 +16,7 @@ const SearchUsers = () => {
     const toastSuccess = (msg) => toast.success(msg);
 
     React.useEffect(()=> {
+        // get all the users
         async function getUsers() {
             const {data} = await axios.get('/api/users/allUsers')
             setUsers(data)
@@ -23,6 +24,7 @@ const SearchUsers = () => {
         getUsers()
     },[])
 
+    // helper function that shows how many components a user has created
     function numCreated(user) {
         const filtered = user.components.filter((component) => {
             return component.user_component.isAuthor === true
@@ -30,14 +32,17 @@ const SearchUsers = () => {
         return filtered
     }
 
+    // goes to the users page
     function goToUser(event) {
         navigate(`/users/${event.currentTarget.getAttribute('value')}`)
     }
 
+    // sets the search state, which then shows the approprate users
     function searchHandler(event) {
         setSearch(event.target.value)
     }
 
+    // filters users based on the search state
     const filteredUsers = users.filter((user) => {
         if (user.username.toLowerCase().includes(search.toLowerCase())) {
             return true
@@ -46,6 +51,7 @@ const SearchUsers = () => {
         }
     })
 
+    // helper function to see if you are already following the user
     const isFollowing = (user) => {
         for (let i = 0; i < user.followers.length; i++) {
             if (user.followers[i].id === loggedUser.id) {
@@ -55,6 +61,8 @@ const SearchUsers = () => {
         return false
     }
 
+
+    // follow the user, uses axios
     const followHandler = async(userId, username) => {
         await axios.put(`api/users/follow/${userId}`,{},{
             headers: {
@@ -66,6 +74,7 @@ const SearchUsers = () => {
         toastSuccess(`You are now following ${username}`)
     }
 
+    // unfollow
     const unFollowHandler = async(userId, username) => {
         await axios.put(`api/users/unfollow/${userId}`,{},{
             headers: {

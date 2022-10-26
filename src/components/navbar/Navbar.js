@@ -8,7 +8,9 @@ import { useSelector } from "react-redux";
 function Navbar({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 
+  // search bar input is taken from side bar, to use in the navbar on mobile only
   const [searchBarInput, setSearchBarInput] = React.useState("");
+  // changes if you see the dropdown from the profile
   const [dropDown, setDropDown] = React.useState(false);
 
   const login = useSelector((state) => state.value);

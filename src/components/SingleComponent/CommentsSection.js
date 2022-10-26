@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CommentsSection = (props) => {
 
+    // state that holds the comments
     const [comment, setComment] = React.useState('')
     const [comments, setComments] = React.useState([])
     const [temp, setTemp] = React.useState(false)
@@ -21,6 +22,7 @@ const CommentsSection = (props) => {
     const params = useParams()
     const dispatch = useDispatch()
 
+    // submit comment, and then RE GET the comments and set that so it "live updates"
     const submitComment = async() => {
         await axios.put(`api/comments/component/${params.id}/addcomment`, {
             message: comment
@@ -37,11 +39,9 @@ const CommentsSection = (props) => {
 
     }
 
-        // Like and unlike handler
-
+    // like handler
     const likeHandler = async(event) => {
         event.preventDefault()
-        console.log(event.currentTarget.getAttribute('value'))
         await axios.post(`api/comments/${event.currentTarget.getAttribute('value')}/like`, {
         }, {
             headers: {
@@ -54,9 +54,9 @@ const CommentsSection = (props) => {
         setComments(data)
     }
 
+    // unlike handler
     const unlikeHandler = async(event) => {
         event.preventDefault()
-        console.log(event.currentTarget.getAttribute('value'))
         await axios.delete(`api/comments/${event.currentTarget.getAttribute('value')}/unlike`,{
             headers: {
                 authorization: window.localStorage.getItem('token')
@@ -68,6 +68,7 @@ const CommentsSection = (props) => {
         setComments(data)
     }
 
+    // helper function that sees if you liked already
     const likedAlready = (commentId) => {
         for (let i = 0; i < user.comments?.length; i++) {
             if (user.comments[i].id === commentId) {
@@ -78,8 +79,7 @@ const CommentsSection = (props) => {
 
     }
 
-    // another function
-
+    // helper function that sees if its your own comment
     const ownComment = (commentId) => {
         for (let i = 0; i < user.comments?.length; i++) {
             if (user.comments[i].id === commentId && user.comments[i].user_comments.isAuthor) {
@@ -89,6 +89,7 @@ const CommentsSection = (props) => {
         return true
     }
 
+    // helper function that converts the date value to a readable date string
     const convertDate = (str) => {
         const date = new Date(str)
         return date.toDateString()
@@ -107,8 +108,6 @@ const CommentsSection = (props) => {
         getComments()
     },[])
 
-    console.log(comments)
-
     return (
         <div id="comments-root">
             <h1>Comments</h1>
@@ -122,6 +121,7 @@ const CommentsSection = (props) => {
             {comments?.map((comment) =>
                 <div className='comment-box' key={comment.id}>
                     <div className="comment-name">{comment.users[0].username}
+                    {/* Check to see if its your own comment OR if you liked it already, and changes the symbol accordingly */}
                     {props.loggin && ownComment(comment.id) ? <div className="comment-heart">{likedAlready(comment.id)
                     ? <span className='comment-hearted' onClick={unlikeHandler} value={comment.id}><IconContext.Provider
                     value={{ size: "25px"}}
