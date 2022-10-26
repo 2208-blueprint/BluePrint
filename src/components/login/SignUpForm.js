@@ -24,8 +24,6 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
     const [profilePicture, setProfilePicture] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [country, setCountry] = React.useState('United States')
-    const [err, setErr] = React.useState(false)
-    const [loading, setLoading] = React.useState(false);
 
     const toastError = (err) => toast.error(err);
     const toastCreate = (msg) => toast.success(msg);
@@ -58,11 +56,13 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
         }
 
         try {
+            //Creates new user in postgres db and sets jwt
             const authorization = await Axios.post('/api/auth/signup', newUserObj)
             const { token } = authorization.data
 
             window.localStorage.setItem('token', token);
 
+            //Creates user in firestore
             const res = await createUserWithEmailAndPassword(auth, email, password);
             res.displayName = username;
 
@@ -73,6 +73,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                 res.photoURL = profilePicture;
             }
 
+            //Creates user storage file in firestore
             const date = new Date().getTime();
             const storageRef = ref(storage, `${username + date}`);
 
@@ -88,7 +89,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                       displayName: username,
                       photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
-                    //create user on firestore
+                    //Create user doc in firestore db
                     await setDoc(doc(db, "users", res.user.uid), {
                       uid: res.user.uid,
                       displayName: displayName,
@@ -96,7 +97,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                       photoURL: profilePicture ? profilePicture : defaultProfilePicture,
                     });
 
-                    //create empty user chats on firestore
+                    //Create empty userchats doc in firestore db
                     await setDoc(doc(db, "userChats", res.user.uid), {});
                     navigate("/");
                   } catch (err) {
@@ -107,6 +108,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
                 });
               });
 
+              //Signs created user in with firebase using AuthContext
               await signInWithEmailAndPassword(auth, email, password);
 
 
@@ -125,6 +127,7 @@ function SignUpForm({ toggle, setToggle, setLoggedIn }) {
         }
         catch(error) {
 
+            //Checks which error for toast popup
             if (error.response) {
                 if (error.response.data === 'Validation error: Validation isEmail on email failed'){
                     toastError('Invalid email')

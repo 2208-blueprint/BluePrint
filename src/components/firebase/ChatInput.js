@@ -17,8 +17,8 @@ function ChatInput() {
 
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-  const [showEmojis, setShowEmojis] = useState(false);
 
+  //Gets firestore logged in user object
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
@@ -27,14 +27,16 @@ function ChatInput() {
     if (img) {
       const storageRef = ref(storage, uuid());
 
+      //Adds image to storage
       const uploadTask = uploadBytesResumable(storageRef, img);
 
       uploadTask.on(
         (error) => {
-          //TODO:Handle Error
+          console.log(error)
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //Adds image to the chat log array
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -50,6 +52,7 @@ function ChatInput() {
       );
     } else {
       await updateDoc(doc(db, "chats", data.chatId), {
+        //Adds message to the chat log array
         messages: arrayUnion({
           id: uuid(),
           text,
@@ -61,6 +64,7 @@ function ChatInput() {
       });
     }
 
+    //Updates the chat document with the last message sent from user
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
@@ -68,6 +72,7 @@ function ChatInput() {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
+    //Updates the chat document with the last message for receiver
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
