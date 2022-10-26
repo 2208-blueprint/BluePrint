@@ -21,6 +21,7 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
   const toastError = (err) => toast.error(err);
   const toastLogin = (msg) => toast.success(msg);
 
+  //Routes for social login buttons
   const google = async () => {
     window.open("http://fsa-blueprint.herokuapp.com/auth/google", "_self");
   };
@@ -39,6 +40,7 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
     };
 
     try {
+      //Logs user in and sets jwt
       const authorize = await Axios.post("/api/auth/login", loginObj);
       const { token } = authorize.data;
       window.localStorage.setItem("token", token);
@@ -49,6 +51,7 @@ function LoginForm({ toggle, setToggle, setLoggedIn }) {
         },
       });
 
+      //Logs user into firestore using authContext
       await signInWithEmailAndPassword(auth, currentUser.data.email, password);
 
       setUserName("");

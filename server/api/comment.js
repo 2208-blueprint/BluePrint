@@ -15,7 +15,6 @@ const requireToken = async (req, res, next) => {
 };
 
 //get all comments made by a user
-// I dont think we need this, but SHOULD work
 router.get("/user", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -27,7 +26,6 @@ router.get("/user", requireToken, async (req, res, next) => {
 });
 
 //get all comments on a single component
-//WORKS
 router.get("/component/:componentId", async (req, res, next) => {
   try {
     const id = req.params.componentId;
@@ -45,7 +43,6 @@ router.get("/component/:componentId", async (req, res, next) => {
 });
 
 // add comment to component
-// WORKS
 router.put(
   "/component/:componentId/addcomment",
   requireToken,
@@ -64,20 +61,7 @@ router.put(
   }
 );
 
-// //get all likes on a comment
-// router.get("/:commentId/likes", async (req, res, next) => {
-//   try {
-//     const id = req.params.commentId;
-//     const comment = await Comment.findByPk(id);
-//     const likes = await component.getLikes();
-//     res.send(likes);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 //add like to comment
-// WORKS
 router.post("/:commentId/like", requireToken, async (req, res, next) => {
   try {
     const id = req.params.commentId;
@@ -90,7 +74,6 @@ router.post("/:commentId/like", requireToken, async (req, res, next) => {
   }
 });
 //remove like from comment
-// WORKS
 router.delete("/:commentId/unlike", requireToken, async (req, res, next) => {
   try {
     const id = req.params.commentId;

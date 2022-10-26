@@ -11,9 +11,8 @@ function ComponentCardProfile({ component }) {
   const [srcDoc, setSrcDoc] = useState("");
   const [title, setTitle] = useState("title of component");
 
-  // load in the apropriate component
+  // load in the appropriate component
   React.useEffect(() => {
-    console.log(component);
     if (component.framework === "html") {
       setHTML(component.markup);
     } else {

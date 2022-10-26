@@ -5,6 +5,7 @@ const seed = require("../script/seed");
 
 const init = async () => {
   try {
+    //seed the database if env variable is true
     if (process.env.SEED === "true") {
       await seed();
     } else {

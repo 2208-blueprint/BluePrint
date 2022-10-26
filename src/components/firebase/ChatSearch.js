@@ -25,15 +25,13 @@ function ChatSearch() {
       const allUsersFromFirebase = query(
         collection(db, "users"),
       );
+
+      //Gets all chats and filters the current users chats
       const allChats = collection(db, "chats")
       const chatsQuery = await getDocs(allChats)
       const filteredChats = chatsQuery.docs.filter(chat => chat.id.includes(currentUser.uid))
 
       setAllUserChats(filteredChats)
-
-      // const allChatsSnapshot = await getDocs(allChats);
-      // setAllChats(allChatsSnapshot);
-
 
       const allUsersSnapshot = await getDocs(allUsersFromFirebase);
       const allUsersArray = [];
@@ -46,6 +44,8 @@ function ChatSearch() {
     getAllUsers();
   }, [])
 
+  //Filters all users to only includes names that incluse users input in search
+  //Also filters out any users that user has active chats with so no duplicates show
   const filteredUsersData = allUsers?.filter((user) => {
     if (user.displayName.toLowerCase().includes(username.toLowerCase())) {
       for (let i = 0; i < allUserChats.length; i++) {
@@ -60,7 +60,7 @@ function ChatSearch() {
   })
 
   const handleSelect = async (user) => {
-    //check whether the group(chats in firestore) exists, if not create
+    //check whether the chat exists, if not create
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
@@ -70,10 +70,10 @@ function ChatSearch() {
       const res = await getDoc(doc(db, "chats", combinedId));
 
       if (!res.exists()) {
-        //create a chat in chats collection
+        //create a chat doc in firebase db
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        //create user chats
+        //Updates user chat doc of current user
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -83,6 +83,7 @@ function ChatSearch() {
           [combinedId + ".date"]: serverTimestamp(),
         });
 
+        //Updates user chat doc of receiving user
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,

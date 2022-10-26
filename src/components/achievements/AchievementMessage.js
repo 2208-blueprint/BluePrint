@@ -6,6 +6,7 @@ function AchievementMessage({
   achievementIcon,
   pointVal,
 }) {
+  //component that displays in toastify when achievement is earned
   return (
     <div className="achievement-main-container">
       {achievementIcon}

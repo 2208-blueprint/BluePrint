@@ -1,7 +1,4 @@
 const User = require("../db/User.js");
-const Component = require("../db/Component.js");
-const UserComponent = require("../db/UserComponent");
-const Comment = require("../db/Comment");
 const router = require("express").Router();
 
 const requireToken = async (req, res, next) => {
@@ -14,7 +11,7 @@ const requireToken = async (req, res, next) => {
     next(error);
   }
 };
-
+//change user to top ranked
 router.get("/rankedFirst", requireToken, (req, res, next) => {
   try {
     const user = req.user;

@@ -12,7 +12,7 @@ const requireToken = async (req, res, next) => {
     next(error);
   }
 };
-
+//get currently logged in user from require token middleware
 router.get("/", requireToken, async (req, res, next) => {
   try {
     const user = req.user;

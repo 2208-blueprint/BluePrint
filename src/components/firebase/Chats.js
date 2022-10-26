@@ -10,6 +10,7 @@ function Chats() {
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
+  //Gets the users chats with other users and sets in state
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -25,6 +26,7 @@ function Chats() {
   }, [currentUser.uid]);
 
 
+  //Dispatches on chat select to set context for that chat
   const handleSelect = async(u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };

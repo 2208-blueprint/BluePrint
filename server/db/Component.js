@@ -67,13 +67,6 @@ const Component = db.define("component", {
   src: {
     type: Sequelize.STRING,
   },
-  // less: {
-  //   type: Sequelize.TEXT,
-  // },
-  // sass: {
-  //   type: Sequelize.TEXT,
-  // },
 });
-//depending on enum value, we conditionally render code editor with correct tabs and buttons
 
 module.exports = Component;

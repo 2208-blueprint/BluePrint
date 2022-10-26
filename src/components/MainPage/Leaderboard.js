@@ -11,6 +11,7 @@ function Leaderboard() {
   useEffect(() => {
     const getTopComponents = async () => {
       const { data } = await axios.get("api/admin/top-components");
+      //get top components based on points, map through them and keep track of total likes, saves, and points. return an array of objects to use for each leaderboard row
       const parsedData = data.map((component) => {
         let favorites = 0;
         let saves = 0;
@@ -36,7 +37,7 @@ function Leaderboard() {
     };
     getTopComponents();
   }, []);
-
+  //see useeffect above, mirrors same logic
   useEffect(() => {
     const getTopUsers = async () => {
       const { data } = await axios.get("api/admin/top-users");

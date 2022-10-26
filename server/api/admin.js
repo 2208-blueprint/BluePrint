@@ -7,9 +7,6 @@ const requireToken = async (req, res, next) => {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
     req.user = user;
-    // if (!user.isAdmin) {
-    //   throw new Error("You don't have admin rights!");
-    // }
     next();
   } catch (error) {
     next(error);
@@ -36,6 +33,8 @@ router.put("/delete-user/:id", requireToken, async (req, res, next) => {
     next(ex);
   }
 });
+
+//gets top 5 components based on score
 router.get("/top-components", async (req, res, next) => {
   try {
     const topComponents = await Component.findAll({
@@ -47,11 +46,6 @@ router.get("/top-components", async (req, res, next) => {
         attributes: ["username"],
       },
     });
-    // console.log(
-    //   "akjdsfhahdfuhdaihfudi",
-    //   topComponents[0].users[0]["user_component"].dataValues.isAuthor
-    // );
-    // console.log(topComponents[0].users);
     const topComponentUsers = topComponents[0].users;
     for (let i = 0; i < topComponentUsers.length; i++) {
       let current = topComponentUsers[i];
@@ -69,6 +63,7 @@ router.get("/top-components", async (req, res, next) => {
     next(ex);
   }
 });
+//gets top 5 users based on score
 router.get("/top-users", async (req, res, next) => {
   try {
     const topUsers = await User.findAll({
@@ -86,6 +81,7 @@ router.get("/top-users", async (req, res, next) => {
     next(ex);
   }
 });
+//route used to update achievement boolean in user
 router.put("/awardAchievement", requireToken, async (req, res, next) => {
   try {
     const user = req.user;
