@@ -14,6 +14,8 @@ import {useNavigate} from 'react-router-dom'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// for same logic, see the EditComponent.js and SingleComponent.js file
+
 function CreateComponent({width}) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");

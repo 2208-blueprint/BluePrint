@@ -14,6 +14,8 @@ import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// FOR similar logic, see the SingleComponent.js file
+
 function EditComponent({width}) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
@@ -31,7 +33,7 @@ function EditComponent({width}) {
     toast.dark(msg);
   };
 
-  // form section
+  // form section, holds all the user inputs into the form
   const [form, setForm] = useState('html')
   const [form2, setForm2] = useState('css')
   const [name, setName] = useState('')
@@ -82,6 +84,7 @@ function EditComponent({width}) {
     }
   }
 
+  // submits the new component to DB with axios
   async function submitComponent() {
     let markup
     let stylesheet
@@ -114,11 +117,14 @@ function EditComponent({width}) {
     navigate(`/components/${data.id}`)
   }
 
+
+  // tags is an array, so clicking add tag adds it to the array
   function addTag() {
     setTags([...tags, singleTag])
     setSingleTag('')
   }
 
+  // removes tag from the tag array
   function removeTag(tagName) {
     const tagList = tags
     setTags(tagList.filter((tag) => {
@@ -203,8 +209,6 @@ function EditComponent({width}) {
     getComp()
     
   }, []);
-
-  console.log(form)
 
   return (
     <div id="createcomp-root">
@@ -391,6 +395,7 @@ function EditComponent({width}) {
             <div>
                 <textarea value={desc} onChange={(event)=>setDesc(event.target.value)} className="createcomp-desc"></textarea>
             </div>
+            {/* Based on the tags array, shows a group of divs */}
             <div>Tags:&nbsp;&nbsp;
                 <input placeholder="one word tag" value={singleTag} onChange={(event) => setSingleTag(event.target.value)}></input><button onClick={addTag} className="createcomp-tag-button">Add Tag</button>
             </div>

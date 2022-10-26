@@ -18,9 +18,12 @@ import { FireBaseChat } from "../index";
 import updateAchievements from "../achievements/achievementListener";
 
 function Navigation({ loggedIn, setLoggedIn }) {
+  // toggle changes if the sidebar on mobile is shown
   const [toggle, setToggle] = React.useState(true);
+  // redux state for user
   const user = useSelector((state) => state.singleUser);
   const { currentUser } = useContext(AuthContext);
+  // toggle if the drop down is shown
   const [show, setShow] = React.useState(false);
   const [chatVisible, setChatVisible] = React.useState(false);
   const [unread, setUnread] = React.useState(0);
@@ -33,6 +36,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
     updateAchievements(user);
   }, [user]);
 
+  // set the user in the navbar
   React.useEffect(() => {
     if (window.localStorage.getItem("token")) {
       setLoggedIn(true);
@@ -42,6 +46,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
     }
   }, []);
 
+  // logout, and refresh the page forcefully
   const logoutHandler = async () => {
     await signOut(auth);
     window.localStorage.removeItem("token");
@@ -51,14 +56,17 @@ function Navigation({ loggedIn, setLoggedIn }) {
     window.location.reload(false);
   };
 
+  // take you to profile
   const profileHandler = () => {
     navigate("/profile");
   };
 
+  // this changes how you see the mobile pull out side bar, based on its position.
   let style = {
     right: toggle ? "-100%" : "0",
   };
 
+  // changes if you see the dropdown from profile
   const fallDownHandler = () => {
     setShow(!show);
   };
@@ -81,6 +89,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
           </a>
 
           <div className="navigation-link-wrapper">
+            {/* if you are logged in, display the following */}
             {loggedIn ? (
               <>
                 <Link to="/profile/create" id="create-component-button">
@@ -121,6 +130,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
                 </div>
               </>
             ) : (
+              /* if you are logged out, display the following */
               <>
                 <Link className="navigation-search-button" to="/users/search">
                   <IconContext.Provider value={{ size: "20px" }}>
@@ -138,6 +148,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
             )}
           </div>
 
+              {/* only if you are logged in, you get access to the dropdown or "falldown" */}
           {show ? (
             <div className="navigation-fall-down">
               <a
@@ -181,6 +192,7 @@ function Navigation({ loggedIn, setLoggedIn }) {
             <></>
           )}
 
+            {/* Everything below here is for mobile, similar logic as above */}
           <div
             className="navigation-drop-down"
             onClick={() => {
