@@ -7,6 +7,7 @@ function AchievementDisplay({
   pointVal,
   earned,
 }) {
+  //component used to display individual achievement user unlocks inside of profile
   return (
     <div
       className={

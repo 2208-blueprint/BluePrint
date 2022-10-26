@@ -17,19 +17,16 @@ import {
 } from "react-icons/bs";
 
 function MainPage({ showScroll, width }) {
-  //   const [users, setUsers] = React.useState([]);
   const [components, setComponents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [componentsPerPage, setComponentsPerPage] = React.useState(8);
   const [sortedComponents, setSorted] = React.useState([]);
   const [test, setTest] = React.useState(true);
-  // const [loadRight, setLoadRight] = React.useState(false);
-  // const [loadLeft, setLoadLeft] = React.useState(false);
 
   const dispatch = useDispatch();
   dispatch(getSingleUser());
-
+  //change number of displayed components based on window width, passed down by app
   React.useEffect(() => {
     if (width > 1300) setComponentsPerPage(8);
     else setComponentsPerPage(4);
@@ -95,7 +92,7 @@ function MainPage({ showScroll, width }) {
     lastPostIndex
   );
   const totalPages = Math.ceil(sortedComponents.length / componentsPerPage);
-
+  //map sorted slice of components array, based on which page/sort method is selected
   return (
     <div className="main-page-main-container">
       <div className="main-page-wrapper">

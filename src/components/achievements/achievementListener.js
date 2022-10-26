@@ -52,7 +52,7 @@ const toastSettingsFirst = (id) => {
   };
 };
 
-//icon passed to achievement component
+//icons passed to achievement component
 export const newUser = <BsFillHouseFill size="40px" />;
 export const twoForOne = <RiHeartsFill size="40px" />;
 export const tenForOne = <GiCrownedHeart size="40px" />;
@@ -68,6 +68,8 @@ export const twentyFiveFollows = <GiMedallist size="40px" />;
 export const fiftyFollows = <BiCool size="80px" />;
 export const rankedFirst = <FaCrown size="40px" />;
 export const topComponent = <AiFillTrophy size="40px" />;
+//big function, basically just if checks, that is stored in use effect inside of sidebar and nav, checks current state of logged in user and awards achievements if conditions are met
+//see user in db for more information
 
 const updateAchievements = async (currentUser) => {
   //new user achievement

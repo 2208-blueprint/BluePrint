@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("./database.js");
 
+//custom through table, adds booleans to distinguish users based on different booleans
 const UserComponent = db.define("user_component", {
   isAuthor: {
     type: Sequelize.BOOLEAN,
@@ -12,8 +13,8 @@ const UserComponent = db.define("user_component", {
   },
   isSaved: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 });
 
 module.exports = UserComponent;
