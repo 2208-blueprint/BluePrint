@@ -36,14 +36,17 @@ function Sidebar(props) {
           onKeyDown={(e) => {
             if (e.code === "Enter") {
               handleSearch();
-              props.setToggle(true)
+              props.setToggle(true);
             }
           }}
         />
-        <div className="side-bar-search-button" onClick={()=>{
-          handleSearch()
-          props.setToggle(true)
-          }}>
+        <div
+          className="side-bar-search-button"
+          onClick={() => {
+            handleSearch();
+            props.setToggle(true);
+          }}
+        >
           {" "}
           <IconContext.Provider value={{ size: "20px" }}>
             <BsSearch />
@@ -56,9 +59,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/animation`)
+            navigate(`/components/category/animation`);
           }}
         >
           ANIMATION
@@ -68,9 +71,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/button`)
+            navigate(`/components/category/button`);
           }}
         >
           BUTTONS
@@ -80,9 +83,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/drop-down`)
+            navigate(`/components/category/drop-down`);
           }}
         >
           DROP-DOWNS
@@ -92,9 +95,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/footer`)
+            navigate(`/components/category/footer`);
           }}
         >
           FOOTERS
@@ -104,9 +107,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/form`)
+            navigate(`/components/category/form`);
           }}
         >
           FORMS
@@ -116,9 +119,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/graphic`)
+            navigate(`/components/category/graphic`);
           }}
         >
           GRAPHICS
@@ -128,9 +131,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/icon`)
+            navigate(`/components/category/icon`);
           }}
         >
           ICONS
@@ -140,9 +143,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/info-card`)
+            navigate(`/components/category/info-card`);
           }}
         >
           INFO-CARDS
@@ -152,9 +155,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/mobile`)
+            navigate(`/components/category/mobile`);
           }}
         >
           MOBILE-FRIENDLY
@@ -164,9 +167,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/navbar`)
+            navigate(`/components/category/navbar`);
           }}
         >
           NAVBARS
@@ -176,9 +179,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/slider`)
+            navigate(`/components/category/slider`);
           }}
         >
           SLIDERS
@@ -188,9 +191,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/misc`)
+            navigate(`/components/category/misc`);
           }}
         >
           MISC
@@ -206,9 +209,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/react`)
+            navigate(`/components/category/react`);
           }}
         >
           REACT
@@ -218,9 +221,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/${"html"}`)
+            navigate(`/components/category/${"html"}`);
           }}
         >
           HTML
@@ -230,9 +233,9 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/css`)
+            navigate(`/components/category/css`);
           }}
         >
           CSS
@@ -242,15 +245,15 @@ function Sidebar(props) {
           className="side-bar-container-category"
           onClick={() => {
             if (props.setToggle) {
-              props.setToggle(true)
+              props.setToggle(true);
             }
-            navigate(`/components/category/less`)
+            navigate(`/components/category/less`);
           }}
         >
           LESS
         </div>
-        <div className="mobile-sidebar-dot">&bull;</div>
-        <div
+        {/* <div className="mobile-sidebar-dot">&bull;</div> */}
+        {/* <div
           className="side-bar-container-category-heading"
           id="side-bar-resources"
         >
@@ -258,7 +261,7 @@ function Sidebar(props) {
         </div>
         <div className="side-bar-container-category">APIs</div>
         <div className="mobile-sidebar-dot">&bull;</div>
-        <div className="side-bar-container-category">TOOLS</div>
+        <div className="side-bar-container-category">TOOLS</div> */}
       </div>
     </div>
   );

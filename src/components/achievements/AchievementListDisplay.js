@@ -17,6 +17,7 @@ import {
 } from "./achievementListener";
 import AchievementDisplay from "./AchievementDisplay";
 import React, { useState } from "react";
+//component used to display list of achievements in profile page
 
 function AchievementListDisplay({ achievementTotal, user }) {
   return (

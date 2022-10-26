@@ -21,9 +21,11 @@ function CategoryComponent({ showScroll, width }) {
   const [test, setTest] = React.useState(true);
   const { type } = useParams();
 
+  //function used by scroll to top button
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  // change size of list of elements displayed based on window width
   React.useEffect(() => {
     if (width > 1300) setComponentsPerPage(8);
     else setComponentsPerPage(4);
@@ -31,7 +33,7 @@ function CategoryComponent({ showScroll, width }) {
   React.useEffect(() => {
     setCurrentPage(1);
   }, [type]);
-
+  //get components by category
   React.useEffect(() => {
     async function getComponents() {
       console.log(type);
@@ -44,7 +46,7 @@ function CategoryComponent({ showScroll, width }) {
     }
     getComponents();
   }, [type]);
-
+  //calculate which items to show in components array
   const lastPostIndex = currentPage * componentsPerPage;
   const firstPostIndex = lastPostIndex - componentsPerPage;
   const currentComponents = components.slice(firstPostIndex, lastPostIndex);
@@ -64,7 +66,7 @@ function CategoryComponent({ showScroll, width }) {
     }
   };
   console.log(totalPages);
-
+  //sort components returned
   function sortHandler(event) {
     event.preventDefault();
     let oldArray = components;
@@ -115,15 +117,19 @@ function CategoryComponent({ showScroll, width }) {
               length === 1 ? "match" : "matches"
             }`}</div>
           </div>
-          {components.length === 0 ? <div></div> : <div className="mainPage-sort-container">
-            <p>Sort By:</p>
-            <select onChange={sortHandler}>
-              <option value=""></option>
-              <option value="popular">Most Popular</option>
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-            </select>
-          </div>}
+          {components.length === 0 ? (
+            <div></div>
+          ) : (
+            <div className="mainPage-sort-container">
+              <p>Sort By:</p>
+              <select onChange={sortHandler}>
+                <option value=""></option>
+                <option value="popular">Most Popular</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
+            </div>
+          )}
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (
               <button onClick={previousPage} className="main-page-prev-button">

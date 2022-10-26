@@ -12,6 +12,8 @@ if (process.env.NODE_ENV !== "production") {
 // more salt rounds makes the password more encrypted (secure), but is slower
 const SALT_ROUNDS = 5;
 
+//for achievements, users have unlocked achievement and display achievement booleans. if user has unlocked an achievment but not displayed, a use effect in side bar/nav bar will send out toastify and update booleans
+
 const User = db.define("user", {
   username: {
     type: Sequelize.STRING,

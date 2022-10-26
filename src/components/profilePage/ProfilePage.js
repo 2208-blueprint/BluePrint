@@ -19,13 +19,9 @@ import AchievementListDisplay from "../achievements/AchievementListDisplay";
 import ComponentCardProfile from "./ComponentCardProfile";
 
 import { IconContext } from "react-icons";
-import {
-  BsQuestionCircleFill,
-  BsArrowRightShort,
-  BsArrowLeftShort,
-} from "react-icons/bs";
+import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 
-function ProfilePage({ showScroll, width }) {
+function ProfilePage({ width }) {
   const [user, setUser] = React.useState();
   const [savedComponents, setSavedComponents] = React.useState([]);
   const [ownedComponents, setOwnedComponents] = React.useState([]);
@@ -40,7 +36,6 @@ function ProfilePage({ showScroll, width }) {
 
   const [currentPage, setCurrentPage] = React.useState(1);
   const [componentsPerPage, setComponentsPerPage] = React.useState(6);
-  const [sortedComponents, setSorted] = React.useState([]);
 
   const navigate = useNavigate();
   const toastPopup = (msg) => {
@@ -61,7 +56,6 @@ function ProfilePage({ showScroll, width }) {
               authorization: token,
             },
           });
-          console.log(data);
           setUser(data);
           if (data.highestRank >= 1000) {
             setRank("Chief");

@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Less from "less";
 import { Link } from "react-router-dom";
-import {
-  FaHeart,
-  FaCommentAlt,
-  FaSave,
-  FaRegHeart,
-  FaHeartBroken,
-} from "react-icons/fa";
+import { FaHeart, FaCommentAlt, FaSave, FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BsHeartFill } from "react-icons/bs";
 
-function ComponentCard({ componentId, loadRight, loadLeft }) {
+function ComponentCard({ componentId }) {
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [less, setLess] = useState("");
@@ -35,12 +28,14 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
   const toastPopup = (msg) => {
     toast.dark(msg, { autoClose: 2000 });
   };
-
+  //used for liking component
   async function likeHandler(e) {
     const token = window.localStorage.getItem("token");
     try {
+      //check for a token
       e.preventDefault();
       if (window.localStorage.getItem("token")) {
+        //if it hasn't been liked, set it to liked, increment like counter, and associate with currently logged in. do the opposite if it's been liked already
         if (!liked) {
           setLikes(likes + 1);
           await axios.post(
@@ -68,6 +63,7 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
       console.log(err);
     }
   }
+  //same with saved, check to see if user is logged in, make the correct association if not saved, else remove association
   async function saveHandler(e) {
     const token = window.localStorage.getItem("token");
     e.preventDefault();
@@ -96,7 +92,7 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
       toastPopup("🖥️ Only logged in users can save to profile!");
     }
   }
-
+  //set source doc for i frames using components html, css, js
   React.useEffect(() => {
     setSrcDoc(`
             <html>
@@ -122,6 +118,7 @@ function ComponentCard({ componentId, loadRight, loadLeft }) {
         const componentSaves = data.users.filter(
           (user) => user["user_component"].isSaved
         );
+        //get current user and check to see if they've liked or saved component, set the state to display correct icon/use correct axios call
         const profile = await axios.get(`/api/users/profile`, {
           headers: { authorization: token },
         });
