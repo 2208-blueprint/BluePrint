@@ -8,10 +8,13 @@ function Message({ message }) {
 
   const ref = useRef();
 
+  //Scrolls to bottom message
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+  //Gets the date info of message and splits it to display only
+  //necessary parts
   const replyDate = message.date.toDate().toString();
   const dateSent = replyDate.split(" ").splice(1,2).join(" ");
   const timeSent = replyDate.split(" ")[4].slice(0,5)

@@ -24,12 +24,13 @@ passport.use(
         return done(null, user);
       } else {
         return done(null, false);
-        // or you could create a new account
       }
     });
   })
 );
 
+//Sets the env variables and callback URL for Google/Github/Twtich login
+//returns profile of user
 passport.use(
   new GoogleStrategy(
     {

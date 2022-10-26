@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { ChatContext } from "./ChatContext";
 import { Messages, ChatInput } from '../'
-import { HiOutlineUserAdd, HiDotsHorizontal } from "react-icons/hi";
+import { HiOutlineUserAdd } from "react-icons/hi";
 import { RiCloseCircleFill } from 'react-icons/ri'
 
 function Chat({chatVisible, setChatVisible}) {
+  //Gets data of the selected chat
   const { data } = useContext(ChatContext);
 
   return (

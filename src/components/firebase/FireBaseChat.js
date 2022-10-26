@@ -3,7 +3,6 @@ import { ChatSideBar, Chat } from '../index'
 
 function fireBaseChat({ chatVisible, setChatVisible }) {
 
-
   return (
     <div className="firebase-chat-wrapper">
         <div className="firebase-chat-container">
