@@ -40,6 +40,7 @@ body {
 #singlecomp-top .singlecomp-title-author span {
   font-size: 1.75rem;
   cursor: default;
+  color: white;
 }
 #singlecomp-top .singlecomp-title-author .singlecomp-author {
   color: #8bd1ff;
@@ -337,6 +338,7 @@ a.singlecomp-back div span {
   align-items: center;
   flex: 2;
   height: 100%;
+  min-height: 485px;
   width: 100%;
   background-color: white;
 }
@@ -494,6 +496,7 @@ a.singlecomp-back div span {
   border-radius: 0 5px 5px 0;
   flex: 1;
   height: 100%;
+  min-height: 485px;
   width: 100%;
   background-image: url("/trianglify-lowres.png");
   background-repeat: no-repeat;
@@ -559,6 +562,7 @@ a.singlecomp-back div span {
   justify-content: center;
   flex: 2;
   height: 100%;
+  min-height: 485px;
   width: 100%;
   background-color: white;
 }
@@ -639,6 +643,7 @@ a.singlecomp-back div span {
   border-radius: 0 5px 5px 0;
   flex: 1;
   height: 100%;
+  min-height: 485px;
   width: 100%;
   background-image: url("/trianglify-lowres.png");
   background-repeat: no-repeat;
@@ -799,6 +804,7 @@ a.createcomp-back div span {
   background-color: #0F4C75;
   border-radius: 0.25rem;
   margin: 20px;
+  color: white;
 }
 #createcomp-color-picker input {
   height: 100px;
@@ -823,6 +829,8 @@ a.createcomp-back div span {
 }
 #createcomp-submission h1 {
   text-align: center;
+  color: white;
+  margin-bottom: 50px;
 }
 #createcomp-submission div {
   font-size: 1.25rem;
@@ -855,6 +863,7 @@ a.createcomp-back div span {
   cursor: pointer;
   transition: 0.25s ease;
   align-self: center;
+  border-radius: 5px;
 }
 #createcomp-submission button:hover {
   background-color: #1a6da4;
@@ -1013,6 +1022,7 @@ body {
   align-items: center;
   justify-content: center;
   align-self: flex-start;
+  border-radius: 5px;
 }
 .mainPage-sort-container select {
   font-size: 1.5rem;
@@ -1300,6 +1310,7 @@ body {
   background-color: #09141a;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .single-user-page-main-container .single-user-page-title-container .single-user-page-user-pic {
   margin: 10px;
@@ -1493,16 +1504,18 @@ body {
   padding: 8px;
   color: #47B5FF;
   height: 550px;
+  border-radius: 5px;
 }
 #comments-root h1 {
-  color: #47B5FF;
   margin-left: 20px;
+  color: white;
 }
 #comments-root #comments-list {
   overflow-y: auto;
   height: 450px;
 }
 #comments-root #comments-list #comments-form p {
+  color: white;
   font-size: 1.5rem;
 }
 #comments-root #comments-list #comments-form input {
@@ -3326,15 +3339,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 5px 5px 0;
 }
 #search-user-root .search-user-bar-container input {
-  border-radius: 0.5rem 0rem 0rem 0.5rem;
+  border-radius: 5px 0 0 5px;
   height: 40px;
   border-width: 2px;
-  border-color: #47B5FF;
+  border: none;
   width: 300px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 #search-user-root .search-user-results {
   display: flex;
@@ -3346,6 +3359,7 @@ body {
   margin-right: 20px;
   margin-top: 50px;
   background-color: #20212d;
+  border-radius: 5px;
 }
 #search-user-root .search-user-results .search-user-none {
   width: 100%;
@@ -3361,6 +3375,7 @@ body {
   height: 125px;
   background-color: #0F4C75;
   margin: 2.5%;
+  border-radius: 5px;
 }
 #search-user-root .search-user-results .search-user-card img {
   width: 100px;
