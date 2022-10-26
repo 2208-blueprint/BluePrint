@@ -21,16 +21,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0 0.5rem 0.5rem 0;
+            border-radius: 0 5px 5px 0;
         }
 
         input {
-            border-radius: 0.5rem 0rem 0rem 0.5rem;
+            border-radius: 5px 0 0 5px;
             height: 40px;
             border-width: 2px;
-            border-color: @tertiary-color;
+            // border-color: @tertiary-color;
+            border: none;
             width: 300px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
     }
 
@@ -44,7 +45,8 @@
         margin-right: 20px;
         margin-top: 50px;
         background-color: rgb(32, 33, 45);
-        
+        border-radius: 5px;
+
         .search-user-none {
             width: 100%;
             color: white;
@@ -60,6 +62,7 @@
             height: 125px;
             background-color: @secondary-color;
             margin: 2.5%;
+            border-radius: 5px;
 
             img {
                 width: 100px;
@@ -95,7 +98,7 @@
                 .search-user-follow:hover {
                     text-decoration: underline;
                 }
-                
+
             }
         }
     }
