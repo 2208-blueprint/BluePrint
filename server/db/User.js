@@ -2,14 +2,14 @@ const Sequelize = require("sequelize");
 const db = require("./database.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
 const Comment = require("./Comment");
 const Component = require("./Component");
 
-// if not in production environment, I want access to the JWT key
+// if not in production environment, access to the JWT key
 if (process.env.NODE_ENV !== "production") {
   require("../../secrets.js");
 }
+// more salt rounds makes the password more encrypted (secure), but is slower
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
@@ -31,7 +31,6 @@ const User = db.define("user", {
   },
   email: {
     type: Sequelize.STRING,
-    // allowNull: false,
     validate: {
       isEmail: true,
     },
@@ -199,6 +198,7 @@ User.prototype.generateToken = function () {
  * classMethods
  */
 User.authenticate = async function ({ username, password }) {
+  //finds user by username, checks that password is correct. if correct, generate token
   const user = await this.findOne({ where: { username } });
 
   if (!user || !(await user.correctPassword(password))) {
@@ -211,6 +211,7 @@ User.authenticate = async function ({ username, password }) {
 
 User.findByToken = async function (token) {
   try {
+    //decrypts token to give id of user stored inside
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id, {
       include: [Comment, Component],
@@ -218,6 +219,7 @@ User.findByToken = async function (token) {
     if (!user) {
       throw "No user with that token found";
     }
+    //find and return user using id given by token
     return user;
   } catch (ex) {
     const error = Error("Bad token");
@@ -227,25 +229,9 @@ User.findByToken = async function (token) {
 };
 
 User.beforeCreate(async (user) => {
+  //hash password before adding to db
   let hashed = await bcrypt.hash(user.password, 5);
   user.password = hashed;
 });
-
-// User.beforeUpdate(async (user) => {
-//   if (user.password) {
-//     let hashed = await bcrypt.hash(user.password, 5);
-//     user.password = hashed;
-//   }
-// });
-
-/**
- * hooks
- */
-const hashPassword = async (user) => {
-  //in case the password has been changed, we want to encrypt it with bcrypt
-  if (user.changed("password")) {
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
-  }
-};
 
 module.exports = User;
