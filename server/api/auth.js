@@ -1,8 +1,6 @@
 const User = require("../db/User.js");
 const router = require("express").Router();
 const passport = require("passport");
-const CLIENT_URL = "http://localhost:3000/api/auth/login/success";
-const jwt = require("jsonwebtoken");
 
 if (process.env.NODE_ENV !== "production") {
   require("../../secrets.js");
@@ -34,9 +32,9 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
+//Route called in Redirect.js if social login is successful
 router.get("/login/success", async (req, res, next) => {
   const password = process.env.RPW;
-  console.log(req.user);
 
   let email = "";
   let profilePicUrl = "";
@@ -44,6 +42,7 @@ router.get("/login/success", async (req, res, next) => {
   let socialFirstName = "";
   let socialLastName = "";
 
+  //Check which social login is used and sets default variables above
   if (req.user.provider === "google") {
     socialUserName = req.user.displayName;
     socialFirstName = req.user["_json"].given_name;
@@ -93,12 +92,22 @@ router.get("/login/success", async (req, res, next) => {
       message: "Login successful",
       user: req.user,
       password: password,
-      // jwt token here or cookies
       token: token,
       img: profilePicUrl,
     });
   }
 });
+
+//Route called on social login and callback route on way back with success or fail
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ],
+  })
+);
 
 router.get(
   "/google",

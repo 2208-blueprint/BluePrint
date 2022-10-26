@@ -8,9 +8,8 @@ function Messages() {
   const bottomRef = useRef(null);
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
-  // const objDiv = document.getElementById("firebase-messages-id");
-  // objDiv.scrollTop = objDiv.scrollHeight;
 
+  //Gets all messages of the chat in context and sets in state
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
@@ -21,6 +20,7 @@ function Messages() {
     };
   }, [data.chatId]);
 
+  //Scrolls to bottom of messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView(false);
   },[messages])
