@@ -21,19 +21,26 @@ import { GoPencil } from 'react-icons/go'
 import { IconContext } from "react-icons";
 
 function SingleComponent({width}) {
+
+  // these states hold the actual component code
   const [html, setHTML] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJS] = useState("");
   const [less, setLess] = useState("");
   const [sass, setSass] = useState("");
+  // this state holds the code that goes into the iFrame
   const [srcDoc, setSrcDoc] = useState("");
+  // this state changes what code editor is shown (based on what tab is clicked)
   const [view, setView] = useState("html");
+  // this is for the color picker
   const [color, setColor] = useState('')
+  // this is for the title of component
   const [title, setTitle] = useState('title of component')
   const [temp, setTemp] = useState({
     framework: null,
     stylingFramework: null
   })
+  // these help determine whether or not you like and saved, or followed, favorite, etc.
   const [liked, setLiked] = useState(false)
   const [saved, setSaved] = useState(false)
   const [followed, setFollowed] = useState(false)
@@ -46,6 +53,8 @@ function SingleComponent({width}) {
   const toastSuccess = (msg) => toast.dark(msg, { autoClose: 2000});
   const toastPopup = (msg) => toast.dark(msg, { autoClose: 2000});
 
+
+  // changes in the code editor change these
   function onChangeHTML(newValue) {
     setHTML(newValue);
   }
@@ -69,6 +78,7 @@ function SingleComponent({width}) {
     setSass(newValue);
   }
 
+  // copy to clipboard, NEEDS HTTPS url
   function copyClipboard() {
     switch (view) {
       case 'html':
@@ -88,16 +98,20 @@ function SingleComponent({width}) {
     }
   }
 
+  // like handler
   async function likeHandler(e) {
     try {
       e.preventDefault();
+      // ONLY if you are logged in
       if (window.localStorage.token) {
+        // if you did not like it already
         if (!liked) {
           await axios.post(`/api/components/${params.id}/favorite`, {}, {
             headers: {
               authorization: window.localStorage.getItem('token')
             }
           });
+          // this makes the little grow animation when you click it
           anime({
             targets: '#singlecomp-heart',
             scale: [4,1],
@@ -120,6 +134,8 @@ function SingleComponent({width}) {
     }
   }
 
+
+  // save handler, see logic from like handler
   async function saveHandler(e) {
     try {
       e.preventDefault();
@@ -152,6 +168,7 @@ function SingleComponent({width}) {
     }
   }
 
+  // follow handler, see logic from like handler
   async function followHandler(e) {
     try {
       e.preventDefault();
@@ -178,7 +195,7 @@ function SingleComponent({width}) {
     }
   }
 
-  // if any of those changes, then re define the source for the iframe
+  // if any of the code changes, then re-define the source for the iframe
   React.useEffect(() => {
     setSrcDoc(`
         <html>
@@ -198,10 +215,12 @@ function SingleComponent({width}) {
     async function getComp() {
       // get the component, with the code
       const {data} = await axios.get(`/api/components/${params.id}`)
+      // variables we'll store for now, will help later
       let currentUser
       let currentFollowers
       let currentAuthor
 
+      // if you are logged in, get this information so you can see if you already liked, favorited, etc.
       if (window.localStorage.getItem('token')) {
         const profile = await axios.get(`/api/users/profile`, {
           headers: {
@@ -217,6 +236,7 @@ function SingleComponent({width}) {
         currentFollowers = followers.data
       }
 
+      // sets the information from the component
       if (data.framework === 'html') {
         setHTML(data.markup)
         setJS(data.js)
@@ -231,12 +251,15 @@ function SingleComponent({width}) {
       setTitle(data.name)
       setTemp(data)
       setView(data.framework === 'html' ? 'html' : 'js')
+
+      // find the author of the component
       for (let i = 0; i < data.users.length; i++) {
         if (data.users[i].user_component.isAuthor) {
           setAuthor(data.users[i])
           currentAuthor = data.users[i]
         }
       }
+      // if you are logged in, all the logic to see if you liked, saved, created, followed, etc.
       if (window.localStorage.getItem('token')) {
         const componentLikes = data.users.filter(
           (user) => user["user_component"].isFavorite
@@ -264,6 +287,7 @@ function SingleComponent({width}) {
     }
   }, []);
 
+  // delete handler
   async function deleteHandler() {
     const confirmation = confirm('Are you sure to delete this component?') ; 
     if (confirmation) {
@@ -291,6 +315,7 @@ function SingleComponent({width}) {
       </a>
       <div className='singlecomp-title-author'>
         <span>{title} by </span><span onClick={author.username ? ()=>navigate(`/users/${author.id}`) : ()=>navigate('/')} className="singlecomp-author"> {author.username ? author.username : 'BluePrint Community'}</span>
+        {/* ONLY show the follow symbol if you are logged in and NOT the creator of the component */}
         {(loggin && !amCreator && author.username) ? 
          (followed ? <div onClick={followHandler} id ="singlecomp-follow">
           <IconContext.Provider value={{size: "40px"}}>
@@ -304,6 +329,7 @@ function SingleComponent({width}) {
           <span className="singlecomp-tooltip">Follow User</span>
         </div>) : <div></div>}
       </div>
+      {/* ONLY show the like symbol if you are logged in and NOT the creator of the component */}
       {loggin ? amCreator ? 
       <div id="singlecomp-heart" onClick={()=>navigate(`/components/${params.id}/edit`)}>
         <IconContext.Provider value={{size: '40px'}}>
@@ -324,6 +350,7 @@ function SingleComponent({width}) {
                 </IconContext.Provider></span>}
         </div>
       : <div></div>}
+      {/* ONLY show the save symbol if you are logged in and NOT the creator of the component */}
       {loggin ? amCreator ? 
       <div id="singlecomp-save" onClick={deleteHandler}> 
         <IconContext.Provider value={{size: '40px'}}>
@@ -344,6 +371,7 @@ function SingleComponent({width}) {
         </div>
       : <div></div>}
       </div>
+      {/* this is the iFrame that previews the code */}
       <div id="singlecomp-iframe">
         <iframe
           srcDoc={srcDoc}
@@ -354,6 +382,7 @@ function SingleComponent({width}) {
         />
       </div>
       <div id="singlecomp-buttons">
+        {/* Changing tabs changes the view */}
       <div id="singlecomp-buttons-box">
         <button
           onClick={() => setView("html")}
@@ -393,6 +422,7 @@ function SingleComponent({width}) {
             <img src="/copy.png"></img>
         </div>
       </div>
+      {/* Divs that hold the edtiors, they are ONLY shown if the correct view is selected */}
       <div id="singlecomp-editors">
         <div
           id="singlecomp-html-editor"

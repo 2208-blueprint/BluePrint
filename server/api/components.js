@@ -15,7 +15,6 @@ const requireToken = async (req, res, next) => {
   }
 };
 //get all components
-// WORKS
 router.get("/", async (req, res, next) => {
   try {
     const components = await Component.findAll({
@@ -36,18 +35,8 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-// Works
-router.post("/test-create", async (req, res, next) => {
-  try {
-    const component = await Component.create(req.body);
-    res.status(201).send(component);
-  } catch (error) {
-    next(error);
-  }
-});
 
 // Create a component by logged in user
-// WORKS
 router.post("/create", requireToken, async (req, res, next) => {
   try {
     const component = await Component.create(req.body);
@@ -60,7 +49,6 @@ router.post("/create", requireToken, async (req, res, next) => {
 });
 
 //get component by id
-// WORK
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -73,6 +61,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+//update component by id
 router.put("/:id", requireToken, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -84,6 +73,7 @@ router.put("/:id", requireToken, async (req, res, next) => {
   }
 });
 
+//delete component by id
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -95,22 +85,10 @@ router.delete("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-// //get all favorites on a component
-// router.get("/:componentId/favorites", async (req, res, next) => {
-//   try {
-//     const id = req.params.componentId;
-//     const component = await Component.findByPk(id);
-//     const favorites = await Component.getFavorites();
-//     res.send(favorites);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 //add favorite to component
-// WORKS
 router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
   try {
+    //get the component
     const id = req.params.componentId;
     const user = req.user;
     const component = await Component.findByPk(id, {
@@ -120,8 +98,10 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
         attributes: ["id", "highestRank", "currentPoints"],
       },
     });
+    //total up the points
     const points = component.currentPoints + 10;
     const componentAuthor = component.users[0];
+    //change the points of the component author, update highest points if new current points is greater
     if (componentAuthor) {
       const userPoints = componentAuthor.currentPoints + 10;
       if (userPoints > componentAuthor.highestRank) {
@@ -135,32 +115,36 @@ router.post("/:componentId/favorite", requireToken, async (req, res, next) => {
         });
       }
     }
-
+    //update component points
     await component.update({ currentPoints: points });
+    //add favorite to component
     await component.addUser(user, { through: { isFavorite: true } });
     const users = await component.getUsers();
+    //check components total favorites, update component author's achievements if requirements are met
     const favoritedUsers = users.filter(
       (user) => user["user_component"].isFavorite
     );
-    if (favoritedUsers.length >= 2) {
-      await componentAuthor.update({ twoFavoriteUnlocked: true });
-    }
-    if (favoritedUsers.length >= 10) {
-      await componentAuthor.update({ tenFavoriteUnlocked: true });
-    }
-    if (favoritedUsers.length >= 25) {
-      await componentAuthor.update({ twentyFiveFavoriteUnlocked: true });
-    }
-    if (favoritedUsers.length >= 50) {
-      await componentAuthor.update({ fiftyFavoriteUnlocked: true });
+    if (componentAuthor) {
+      if (favoritedUsers.length >= 2) {
+        await componentAuthor.update({ twoFavoriteUnlocked: true });
+      }
+      if (favoritedUsers.length >= 10) {
+        await componentAuthor.update({ tenFavoriteUnlocked: true });
+      }
+      if (favoritedUsers.length >= 25) {
+        await componentAuthor.update({ twentyFiveFavoriteUnlocked: true });
+      }
+      if (favoritedUsers.length >= 50) {
+        await componentAuthor.update({ fiftyFavoriteUnlocked: true });
+      }
     }
     res.sendStatus(201);
   } catch (error) {
     next(error);
   }
 });
-//remove favorite from component
-// WORKS
+
+//remove favorite from component, see add favorite for similar logic
 router.delete(
   "/:componentId/remove-favorite",
   requireToken,
@@ -193,8 +177,7 @@ router.delete(
   }
 );
 
-//save component
-// WORKS
+//save component, see add favorite for logic
 router.post("/:componentId/save", requireToken, async (req, res, next) => {
   try {
     const id = req.params.componentId;
@@ -226,17 +209,19 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
     await component.addUser(user, { through: { isSaved: true } });
     const users = await component.getUsers();
     const savedUsers = users.filter((user) => user["user_component"].isSaved);
-    if (savedUsers.length >= 2) {
-      await componentAuthor.update({ twoSaveUnlocked: true });
-    }
-    if (savedUsers.length >= 10) {
-      await componentAuthor.update({ tenSaveUnlocked: true });
-    }
-    if (savedUsers.length >= 25) {
-      await componentAuthor.update({ twentyFiveSaveUnlocked: true });
-    }
-    if (savedUsers.length >= 50) {
-      await componentAuthor.update({ fiftySaveUnlocked: true });
+    if (componentAuthor) {
+      if (savedUsers.length >= 2) {
+        await componentAuthor.update({ twoSaveUnlocked: true });
+      }
+      if (savedUsers.length >= 10) {
+        await componentAuthor.update({ tenSaveUnlocked: true });
+      }
+      if (savedUsers.length >= 25) {
+        await componentAuthor.update({ twentyFiveSaveUnlocked: true });
+      }
+      if (savedUsers.length >= 50) {
+        await componentAuthor.update({ fiftySaveUnlocked: true });
+      }
     }
     res.sendStatus(201);
   } catch (error) {
@@ -244,8 +229,7 @@ router.post("/:componentId/save", requireToken, async (req, res, next) => {
   }
 });
 
-//remove save from component
-// WORKS
+//remove save from component, see add favorite for logic
 router.delete(
   "/:componentId/remove-save",
   requireToken,
@@ -277,7 +261,7 @@ router.delete(
     }
   }
 );
-
+//get all components by type, used in sidebar
 router.get("/category/:type", async (req, res, next) => {
   try {
     const target = req.params.type;

@@ -22,6 +22,7 @@ function SearchComponent({ showScroll, width }) {
   const [componentsPerPage, setComponentsPerPage] = React.useState(8);
   const [test, setTest] = React.useState(true);
   let { keywords } = useParams();
+  //change number of displayed based on window width
   React.useEffect(() => {
     if (width > 1300) setComponentsPerPage(8);
     else setComponentsPerPage(4);
@@ -40,9 +41,10 @@ function SearchComponent({ showScroll, width }) {
   React.useEffect(() => {
     setCurrentPage(1);
   }, [keywords]);
-
+  //create cache to avoid duplicate results
   const cache = {};
   const searchResult = [];
+  //take keywords stored in parameters and filter results based on words being included in various properties of component
   keywords = keywords.split("+");
   const ignoreWords = ["the", "and", "of", "in", "a"];
   const filteredKeywords = [];
@@ -56,7 +58,7 @@ function SearchComponent({ showScroll, width }) {
         (user) => user["user_component"].isAuthor
       );
       let currentWord = filteredKeywords[i];
-
+      //if keyword is found in component's name, author username, framework, etc
       if (
         component.name?.toLowerCase().indexOf(currentWord.toLowerCase()) >= 0 ||
         component.description
@@ -73,9 +75,11 @@ function SearchComponent({ showScroll, width }) {
           .indexOf(currentWord.toLowerCase()) >= 0 ||
         component.tags?.toLowerCase().indexOf(currentWord.toLowerCase()) >= 0
       ) {
+        //check to see if it's been added already, if so continue
         if (cache[component.name]) {
           continue;
         }
+        //otherwise add it to search results
         cache[component.name] = true;
         searchResult.push(component);
       } else break;
@@ -148,15 +152,19 @@ function SearchComponent({ showScroll, width }) {
               searchResult.length
             } ${searchResult.length === 1 ? "match" : "matches"}`}</div>
           </div>
-          {searchResult.length === 0 ? <div></div> : <div className="mainPage-sort-container">
-            <p>Sort By:</p>
-            <select onChange={sortHandler}>
-              <option value=""></option>
-              <option value="popular">Most Popular</option>
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-            </select>
-          </div>}
+          {searchResult.length === 0 ? (
+            <div></div>
+          ) : (
+            <div className="mainPage-sort-container">
+              <p>Sort By:</p>
+              <select onChange={sortHandler}>
+                <option value=""></option>
+                <option value="popular">Most Popular</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
+            </div>
+          )}
           <div className="mainPage-button-container">
             {currentPage === 1 ? null : (
               <button onClick={previousPage} className="main-page-prev-button">

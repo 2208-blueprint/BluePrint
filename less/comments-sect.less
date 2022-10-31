@@ -97,6 +97,8 @@
 @media only screen and (max-width: 600px) {
     #comments-root {
         min-width: 275px;
+        margin-left: 0;
+        margin-right: 0;
 
         p {
             font-size: 0.75rem;
@@ -108,12 +110,18 @@
                     font-size: 1rem;
                 }
                 input {
-                    width: 150px;
+                    width: 175px;
                     font-size: 0.75rem;
                 }
             }
 
             .comment-box {
+                margin-left: 0;
+                margin-right: 0;
+
+                .comment-likes {
+                    white-space: nowrap;
+                }
                 .comment-name {
                     font-size: 0.75rem;
                 }
