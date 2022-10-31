@@ -1574,6 +1574,8 @@ body {
 @media only screen and (max-width: 600px) {
   #comments-root {
     min-width: 275px;
+    margin-left: 0;
+    margin-right: 0;
   }
   #comments-root p {
     font-size: 0.75rem;
@@ -1582,8 +1584,15 @@ body {
     font-size: 1rem;
   }
   #comments-root #comments-list #comments-form input {
-    width: 150px;
+    width: 175px;
     font-size: 0.75rem;
+  }
+  #comments-root #comments-list .comment-box {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #comments-root #comments-list .comment-box .comment-likes {
+    white-space: nowrap;
   }
   #comments-root #comments-list .comment-box .comment-name {
     font-size: 0.75rem;
