@@ -313,6 +313,11 @@ a.singlecomp-back div span {
   background: linear-gradient(150deg, #09141a 0%, #011018 100%);
   font-family: "Inter", sans-serif;
 }
+@media only screen and (max-width: 600px) {
+  .login-main-container {
+    height: 100%;
+  }
+}
 .login-main-container .login-signup-wrapper {
   display: flex;
   justify-content: center;
@@ -329,6 +334,7 @@ a.singlecomp-back div span {
     flex-direction: column;
     width: 90vw;
     height: 90vh;
+    margin: 20px 0 0 0;
   }
 }
 .login-main-container .login-signup-wrapper .login-signup-form-container {
@@ -338,9 +344,14 @@ a.singlecomp-back div span {
   align-items: center;
   flex: 2;
   height: 100%;
-  min-height: 485px;
   width: 100%;
+  min-height: 485px;
   background-color: white;
+}
+@media only screen and (max-width: 600px) {
+  .login-main-container .login-signup-wrapper .login-signup-form-container {
+    border-radius: 0;
+  }
 }
 .login-main-container .login-signup-wrapper .login-signup-form-container .login-form-container-top {
   display: flex;
@@ -482,11 +493,6 @@ a.singlecomp-back div span {
     font-size: 15px;
   }
 }
-@media only screen and (max-width: 600px) {
-  .login-main-container .login-signup-wrapper .login-signup-form-container {
-    border-radius: 0;
-  }
-}
 .login-main-container .login-signup-wrapper .login-signup-toggle-container {
   display: flex;
   flex-direction: column;
@@ -502,6 +508,11 @@ a.singlecomp-back div span {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+@media only screen and (max-width: 600px) {
+  .login-main-container .login-signup-wrapper .login-signup-toggle-container {
+    min-height: min-content;
+  }
 }
 .login-main-container .login-signup-wrapper .login-signup-toggle-container h1 {
   font-size: 30px;
@@ -552,6 +563,7 @@ a.singlecomp-back div span {
     flex-direction: column;
     width: 90vw;
     height: 90vh;
+    margin: 40px 0 0 0;
   }
 }
 .signup-main-container .signup-wrapper .signup-form-container {
@@ -652,7 +664,11 @@ a.singlecomp-back div span {
 }
 @media only screen and (max-width: 600px) {
   .signup-main-container .signup-wrapper .signup-toggle-container {
+    min-height: min-content;
     border-radius: 0;
+  }
+  .signup-main-container .signup-wrapper .signup-toggle-container button {
+    margin-bottom: 30px !important;
   }
 }
 .signup-main-container .signup-wrapper .signup-toggle-container h1 {
@@ -1179,9 +1195,9 @@ body {
   }
 }
 #footer-root-container {
-  height: auto;
+  height: 150px !important;
   max-width: 100%;
-  margin: 0;
+  margin: 10px 0 0 0 !important;
   background-color: #09141a;
   padding-left: 10%;
   padding-right: 10%;

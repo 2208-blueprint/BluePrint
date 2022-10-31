@@ -24,6 +24,7 @@ function Redirect() {
           try{
             const {data} = await Axios.get('/api/auth/login/success')
             window.localStorage.setItem('token', data.token)
+console.log(data);
 
             const usersRef = collection(db, 'users')
             let socialLoginEmail = '';
