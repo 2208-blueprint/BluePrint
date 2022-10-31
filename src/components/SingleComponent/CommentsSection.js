@@ -134,7 +134,7 @@ const CommentsSection = (props) => {
                     <FaRegHeart/>
                   </IconContext.Provider></span>}</div>
                     : <div></div>}
-                    <span>{(comment.users.length - 1) + '  Like(s)'}</span>
+                    <span className="comment-likes">{(comment.users.length - 1) + '  Like(s)'}</span>
                     <span className="comment-date">{convertDate(comment.createdAt)}</span>
                     </div>
                     {/* this is the split between "header" and message */}
