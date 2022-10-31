@@ -1492,6 +1492,9 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+.single-user-page-follow svg {
+  cursor: pointer;
+}
 #comments-root {
   font-family: 'Inter', 'sans-serif';
   margin-left: 20px;
@@ -3235,7 +3238,6 @@ body {
   }
   .leaderboard-state-switch {
     display: block;
-    margin-left: 200px;
   }
 }
 @media all and (max-width: 750px) {
